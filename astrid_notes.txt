@@ -16,6 +16,7 @@ Change what's displayed on the screen to reflect the current contents of rl_line
 
 add_history - void add_history (char *string);
 
+
 printf
 malloc
 free
@@ -29,11 +30,23 @@ wait
 waitpid
 wait3
 wait4
-signal
-sigaction
-sigemptyset
-sigaddset
-kill
+
+
+signal -
+Signals allow the manipulation of a process from outside its domain, 
+as well as allowing the process to manipulate itself or copies of itself (children).
+
+sigaction - 
+
+sigemptyset - int sigemptyset(sigset_t *set);
+The sigemptyset() function initializes a signal set to be empty.
+
+sigaddset - int sigaddset(sigset_t *set, int signo);
+The sigaddset() function adds the specified signal signo to the signal set.
+
+kill - int kill(pid_t pid, int sig);
+The kill() function sends the signal specified by sig to pid, a process or a group of processes.
+
 exit
 getcwd
 chdir
@@ -41,10 +54,14 @@ stat
 lstat
 fstat
 unlink
+
+
 execve
 dup
 dup2
 pipe
+
+
 opendir
 readdir
 closedir

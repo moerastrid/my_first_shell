@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 18:14:04 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 20:05:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include <signal.h>
 
 # define READ 0
 # define WRITE 1
