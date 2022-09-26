@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 22:20:02 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/26 13:18:07 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 22:20:02 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/26 14:02:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	setup_structs();
-	lex();
-	parse();
+	parse(argc, argv);
 	execute();
 	free_structs();
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/22 22:18:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 14:13:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	family_life(int total_cmd, t_list *cmds)
 {
 	pid_t	stdin;
 	pid_t	stdout;
+	pid_t	stderr;
 	int		pfd[2][2];
 	int		i;
 	int		*children;
@@ -31,6 +32,7 @@ int	family_life(int total_cmd, t_list *cmds)
 		return (-1);
 	stdin = dup(STDIN_FILENO);
 	stdout = dup(STDOUT_FILENO);
+	strerr = dup(STDERR_FILENO);
 	if (stdout == -1 || stdout == -1)
 		exit (-1);
 	i = 0;
