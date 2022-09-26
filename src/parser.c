@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins00.c                                       :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 14:12:13 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/26 13:22:00 by tnuyten          ###   ########.fr       */
+/*   Created: 2022/09/26 13:20:57 by tnuyten           #+#    #+#             */
+/*   Updated: 2022/09/26 13:21:33 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	bi_echo(void);
-void	bi_cd(void);
-void	bi_pwd(void);
-void	bi_export(void);
-void	bi_unset(void);
-void	bi_env(void);
-void	bi_exit(void);
+void parse()
+{
+	
+}
