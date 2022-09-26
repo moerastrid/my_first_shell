@@ -6,22 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/26 18:05:32 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 21:56:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 22:06:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	put_lst(t_token *temp)
-{
-	while (temp != NULL)
-	{
-		rl_replace_line(temp->data, 0);
-		rl_on_new_line();
-		rl_redisplay();
-		temp = temp->next;
-	}
-}
+
 
 int	prompt(void)
 {
@@ -33,13 +24,15 @@ int	prompt(void)
 	{
 		if (line)
 			free (line);
-		line = readline(" my_first_shell > ");
+		line = readline("my_first_shell > ");
 		if (!line)
 			return (1);
 		if (line && *line)
 			add_history (line);
-		temp = tokenize(line);
-		put_lst(temp);
+		ft_putstr_fd("my_first_shell: ", 1);
+		ft_putstr_fd(line, 1);
+		ft_putstr_fd(": command not found\n", 1);
+		rl_on_new_line();
 	}
 	free (line);
 	rl_clear_history();
