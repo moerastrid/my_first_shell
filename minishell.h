@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:16:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 14:24:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@
 # define READ 0
 # define WRITE 1
 
-//children
+//parser
+int	parse(int argc, char **argv);
+
+
+//thefam
 int		family_life(int total_cmd, t_list *cmds);
 int		parent(int *children, int total_cmd, int *pfd);
 int		child(t_list *cmds, int *write_pipe, int *read_pipe, int cmd_no, int total_cmd);
@@ -37,5 +41,9 @@ void	bi_exit(void);
 
 //execute (00)
 void	exec_cmd(t_list *cmds, int cmd_no);
+
+//utils (00)
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif
