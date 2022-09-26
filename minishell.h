@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:20:14 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/26 19:17:42 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/26 20:53:34 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include <signal.h>
 
 # define READ 0
 # define WRITE 1
 
-//structs
+//STRUCTS:
 typedef struct s_simple {
 	char	**arguments;
 }	t_simple;
@@ -51,6 +52,10 @@ typedef struct s_token {
 	char			*data;
 	struct s_token	*next;
 }	t_token;
+
+// FILES & FUNCTIONS:
+//prompt
+int	prompt(void);
 
 //Lexer
 

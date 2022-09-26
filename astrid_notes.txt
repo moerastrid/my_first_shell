@@ -1,0 +1,93 @@
+readline - char *readline (const char *prompt); The line returned is allocated with malloc(3);
+       the caller must free it when finished.
+
+rl_clear_history - void rl_clear_history(void); it frees private data Readline saves in the history list.
+
+rl_on_new_line - int rl_on_new_line(void); 
+Tell the update functions that we have moved onto a new (empty) line, usually after outputting a newline.
+
+rl_replace_line - void rl_replace_line (const char *text, int clear_undo);
+Replace the contents of rl_line_buffer with text. 
+The point and mark are preserved, if possible. 
+If clear_undo is non-zero, the undo list associated with the current line is cleared.
+
+rl_redisplay - void rl_redisplay (void);
+Change what's displayed on the screen to reflect the current contents of rl_line_buffer.
+
+add_history - void add_history (char *string);
+
+
+printf
+malloc
+free
+write
+access
+open
+read
+close
+fork
+wait
+waitpid
+wait3
+wait4
+
+/*
+void	my_signals(void)
+{
+	int			my_signal;
+	sigset_t	my_first_set;
+
+	my_signal = 0;
+	sigemptyset(&my_first_set);
+	sigaddset(&my_first_set, my_signal);
+}
+*/ 
+
+signal -
+Signals allow the manipulation of a process from outside its domain, 
+as well as allowing the process to manipulate itself or copies of itself (children).
+
+sigaction - 
+
+sigemptyset - int sigemptyset(sigset_t *set);
+The sigemptyset() function initializes a signal set to be empty.
+
+sigaddset - int sigaddset(sigset_t *set, int signo);
+The sigaddset() function adds the specified signal signo to the signal set.
+
+kill - int kill(pid_t pid, int sig);
+The kill() function sends the signal specified by sig to pid, a process or a group of processes.
+
+exit
+getcwd
+chdir
+stat
+lstat
+fstat
+unlink
+
+
+execve
+dup
+dup2
+pipe
+
+
+opendir
+readdir
+closedir
+strerror
+perror
+isatty
+ttyname
+ttyslot
+ioctl
+getenv
+tcsetattr
+tcgetattr
+tgetent
+tgetflag
+tgetnum
+tgetstr
+tgoto
+tputs
