@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 21:59:16 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/26 22:08:09 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,19 @@ char	*get_data_end(char *input, int type)
 {
 	int len;
 
-	printf("%d: %s\n", type, input);
-
 	len = ft_strlen(input);
 	if(len == 0)
 		return input;
 	input++; //skip first symbol of token
-	if (len >= 2 && (type == GREATGREAT || type == LESSLESS))
-	{
+	if (len > 1 && (type == GREATGREAT || type == LESSLESS)) //skip second symbol of token, if it exists.
 		input++;
-	}
 	while (*input)
 	{
 		if (is_token(input))
 			return (input);
 		input++;
 	}
-	return (input + ft_strlen(input) - 1);
+	return (input + ft_strlen(input));
 }
 
 t_token	*tokenize(char *input)
@@ -79,7 +75,6 @@ t_token	*tokenize(char *input)
 		if (is_token(input))
 		{
 			type = get_token_type(input);
-			printf("%lu\n", get_data_end(input, type) - input);
 			data = ft_substr(input, 0, get_data_end(input, type) - input);
 			if (token == NULL)
 				token = token_new(data, type);
@@ -92,3 +87,14 @@ t_token	*tokenize(char *input)
 	}
 	return (token);
 }
+
+// int main()
+// {
+// 	t_token *tok = tokenize(">>test >test <test <<test | test | test $");
+//
+// 	while(tok != NULL)
+// 	{
+// 		printf("%d:[%s]\n", tok->type, tok->data);
+// 		tok = tok->next;
+// 	}
+// }
