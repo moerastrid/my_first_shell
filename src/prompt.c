@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/26 18:05:32 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 18:27:26 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 20:03:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	prompt(void)
 {
-	rl_bind_key('\t', rl_complete);
 	char	*line;
 
 	line = NULL;
@@ -25,8 +24,10 @@ int	prompt(void)
 		line = readline(" my_first_shell > ");
 		if (!line)
 			return (1);
-		add_history (line);
+		if (line && *line)
+			add_history (line);
 	}
 	free (line);
+	rl_clear_history();
 	return (0);
 }

@@ -1,11 +1,21 @@
 readline - char *readline (const char *prompt); The line returned is allocated with malloc(3);
        the caller must free it when finished.
 
-rl_clear_history
-rl_on_new_line
-rl_replace_line
-rl_redisplay
-add_history
+rl_clear_history - void rl_clear_history(void); it frees private data Readline saves in the history list.
+
+rl_on_new_line - int rl_on_new_line(void); 
+Tell the update functions that we have moved onto a new (empty) line, usually after outputting a newline.
+
+rl_replace_line - void rl_replace_line (const char *text, int clear_undo);
+Replace the contents of rl_line_buffer with text. 
+The point and mark are preserved, if possible. 
+If clear_undo is non-zero, the undo list associated with the current line is cleared.
+
+rl_redisplay - void rl_redisplay (void);
+Change what's displayed on the screen to reflect the current contents of rl_line_buffer.
+
+add_history - void add_history (char *string);
+
 printf
 malloc
 free

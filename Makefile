@@ -6,14 +6,14 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/26 18:08:24 by ageels        ########   odam.nl          #
+#    Updated: 2022/09/26 20:02:22 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
-USER = ageels
-CFLAG = -I /Users/$(USER).brew/opt/readline/include
-LFLAG = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
+BREW_DIR = $(shell brew --prefix)
+CFLAG = -I $(BREW_DIR)/opt/readline/include
+LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline
 #-Wall -Werror -Wextra
 SRC = 	src/main.c\
 		src/prompt.c\
