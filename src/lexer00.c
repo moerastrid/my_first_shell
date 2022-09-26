@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer00.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 22:08:09 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   lexer00.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/26 18:22:06 by tnuyten       #+#    #+#                 */
+/*   Updated: 2022/09/26 22:16:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int get_token_type(char *str)
 	return (0);
 }
 
-char	*get_data_end(char *input, int type)
+char	*get_token_end(char *input, int type)
 {
 	int len;
 
@@ -75,7 +75,7 @@ t_token	*tokenize(char *input)
 		if (is_token(input))
 		{
 			type = get_token_type(input);
-			data = ft_substr(input, 0, get_data_end(input, type) - input);
+			data = ft_substr(input, 0, get_token_end(input, type) - input);
 			if (token == NULL)
 				token = token_new(data, type);
 			else
