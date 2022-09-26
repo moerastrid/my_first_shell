@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 20:50:44 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/26 21:42:42 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,31 @@ static int get_token_type(char *str)
 	return (0);
 }
 
+char	*get_data_end(char *input, int type)
+{
+	int len;
+
+	len = ft_strlen(input);
+	if(len == 0)
+		return input;
+	input++;
+	if(len == 1)
+		return input;
+	if(len == 2)
+		return input;
+	if (len == 2 && type == GREATGREAT || type == LESSLESS)
+	{
+		input++;
+	}
+	while (*input)
+	{
+		if (is_token(input))
+			return (input);
+		input++;
+	}
+	return (NULL);
+}
+
 t_token	*tokenize(char *input)
 {
 	t_token	*token;
@@ -98,11 +123,14 @@ t_token	*tokenize(char *input)
 	{
 		if (is_token(input))
 		{
-			data = ft_substr(input, 0, ft_strlen(input));
+			type = get_token_type(input);
+			data = ft_substr(input, 0, get_data_end(input, type) - input);
 			if (token == NULL)
 				token = token_new(data, type);
 			else
 				token_add_back(token, token_new(data, type));
+			if(type == GREATGREAT || type == LESSLESS)
+				input++;
 		}
 		input++;
 	}
@@ -111,7 +139,7 @@ t_token	*tokenize(char *input)
 
 int main()
 {
-	t_token *tt = tokenize("cat <test.txt | ls -la > output.txt << test EOF >>output.txt | echo $?");
+	t_token *tt = tokenize("cat <test.txt | ls -la > output.txt << test EOF >>output.txt | echo $??");
 
 	while(tt != NULL)
 	{
