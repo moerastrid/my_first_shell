@@ -2,10 +2,14 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	parse(argc, argv);
+	t_cmd	cmds;
+
+	char input[50] = "<input.txt cat | wc -l >output.txt";
+	parse(input, &cmds);
+
 	//execute();
 	//free_structs();
-	t_cmd	cmds;
+
 	cmds.amount_cmd = 4;
 	family_life(cmds);
 }

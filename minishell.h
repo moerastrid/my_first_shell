@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:50:17 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 22:20:14 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/26 19:17:42 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,36 @@
 //structs
 typedef struct s_simple {
 	char	**arguments;
-}		t_simple;
+}	t_simple;
 
 typedef struct s_cmd {
 	int			amount_cmd;
 	t_simple	**simple;
 	char		*outfile;
-	char		*infile;
+	char    	*infile;
 	char		*errfile;
-}		t_cmd;
+}	t_cmd;
 
-//parser
-int		parse(int argc, char **argv);
+enum Token_type {
+	GREAT = 1,
+	LESS = 2,
+	PIPE = 3,
+	GREATGREAT = 4, //Redirect STDOUT in append mode.
+	LESSLESS = 5, //HEREDOC
+	DOLL = 6,
+	DOLLQ = 7,
+};
+
+typedef struct s_token {
+	enum Token_type	type;
+	char			*data;
+	struct s_token	*next;
+}	t_token;
+
+//Lexer
+
+//Parser
+int		parse(char *input, t_cmd *cmd);
 
 //thefam
 int		family_life(t_cmd cmds);

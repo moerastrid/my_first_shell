@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils00.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/26 14:23:22 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:47:42 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils00.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/26 14:23:22 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/26 17:04:11 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*point;
 
 	point = malloc(count * size);
-	if (point == 0)
-		return (0);
+	if (point == NULL)
+		return (NULL);
 	ft_bzero(point, size * count);
 	return (point);
 }
