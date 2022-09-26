@@ -1,4 +1,6 @@
-readline
+readline - char *readline (const char *prompt); The line returned is allocated with malloc(3);
+       the caller must free it when finished.
+
 rl_clear_history
 rl_on_new_line
 rl_replace_line

@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   prompt.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/26 16:54:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 18:13:46 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/26 18:05:32 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/26 18:27:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	prompt(void)
 {
-	if (prompt() != 0)
+	rl_bind_key('\t', rl_complete);
+	char	*line;
+
+	line = NULL;
+	while (1)
 	{
-		ft_putstr_fd("no prompt today", 1);
-		return (1);
+		if (line)
+			free (line);
+		line = readline(" my_first_shell > ");
+		if (!line)
+			return (1);
+		add_history (line);
 	}
-	//execute();
-	//free_structs();
-	t_cmd	cmds;
-	cmds.amount_cmd = 4;
-	//family_life(cmds);
+	free (line);
+	return (0);
 }

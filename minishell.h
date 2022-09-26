@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 17:53:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 18:14:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define READ 0
 # define WRITE 1
 
-//structs
+//STRUCTS:
 typedef struct s_simple {
 	char	**argument;
 }		t_simple;
@@ -35,6 +35,10 @@ typedef struct s_cmd {
 	char		*infile;
 	char		*errfile;
 }		t_cmd;
+
+// FILES & FUNCTIONS:
+//prompt
+int	prompt(void);
 
 //parser
 int		parse(int argc, char **argv);

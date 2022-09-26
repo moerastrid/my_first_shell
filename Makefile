@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/26 18:01:54 by ageels        ########   odam.nl          #
+#    Updated: 2022/09/26 18:08:24 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ CFLAG = -I /Users/$(USER).brew/opt/readline/include
 LFLAG = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 #-Wall -Werror -Wextra
 SRC = 	src/main.c\
-		src/execute_command.c\
-		src/thefam.c\
-		src/builtins00.c\
+		src/prompt.c\
 		src/parser.c\
+		src/thefam.c\
+		src/execute_command.c\
+		src/builtins00.c\
 		src/utils00.c\
 		src/utils01.c\
 
