@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:50:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 15:37:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 //structs
 typedef struct s_simple {
-	char	**arguments;
+	char	**argument;
 }		t_simple;
 
 typedef struct s_cmd {
