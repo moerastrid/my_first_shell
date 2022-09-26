@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 21:42:42 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/26 21:57:30 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,13 @@ char	*get_data_end(char *input, int type)
 {
 	int len;
 
+	printf("%d: %s\n", type, input);
+
 	len = ft_strlen(input);
 	if(len == 0)
 		return input;
-	input++;
-	if(len == 1)
-		return input;
-	if(len == 2)
-		return input;
-	if (len == 2 && type == GREATGREAT || type == LESSLESS)
+	input++; //skip first symbol of token
+	if (len >= 2 && (type == GREATGREAT || type == LESSLESS))
 	{
 		input++;
 	}
@@ -109,7 +107,7 @@ char	*get_data_end(char *input, int type)
 			return (input);
 		input++;
 	}
-	return (NULL);
+	return (input + ft_strlen(input) - 1);
 }
 
 t_token	*tokenize(char *input)
@@ -124,6 +122,7 @@ t_token	*tokenize(char *input)
 		if (is_token(input))
 		{
 			type = get_token_type(input);
+			printf("%lu\n", get_data_end(input, type) - input);
 			data = ft_substr(input, 0, get_data_end(input, type) - input);
 			if (token == NULL)
 				token = token_new(data, type);
