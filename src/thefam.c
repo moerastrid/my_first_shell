@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   thefam.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/22 22:18:40 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   thefam.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 22:18:38 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/26 14:19:52 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief	setup of the child processes and the parent
 ///			who catches their return value at the end
 /// @param	total_cmd the total amounds of commands between pipes.
-/// @param	cmds this needs to be a list of commands 
+/// @param	cmds this needs to be a list of commands
 ///			we can pass to the execute function
 /// @return	exit code of the parent process
 int	family_life(int total_cmd, t_list *cmds)
@@ -46,7 +46,7 @@ int	family_life(int total_cmd, t_list *cmds)
 	return (parent(children, total_cmd, pfd[(i + 1) % 2]));
 }
 
-/// @brief		The parent process waits for the child processes 
+/// @brief		The parent process waits for the child processes
 ///				to have finished
 ///				and checks their return status (see if they succeeded in life)
 /// @param 		children : PID's of the child processes
@@ -98,7 +98,7 @@ int	child(t_list *cmds, int *write_pipe, int *read_pipe, int cmd_no, int total_c
 				exit (-1);
 		}
 		if (cmd_no != total_cmd)
-		{	
+		{
 			if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 				exit (-1);
 		}
