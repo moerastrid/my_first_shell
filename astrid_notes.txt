@@ -31,6 +31,17 @@ waitpid
 wait3
 wait4
 
+/*
+void	my_signals(void)
+{
+	int			my_signal;
+	sigset_t	my_first_set;
+
+	my_signal = 0;
+	sigemptyset(&my_first_set);
+	sigaddset(&my_first_set, my_signal);
+}
+*/ 
 
 signal -
 Signals allow the manipulation of a process from outside its domain, 
