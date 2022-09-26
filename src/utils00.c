@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils00.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:23:22 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/26 17:04:11 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   utils00.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/26 14:23:22 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/26 21:46:15 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,27 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(point, size * count);
 	return (point);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	int		i;
+	char	*ptr;
+
+	if (!s)
+		return (NULL);
+	ptr = malloc(len + 1);
+	if (!ptr)
+		return (NULL);
+	while (start-- && *s)
+		s++;
+	i = 0;
+	while (*s && len > 0)
+	{
+		ptr[i] = *s++;
+		len--;
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

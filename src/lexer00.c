@@ -1,59 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 21:42:42 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   lexer00.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/26 18:22:06 by tnuyten       #+#    #+#                 */
+/*   Updated: 2022/09/26 21:48:28 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "token.c"
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	int		i;
-	char	*ptr;
-
-	if (!s)
-		return (NULL);
-	ptr = malloc(len + 1);
-	if (!ptr)
-		return (NULL);
-	while (start-- && *s)
-		s++;
-	i = 0;
-	while (*s && len > 0)
-	{
-		ptr[i] = *s++;
-		len--;
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
-
-
-static int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-
-	while (n > 0)
-	{
-		n--;
-		c1 = (unsigned char) *s1++;
-		c2 = (unsigned char) *s2++;
-		if (c1 != c2)
-			return (c1 - c2);
-		if (c1 == '\0')
-			return (0);
-	}
-	return (0);
-}
 
 static int is_token(char *str)
 {
@@ -99,7 +56,7 @@ char	*get_data_end(char *input, int type)
 		return input;
 	if(len == 2)
 		return input;
-	if (len == 2 && type == GREATGREAT || type == LESSLESS)
+	if (len == 2 && (type == GREATGREAT || type == LESSLESS))
 	{
 		input++;
 	}
@@ -135,15 +92,4 @@ t_token	*tokenize(char *input)
 		input++;
 	}
 	return (token);
-}
-
-int main()
-{
-	t_token *tt = tokenize("cat <test.txt | ls -la > output.txt << test EOF >>output.txt | echo $??");
-
-	while(tt != NULL)
-	{
-		printf("%d: %s\n", tt->type, tt->data);
-		tt = tt->next;
-	}
 }
