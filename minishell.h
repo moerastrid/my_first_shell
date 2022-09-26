@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:24:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 14:50:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,32 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
+# include <stdlib.h>
 
 # define READ 0
 # define WRITE 1
 
-//parser
-int	parse(int argc, char **argv);
+//structs
+typedef struct s_simple {
+	char	**arguments;
+}		t_simple;
 
+typedef struct s_cmd {
+	int			amount_cmd;
+	t_simple	**simple;
+	char		*outfile;
+	char		*infile;
+	char		*errfile;
+}		t_cmd;
+
+//parser
+int		parse(int argc, char **argv);
 
 //thefam
-int		family_life(int total_cmd, t_list *cmds);
-int		parent(int *children, int total_cmd, int *pfd);
-int		child(t_list *cmds, int *write_pipe, int *read_pipe, int cmd_no, int total_cmd);
+int		family_life(t_cmd cmds);
+int		parent(int *children, t_cmd cmds, int *pfd);
+int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 
 //buildins (00)
 void	bi_echo(void);
@@ -40,9 +54,11 @@ void	bi_env(void);
 void	bi_exit(void);
 
 //execute (00)
-void	exec_cmd(t_list *cmds, int cmd_no);
+void	exec_cmd(t_cmd cmds, int cmd_no);
 
 //utils (00)
+size_t	ft_strlen(const char *string);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 

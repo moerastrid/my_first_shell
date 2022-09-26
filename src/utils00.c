@@ -6,9 +6,26 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/26 14:23:22 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:24:15 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/26 14:47:42 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../minishell.h"
+
+size_t	ft_strlen(const char *string)
+{
+	int	a;
+
+	a = 0;
+	while (string[a] != 0)
+		a++;
+	return (a);
+}
+
+int	ft_putstr_fd(char *s, int fd)
+{
+	return (write(fd, s, ft_strlen(s)));
+}
 
 void	ft_bzero(void *s, size_t n)
 {

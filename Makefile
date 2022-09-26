@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/26 14:15:58 by ageels        ########   odam.nl          #
+#    Updated: 2022/09/26 14:45:28 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC = 	src/main.c\
 		src/thefam.c\
 		src/builtins00.c\
 		src/parser.c\
+		src/utils00.c\
 
 #Colors:
 GREEN		=	\e[38;5;118m
