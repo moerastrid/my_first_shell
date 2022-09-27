@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:19:43 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 22:25:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_token	*token_new(char *data, int type);
 void	token_add_back(t_token *tokens, t_token *new);
 
 //Parser
-int		parse(char *input, t_cmd *cmd, char **envp);
+int		parse(char *input, t_cmd *cmds, char **envp);
 
 //buildins (00)
 void	bi_echo(void);

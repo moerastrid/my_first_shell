@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/26 16:54:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 21:12:37 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 22:24:00 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (*line)
 		{
-			printf("\nRETURN VALUES:\nPARSE:\t\t%d\n", parse(line, &cmds));
+			printf("\nRETURN VALUES:\nPARSE:\t\t%d\n", parse(line, &cmds, envp));
 			printf("EXECUTE:\t%d\n", execute(cmds));
 		}
 		free(line);

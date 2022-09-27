@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:22:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 22:25:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_cmds(t_token *tokens)
 	return (amount_cmds);
 }
 
-int	parse(char *input, t_cmd *cmd, char **envp)
+int	parse(char *input, t_cmd *cmds, char **envp)
 {
 	int			amount_cmd;
 	t_simple	*simple;
