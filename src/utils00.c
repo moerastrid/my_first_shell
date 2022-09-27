@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/26 14:23:22 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 21:46:15 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 18:33:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *string)
 	int	a;
 
 	a = 0;
-	while (string[a] != 0)
+	if (!string)
+		return (a);
+	while (string[a] != '\0')
 		a++;
 	return (a);
 }

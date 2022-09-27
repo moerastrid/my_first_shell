@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 21:50:42 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 18:24:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_token {
 
 // FILES & FUNCTIONS:
 //prompt
-int	prompt(void);
+char*	prompt(void);
 
 //Lexer (00, 01)
 t_token	*tokenize(char *input);
@@ -89,6 +89,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n) ;
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

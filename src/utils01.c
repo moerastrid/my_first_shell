@@ -97,3 +97,33 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		a;
+	int		b;
+	int		c;
+	char	*newstring;
+
+	a = 0;
+	b = 0;
+	c = ft_strlen(s1) + ft_strlen(s2) + 1;
+	newstring = (char *)malloc(sizeof(char) * c);
+	if (newstring == 0)
+		return (0);
+	while (s1 != NULL)
+	{
+		newstring[a] = s1[a];
+		a++;
+		s1++;
+	}
+	while (s2 != NULL)
+	{
+		newstring[a] = s2[b];
+		a++;
+		b++;
+		s2++;
+	}
+	newstring[a] = 0;
+	return (newstring);
+}
