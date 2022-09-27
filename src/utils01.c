@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 	return ((char **)startPtr);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n) 
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	c1;
 	unsigned char	c2;
@@ -98,32 +98,19 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char* ft_strjoin(char const *s1, char const *s2)
 {
-	int		a;
-	int		b;
-	int		c;
-	char	*newstring;
+	int len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	char *str = malloc(sizeof(char) * len);
 
-	a = 0;
-	b = 0;
-	c = ft_strlen(s1) + ft_strlen(s2) + 1;
-	newstring = (char *)malloc(sizeof(char) * c);
-	if (newstring == 0)
-		return (0);
-	while (s1 != NULL)
+	while(s1 && *s1)
 	{
-		newstring[a] = s1[a];
-		a++;
-		s1++;
+		*str++ = *s1++;
 	}
-	while (s2 != NULL)
+	while(s2 && *s2)
 	{
-		newstring[a] = s2[b];
-		a++;
-		b++;
-		s2++;
+		*str++ = *s2++;
 	}
-	newstring[a] = 0;
-	return (newstring);
+	*str = '\0';
+	return (str - len);
 }
