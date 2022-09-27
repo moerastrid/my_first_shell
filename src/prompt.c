@@ -6,34 +6,30 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:05:32 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/27 17:14:11 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:50:35 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-
-char	**prompt(void)
+char*	prompt(void)
 {
-	t_token	*temp;
+	t_token	*tok;
 	char	*line;
-	t_cmd cmd;
+	char	*return_string;
 
-	while (1)
+	return_string = NULL;
+	line = readline("my_first_shell > ");
+	if (!line)
+		return (NULL);
+	if (*line)
 	{
-		line = readline("my_first_shell > ");
-		if (!line)
-			return (NULL);
-		if (line && *line)
-			add_history (line);
-		// ft_putstr_fd("my_first_shell: ", 1);
-		// ft_putstr_fd(line, 1);
-		// ft_putstr_fd(": command not found\n", 1);
-		parse(line, &cmd); //Temporary. ...?
+		add_history(line);
+		return_string = ft_strjoin(line, return_string);
+		ft_putstr_fd("\nhello \n", 1);
 		rl_on_new_line();
-		free (line);
+		tok = NULL;
 	}
-	//rl_clear_history();
-	return (0);
+	free (line);
+	return (return_string);
 }

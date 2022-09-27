@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
-#    Updated: 2022/09/27 16:24:13 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/27 18:51:20 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
-CFLAG = -I $(BREW_DIR)/opt/readline/include
+CFLAG = -I $(BREW_DIR)/opt/readline/include -fsanitize=address -g -O3
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline
 CC = clang
 #-Wall -Werror -Wextra

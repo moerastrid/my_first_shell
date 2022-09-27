@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/27 16:15:00 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:50:33 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_token_type(char *str)
 	return (0);
 }
 
-static char	*get_data_end(char *input, int type)
+char	*get_token_end(char *input, int type)
 {
 	int	len;
 
@@ -75,7 +75,7 @@ t_token	*tokenize(char *input)
 		if (is_token(input))
 		{
 			type = get_token_type(input);
-			data = ft_substr(input, 0, get_data_end(input, type) - input);
+			data = ft_substr(input, 0, get_token_end(input, type) - input);
 			if (token == NULL)
 				token = token_new(data, type);
 			else
@@ -90,9 +90,10 @@ t_token	*tokenize(char *input)
 
 // int main()
 // {
-// 	t_token *tok = tokenize(">>test >test <test <<test | test | test $");
-//
-// 	while (tok != NULL)
+// 	//t_token *tok = tokenize("alle tekst die hier staat wordt genegeerd! >>test >test <test <<test | test | test $");
+//	t_token *tok = tokenize("echo string | hallo << test");
+
+// 	while(tok != NULL)
 // 	{
 // 		printf("%d:[%s]\n", tok->type, tok->data);
 // 		tok = tok->next;
