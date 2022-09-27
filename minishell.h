@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:20:14 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/27 18:51:05 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/27 19:43:52 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_cmd {
 	char		*errfile;
 }	t_cmd;
 
+typedef struct s_path
+{
+	char	**paths;
+	int		size;
+}	t_path;
+
 enum	 e_token_type {
 	GREAT = 1,
 	LESS = 2,
@@ -64,7 +70,7 @@ t_token	*token_new(char *data, int type);
 void	token_add_back(t_token *tokens, t_token *new);
 
 //Parser
-int		parse(char *input, t_cmd *cmd);
+int		parse(char *input, t_cmd *cmd, char **envp);
 
 //thefam
 int		family_life(t_cmd cmds);
@@ -92,5 +98,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+
+//path
+t_path	*split_path(char **envp);
+
 
 #endif
