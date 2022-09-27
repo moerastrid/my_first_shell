@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 22:20:14 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/27 18:51:05 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 22:20:14 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/27 21:23:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <stdbool.h>
 
 # define READ 0
 # define WRITE 1
@@ -58,18 +59,13 @@ typedef struct s_token {
 //prompt
 char	*prompt(void);
 
-//Lexer (00, 01)
+//Tokens (00, 01)
 t_token	*tokenize(char *input);
 t_token	*token_new(char *data, int type);
 void	token_add_back(t_token *tokens, t_token *new);
 
 //Parser
 int		parse(char *input, t_cmd *cmd);
-
-//thefam
-int		family_life(t_cmd cmds);
-int		parent(int *children, t_cmd cmds, int *pfd);
-int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 
 //buildins (00)
 void	bi_echo(void);
@@ -80,7 +76,12 @@ void	bi_unset(void);
 void	bi_env(void);
 void	bi_exit(void);
 
-//execute (00)
+//execute (00, 01)
+int		execute(t_cmd cmds);
+int		family_life(t_cmd cmds);
+int		parent(int *children, t_cmd cmds, int *pfd);
+int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+int		exec_single_cmd(t_cmd cmds);
 void	exec_cmd(t_cmd cmds, int cmd_no);
 
 //utils (00)

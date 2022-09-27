@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   execute00.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/26 16:54:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 21:12:37 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/27 22:17:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*line;
-	t_cmd	cmds;
+// EXECUTE00 IS THE EXECUTE MAIN STRUCTURE 
 
-	line = NULL;
-	while (1)
+int	execute(t_cmd cmds)
+{
+	pid_t	stdin;
+	pid_t	stdout;
+	pid_t	stderr;
+
+	if (cmds.amount_cmd <= 0)
+		return (-1);
+	stdin = dup(STDIN_FILENO);
+	stdout = dup(STDOUT_FILENO);
+	stderr = dup(STDERR_FILENO);
+	if (stdout == -1 || stdout == -1 || stderr == -1)
+		return (-1);
+	if (cmds.amount_cmd == 1)
 	{
-		line = prompt();
-		if (!line)
-			return (1);
-		if (*line)
-		{
-			printf("\nRETURN VALUES:\nPARSE:\t\t%d\n", parse(line, &cmds));
-			printf("EXECUTE:\t%d\n", execute(cmds));
-		}
-		free(line);
-		line = NULL;
+		if (exec_single_cmd(cmds) != 0)
+			return (-1);
 	}
-	rl_clear_history();
+	else
+	{
+		if (family_life(cmds) != 0)
+			return (-1);
+	}
 	return (0);
 }

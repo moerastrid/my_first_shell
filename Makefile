@@ -1,28 +1,30 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
-#    Updated: 2022/09/27 18:51:20 by tnuyten          ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: ageels <ageels@student.codam.nl>             +#+                      #
+#                                                    +#+                       #
+#    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
+#    Updated: 2022/09/27 20:50:48 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
-CFLAG = -I $(BREW_DIR)/opt/readline/include -fsanitize=address -g -O3
+CFLAG = -I $(BREW_DIR)/opt/readline/include
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline
 CC = clang
+#-fsanitize=address -g -O3
 #-Wall -Werror -Wextra
 SRC = 	src/main.c\
 		src/prompt.c\
-		src/lexer00.c\
-		src/lexer01.c\
 		src/parser.c\
-		src/thefam.c\
-		src/execute_command.c\
+		src/token00.c\
+		src/token01.c\
+		src/execute00.c\
+		src/execute01.c\
+		src/execute02.c\
 		src/builtins00.c\
 		src/utils00.c\
 		src/utils01.c\

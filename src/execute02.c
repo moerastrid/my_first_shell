@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute_command.c                                  :+:    :+:            */
+/*   execute02.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/26 14:57:15 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/27 22:17:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-/// @brief	here we execute one command
-/// @param	cmds the list with all commands
-/// @param	cmd_no	the command we want to execute
+// IN EXECUTE02, THE SINGLE COMMANDS ARE EXECUTED
+
 void	exec_cmd(t_cmd cmds, int cmd_no)
 {
 	dprintf(2, "cmd %d is executed\n", cmd_no);
 	exit(0);
+}
+
+int	exec_single_cmd(t_cmd cmds)
+{
+	dprintf(2, "single cmd is executed\n");
+	return (0);
 }
