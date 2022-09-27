@@ -6,51 +6,51 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/26 22:08:09 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:15:00 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int is_token(char *str)
+static int	is_token(char *str)
 {
-	if(ft_strncmp(str, "$", 1) == 0)
-		return 1;
-	if(ft_strncmp(str, "|", 1) == 0)
-		return 1;
-	if(ft_strncmp(str, ">", 1) == 0)
-		return 1;
-	if(ft_strncmp(str, "<", 1) == 0)
-		return 1;
+	if (ft_strncmp(str, "$", 1) == 0)
+		return (1);
+	if (ft_strncmp(str, "|", 1) == 0)
+		return (1);
+	if (ft_strncmp(str, ">", 1) == 0)
+		return (1);
+	if (ft_strncmp(str, "<", 1) == 0)
+		return (1);
 	return (0);
 }
 
-static int get_token_type(char *str)
+static int	get_token_type(char *str)
 {
-	if(ft_strncmp(str, "$?", 2) == 0)
-		return DOLLQ;
-	if(ft_strncmp(str, "$", 1) == 0)
-		return DOLL;
-	if(ft_strncmp(str, "|", 1) == 0)
-		return PIPE;
-	if(ft_strncmp(str, ">>", 2) == 0)
-		return GREATGREAT;
-	if(ft_strncmp(str, "<<", 2) == 0)
-		return LESSLESS;
-	if(ft_strncmp(str, ">", 1) == 0)
-		return GREAT;
-	if(ft_strncmp(str, "<", 1) == 0)
-		return LESS;
+	if (ft_strncmp(str, "$?", 2) == 0)
+		return (DOLLQ);
+	if (ft_strncmp(str, "$", 1) == 0)
+		return (DOLL);
+	if (ft_strncmp(str, "|", 1) == 0)
+		return (PIPE);
+	if (ft_strncmp(str, ">>", 2) == 0)
+		return (GREATGREAT);
+	if (ft_strncmp(str, "<<", 2) == 0)
+		return (LESSLESS);
+	if (ft_strncmp(str, ">", 1) == 0)
+		return (GREAT);
+	if (ft_strncmp(str, "<", 1) == 0)
+		return (LESS);
 	return (0);
 }
 
-char	*get_data_end(char *input, int type)
+static char	*get_data_end(char *input, int type)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(input);
-	if(len == 0)
-		return input;
+	if (len == 0)
+		return (input);
 	input++; //skip first symbol of token
 	if (len > 1 && (type == GREATGREAT || type == LESSLESS)) //skip second symbol of token, if it exists.
 		input++;
@@ -80,7 +80,7 @@ t_token	*tokenize(char *input)
 				token = token_new(data, type);
 			else
 				token_add_back(token, token_new(data, type));
-			if(type == GREATGREAT || type == LESSLESS)
+			if (type == GREATGREAT || type == LESSLESS)
 				input++;
 		}
 		input++;
@@ -92,7 +92,7 @@ t_token	*tokenize(char *input)
 // {
 // 	t_token *tok = tokenize(">>test >test <test <<test | test | test $");
 //
-// 	while(tok != NULL)
+// 	while (tok != NULL)
 // 	{
 // 		printf("%d:[%s]\n", tok->type, tok->data);
 // 		tok = tok->next;

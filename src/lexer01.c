@@ -1,19 +1,19 @@
 #include "../minishell.h"
 
-void token_add_back(t_token* tokens, t_token* new)
+void	token_add_back(t_token *tokens, t_token *new)
 {
-	if(tokens == NULL)
+	if (tokens == NULL)
 		return ;
-	while(tokens->next != NULL)
+	while (tokens->next != NULL)
 	{
 		tokens = tokens->next;
 	}
 	tokens->next = new;
 }
 
-t_token* token_new(char *data, int type)
+t_token	*token_new(char *data, int type)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = ft_calloc(1, sizeof(t_token));
 	if (token == NULL)

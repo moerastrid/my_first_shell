@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: ageels <ageels@student.codam.nl>             +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/26 21:26:15 by ageels        ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
+#    Updated: 2022/09/27 16:24:13 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 CFLAG = -I $(BREW_DIR)/opt/readline/include
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline
+CC = clang
 #-Wall -Werror -Wextra
 SRC = 	src/main.c\
 		src/prompt.c\
@@ -38,7 +39,7 @@ all : $(NAME)
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAG) $(LFLAG) $(OBJ) -o $@
+	$(CC) $(CFLAG) $(LFLAG) $(OBJ) -o $@
 	@printf "$(_SUCCESS) Minishell ready.\n"
 
 obj/%.o : src/%.c
