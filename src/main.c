@@ -61,9 +61,10 @@ static void print_tokens(t_token *root)
 	{
 		printf("[");
 		print_token_type(i->type);
-		printf(" , %s", i->data);
+		printf(" , %s]", i->data);
 		i = i->next;
-		printf("] -> ");
+		if(i != NULL)
+			printf(" -> ");
 	}
 	printf("\n");
 }

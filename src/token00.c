@@ -48,7 +48,8 @@ static int	token_length(t_token *token)
 {
 	int len;
 
-	if (token->type == GREATGREAT || token->type == LESSLESS)
+	if (token->type == GREATGREAT || token->type == LESSLESS
+		|| token->type == DOLLQ)
 		len = 2;
 	else if(token->type == WORD)
 		len = ft_strlen(token->data);
