@@ -21,19 +21,21 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
+# include "lib/libft/libft.h"
 
 # define READ 0
 # define WRITE 1
 
 //STRUCTS:
 typedef struct s_simple {
-	char	**argv;
-	char	*bin;
+	char			**argv;
+	char			*bin;
+	struct s_simple	*next;
 }	t_simple;
 
 typedef struct s_cmd {
 	int			amount_cmd;
-	t_simple	**simple;
+	t_simple	*simples;
 	char		*outfile;
 	char		*infile;
 	char		*errfile;
@@ -46,6 +48,7 @@ typedef struct s_path
 }	t_path;
 
 enum	 e_token_type {
+	WORD = 0,
 	GREAT = 1,
 	LESS = 2,
 	PIPE = 3,
@@ -71,7 +74,7 @@ t_token	*token_new(char *data, int type);
 void	token_add_back(t_token *tokens, t_token *new);
 
 //Parser
-int		parse(char *input, t_cmd *cmds, char **envp);
+int		parse(t_token *tokens, t_cmd *cmds, char **envp);
 
 //buildins (00)
 void	bi_echo(void);
@@ -91,14 +94,14 @@ int		exec_single_cmd(t_cmd cmds);
 void	exec_cmd(t_cmd cmds, int cmd_no);
 
 //utils (00)
-size_t	ft_strlen(const char *string);
-int		ft_putstr_fd(char *s, int fd);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
+// size_t	ft_strlen(const char *string);
+// int		ft_putstr_fd(char *s, int fd);
+// void	ft_bzero(void *s, size_t n);
+// void	*ft_calloc(size_t count, size_t size);
+// char	*ft_substr(char const *s, unsigned int start, size_t len);
+// char	**ft_split(char const *s, char c);
+// int		ft_strncmp(const char *s1, const char *s2, size_t n);
+// char	*ft_strjoin(char const *s1, char const *s2);
 
 //path
 t_path	*split_path(char **envp);

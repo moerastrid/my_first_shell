@@ -25,7 +25,7 @@ static int	is_token(char *str)
 	return (0);
 }
 
-static int	get_token_type(char *str)
+static int	token_type(char *str)
 {
 	if (ft_strncmp(str, "$?", 2) == 0)
 		return (DOLLQ);
@@ -44,49 +44,103 @@ static int	get_token_type(char *str)
 	return (0);
 }
 
-char	*get_token_end(char *input, int type)
+static int	token_length(t_token *token)
+{
+	int len;
+
+	if (token->type == GREATGREAT || token->type == LESSLESS)
+		len = 2;
+	else if(token->type == WORD)
+		len = ft_strlen(token->data);
+	else
+		len = 1;
+	return (len);
+}
+
+static int word_length(char *input)
 {
 	int	len;
 
-	len = ft_strlen(input);
-	if (len == 0)
-		return (input);
-	input++; //skip first symbol of token
-	if (len > 1 && (type == GREATGREAT || type == LESSLESS)) //skip second symbol of token, if it exists.
-		input++;
-	while (*input)
+	len = 0;
+	while(*input != ' ' && *input != '\0' && !is_token(input))
 	{
-		if (is_token(input))
-			return (input);
+		len++;
 		input++;
 	}
-	return (input + ft_strlen(input));
+	return (len);
 }
 
-t_token	*tokenize(char *input)
+t_token *tokenize(char *input)
 {
-	t_token	*token;
-	int		type;
+	t_token	root;
 	char	*data;
+	int		type;
+	int		len;
+	t_token *new;
 
-	token = NULL;
-	while (*input)
+	root.next = NULL;
+	while (*input != '\0')
 	{
-		if (is_token(input))
-		{
-			type = get_token_type(input);
-			data = ft_substr(input, 0, get_token_end(input, type) - input);
-			if (token == NULL)
-				token = token_new(data, type);
-			else
-				token_add_back(token, token_new(data, type));
-			if (type == GREATGREAT || type == LESSLESS)
-				input++;
-		}
-		input++;
+		while(*input == ' ')
+			input++;
+		if(!*input)
+			break;
+		type = token_type(input);
+		data = NULL;
+		if (type == WORD)
+			data = ft_substr(input, 0, word_length(input));
+		new = token_new(data, type);
+		token_add_back(&root, new);
+		len = token_length(new);
+		input += len;
 	}
-	return (token);
+	return (root.next);
 }
+
+// Reference, old version without WORD type.
+// char	*get_token_end(char *input, int type)
+// {
+// 	int	len;
+//
+// 	len = ft_strlen(input);
+// 	if (len == 0)
+// 		return (input);
+// 	input++; //skip first symbol of token
+// 	if (len > 1 && (type == GREATGREAT || type == LESSLESS)) //skip second symbol of token, if it exists.
+// 		input++;
+// 	while (*input)
+// 	{
+// 		if (is_token(input))
+// 			return (input);
+// 		input++;
+// 	}
+// 	return (input + ft_strlen(input));
+// }
+// t_token	*tokenize(char *input)
+// {
+// 	t_token	*token;
+// 	char	*data;
+// 	int		type;
+//
+// 	token = NULL;
+// 	while (*input)
+// 	{
+// 		if (is_token(input))
+// 		{
+// 			type = token_type(input);
+// 			data = ft_substr(input, 0, get_token_end(input, type) - input);
+// 			printf("data: %s\n", data);
+// 			if (token == NULL)
+// 				token = token_new(data, type);
+// 			else
+// 				token_add_back(token, token_new(data, type));
+// 			if (type == GREATGREAT || type == LESSLESS)
+// 				input++;
+// 		}
+// 		input++;
+// 	}
+// 	return (token);
+// }
 
 // int main()
 // {

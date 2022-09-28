@@ -11,50 +11,51 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "path.h"
 
-int	count_cmds(t_token *tokens)
+static int	count_cmd(t_cmd *cmd)
 {
-	int	amount_cmds;
+	int			amount_cmd;
+	t_simple	*simples;
 
-	amount_cmds = 1;
-	while (tokens != NULL)
+	simples = cmd->simples;
+	amount_cmd = 1;
+	while (simples != NULL)
 	{
-		amount_cmds ++;
-		tokens = tokens->next;
+		amount_cmd++;
+		simples = simples->next;
 	}
-	return (amount_cmds);
+	return (amount_cmd);
 }
 
-int	parse(char *input, t_cmd *cmds, char **envp)
+int	parse(t_token *tokens, t_cmd *cmd, char **envp)
 {
 	int			amount_cmd;
 	t_simple	*simple;
-	t_token		*tokens;
 	t_path		*path;
+	char		**split;
 
 	amount_cmd = 0;
-	tokens = NULL;
-	//tokens = tokenize(input);
-	//path = split_path(envp);
-
+	path = split_path(envp);
 	if (tokens == NULL) // No special characters present in string. No redirections, no pipes, no substitutions. Just one simple command.
 	{
 		simple = ft_calloc(1, sizeof(t_simple));
 		if (simple == NULL)
 			return (1);
-		amount_cmd = 1;
-		cmds->infile = NULL;
-		cmds->outfile = NULL;
-		cmds->errfile = NULL;
-		cmds->amount_cmd = 1;
+		simple->next = NULL;
+		cmd->amount_cmd = 1;
 		simple->bin = "";
+		simple->argv = NULL;
+		cmd->simples = simple;
+		return (0);
 	}
-	else
-	{
-		// hier komt meer , maar nu voor testen even dit geteld :)
-		amount_cmd = count_cmds(tokens);
-	}
-	cmds->amount_cmd = amount_cmd;
+
+	// hier komt meer , maar nu voor testen even dit geteld :)
+	amount_cmd = count_cmd(cmd);
+	cmd->amount_cmd = amount_cmd;
+
+
+
 	//check_fds();
 	//setup_cmd_lst();
 	//replace_def_arg();
