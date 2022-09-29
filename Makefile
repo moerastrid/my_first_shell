@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/29 19:20:36 by ageels        ########   odam.nl          #
+#    Updated: 2022/09/29 21:13:26 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ CC = clang
 
 SRC =	src/main.c\
 		src/prompt.c\
-		src/parser.c\
 		src/path.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
+		src/parser/parser.c\
+		src/parser/str_list.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
@@ -38,12 +39,12 @@ RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
+all : libft $(NAME)
+
 lib/libft/libft.a: libft
 
 libft:
 	@$(MAKE) -C lib/libft
-
-all : libft $(NAME)
 
 $(NAME): $(OBJ) libft
 	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) lib/libft/libft.a
@@ -55,6 +56,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/execute
 	@mkdir -pv obj/builtins
 	@mkdir -pv obj/utils
+	@mkdir -pv obj/parser
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
