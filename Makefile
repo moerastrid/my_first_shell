@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
-#    Updated: 2022/09/29 15:31:16 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/29 16:03:03 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
-CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft #-Wall -Wextra -Werror#-fsanitize=address -g
+CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft #-fsanitize=address -fno-omit-frame-pointer -g -O3 #-Wall -Wextra -Werror
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline -L lib/libft
 CC = clang
 
@@ -21,6 +21,7 @@ SRC = 	src/main.c\
 		src/parser.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
+		src/lexer/token_free.c\
 		src/execute00.c\
 		src/execute01.c\
 		src/execute02.c\

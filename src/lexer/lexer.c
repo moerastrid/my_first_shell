@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer00.c                                          :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/27 18:50:33 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:07:01 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ static int	token_type(char *str)
 	return (0);
 }
 
-static int word_length(char *input)
+static int	word_length(char *input)
 {
 	int	len;
 
 	len = 0;
-	while(*input != ' ' && *input != '\0' && !is_token(input))
+	while (*input != ' ' && *input != '\0' && !is_token(input))
 	{
 		len++;
 		input++;
@@ -73,21 +73,21 @@ static void	merge_redirects(t_token *token)
 	}
 }
 
-t_token *tokenize(char *input)
+t_token	*tokenize(char *input)
 {
 	t_token	root;
 	char	*data;
 	int		type;
 	int		len;
-	t_token *new;
+	t_token	*new;
 
 	root.next = NULL;
 	while (*input != '\0')
 	{
-		while(*input == ' ')
+		while (*input == ' ')
 			input++;
-		if(!*input)
-			break;
+		if (!*input)
+			break ;
 		type = token_type(input);
 		data = NULL;
 		if (type == WORD)

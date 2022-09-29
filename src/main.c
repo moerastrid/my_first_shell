@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/26 16:54:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:24:00 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/26 16:54:53 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/29 16:04:23 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void cmd_setup(t_cmd *cmd)
+void	cmd_setup(t_cmd *cmd)
 {
 	cmd->amount_cmd = 0;
 	cmd->simples = NULL;
@@ -20,52 +20,59 @@ void cmd_setup(t_cmd *cmd)
 	cmd->infile = NULL;
 }
 
-static void print_token_type(enum e_token_type num)
+// Totally illegal
+static void	print_token_type(enum e_token_type num)
 {
-	switch (num) {
+	switch (num)
+	{
 		case 0:
 			printf("%s", "WORD");
-			break;
+		break ;
 		case 1:
 			printf("%s", "GREAT");
-			break;
+		break ;
 		case 2:
 			printf("%s", "LESS");
-			break;
+		break ;
 		case 3:
 			printf("%s", "PIPE");
-			break;
+		break ;
 		case 4:
 			printf("%s", "GREATGREAT");
-			break;
+		break ;
 		case 5:
 			printf("%s", "LESSLESS");
-			break;
+		break ;
 		case 6:
 			printf("%s", "DOLL");
-			break;
+		break ;
 		case 7:
 			printf("%s", "DOLLQ");
-			break;
+		break ;
 	}
 }
 
-static void print_tokens(t_token *root)
+static void	print_tokens(t_token *root)
 {
 	t_token	*i;
 
 	i = root;
 	printf("Token list:\n");
-	while(i != NULL)
+	while (i != NULL)
 	{
 		printf("[");
 		print_token_type(i->type);
 		printf(", %s]", i->data);
 		i = i->next;
-		if(i != NULL)
+		if (i != NULL)
 			printf("->");
 	}
 	printf("\n");
+}
+
+static void	run(void)
+{
+	system("leaks minishell");
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -75,18 +82,20 @@ int	main(int argc, char **argv, char **envp)
 	t_path	*paths;
 	t_cmd	cmd;
 
+	atexit(run);
 	cmd_setup(&cmd);
 	paths = split_path(envp);
+	tokens = NULL;
 	line = NULL;
 	while (1)
 	{
 		line = prompt();
 		if (!line)
-			return (1);
+			break ;
 		if (*line)
 		{
 			tokens = tokenize(line);
-			if(tokens == NULL)
+			if (tokens == NULL)
 			{
 				printf("%s\n", NULL);
 				return (1);
@@ -98,6 +107,8 @@ int	main(int argc, char **argv, char **envp)
 		free(line);
 		line = NULL;
 	}
-	rl_clear_history();
+	free_token_list(tokens);
+	free_paths(paths);
+	// rl_clear_history();
 	return (0);
 }

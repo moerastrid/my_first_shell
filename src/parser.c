@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 15:28:56 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:05:03 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 
 	amount_cmd = count_cmd(cmd);
 	cmd->amount_cmd = amount_cmd;
-
-	while(tokens != NULL)
+	while (tokens != NULL)
 	{
 		type = tokens->type;
 		if (type == GREAT)
@@ -48,17 +47,15 @@ int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 		if (type == GREATGREAT)
 			;
 		if (type == LESSLESS)
-			;
+			cmd->delimiter = ft_strdup(tokens->data);
 		if (type == WORD)
 		{
 			simple = NULL;
 		}
 		tokens = tokens->next;
 	}
-
 	//check_fds();
 	//setup_cmd_lst();
 	//replace_def_arg();
 	return (0);
 }
-

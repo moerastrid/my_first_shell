@@ -1,10 +1,13 @@
 #include "../minishell.h"
 
-void free_paths(t_path *paths)
+void	free_paths(t_path *paths)
 {
-	int i = 0;
+	int	i;
 
-	while (paths->paths != NULL)
+	i = 0;
+	if (paths == NULL)
+		return ;
+	while (i < paths->size)
 	{
 		free(paths->paths[i++]);
 	}
