@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parser.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:25:09 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/29 15:28:56 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 		if (type == LESS)
 			cmd->infile = ft_strdup(tokens->data);
 		if (type == GREATGREAT)
-			0;
+			;
 		if (type == LESSLESS)
-			0;
+			;
 		if (type == WORD)
 		{
 			simple = NULL;

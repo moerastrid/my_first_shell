@@ -6,7 +6,7 @@
 #    By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 14:33:40 by tnuyten           #+#    #+#              #
-#    Updated: 2021/10/27 16:22:57 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/29 15:30:12 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,8 @@ endif
 
 BFILES = $(SRCS) $(BONUS_SRCS)
 
-OBJS =			@$(FILES:.c=.o)
-BONUS_OBJS =	@$(BFILES:.c=.o)
+OBJS =			$(FILES:.c=.o)
+BONUS_OBJS =	$(BFILES:.c=.o)
 
 CC =			gcc
 RM =			rm -f
