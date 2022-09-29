@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 17:23:43 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:24:16 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static int	count_cmd(t_cmd *cmd)
 {
