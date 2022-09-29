@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: tnuyten <tnuyten@student.codam.nl>           +#+                      #
-#                                                    +#+                       #
-#    Created: 2021/10/11 14:33:40 by tnuyten       #+#    #+#                  #
-#    Updated: 2022/09/29 19:13:41 by ageels        ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/11 14:33:40 by tnuyten           #+#    #+#              #
+#    Updated: 2022/09/29 19:23:19 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC =				ft_atoi.c \
 					ft_strtrim.c \
 					ft_substr.c \
 					ft_tolower.c \
-					ft_toupper.c 
+					ft_toupper.c
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 

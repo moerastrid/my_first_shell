@@ -1,19 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 18:22:06 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/29 16:07:01 by tnuyten          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../minishell.h"
 
 static int	is_token(char *str)
 {
+	if (ft_strncmp(str, "'", 1) == 0)
+		return (1);
+	if (ft_strncmp(str, "\"", 1) == 0)
+		return (1);
 	if (ft_strncmp(str, "$", 1) == 0)
 		return (1);
 	if (ft_strncmp(str, "|", 1) == 0)
@@ -27,6 +19,10 @@ static int	is_token(char *str)
 
 static int	token_type(char *str)
 {
+	if (ft_strncmp(str, "'", 1) == 0)
+		return (QUOT);
+	if (ft_strncmp(str, "\"", 1) == 0)
+		return (DQUOT);
 	if (ft_strncmp(str, "$?", 2) == 0)
 		return (DOLLQ);
 	if (ft_strncmp(str, "$", 1) == 0)

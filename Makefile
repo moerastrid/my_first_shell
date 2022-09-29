@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: ageels <ageels@student.codam.nl>             +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/09/12 13:51:01 by ageels        #+#    #+#                  #
-#    Updated: 2022/09/29 21:13:26 by ageels        ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 OBJ_DIR = ./obj
@@ -33,7 +21,7 @@ SRC =	src/main.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
-GREEN		=	\e[38;5;118m 
+GREEN		=	\e[38;5;118m
 YELLOW		=	\e[38;5;226m
 RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
@@ -50,7 +38,7 @@ $(NAME): $(OBJ) libft
 	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) lib/libft/libft.a
 	@printf "$(_SUCCESS) Minishell ready.\n"
 
-obj/%.o : src/%.c 
+obj/%.o : src/%.c
 	@mkdir -pv obj
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute

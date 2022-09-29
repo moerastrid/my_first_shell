@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/26 16:54:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 21:15:25 by ageels        ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
 
 void	cmd_setup(t_cmd *cmd)
@@ -50,7 +38,34 @@ static void	print_token_type(enum e_token_type num)
 		case 7:
 			printf("%s", "DOLLQ");
 		break ;
+		case 8:
+			printf("%s", "QUOT");
+		break ;
+		case 9:
+			printf("%s", "DQUOT");
+		break ;
 	}
+}
+
+static void	print_str_list(t_str_list *root, int mode)
+{
+	t_str_list	*i;
+
+	i = root;
+	if (mode == 0)
+		printf("Infile list:\t\t");
+	if (mode == 1)
+		printf("Outfile list:\t\t");
+	if (mode == 2)
+		printf("Delimiter list:\t\t");
+	while (i != NULL)
+	{
+		printf("[%s]", i->str);
+		i = i->next;
+		if (i != NULL)
+			printf("->");
+	}
+	printf("\n");
 }
 
 static void	print_tokens(t_token *root)
@@ -58,7 +73,7 @@ static void	print_tokens(t_token *root)
 	t_token	*i;
 
 	i = root;
-	printf("Token list:\n");
+	printf("Token list:\t\t");
 	while (i != NULL)
 	{
 		printf("[");
@@ -103,11 +118,16 @@ int	main(int argc, char **argv, char **envp)
 			}
 			print_tokens(tokens);
 			parse(tokens, &cmd, paths);
+<<<<<<< HEAD
 			if (execute(cmd) == -1)
 			{
 				continue ;
 			}
 			free_token_list(tokens);
+=======
+			print_str_list(cmd.infiles, 0);
+			execute(cmd);
+>>>>>>> 4e8eb6eab73b90bc1da32c9206162213b371a73a
 		}
 		free(line);
 		line = NULL;
