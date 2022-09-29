@@ -15,27 +15,6 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
-static void	print_str_list(t_str_list *root, int mode)
-{
-	t_str_list	*i;
-
-	i = root;
-	if (mode == 0)
-		printf("Infile list:\t\t");
-	if (mode == 1)
-		printf("Outfile list:\t\t");
-	if (mode == 2)
-		printf("Delimiter list:\t\t");
-	while (i != NULL)
-	{
-		printf("[%s]", i->str);
-		i = i->next;
-		if (i != NULL)
-			printf("->");
-	}
-	printf("\n");
-}
-
 void add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
 	if(cmd->outfiles == NULL)

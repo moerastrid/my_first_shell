@@ -17,7 +17,8 @@ SRC =	src/main.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
 		src/builtins/builtins00.c\
-		src/utils/utils00.c
+		src/utils/utils00.c\
+		src/debug/print.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -45,6 +46,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/builtins
 	@mkdir -pv obj/utils
 	@mkdir -pv obj/parser
+	@mkdir -pv obj/debug
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
