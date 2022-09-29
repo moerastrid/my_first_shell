@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 22:25:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 22:41:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,41 +56,36 @@ typedef struct s_cmd {
 
 // FILES & FUNCTIONS:
 //prompt
-char	*prompt(void);
+char		*prompt(void);
 
 //parser
-int		parse(t_token *tokens, t_cmd *cmds);
+int			parse(t_token *tokens, t_cmd *cmds);
 
 //buildins (00)
-void	bi_echo(void);
-void	bi_cd(void);
-void	bi_pwd(void);
-void	bi_export(void);
-void	bi_unset(void);
-void	bi_env(void);
-void	bi_exit(void);
+void		bi_echo(void);
+void		bi_cd(void);
+void		bi_pwd(void);
+void		bi_export(void);
+void		bi_unset(void);
+void		bi_env(void);
+void		bi_exit(void);
 
-//execute (00, 01)
-void	exec_cmd(t_simple simple);
-int		family_life(t_cmd cmds);
-int		parent(int *children, t_cmd cmds, int *pfd);
-int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
-int		single_parent(t_cmd cmds);
-void	exec_cmd(t_simple simple);
+//execute
+int			execute(t_cmd cmds);
 
 //utils
-char	**single_split(char const *s, char c);
+char		**single_split(char const *s, char c);
 
 //path
-char	**getpaths(char **envp);
+char		**getpaths(char **envp);
 
 //str_list
-t_str_list *str_list_new(char *str, int append_mode);
-void str_list_add_back(t_str_list *root, t_str_list *new);
+t_str_list	*str_list_new(char *str, int append_mode);
+void		str_list_add_back(t_str_list *root, t_str_list *new);
 
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
-void	print_token_type(enum e_token_type num);
-void	print_str_list(t_str_list *root, int mode);
-void	print_tokens(t_token *root);
+void		print_token_type(enum e_token_type num);
+void		print_str_list(t_str_list *root, int mode);
+void		print_tokens(t_token *root);
 
 #endif
