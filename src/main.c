@@ -18,7 +18,6 @@ void cmd_setup(t_cmd *cmd)
 	cmd->simples = NULL;
 	cmd->outfile = NULL;
 	cmd->infile = NULL;
-	cmd->errfile = NULL;
 }
 
 static void print_token_type(enum e_token_type num)
@@ -61,10 +60,10 @@ static void print_tokens(t_token *root)
 	{
 		printf("[");
 		print_token_type(i->type);
-		printf(" , %s]", i->data);
+		printf(", %s]", i->data);
 		i = i->next;
 		if(i != NULL)
-			printf(" -> ");
+			printf("->");
 	}
 	printf("\n");
 }
@@ -73,9 +72,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_token	*tokens;
+	t_path	*paths;
 	t_cmd	cmd;
 
 	cmd_setup(&cmd);
+	paths = split_path(envp);
 	line = NULL;
 	while (1)
 	{
@@ -91,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 				return (1);
 			}
 			print_tokens(tokens);
-			parse(tokens, &cmd, envp);
+			parse(tokens, &cmd, paths);
 			execute(cmd);
 		}
 		free(line);

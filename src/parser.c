@@ -28,33 +28,33 @@ static int	count_cmd(t_cmd *cmd)
 	return (amount_cmd);
 }
 
-int	parse(t_token *tokens, t_cmd *cmd, char **envp)
+int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 {
 	int			amount_cmd;
+	int			type;
 	t_simple	*simple;
-	t_path		*path;
-	char		**split;
+	char		**argv;
 
-	amount_cmd = 0;
-	path = split_path(envp);
-	if (tokens == NULL) // No special characters present in string. No redirections, no pipes, no substitutions. Just one simple command.
-	{
-		simple = ft_calloc(1, sizeof(t_simple));
-		if (simple == NULL)
-			return (1);
-		simple->next = NULL;
-		cmd->amount_cmd = 1;
-		simple->bin = "";
-		simple->argv = NULL;
-		cmd->simples = simple;
-		return (0);
-	}
-
-	// hier komt meer , maar nu voor testen even dit geteld :)
 	amount_cmd = count_cmd(cmd);
 	cmd->amount_cmd = amount_cmd;
 
-
+	while(tokens != NULL)
+	{
+		type = tokens->type;
+		if (type == GREAT)
+			cmd->outfile = ft_strdup(tokens->data);
+		if (type == LESS)
+			cmd->infile = ft_strdup(tokens->data);
+		if (type == GREATGREAT)
+			0;
+		if (type == LESSLESS)
+			0;
+		if (type == WORD)
+		{
+			simple = NULL;
+		}
+		tokens = tokens->next;
+	}
 
 	//check_fds();
 	//setup_cmd_lst();

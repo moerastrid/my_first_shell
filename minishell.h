@@ -21,7 +21,12 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
+
+// Libft
 # include "lib/libft/libft.h"
+
+// Lexer
+# include "src/lexer/lexer.h"
 
 # define READ 0
 # define WRITE 1
@@ -38,7 +43,6 @@ typedef struct s_cmd {
 	t_simple	*simples;
 	char		*outfile;
 	char		*infile;
-	char		*errfile;
 }	t_cmd;
 
 typedef struct s_path
@@ -47,34 +51,12 @@ typedef struct s_path
 	int		size;
 }	t_path;
 
-enum	 e_token_type {
-	WORD = 0,
-	GREAT = 1,
-	LESS = 2,
-	PIPE = 3,
-	GREATGREAT = 4,
-	LESSLESS = 5,
-	DOLL = 6,
-	DOLLQ = 7,
-};
-
-typedef struct s_token {
-	enum e_token_type	type;
-	char				*data;
-	struct s_token		*next;
-}	t_token;
-
 // FILES & FUNCTIONS:
 //prompt
 char	*prompt(void);
 
-//Tokens (00, 01)
-t_token	*tokenize(char *input);
-t_token	*token_new(char *data, int type);
-void	token_add_back(t_token *tokens, t_token *new);
-
 //Parser
-int		parse(t_token *tokens, t_cmd *cmds, char **envp);
+int		parse(t_token *tokens, t_cmd *cmds, t_path *path);
 
 //buildins (00)
 void	bi_echo(void);
@@ -105,6 +87,5 @@ void	exec_cmd(t_cmd cmds, int cmd_no);
 
 //path
 t_path	*split_path(char **envp);
-
 
 #endif

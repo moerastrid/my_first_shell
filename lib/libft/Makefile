@@ -64,8 +64,8 @@ endif
 
 BFILES = $(SRCS) $(BONUS_SRCS)
 
-OBJS =			$(FILES:.c=.o)
-BONUS_OBJS =	$(BFILES:.c=.o)
+OBJS =			@$(FILES:.c=.o)
+BONUS_OBJS =	@$(BFILES:.c=.o)
 
 CC =			gcc
 RM =			rm -f
@@ -77,15 +77,15 @@ NAME =			libft.a
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-					ar rcs $(NAME) $(OBJS)
+					@ar rcs $(NAME) $(OBJS)
 
 test: 			$(NAME)
 
 clean:
-				$(RM) $(BONUS_OBJS)
+				@$(RM) $(BONUS_OBJS)
 
 fclean:			clean
-					$(RM) $(NAME)
+					@$(RM) $(NAME)
 
 re:				fclean $(NAME)
 
