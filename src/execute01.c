@@ -20,13 +20,13 @@ int	family_life(t_cmd cmds)
 	int		i;
 	int		*children;
 
-	children = ft_calloc(cmds.amount_cmd, sizeof(int));
+	children = ft_calloc(cmds.cmd_count, sizeof(int));
 	if (children == NULL)
 		return (-1);
 	i = 0;
-	while (i < cmds.amount_cmd)
+	while (i < cmds.cmd_count)
 	{
-		if (i + 1 != cmds.amount_cmd)
+		if (i + 1 != cmds.cmd_count)
 			pipe(pfd[i % 2]);
 		children[i] = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (children[i] == -1)
@@ -45,7 +45,7 @@ int	parent(int *children, t_cmd cmds, int *pfd)
 	exit_code = 0;
 	status = 0;
 	i = 0;
-	while (i < cmds.amount_cmd)
+	while (i < cmds.cmd_count)
 	{
 		waitpid(children[i], &status, 0);
 		i++;
@@ -66,7 +66,7 @@ void	child_2(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		if (dup2(read_pipe[READ], STDIN_FILENO) == -1)
 			exit (-1);
 	}
-	if (cmd_no != cmds.amount_cmd - 1)
+	if (cmd_no != cmds.cmd_count - 1)
 	{
 		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
@@ -92,7 +92,7 @@ int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
-		if (cmd_no != cmds.amount_cmd)
+		if (cmd_no != cmds.cmd_count)
 			close (write_pipe[WRITE]);
 		return (child_one_id);
 	}

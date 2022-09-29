@@ -20,14 +20,14 @@ int	execute(t_cmd cmds)
 	pid_t	stdout;
 	pid_t	stderr;
 
-	if (cmds.amount_cmd <= 0)
+	if (cmds.cmd_count <= 0)
 		return (-1);
 	stdin = dup(STDIN_FILENO);
 	stdout = dup(STDOUT_FILENO);
 	stderr = dup(STDERR_FILENO);
 	if (stdout == -1 || stdout == -1 || stderr == -1)
 		return (-1);
-	if (cmds.amount_cmd == 1)
+	if (cmds.cmd_count == 1)
 	{
 		if (exec_single_cmd(cmds) != 0)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:54:53 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 16:04:23 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:01 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	cmd_setup(t_cmd *cmd)
 {
-	cmd->amount_cmd = 0;
+	cmd->cmd_count = 0;
 	cmd->simples = NULL;
 	cmd->outfile = NULL;
 	cmd->infile = NULL;
+	cmd->delimiter = NULL;
+	// cmd->append_mode = 0;
 }
 
 // Totally illegal

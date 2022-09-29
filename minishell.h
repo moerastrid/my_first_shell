@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 15:56:41 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:00:32 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,19 @@ typedef struct s_simple {
 	struct s_simple	*next;
 }	t_simple;
 
+typedef struct s_str_list
+{
+	char				*str;
+	int					append_mode;
+	struct s_str_list	*next;
+}	t_str_list;
+
 typedef struct s_cmd {
-	int			amount_cmd;
+	int			cmd_count;
 	t_simple	*simples;
-	char		*outfile;
-	char		*infile;
-	char		*delimiter;
+	t_str_list	*outfile;
+	t_str_list	*infile;
+	t_str_list	*delimiter;
 }	t_cmd;
 
 typedef struct s_path

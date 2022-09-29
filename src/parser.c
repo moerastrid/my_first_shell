@@ -6,48 +6,61 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 16:05:03 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:02:56 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "path.h"
 
 static int	count_cmd(t_cmd *cmd)
 {
-	int			amount_cmd;
+	int			cmd_count;
 	t_simple	*simples;
 
 	simples = cmd->simples;
-	amount_cmd = 1;
+	cmd_count = 1;
 	while (simples != NULL)
 	{
-		amount_cmd++;
+		cmd_count++;
 		simples = simples->next;
 	}
-	return (amount_cmd);
+	return (cmd_count);
 }
 
 int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 {
-	int			amount_cmd;
+	int			cmd_count;
 	int			type;
 	t_simple	*simple;
 	char		**argv;
 
-	amount_cmd = count_cmd(cmd);
-	cmd->amount_cmd = amount_cmd;
+	cmd_count = count_cmd(cmd);
+	cmd->cmd_count = cmd_count;
 	while (tokens != NULL)
 	{
 		type = tokens->type;
 		if (type == GREAT)
-			cmd->outfile = ft_strdup(tokens->data);
+		{
+			if(cmd->outfile != NULL)
+				free(cmd->outfile);
+			// cmd->outfile = ft_strdup(tokens->data);
+			// cmd->append_mode = 0;
+		}
 		if (type == LESS)
-			cmd->infile = ft_strdup(tokens->data);
+		{
+			if(cmd->infile != NULL)
+				free(cmd->infile);
+			// cmd->infile = ft_strdup(tokens->data);
+		}
 		if (type == GREATGREAT)
-			;
+		{
+			if (cmd->outfile != NULL)
+				free(cmd->outfile);
+			// cmd->outfile = ft_strdup(tokens->data);
+			// cmd->append_mode = 1;
+		}
 		if (type == LESSLESS)
-			cmd->delimiter = ft_strdup(tokens->data);
+			// cmd->delimiter = ft_strdup(tokens->data);
 		if (type == WORD)
 		{
 			simple = NULL;
