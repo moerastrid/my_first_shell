@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 17:02:56 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:27:34 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static int	count_cmd(t_cmd *cmd)
 {
@@ -27,12 +27,34 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
+void add_outfile(t_cmd *cmd, int append_mode, char *data)
+{
+	if(cmd->outfiles == NULL)
+		cmd->outfiles = str_list_new(data, append_mode);
+	else
+		str_list_add_back(cmd->outfiles, str_list_new(data, append_mode));
+}
+
+void add_infile(t_cmd *cmd, char *data)
+{
+	if(cmd->infiles == NULL)
+		cmd->infiles = str_list_new(data, -1);
+	else
+		str_list_add_back(cmd->infiles, str_list_new(data, -1));
+}
+
+void add_delimiter(t_cmd *cmd, char *data)
+{
+	if(cmd->delimiters == NULL)
+		cmd->delimiters = str_list_new(data, -1);
+	else
+		str_list_add_back(cmd->delimiters, str_list_new(data, -1));
+}
+
 int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 {
 	int			cmd_count;
 	int			type;
-	t_simple	*simple;
-	char		**argv;
 
 	cmd_count = count_cmd(cmd);
 	cmd->cmd_count = cmd_count;
@@ -40,35 +62,18 @@ int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
 	{
 		type = tokens->type;
 		if (type == GREAT)
-		{
-			if(cmd->outfile != NULL)
-				free(cmd->outfile);
-			// cmd->outfile = ft_strdup(tokens->data);
-			// cmd->append_mode = 0;
-		}
+			add_outfile(cmd, 0, tokens->data);
 		if (type == LESS)
-		{
-			if(cmd->infile != NULL)
-				free(cmd->infile);
-			// cmd->infile = ft_strdup(tokens->data);
-		}
+			add_infile(cmd, tokens->data);
 		if (type == GREATGREAT)
-		{
-			if (cmd->outfile != NULL)
-				free(cmd->outfile);
-			// cmd->outfile = ft_strdup(tokens->data);
-			// cmd->append_mode = 1;
-		}
+			add_outfile(cmd, 1, tokens->data);
 		if (type == LESSLESS)
-			// cmd->delimiter = ft_strdup(tokens->data);
+			add_delimiter(cmd, tokens->data);
 		if (type == WORD)
 		{
-			simple = NULL;
+			//generate simplecommands.
 		}
 		tokens = tokens->next;
 	}
-	//check_fds();
-	//setup_cmd_lst();
-	//replace_def_arg();
 	return (0);
 }

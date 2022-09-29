@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 17:16:15 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 19:19:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct s_str_list
 typedef struct s_cmd {
 	int			cmd_count;
 	t_simple	*simples;
-	t_str_list	*outfile;
-	t_str_list	*infile;
-	t_str_list	*delimiter;
+	t_str_list	*outfiles;
+	t_str_list	*infiles;
+	t_str_list	*delimiters;
 }	t_cmd;
 
 typedef struct s_path
@@ -89,5 +89,9 @@ char	**single_split(char const *s, char c);
 //path
 t_path	*split_path(char **envp);
 void	free_paths(t_path *paths);
+
+//str_list
+t_str_list *str_list_new(char *str, int append_mode);
+void str_list_add_back(t_str_list *root, t_str_list *new);
 
 #endif

@@ -6,16 +6,29 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:09:22 by tnuyten           #+#    #+#             */
-/*   Updated: 2021/10/26 23:40:14 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:19:51 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
+	int written;
+	int temp;
+
+	temp = 0;
+	written = 0;
 	if (!s)
-		return ;
+		return (written);
 	while (*s)
-		ft_putchar_fd(*s++, fd);
+	{
+		temp = ft_putchar_fd(*s++, fd);
+		if(temp == -1)
+		{
+			return (-1);
+		}
+		written += temp;
+	}
+	return (written);
 }
