@@ -95,12 +95,15 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_token	*tokens;
-	t_path	*paths;
+	char	**paths;
 	t_cmd	cmd;
 
 	//atexit(run);
 	cmd_setup(&cmd);
-	paths = split_path(envp);
+	paths = getpaths(envp);
+	if (!paths)
+		return (-1);
+	cmd.paths = paths;
 	tokens = NULL;
 	line = NULL;
 	while (1)
@@ -117,22 +120,16 @@ int	main(int argc, char **argv, char **envp)
 				continue ;
 			}
 			print_tokens(tokens);
-			parse(tokens, &cmd, paths);
-<<<<<<< HEAD
+			parse(tokens, &cmd);
 			if (execute(cmd) == -1)
-			{
 				continue ;
-			}
 			free_token_list(tokens);
-=======
 			print_str_list(cmd.infiles, 0);
-			execute(cmd);
->>>>>>> 4e8eb6eab73b90bc1da32c9206162213b371a73a
 		}
 		free(line);
 		line = NULL;
 	}
-	free_paths(paths);
+	free(paths);
 	// rl_clear_history();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 19:35:05 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 21:50:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,15 @@ typedef struct s_cmd {
 	t_str_list	*outfiles;
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
+	char		**paths;
 }	t_cmd;
-
-typedef struct s_path
-{
-	char	**paths;
-	int		size;
-}	t_path;
 
 // FILES & FUNCTIONS:
 //prompt
 char	*prompt(void);
 
 //parser
-int		parse(t_token *tokens, t_cmd *cmds, t_path *path);
+int		parse(t_token *tokens, t_cmd *cmds);
 
 //buildins (00)
 void	bi_echo(void);
@@ -87,8 +82,7 @@ void	exec_cmd(t_cmd cmds, int cmd_no);
 char	**single_split(char const *s, char c);
 
 //path
-t_path	*split_path(char **envp);
-void	free_paths(t_path *paths);
+char	**getpaths(char **envp);
 
 //str_list
 t_str_list *str_list_new(char *str, int append_mode);

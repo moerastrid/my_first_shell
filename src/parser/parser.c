@@ -62,7 +62,7 @@ void add_delimiter(t_cmd *cmd, char *data)
 		str_list_add_back(cmd->delimiters, str_list_new(data, -1));
 }
 
-int	parse(t_token *tokens, t_cmd *cmd, t_path *path)
+int	parse(t_token *tokens, t_cmd *cmd)
 {
 	int			cmd_count;
 	int			type;
