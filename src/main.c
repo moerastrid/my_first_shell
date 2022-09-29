@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	t_path	*paths;
 	t_cmd	cmd;
 
-	atexit(run);
+	//atexit(run);
 	cmd_setup(&cmd);
 	paths = split_path(envp);
 	tokens = NULL;
@@ -30,24 +30,26 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = prompt();
 		if (!line)
-			break ;
+			continue ;
 		if (*line)
 		{
 			tokens = tokenize(line);
 			if (tokens == NULL)
 			{
 				printf("%s\n", NULL);
-				return (1);
+				continue ;
 			}
 			print_tokens(tokens);
 			parse(tokens, &cmd, paths);
-			print_str_list(cmd.infiles, 0);
-			execute(cmd);
+			if (execute(cmd) == -1)
+			{
+				continue ;
+			}
+			free_token_list(tokens);
 		}
 		free(line);
 		line = NULL;
 	}
-	free_token_list(tokens);
 	free_paths(paths);
 	// rl_clear_history();
 	return (0);

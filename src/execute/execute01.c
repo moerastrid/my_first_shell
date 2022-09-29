@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 17:42:05 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 21:13:42 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	parent(int *children, t_cmd cmds, int *pfd)
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
 	free(children);
-	dprintf(1, "exit_code : %d \n", exit_code);
+	dprintf(STDERR_FILENO, "exit_code : %d \n", exit_code);
 	return (exit_code);
 }
 
@@ -85,8 +85,9 @@ int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		close(write_pipe[READ]);
 		child_2(cmds, write_pipe, read_pipe, cmd_no);
 		exec_cmd(cmds, cmd_no);
+		dprintf(STDERR_FILENO, "cmd %d not found\n", cmd_no);
 		close(write_pipe[WRITE]);
-		return (-1);
+		exit (-1);
 	}
 	else
 	{

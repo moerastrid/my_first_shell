@@ -28,12 +28,12 @@ RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
+all : libft $(NAME)
+
 lib/libft/libft.a: libft
 
 libft:
 	@$(MAKE) -C lib/libft
-
-all : libft $(NAME)
 
 $(NAME): $(OBJ) libft
 	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) lib/libft/libft.a

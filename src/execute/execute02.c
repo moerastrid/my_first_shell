@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 17:42:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 21:11:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,22 @@
 
 // IN EXECUTE02, THE SINGLE COMMANDS ARE EXECUTED
 
+// this is a single command in a child process 
 void	exec_cmd(t_cmd cmds, int cmd_no)
 {
-	dprintf(2, "cmd %d is executed\n", cmd_no);
-	exit(0);
+	dprintf(STDOUT_FILENO, "cmd %d is executed\n", cmd_no);
+	
+	//execve
 }
 
-int	exec_single_cmd(t_cmd cmds)
+// this is a single command in a single process (when there is only 1 command) 
+// hier dus zorgen dat hij naar exec_cmd gaat !
+int single_parent(t_cmd cmds)
 {
-	dprintf(2, "single cmd is executed\n");
+	//fork()
+	//exec_cmd()
+	//waitpid()
+	//etc..
+	dprintf(STDERR_FILENO, "single cmd is executed\n");
 	return (0);
 }
