@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:37:44 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 17:42:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	bi_echo(void);
 void	bi_cd(void);

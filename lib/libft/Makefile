@@ -6,11 +6,17 @@
 #    By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 14:33:40 by tnuyten           #+#    #+#              #
-#    Updated: 2022/09/29 18:56:53 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/29 19:23:19 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =				ft_atoi.c \
+NAME = libft.a
+
+CC = gcc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
+
+SRC =				ft_atoi.c \
 					ft_bzero.c \
 					ft_calloc.c \
 					ft_isalnum.c \
@@ -43,54 +49,24 @@ SRCS =				ft_atoi.c \
 					ft_strtrim.c \
 					ft_substr.c \
 					ft_tolower.c \
-					ft_toupper.c \
+					ft_toupper.c
 
+OBJ = $(patsubst %.c,%.o,$(SRC))
 
-BONUS_SRCS =			ft_lstnew.c \
-						ft_lstadd_front.c \
-						ft_lstsize.c \
-						ft_lstlast.c \
-						ft_lstadd_back.c \
-						ft_lstdelone.c \
-						ft_lstclear.c \
-						ft_lstmap.c \
-						ft_lstiter.c
+all : $(NAME)
 
-ifdef	BONUS_ADD
-	FILES = $(SRCS) $(BONUS_SRCS)
-else
-	FILES = $(SRCS)
-endif
+%.o : %.c
+	@$(CC) $(CFLAGS) -o $@ -c $^
 
-BFILES = $(SRCS) $(BONUS_SRCS)
+$(NAME):	$(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
 
-OBJS =			$(FILES:.c=.o)
-BONUS_OBJS =	$(BFILES:.c=.o)
+clean :
+	@$(RM) $(OBJ)
 
-CC =			gcc
-RM =			rm -f
-CFLAGS =		-Wall -Wextra -Werror
+fclean : clean
+	@$(RM) $(NAME)
 
-NAME =			libft.a
+re : fclean $(NAME)
 
-
-all:			$(NAME)
-
-$(NAME):		$(OBJS)
-					@ar rcs $(NAME) $(OBJS)
-
-test: 			$(NAME)
-
-clean:
-				@$(RM) $(BONUS_OBJS)
-
-fclean:			clean
-					@$(RM) $(NAME)
-
-re:				fclean $(NAME)
-
-bonus:
-				@$(MAKE) BONUS_ADD=1 all
-
-
-.PHONY:			all clean fclean re bonus
+.PHONY :	all clean fclean re

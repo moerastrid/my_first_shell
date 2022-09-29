@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils01.c                                          :+:    :+:            */
+/*   utils00.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:46:11 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 20:46:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 17:42:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static void	ft_count(char const *s, char c, int *parts, int *cC)
 {
@@ -69,7 +69,7 @@ static void	ft_enter_data(void	*startptr, int flen, char const *s, char c)
 	}
 }
 
-char	**ft_split(char const *s, char c)
+char	**single_split(char const *s, char c)
 {
 	int		flen;
 	int		cc;
@@ -90,41 +90,4 @@ char	**ft_split(char const *s, char c)
 	}
 	ft_enter_data(startptr, flen, s, c);
 	return ((char **)startptr);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-
-	while (n > 0)
-	{
-		n--;
-		c1 = (unsigned char) *s1++;
-		c2 = (unsigned char) *s2++;
-		if (c1 != c2)
-			return (c1 - c2);
-		if (c1 == '\0')
-			return (0);
-	}
-	return (0);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	int		len;
-	char	*str;
-
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(sizeof(char) * len);
-	while (s1 && *s1)
-	{
-		*str++ = *s1++;
-	}
-	while (s2 && *s2)
-	{
-		*str++ = *s2++;
-	}
-	*str = '\0';
-	return (str - len);
 }

@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:15:34 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 17:42:05 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 // IN EXECUTE01, YOU CAN FIND THE CHILD PROCESSES AND THE PARENT :)
 
