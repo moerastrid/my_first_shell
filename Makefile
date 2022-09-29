@@ -7,11 +7,12 @@ CC = clang
 
 SRC =	src/main.c\
 		src/prompt.c\
-		src/parser.c\
 		src/path.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
+		src/parser/parser.c\
+		src/parser/str_list.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
@@ -43,6 +44,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/execute
 	@mkdir -pv obj/builtins
 	@mkdir -pv obj/utils
+	@mkdir -pv obj/parser
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :

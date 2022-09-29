@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:07:28 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/29 16:07:44 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 21:00:56 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ enum	 e_token_type {
 	LESSLESS = 5,
 	DOLL = 6,
 	DOLLQ = 7,
+	QUOT = 8,
+	DQUOT = 9
 };
 
 typedef struct s_token {

@@ -38,6 +38,12 @@ static void	print_token_type(enum e_token_type num)
 		case 7:
 			printf("%s", "DOLLQ");
 		break ;
+		case 8:
+			printf("%s", "QUOT");
+		break ;
+		case 9:
+			printf("%s", "DQUOT");
+		break ;
 	}
 }
 
