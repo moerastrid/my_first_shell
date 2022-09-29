@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:54:53 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 18:04:20 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:48:39 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,33 @@ static void	print_token_type(enum e_token_type num)
 	}
 }
 
+static void	print_str_list(t_str_list *root, int mode)
+{
+	t_str_list	*i;
+
+	i = root;
+	if (mode == 0)
+		printf("Infile list:\t\t");
+	if (mode == 1)
+		printf("Outfile list:\t\t");
+	if (mode == 2)
+		printf("Delimiter list:\t\t");
+	while (i != NULL)
+	{
+		printf("[%s]", i->str);
+		i = i->next;
+		if (i != NULL)
+			printf("->");
+	}
+	printf("\n");
+}
+
 static void	print_tokens(t_token *root)
 {
 	t_token	*i;
 
 	i = root;
-	printf("Token list:\n");
+	printf("Token list:\t\t");
 	while (i != NULL)
 	{
 		printf("[");
@@ -103,6 +124,7 @@ int	main(int argc, char **argv, char **envp)
 			}
 			print_tokens(tokens);
 			parse(tokens, &cmd, paths);
+			print_str_list(cmd.infiles, 0);
 			execute(cmd);
 		}
 		free(line);

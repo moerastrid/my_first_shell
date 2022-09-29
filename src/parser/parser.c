@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:27 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 18:27:34 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/09/29 19:02:32 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
+static void	print_str_list(t_str_list *root, int mode)
+{
+	t_str_list	*i;
+
+	i = root;
+	if (mode == 0)
+		printf("Infile list:\t\t");
+	if (mode == 1)
+		printf("Outfile list:\t\t");
+	if (mode == 2)
+		printf("Delimiter list:\t\t");
+	while (i != NULL)
+	{
+		printf("[%s]", i->str);
+		i = i->next;
+		if (i != NULL)
+			printf("->");
+	}
+	printf("\n");
+}
+
 void add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
 	if(cmd->outfiles == NULL)
@@ -41,6 +62,8 @@ void add_infile(t_cmd *cmd, char *data)
 		cmd->infiles = str_list_new(data, -1);
 	else
 		str_list_add_back(cmd->infiles, str_list_new(data, -1));
+
+	// print_str_list(cmd->infiles, 0);
 }
 
 void add_delimiter(t_cmd *cmd, char *data)
