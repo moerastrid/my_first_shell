@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/27 22:17:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 17:42:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 // EXECUTE00 IS THE EXECUTE MAIN STRUCTURE 
 

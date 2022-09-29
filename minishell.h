@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/29 17:00:32 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/29 17:16:15 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_path
 //prompt
 char	*prompt(void);
 
-//Parser
+//parser
 int		parse(t_token *tokens, t_cmd *cmds, t_path *path);
 
 //buildins (00)
@@ -83,15 +83,8 @@ int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 int		exec_single_cmd(t_cmd cmds);
 void	exec_cmd(t_cmd cmds, int cmd_no);
 
-//utils (00)
-// size_t	ft_strlen(const char *string);
-// int		ft_putstr_fd(char *s, int fd);
-// void	ft_bzero(void *s, size_t n);
-// void	*ft_calloc(size_t count, size_t size);
-// char	*ft_substr(char const *s, unsigned int start, size_t len);
-// char	**ft_split(char const *s, char c);
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
-// char	*ft_strjoin(char const *s1, char const *s2);
+//utils
+char	**single_split(char const *s, char c);
 
 //path
 t_path	*split_path(char **envp);
