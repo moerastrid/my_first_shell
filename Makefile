@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
-#    Updated: 2022/09/29 17:10:21 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/29 18:18:08 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,11 @@ CC = clang
 
 SRC = 	src/main.c\
 		src/prompt.c\
-		src/parser.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
+		src/parser/parser.c\
+		src/parser/str_list.c\
 		src/execute00.c\
 		src/execute01.c\
 		src/execute02.c\
@@ -40,6 +41,7 @@ _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
 all : libft $(NAME)
+	@$(MAKE) clean
 
 lib/libft/libft.a: libft
 
@@ -59,8 +61,7 @@ obj/lexer/%.o : src/lexer/%.c
 	$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
-	@test -e obj && rm -fr obj || printf "$(_INFO) No objects to clean \n"
-	@test -e obj/lexer && rm -fr obj/lexer || printf "$(_INFO) No objects to clean \n"
+	$(RM) $(OBJ)
 		@$(MAKE) -C lib/libft clean
 
 fclean : clean
@@ -70,5 +71,3 @@ fclean : clean
 re : fclean all
 
 .PHONY: all bonus libft clean fclean re
-
-
