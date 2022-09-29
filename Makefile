@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 13:51:01 by ageels            #+#    #+#              #
-#    Updated: 2022/09/29 16:54:18 by tnuyten          ###   ########.fr        #
+#    Updated: 2022/09/29 17:10:21 by tnuyten          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = 	src/main.c\
 		src/builtins00.c\
 		src/path.c\
 
-OBJ_T = $(patsubst src/%.c,obj/%.o,$(SRC))
+# OBJ_T = $(patsubst src/%.c,obj/%.o,$(SRC))
 # OBJ = $(patsubst src/lexer/%.c,obj/lexer/%.o,$(OBJ_T))
 OBJ = $(SRC:.c=.o)
 
