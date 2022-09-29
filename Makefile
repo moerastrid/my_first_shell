@@ -12,6 +12,7 @@ SRC =	src/main.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
 		src/parser/parser.c\
+		src/parser/generate_simple_command.c\
 		src/parser/str_list.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\

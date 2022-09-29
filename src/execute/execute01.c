@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 22:38:10 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/30 00:34:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,18 @@ void	child_2(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 
 int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
-	pid_t	child_one_id;
+	pid_t	child_id;
 
-	child_one_id = fork();
-	if (child_one_id == -1)
+	child_id = fork();
+	if (child_id == -1)
 		return (-1);
-	else if (child_one_id != 0)
+	else if (child_id != 0)
 	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
 		if (cmd_no != cmds.cmd_count)
 			close (write_pipe[WRITE]);
-		return (child_one_id);
+		return (child_id);
 	}
 	close(write_pipe[READ]);
 	child_2(cmds, write_pipe, read_pipe, cmd_no);

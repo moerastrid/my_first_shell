@@ -11,7 +11,7 @@ char	**getpaths(char **envp)
 	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
-			paths = ft_split(envp[i] + 5, ':');
+			paths = single_split(envp[i] + 5, ':');
 			if (paths == NULL)
 			{
 				ft_putstr_fd("ERROR: paths\n", 1);
