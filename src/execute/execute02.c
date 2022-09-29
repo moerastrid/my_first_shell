@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/30 00:41:41 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/30 00:43:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	exec_cmd(t_simple simple)
 
 // this is a function for a single command
 // executed in a single child process
-int only_child(t_cmd cmds)
+int	only_child(t_cmd cmds)
 {
 	pid_t	child_one_id;
 	int		status;

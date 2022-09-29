@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/30 00:41:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/30 00:44:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	execute(t_cmd cmds)
 	stderr = dup(STDERR_FILENO);
 	if (stdout == -1 || stdout == -1 || stderr == -1)
 		return (-1);
-// simples
 	if (cmds.cmd_count == 1)
 	{
 		if (only_child(cmds) != 0)
