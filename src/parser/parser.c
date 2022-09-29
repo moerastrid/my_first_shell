@@ -6,7 +6,6 @@ static int	count_cmd(t_cmd *cmd)
 	t_simple	*simples;
 
 	simples = cmd->simples;
-	cmd_count = 1;
 	while (simples != NULL)
 	{
 		cmd_count++;

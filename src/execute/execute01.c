@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 21:13:42 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 22:25:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,7 @@ int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	child_one_id = fork();
 	if (child_one_id == -1)
 		return (-1);
-	else if (child_one_id == 0)
-	{
-		close(write_pipe[READ]);
-		child_2(cmds, write_pipe, read_pipe, cmd_no);
-		exec_cmd(cmds, cmd_no);
-		dprintf(STDERR_FILENO, "cmd %d not found\n", cmd_no);
-		close(write_pipe[WRITE]);
-		exit (-1);
-	}
-	else
+	else if (child_one_id != 0)
 	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
@@ -97,4 +88,10 @@ int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 			close (write_pipe[WRITE]);
 		return (child_one_id);
 	}
+	close(write_pipe[READ]);
+	child_2(cmds, write_pipe, read_pipe, cmd_no);
+	exec_cmd(cmds.simples[cmd_no]);
+	dprintf(STDERR_FILENO, "cmd %d not found\n", cmd_no);
+	close(write_pipe[WRITE]);
+	exit (-1);
 }

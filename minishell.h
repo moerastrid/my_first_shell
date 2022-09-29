@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 21:54:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/29 22:25:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	bi_env(void);
 void	bi_exit(void);
 
 //execute (00, 01)
-int		execute(t_cmd cmds);
+void	exec_cmd(t_simple simple);
 int		family_life(t_cmd cmds);
 int		parent(int *children, t_cmd cmds, int *pfd);
 int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 int		single_parent(t_cmd cmds);
-void	exec_cmd(t_cmd cmds, int cmd_no);
+void	exec_cmd(t_simple simple);
 
 //utils
 char	**single_split(char const *s, char c);
