@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   prompt.c                                           :+:    :+:            */
+/*   execute.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 23:03:26 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/30 00:43:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-char	*prompt(void)
-{
-	char	*line;
+# include "../../minishell.h"
 
-	line = readline(" > ");
-	if (!line)
-		return (NULL);
-	if (*line)
-		add_history(line);
-	return (line);
-}
+void	exec_cmd(t_simple simple);
+int		family_life(t_cmd cmds);
+int		parent(int *children, t_cmd cmds, int *pfd);
+int		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+int		only_child(t_cmd cmds);
+
+#endif

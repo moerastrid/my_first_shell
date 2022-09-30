@@ -6,7 +6,6 @@ static int	count_cmd(t_cmd *cmd)
 	t_simple	*simples;
 
 	simples = cmd->simples;
-	cmd_count = 1;
 	while (simples != NULL)
 	{
 		cmd_count++;
@@ -60,9 +59,7 @@ int	parse(t_token *tokens, t_cmd *cmd)
 		if (type == LESSLESS)
 			add_delimiter(cmd, tokens->data);
 		if (type == WORD)
-		{
-			//generate simplecommands.
-		}
+			//generate_simple_commands(cmd, tokens->data);
 		tokens = tokens->next;
 	}
 	return (0);

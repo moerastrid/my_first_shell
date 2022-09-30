@@ -1,12 +1,19 @@
 #include "../minishell.h"
 
-void	cmd_setup(t_cmd *cmd)
+int	cmd_setup(t_cmd *cmd, char **envp)
 {
+	char	**paths;
+
 	cmd->cmd_count = 0;
 	cmd->simples = NULL;
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
+	paths = getpaths(envp);
+	if (!paths)
+		return (-1);
+	cmd->paths = paths;
+	return (0);
 }
 
 static void	run(void)
@@ -18,15 +25,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_token	*tokens;
-	char	**paths;
 	t_cmd	cmd;
 
 	//atexit(run);
-	cmd_setup(&cmd);
-	paths = getpaths(envp);
-	if (!paths)
+	if (cmd_setup(&cmd, envp) == -1)
 		return (-1);
-	cmd.paths = paths;
 	tokens = NULL;
 	line = NULL;
 	while (1)
@@ -36,23 +39,31 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (*line)
 		{
-			tokens = tokenize(line);
-			if (tokens == NULL)
+			//tokens = tokenize(line);
+			//if (tokens == NULL)
+			//{
+			//	printf("%s\n", NULL);
+			//	continue ;
+			//}
+			//print_tokens(tokens);
+			//parse(tokens, &cmd);
+			cmd.cmd_count = 1;
+// generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
+			generate_simple_commands(&cmd, line);
+			printf("test99\n");
+			if (execute(cmd) == -1)
 			{
-				printf("%s\n", NULL);
+				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				continue ;
 			}
-			print_tokens(tokens);
-			parse(tokens, &cmd);
-			if (execute(cmd) == -1)
-				continue ;
-			free_token_list(tokens);
-			print_str_list(cmd.infiles, 0);
+			printf("test98\n");
+			//free_token_list(tokens);
+			//print_str_list(cmd.infiles, 0);
 		}
 		free(line);
 		line = NULL;
 	}
-	free(paths);
+	free(cmd.paths);
 	// rl_clear_history();
 	return (0);
 }
