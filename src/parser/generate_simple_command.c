@@ -17,7 +17,7 @@ void	simpleadd_back(t_simple **lst, t_simple *new_elem)
 	tmp->next = new_elem;
 }
 
-int	generate_simple_commands(t_cmd *cmd, char **argv)
+int	generate_simple_command(t_cmd *cmd, char **argv)
 {
 	t_simple	*new_simple;
 	char		*myexec;

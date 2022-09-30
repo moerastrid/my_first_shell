@@ -39,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
+		catch_signals();
 		line = prompt();
 		if (!line)
 			continue ;
@@ -56,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 			cmd.cmd_count = 1;
 
 // generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
-			generate_simple_commands(&cmd, temp);
+			generate_simple_command(&cmd, temp);
 			// printf("test99\n");
 			if (execute(cmd) == -1)
 			{
@@ -72,5 +73,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free(cmd.paths);
 	// rl_clear_history();
-	return (0);
+	return (EXIT_SUCCESS);
 }

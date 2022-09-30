@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/09/30 14:56:32 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
+/*   Updated: 2022/09/30 17:12:36 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define READ 0
 # define WRITE 1
+
+pid_t	*g_children;
 
 //STRUCTS:
 typedef struct s_simple {
@@ -60,7 +62,7 @@ char		*prompt(void);
 
 //parser
 int			parse(t_token *tokens, t_cmd *cmds);
-int			generate_simple_commands(t_cmd *cmd, char **argv);
+int			generate_simple_command(t_cmd *cmd, char **argv);
 
 //buildins (00)
 void		bi_echo(void);
@@ -73,6 +75,9 @@ void		bi_exit(void);
 
 //execute
 int			execute(t_cmd cmds);
+
+//signals
+void		catch_signals(void);
 
 //utils
 char		**single_split(char const *s, char c);

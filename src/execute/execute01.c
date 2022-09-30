@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/30 00:34:59 by ageels        ########   odam.nl         */
+/*   Updated: 2022/09/30 17:16:37 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,19 @@ int	family_life(t_cmd cmds)
 {
 	int		pfd[2][2];
 	int		i;
-	int		*children;
 
-	children = ft_calloc(cmds.cmd_count, sizeof(int));
-	if (children == NULL)
-		return (-1);
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
 		if (i + 1 != cmds.cmd_count)
 			pipe(pfd[i % 2]);
-		children[i] = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
-		if (children[i] == -1)
-			return (-1);
+		g_children[i] = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		i++;
 	}
-	return (parent(children, cmds, pfd[(i + 1) % 2]));
+	return (parent(cmds, pfd[(i + 1) % 2]));
 }
 
-int	parent(int *children, t_cmd cmds, int *pfd)
+int	parent(t_cmd cmds, int *pfd)
 {
 	int	status;
 	int	exit_code;
@@ -47,14 +41,14 @@ int	parent(int *children, t_cmd cmds, int *pfd)
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
-		waitpid(children[i], &status, 0);
+		waitpid(g_children[i], &status, 0);
 		i++;
 	}
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
-	free(children);
+	free(g_children);
 	dprintf(STDERR_FILENO, "exit_code : %d \n", exit_code);
 	return (exit_code);
 }
@@ -73,7 +67,7 @@ void	child_2(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	}
 }
 
-int	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
+pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
 	pid_t	child_id;
 

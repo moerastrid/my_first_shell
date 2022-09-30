@@ -76,6 +76,7 @@ pipe
 opendir
 readdir
 closedir
+
 strerror
 perror
 isatty
