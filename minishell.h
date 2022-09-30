@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/29 23:12:00 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
+/*   Updated: 2022/09/30 14:56:32 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		*prompt(void);
 
 //parser
 int			parse(t_token *tokens, t_cmd *cmds);
-int			generate_simple_commands(t_cmd *cmd, char *data);
+int			generate_simple_commands(t_cmd *cmd, char **argv);
 
 //buildins (00)
 void		bi_echo(void);

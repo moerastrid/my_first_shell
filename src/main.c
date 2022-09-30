@@ -26,6 +26,11 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_token	*tokens;
 	t_cmd	cmd;
+	char **temp;
+
+	temp = ft_calloc (100000, 19);
+	temp[0] = "ls";
+	temp[1] = "-l";
 
 	//atexit(run);
 	if (cmd_setup(&cmd, envp) == -1)
@@ -39,18 +44,20 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (*line)
 		{
-			//tokens = tokenize(line);
-			//if (tokens == NULL)
-			//{
-			//	printf("%s\n", NULL);
-			//	continue ;
-			//}
-			//print_tokens(tokens);
-			//parse(tokens, &cmd);
+			tokens = tokenize(line);
+			if (tokens == NULL)
+			{
+				printf("%s\n", NULL);
+				continue ;
+			}
+			print_tokens(tokens);
+			// parse(tokens, &cmd);
+
 			cmd.cmd_count = 1;
+
 // generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
-			generate_simple_commands(&cmd, line);
-			printf("test99\n");
+			generate_simple_commands(&cmd, temp);
+			// printf("test99\n");
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");

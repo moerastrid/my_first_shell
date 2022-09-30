@@ -59,7 +59,7 @@ int	parse(t_token *tokens, t_cmd *cmd)
 		if (type == LESSLESS)
 			add_delimiter(cmd, tokens->data);
 		if (type == WORD)
-			//generate_simple_commands(cmd, tokens->data);
+			//generate_simple_command(cmd, tokens->data);
 		tokens = tokens->next;
 	}
 	return (0);

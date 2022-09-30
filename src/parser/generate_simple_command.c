@@ -17,10 +17,9 @@ void	simpleadd_back(t_simple **lst, t_simple *new_elem)
 	tmp->next = new_elem;
 }
 
-int	generate_simple_commands(t_cmd *cmd, char *data)
+int	generate_simple_commands(t_cmd *cmd, char **argv)
 {
 	t_simple	*new_simple;
-	char		**splitted_command;
 	char		*myexec;
 	char		*temp;
 	int			i;
@@ -31,12 +30,9 @@ int	generate_simple_commands(t_cmd *cmd, char *data)
 	new_simple->argv = NULL;
 	new_simple->bin = NULL;
 	new_simple->next = NULL;
-	splitted_command = single_split(data, ' ');
-	if (splitted_command == NULL)
-		return (-1);
-	new_simple->argv = splitted_command;
-	if (access(splitted_command[0], X_OK) == 0)
-		new_simple->bin = splitted_command[0];
+	new_simple->argv = argv;
+	if (access(argv[0], X_OK) == 0)
+		new_simple->bin = argv[0];
 	i = 0;
 	while (cmd->paths[i] != NULL)
 	{
@@ -44,7 +40,7 @@ int	generate_simple_commands(t_cmd *cmd, char *data)
 		temp = ft_strjoin(cmd->paths[i], "/");
 		if (!temp)
 			return (-1);
-		myexec = ft_strjoin(temp, splitted_command[0]);
+		myexec = ft_strjoin(temp, argv[0]);
 		if (!myexec)
 			return (-1);
 		free (temp);

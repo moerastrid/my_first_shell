@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-static int	is_token(char *str)
+static int	is_token_char(char *str)
 {
 	if (ft_strncmp(str, "'", 1) == 0)
 		return (1);
@@ -45,7 +45,7 @@ static int	word_length(char *input)
 	int	len;
 
 	len = 0;
-	while (*input != ' ' && *input != '\0' && !is_token(input))
+	while (*input != ' ' && *input != '\0' && !is_token_char(input))
 	{
 		len++;
 		input++;
