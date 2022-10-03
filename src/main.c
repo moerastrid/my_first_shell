@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 
 	temp = ft_calloc (100000, 19);
 	temp[0] = "ls";
-	temp[1] = "-l";
 
 	//atexit(run);
 	if (cmd_setup(&cmd, envp) == -1)
@@ -39,8 +38,8 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		catch_signals();
 		line = prompt();
+		catch_signals();
 		if (!line)
 			continue ;
 		if (*line)

@@ -6,7 +6,7 @@ char	*prompt(void)
 
 	line = readline(" (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ ");
 	if (!line)
-		return (NULL);
+		exit(0);
 	if (*line)
 		add_history(line);
 	return (line);
