@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int	cmd_setup(t_cmd *cmd, char **envp)
+int	setup(t_cmd *cmd, char **envp)
 {
 	char	**paths;
 
@@ -9,6 +9,9 @@ int	cmd_setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
+	g_children.id = -1;
+	g_children.next = NULL;
+
 	paths = getpaths(envp);
 	if (!paths)
 		return (-1);
@@ -21,26 +24,24 @@ static void	run(void)
 	system("leaks minishell");
 }
 
-static void free_simple(t_simple *simple)
+static void	free_simple(t_simple *simple)
 {
 	int	i;
 
 	i = 0;
-	while(i < simple->argc)
-	{
+	while (i < simple->argc)
 		free(simple->argv[i++]);
-	}
 	free(simple->argv);
 	free(simple->bin);
 	simple->argv = NULL;
 	simple->bin = NULL;
 }
 
-static void free_simples(t_simple *simples)
+static void	free_simples(t_simple *simples)
 {
 	t_simple	*next;
 
-	while(simples != NULL)
+	while (simples != NULL)
 	{
 		free_simple(simples);
 		next = simples->next;
@@ -49,7 +50,7 @@ static void free_simples(t_simple *simples)
 	}
 }
 
-static void clear_cmd(t_cmd *cmd)
+static void	clear_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
 	cmd->simples = NULL;
@@ -61,7 +62,8 @@ static void clear_cmd(t_cmd *cmd)
 	cmd->delimiters = NULL;
 }
 
-void freeset(void *ptr) //might be useful
+//might be useful
+void	freeset(void *ptr)
 {
 	free(ptr);
 	ptr = NULL;
@@ -72,16 +74,9 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_token	*tokens;
 	t_cmd	cmd;
-	char **temp;
-
-
-	g_children = ft_calloc(OPEN_MAX, sizeof(pid_t));
-
-	temp = ft_calloc (100000, 19);
-	temp[0] = "ls";
 
 	//atexit(run);
-	if (cmd_setup(&cmd, envp) == -1)
+	if (setup(&cmd, envp) == -1)
 		return (-1);
 	tokens = NULL;
 	line = NULL;
@@ -96,21 +91,23 @@ int	main(int argc, char **argv, char **envp)
 			tokens = tokenize(line);
 			if (tokens == NULL)
 				continue ;
-			print_tokens(tokens);
+			//print_tokens(tokens);
 			parse(tokens, &cmd);
-			print_simples(&cmd);
-
+			//print_simples(&cmd);
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
+				//continue;
 			}
+			ft_putstr_fd("\n", STDERR_FILENO);
+			rl_on_new_line();
 			free_token_list(tokens);
 			clear_cmd(&cmd);
 		}
 		free(line);
-		line = NULL;
+		rl_on_new_line();
 	}
 	free(cmd.paths);
-	// rl_clear_history();
+	//rl_clear_history();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/30 17:16:37 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/03 22:58:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,43 @@
 
 // IN EXECUTE01, YOU CAN FIND THE CHILD PROCESSES AND THE PARENT :)
 
+t_children	*newchild(pid_t id)
+{
+	t_children	*new;
+
+	new = ft_calloc(1, sizeof(t_children));
+	if (new == NULL)
+		return (NULL);
+	new->id = id;
+	new->next = NULL;
+	return (new);
+}
+
+void	childaddback(t_children *current, t_children *new)
+{
+	t_children	*temp;
+
+	*temp = *current;
+	if (current == NULL)
+		current = new;
+	while (temp != NULL)
+		temp = temp->next;
+	temp = new;
+}
+
 int	family_life(t_cmd cmds)
 {
-	int		pfd[2][2];
-	int		i;
+	int			pfd[2][2];
+	int			i;
+	t_children	*new;
 
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
 		if (i + 1 != cmds.cmd_count)
 			pipe(pfd[i % 2]);
-		g_children[i] = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
+		new = newchild(child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i));
+		childaddback(&g_children, new);
 		i++;
 	}
 	return (parent(cmds, pfd[(i + 1) % 2]));
@@ -32,28 +58,26 @@ int	family_life(t_cmd cmds)
 
 int	parent(t_cmd cmds, int *pfd)
 {
-	int	status;
-	int	exit_code;
-	int	i;
+	int			status;
+	int			exit_code;
+	t_children	*temp;
 
+	*temp = g_children;
 	exit_code = 0;
 	status = 0;
-	i = 0;
-	while (i < cmds.cmd_count)
+	while (temp)
 	{
-		waitpid(g_children[i], &status, 0);
-		i++;
+		waitpid(temp->id, &status, 0);
+		temp = temp->next;
 	}
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
-	// free(g_children);
-	dprintf(STDERR_FILENO, "exit_code : %d \n", exit_code);
 	return (exit_code);
 }
 
-void	child_2(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
+void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
 	if (cmd_no != 0)
 	{
@@ -99,10 +123,8 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		return (child_id);
 	}
 	close(write_pipe[READ]);
-	child_2(cmds, write_pipe, read_pipe, cmd_no);
+	child_redirect(cmds, write_pipe, read_pipe, cmd_no);
 	simple = get_simple(cmds, cmd_no);
 	exec_cmd(*simple);
-	dprintf(STDERR_FILENO, "cmd %d not found\n", cmd_no);
-	close(write_pipe[WRITE]);
-	exit (-1);
+	return (-1);
 }

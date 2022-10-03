@@ -17,6 +17,7 @@ void str_list_add_back(t_str_list *root, t_str_list *new)
 {
 	if (root == NULL)
 		return ;
+//VRAAG: hee moet dit niet dan alsnog new in root zetten ? als nieiw eerste elem is?
 	while (root->next != NULL)
 		root = root->next;
 	root->next = new;

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 18:01:42 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/03 22:16:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@
 # define READ 0
 # define WRITE 1
 
-pid_t	*g_children;
-
 //STRUCTS:
+typedef struct s_children {
+	pid_t				id;
+	struct s_children	*next;
+}	t_children;
+
 typedef struct s_simple {
 	char			**argv;
 	int				argc;
@@ -60,6 +63,9 @@ typedef struct s_cmd {
 	t_str_list	*delimiters;
 	char		**paths;
 }	t_cmd;
+
+// GLOBAL VAR
+t_children	g_children;
 
 // FILES & FUNCTIONS:
 //prompt
