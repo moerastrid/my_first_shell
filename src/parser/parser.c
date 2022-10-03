@@ -48,7 +48,7 @@ void add_arg(t_simple *simple, char *arg)
 	if (simple->argv == NULL)
 	{
 		argv = malloc(sizeof(char *) * 2);
-		argv[i++] = arg;
+		argv[i++] = ft_strdup(arg);
 		argv[i] = NULL;
 	}
 	else
@@ -59,7 +59,7 @@ void add_arg(t_simple *simple, char *arg)
 			argv[i] = simple->argv[i];
 			i++;
 		}
-		argv[i++] = arg;
+		argv[i++] = ft_strdup(arg);
 		argv[i] = NULL;
 		free(simple->argv);
 	}

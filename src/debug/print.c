@@ -76,3 +76,27 @@ void	print_str_list(t_str_list *root, int mode)
 	}
 	printf("\n");
 }
+
+void	print_simples(t_cmd *cmd)
+{
+	t_simple	*simple;
+	char		**argv;
+	int			i;
+
+	simple = cmd->simples;
+	while (simple != NULL)
+	{
+		argv = simple->argv;
+		printf("Simple {bin:%s, argv:[", simple->bin);
+		i = 0;
+		while (i < simple->argc)
+		{
+			if (i + 1 == simple->argc)
+				printf("%s", argv[i++]);
+			else
+				printf("%s, ", argv[i++]);
+		}
+		simple = simple->next;
+		printf("]}\n");
+	}
+}

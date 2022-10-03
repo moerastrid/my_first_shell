@@ -21,3 +21,16 @@ void str_list_add_back(t_str_list *root, t_str_list *new)
 		root = root->next;
 	root->next = new;
 }
+
+void free_str_list(t_str_list *root)
+{
+	t_str_list	*temp;
+	while(root != NULL)
+	{
+		free(root->str);
+		temp = root->next;
+		free(root);
+		root = temp;
+	}
+	root = NULL;
+}

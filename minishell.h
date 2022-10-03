@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/syslimits.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
@@ -95,10 +96,13 @@ char		**getpaths(char **envp);
 //str_list
 t_str_list	*str_list_new(char *str, int append_mode);
 void		str_list_add_back(t_str_list *root, t_str_list *new);
+void		free_str_list(t_str_list *root);
 
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
 void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, int mode);
 void		print_tokens(t_token *root);
+void		print_simples(t_cmd *cmd);
+
 
 #endif

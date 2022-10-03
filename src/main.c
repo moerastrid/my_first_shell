@@ -21,28 +21,44 @@ static void	run(void)
 	system("leaks minishell");
 }
 
-static void print_simples(t_cmd *cmd)
+static void free_simple(t_simple *simple)
 {
-	t_simple	*simple;
-	char		**argv;
-	int			i;
+	int	i;
 
-	simple = cmd->simples;
-	while(simple != NULL)
+	i = 0;
+	while(i < simple->argc)
 	{
-		argv = simple->argv;
-		printf("Simple {bin:%s, argv:[", simple->bin);
-		i = 0;
-		while(i < simple->argc)
-		{
-			if(i + 1 == simple->argc)
-				printf("%s", argv[i++]);
-			else
-				printf("%s, ", argv[i++]);
-		}
-		simple = simple->next;
-		printf("]}\n");
+		free(simple->argv[i++]);
 	}
+	free(simple->argv);
+	free(simple->bin);
+	simple->argv = NULL;
+	simple->bin = NULL;
+}
+
+static void free_simples(t_simple *simples)
+{
+	t_simple	*next;
+
+	while(simples != NULL)
+	{
+		free_simple(simples);
+		next = simples->next;
+		free(simples);
+		simples = next;
+	}
+}
+
+static void clear_cmd(t_cmd *cmd)
+{
+	free_simples(cmd->simples);
+	cmd->simples = NULL;
+	free_str_list(cmd->outfiles);
+	cmd->outfiles = NULL;
+	free_str_list(cmd->infiles);
+	cmd->infiles = NULL;
+	free_str_list(cmd->delimiters);
+	cmd->delimiters = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -51,7 +67,9 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 	char **temp;
-	g_children = ft_calloc(1000, 1000);
+
+
+	g_children = ft_calloc(OPEN_MAX, sizeof(pid_t));
 
 	temp = ft_calloc (100000, 19);
 	temp[0] = "ls";
@@ -76,17 +94,12 @@ int	main(int argc, char **argv, char **envp)
 			parse(tokens, &cmd);
 			print_simples(&cmd);
 
-// generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
-			// generate_simple_command(&cmd, 3, temp);
-			// printf("test99\n");
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
-				continue ;
 			}
-			// printf("test98\n");
-			//free_token_list(tokens);
-			//print_str_list(cmd.infiles, 0);
+			free_token_list(tokens);
+			clear_cmd(&cmd);
 		}
 		free(line);
 		line = NULL;

@@ -12,9 +12,11 @@ void	free_token(t_token *token)
 
 void	free_token_list(t_token *token)
 {
+	t_token	*temp;
 	while (token != NULL)
 	{
+		temp = token->next;
 		free_token(token);
-		token = token->next;
+		token = temp;
 	}
 }

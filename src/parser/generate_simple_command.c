@@ -43,7 +43,7 @@ int	set_bin(t_cmd *cmd, t_simple *simple)
 	while (cmd->paths[i] != NULL)
 	{
 		myexec = NULL;
-		temp = ft_strjoin(cmd->paths[i], "/");
+		temp = ft_strjoin(cmd->paths[i++], "/");
 		if (!temp)
 			return (-1);
 		myexec = ft_strjoin(temp, simple->argv[0]);
@@ -56,7 +56,6 @@ int	set_bin(t_cmd *cmd, t_simple *simple)
 			break ;
 		}
 		free (myexec);
-		i++;
 	}
 	return (0);
 }

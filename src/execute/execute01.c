@@ -48,7 +48,7 @@ int	parent(t_cmd cmds, int *pfd)
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
-	free(g_children);
+	// free(g_children);
 	dprintf(STDERR_FILENO, "exit_code : %d \n", exit_code);
 	return (exit_code);
 }
