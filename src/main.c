@@ -61,6 +61,12 @@ static void clear_cmd(t_cmd *cmd)
 	cmd->delimiters = NULL;
 }
 
+void freeset(void *ptr) //might be useful
+{
+	free(ptr);
+	ptr = NULL;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;

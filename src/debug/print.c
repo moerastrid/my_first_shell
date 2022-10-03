@@ -100,3 +100,12 @@ void	print_simples(t_cmd *cmd)
 		printf("]}\n");
 	}
 }
+
+// How will this ever end? Suggestion: Change children global to struct containing also the size of array
+void print_children(pid_t *pids)
+{
+	while (*pids)
+	{
+
+	}
+}

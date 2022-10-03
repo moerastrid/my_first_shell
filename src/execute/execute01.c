@@ -67,9 +67,25 @@ void	child_2(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	}
 }
 
+t_simple	*get_simple(t_cmd cmd, int num)
+{
+	int			i;
+	t_simple	*simple;
+
+	simple = cmd.simples;
+	i = 0;
+	while (i < num)
+	{
+		simple = simple->next;
+		i++;
+	}
+	return (simple);
+}
+
 pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
-	pid_t	child_id;
+	pid_t		child_id;
+	t_simple	*simple;
 
 	child_id = fork();
 	if (child_id == -1)
@@ -84,7 +100,8 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	}
 	close(write_pipe[READ]);
 	child_2(cmds, write_pipe, read_pipe, cmd_no);
-	exec_cmd(cmds.simples[cmd_no]);
+	simple = get_simple(cmds, cmd_no);
+	exec_cmd(*simple);
 	dprintf(STDERR_FILENO, "cmd %d not found\n", cmd_no);
 	close(write_pipe[WRITE]);
 	exit (-1);
