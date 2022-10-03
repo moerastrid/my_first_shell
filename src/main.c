@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		catch_signals();
+		// catch_signals();
 		line = prompt();
 		if (!line)
 			continue ;

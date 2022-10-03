@@ -2,10 +2,6 @@
 
 static int	is_token_char(char *str)
 {
-	if (ft_strncmp(str, "'", 1) == 0)
-		return (1);
-	if (ft_strncmp(str, "\"", 1) == 0)
-		return (1);
 	if (ft_strncmp(str, "$", 1) == 0)
 		return (1);
 	if (ft_strncmp(str, "|", 1) == 0)
@@ -40,6 +36,23 @@ static int	token_type(char *str)
 	return (0);
 }
 
+static int	token_length(t_token *token)
+{
+	int	len;
+	int	type;
+
+	type = token->type;
+	if (type == GREATGREAT || type == LESSLESS || type == DOLLQ)
+		len = 2;
+	else if (type == WORD || type == QUOT || type == DQUOT)
+		len = ft_strlen(token->data);
+	else
+		len = 1;
+	if(type == QUOT || type == DQUOT)
+		len+=2;
+	return (len);
+}
+
 static int	word_length(char *input)
 {
 	int	len;
@@ -53,20 +66,20 @@ static int	word_length(char *input)
 	return (len);
 }
 
-static void	merge_redirects(t_token *token)
+static int	quot_length(char *input)
 {
-	int		type;
+	int	count;
 
-	while (token != NULL)
-	{
-		type = token->type;
-		if (type == LESS || type == GREAT || type == LESSLESS
-			|| type == GREATGREAT)
+	count = 1;
+	input++;
+	while(*input != '\0' && token_type(input) != QUOT
+		&& token_type(input) != DQUOT)
 		{
-			merge_token_with_next(token);
+			count++;
+			input++;
 		}
-		token = token->next;
-	}
+	printf("%d\n", count);
+	return (count);
 }
 
 t_token	*tokenize(char *input)
@@ -74,7 +87,6 @@ t_token	*tokenize(char *input)
 	t_token	root;
 	char	*data;
 	int		type;
-	int		len;
 	t_token	*new;
 
 	root.next = NULL;
@@ -88,10 +100,11 @@ t_token	*tokenize(char *input)
 		data = NULL;
 		if (type == WORD)
 			data = ft_substr(input, 0, word_length(input));
+		if (type == QUOT || type == DQUOT)
+			data = ft_substr(input, 1, quot_length(input) - 1);
 		new = token_new(data, type);
 		token_add_back(&root, new);
-		len = token_length(new);
-		input += len;
+		input += token_length(new);
 	}
 	merge_redirects(root.next);
 	return (root.next);

@@ -5,6 +5,7 @@ static int	count_cmd(t_cmd *cmd)
 	int			cmd_count;
 	t_simple	*simples;
 
+	cmd_count = 0;
 	simples = cmd->simples;
 	while (simples != NULL)
 	{
@@ -42,25 +43,28 @@ void add_delimiter(t_cmd *cmd, char *data)
 
 int	parse(t_token *tokens, t_cmd *cmd)
 {
-	int			cmd_count;
-	int			type;
-
-	cmd_count = count_cmd(cmd);
-	cmd->cmd_count = cmd_count;
 	while (tokens != NULL)
 	{
-		type = tokens->type;
-		if (type == GREAT)
+		if (tokens->type == GREAT)
 			add_outfile(cmd, 0, tokens->data);
-		if (type == LESS)
+		if (tokens->type == LESS)
 			add_infile(cmd, tokens->data);
-		if (type == GREATGREAT)
+		if (tokens->type == GREATGREAT)
 			add_outfile(cmd, 1, tokens->data);
-		if (type == LESSLESS)
+		if (tokens->type == LESSLESS)
 			add_delimiter(cmd, tokens->data);
-		if (type == WORD)
+		if (tokens->type == WORD)
 			//generate_simple_command(cmd, tokens->data);
+		if (tokens->type == QUOT)
+			//
+		if (tokens->type == DQUOT)
+			//
+		if (tokens->type == DOLL)
+			//
+		if (tokens->type == DOLLQ)
+			//
 		tokens = tokens->next;
 	}
+	cmd->cmd_count = count_cmd(cmd);
 	return (0);
 }
