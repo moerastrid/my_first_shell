@@ -63,8 +63,8 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		line = prompt();
 		catch_signals();
+		line = prompt();
 		if (!line)
 			continue ;
 		if (*line)
@@ -76,16 +76,12 @@ int	main(int argc, char **argv, char **envp)
 			parse(tokens, &cmd);
 			print_simples(&cmd);
 
-// generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
-			// generate_simple_command(&cmd, 3, temp);
-			// printf("test99\n");
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				continue ;
 			}
-			// printf("test98\n");
-			//free_token_list(tokens);
+			free_token_list(tokens);
 			//print_str_list(cmd.infiles, 0);
 		}
 		free(line);
