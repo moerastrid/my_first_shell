@@ -21,6 +21,30 @@ static void	run(void)
 	system("leaks minishell");
 }
 
+static void print_simples(t_cmd *cmd)
+{
+	t_simple	*simple;
+	char		**argv;
+	int			i;
+
+	simple = cmd->simples;
+	while(simple != NULL)
+	{
+		argv = simple->argv;
+		printf("Simple {bin:%s, argv:[", simple->bin);
+		i = 0;
+		while(i < simple->argc)
+		{
+			if(i + 1 == simple->argc)
+				printf("%s", argv[i++]);
+			else
+				printf("%s, ", argv[i++]);
+		}
+		simple = simple->next;
+		printf("]}\n");
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -47,24 +71,20 @@ int	main(int argc, char **argv, char **envp)
 		{
 			tokens = tokenize(line);
 			if (tokens == NULL)
-			{
-				printf("%s\n", NULL);
 				continue ;
-			}
 			print_tokens(tokens);
-			// parse(tokens, &cmd);
-
-			cmd.cmd_count = 1;
+			parse(tokens, &cmd);
+			print_simples(&cmd);
 
 // generate_simple_commands doesn't belong here but I dont want to fuck up your parse function :)
-			generate_simple_command(&cmd, temp);
+			// generate_simple_command(&cmd, 3, temp);
 			// printf("test99\n");
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				continue ;
 			}
-			printf("test98\n");
+			// printf("test98\n");
 			//free_token_list(tokens);
 			//print_str_list(cmd.infiles, 0);
 		}

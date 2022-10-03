@@ -36,6 +36,7 @@ pid_t	*g_children;
 //STRUCTS:
 typedef struct s_simple {
 	char			**argv;
+	int				argc;
 	char			*bin;
 	struct s_simple	*next;
 }	t_simple;
@@ -62,7 +63,10 @@ char		*prompt(void);
 
 //parser
 int			parse(t_token *tokens, t_cmd *cmds);
-int			generate_simple_command(t_cmd *cmd, char **argv);
+int			set_bin(t_cmd *cmd, t_simple *simple);
+t_simple	*new_simple(int argc, char **argv);
+void		simpleadd_back(t_simple **lst, t_simple *new_elem);
+t_simple	*new_simple(int argc, char **argv);
 
 //buildins (00)
 void		bi_echo(void);

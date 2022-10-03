@@ -36,6 +36,11 @@ static int	token_type(char *str)
 	return (0);
 }
 
+// GREATGREAT, LESSLESS and DOLLQ have a fixed length of two.
+// WORD has length of the strlen of its data
+// QUOT and DQUOT have strlen(data) + 2 length, the quotes are skipped.
+// DOLL has length strlen(data) + 1, the dollar is skipped.
+// All other types have length 1.
 static int	token_length(t_token *token)
 {
 	int	len;
@@ -44,12 +49,14 @@ static int	token_length(t_token *token)
 	type = token->type;
 	if (type == GREATGREAT || type == LESSLESS || type == DOLLQ)
 		len = 2;
-	else if (type == WORD || type == QUOT || type == DQUOT)
+	else if (type == WORD || type == QUOT || type == DQUOT || type == DOLL)
 		len = ft_strlen(token->data);
 	else
 		len = 1;
-	if(type == QUOT || type == DQUOT)
-		len+=2;
+	if (type == QUOT || type == DQUOT)
+		len += 2;
+	if (type == DOLL)
+		len++;
 	return (len);
 }
 
@@ -69,16 +76,16 @@ static int	word_length(char *input)
 static int	quot_length(char *input)
 {
 	int	count;
+	int	type;
 
+	type = token_type(input);
 	count = 1;
 	input++;
-	while(*input != '\0' && token_type(input) != QUOT
-		&& token_type(input) != DQUOT)
-		{
-			count++;
-			input++;
-		}
-	printf("%d\n", count);
+	while(*input != '\0' && token_type(input) != type)
+	{
+		count++;
+		input++;
+	}
 	return (count);
 }
 
@@ -102,6 +109,8 @@ t_token	*tokenize(char *input)
 			data = ft_substr(input, 0, word_length(input));
 		if (type == QUOT || type == DQUOT)
 			data = ft_substr(input, 1, quot_length(input) - 1);
+		if (type == DOLL)
+			data = ft_substr(input, 1, word_length(input + 1));
 		new = token_new(data, type);
 		token_add_back(&root, new);
 		input += token_length(new);
