@@ -81,8 +81,8 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		line = prompt();
 		catch_signals();
+		line = prompt();
 		if (!line)
 			continue ;
 		if (*line)
