@@ -89,13 +89,13 @@ int	parse(t_token *tokens, t_cmd *cmd)
 			add_arg(simple, tokens->data);
 		if (type == PIPE)
 		{
-			simpleadd_back(&cmd->simples, simple);
+			simple_add_back(&cmd->simples, simple);
 			set_bin(cmd, simple);
 			simple = new_simple(0, NULL);
 		}
 		tokens = tokens->next;
 	}
-	simpleadd_back(&cmd->simples, simple);
+	simple_add_back(&cmd->simples, simple);
 	set_bin(cmd, simple);
 	cmd->cmd_count = count_cmd(cmd);
 	return (0);

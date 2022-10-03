@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 	char **temp;
+	g_children = ft_calloc(1000, 1000);
 
 	temp = ft_calloc (100000, 19);
 	temp[0] = "ls";

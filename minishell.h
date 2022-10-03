@@ -65,7 +65,7 @@ char		*prompt(void);
 int			parse(t_token *tokens, t_cmd *cmds);
 int			set_bin(t_cmd *cmd, t_simple *simple);
 t_simple	*new_simple(int argc, char **argv);
-void		simpleadd_back(t_simple **lst, t_simple *new_elem);
+void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
 
 //buildins (00)

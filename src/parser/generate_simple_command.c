@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void	simpleadd_back(t_simple **lst, t_simple *new_elem)
+void	simple_add_back(t_simple **lst, t_simple *new_elem)
 {
 	t_simple	*tmp;
 
