@@ -36,16 +36,18 @@ void	merge_token_with_next(t_token *token)
 	free(temp);
 }
 
-int	token_length(t_token *token)
+void	merge_redirects(t_token *token)
 {
-	int	len;
+	int		type;
 
-	if (token->type == GREATGREAT || token->type == LESSLESS
-		|| token->type == DOLLQ)
-		len = 2;
-	else if (token->type == WORD)
-		len = ft_strlen(token->data);
-	else
-		len = 1;
-	return (len);
+	while (token != NULL)
+	{
+		type = token->type;
+		if (type == LESS || type == GREAT || type == LESSLESS
+			|| type == GREATGREAT)
+		{
+			merge_token_with_next(token);
+		}
+		token = token->next;
+	}
 }

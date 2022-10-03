@@ -2,10 +2,6 @@
 
 static int	is_token_char(char *str)
 {
-	if (ft_strncmp(str, "'", 1) == 0)
-		return (1);
-	if (ft_strncmp(str, "\"", 1) == 0)
-		return (1);
 	if (ft_strncmp(str, "$", 1) == 0)
 		return (1);
 	if (ft_strncmp(str, "|", 1) == 0)
@@ -40,6 +36,30 @@ static int	token_type(char *str)
 	return (0);
 }
 
+// GREATGREAT, LESSLESS and DOLLQ have a fixed length of two.
+// WORD has length of the strlen of its data
+// QUOT and DQUOT have strlen(data) + 2 length, the quotes are skipped.
+// DOLL has length strlen(data) + 1, the dollar is skipped.
+// All other types have length 1.
+static int	token_length(t_token *token)
+{
+	int	len;
+	int	type;
+
+	type = token->type;
+	if (type == GREATGREAT || type == LESSLESS || type == DOLLQ)
+		len = 2;
+	else if (type == WORD || type == QUOT || type == DQUOT || type == DOLL)
+		len = ft_strlen(token->data);
+	else
+		len = 1;
+	if (type == QUOT || type == DQUOT)
+		len += 2;
+	if (type == DOLL)
+		len++;
+	return (len);
+}
+
 static int	word_length(char *input)
 {
 	int	len;
@@ -53,20 +73,20 @@ static int	word_length(char *input)
 	return (len);
 }
 
-static void	merge_redirects(t_token *token)
+static int	quot_length(char *input)
 {
-	int		type;
+	int	count;
+	int	type;
 
-	while (token != NULL)
+	type = token_type(input);
+	count = 1;
+	input++;
+	while(*input != '\0' && token_type(input) != type)
 	{
-		type = token->type;
-		if (type == LESS || type == GREAT || type == LESSLESS
-			|| type == GREATGREAT)
-		{
-			merge_token_with_next(token);
-		}
-		token = token->next;
+		count++;
+		input++;
 	}
+	return (count);
 }
 
 t_token	*tokenize(char *input)
@@ -74,7 +94,6 @@ t_token	*tokenize(char *input)
 	t_token	root;
 	char	*data;
 	int		type;
-	int		len;
 	t_token	*new;
 
 	root.next = NULL;
@@ -88,10 +107,13 @@ t_token	*tokenize(char *input)
 		data = NULL;
 		if (type == WORD)
 			data = ft_substr(input, 0, word_length(input));
+		if (type == QUOT || type == DQUOT)
+			data = ft_substr(input, 1, quot_length(input) - 1);
+		if (type == DOLL)
+			data = ft_substr(input, 1, word_length(input + 1));
 		new = token_new(data, type);
 		token_add_back(&root, new);
-		len = token_length(new);
-		input += len;
+		input += token_length(new);
 	}
 	merge_redirects(root.next);
 	return (root.next);
