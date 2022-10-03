@@ -85,8 +85,10 @@ int	parse(t_token *tokens, t_cmd *cmd)
 		if (type == LESSLESS)
 			add_delimiter(cmd, tokens->data);
 		if (type == WORD || type == QUOT || type == DQUOT ||
-			type == DOLL || type == DOLLQ)
+			type == DOLL)
 			add_arg(simple, tokens->data);
+		if (type == DOLLQ)
+			add_arg(simple, ft_strdup("$?"));
 		if (type == PIPE)
 		{
 			simple_add_back(&cmd->simples, simple);
