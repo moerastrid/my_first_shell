@@ -3,7 +3,7 @@ readline - char *readline (const char *prompt); The line returned is allocated w
 
 rl_clear_history - void rl_clear_history(void); it frees private data Readline saves in the history list.
 
- rl_on_new_line - int rl_on_new_line(void); 
+rl_on_new_line - int rl_on_new_line(void); 
 Tell the update functions that we have moved onto a new (empty) line, usually after outputting a newline.
 
 rl_replace_line - void rl_replace_line (const char *text, int clear_undo);
@@ -81,7 +81,7 @@ The lstat() function is like stat() except in the case where the named file is a
 lstat() returns information about the link,
 while stat() returns information about the file the link references.
 
-fstat - intbfstat(int fildes, struct stat *buf);
+fstat - int fstat(int fildes, struct stat *buf);
 The fstat() obtains the same information about an open file known by the file descriptor fildes.
 
 unlink - int unlink(const char *path);

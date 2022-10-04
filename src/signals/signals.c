@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/04 16:23:42 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/04 16:46:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_sigint(int sig)
 {
 	t_children *temp;
-	
+
 	*temp = g_children;
 	ft_putstr_fd("\n", STDERR_FILENO);
 	rl_on_new_line();

@@ -69,6 +69,15 @@ void	freeset(void *ptr)
 	ptr = NULL;
 }
 
+void	kill_children(void)
+{
+	while (g_children.id != -1)
+	{
+		kill(g_children.id, SIGKILL);
+		g_children = *g_children.next;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -99,13 +108,14 @@ int	main(int argc, char **argv, char **envp)
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				//continue;
 			}
-			//ft_putstr_fd("\n", STDERR_FILENO);
-			rl_on_new_line();
 			free_token_list(tokens);
 			clear_cmd(&cmd);
+			kill_children();
+			ft_putstr_fd("\n", STDOUT_FILENO);
+			rl_on_new_line();
 		}
 		free(line);
-		rl_on_new_line();
+		//rl_redisplay();
 	}
 	free(cmd.paths);
 	//rl_clear_history();
