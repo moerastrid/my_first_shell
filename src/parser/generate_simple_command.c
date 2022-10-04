@@ -21,7 +21,7 @@ t_simple	*new_simple(int argc, char **argv)
 {
 	t_simple	*new_simple;
 
-	new_simple = (t_simple *)malloc(sizeof(t_simple));
+	new_simple = (t_simple *)ft_calloc(1, sizeof(t_simple));
 	if (!new_simple)
 		return (NULL);
 	new_simple->bin = NULL;

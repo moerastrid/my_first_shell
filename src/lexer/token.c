@@ -15,7 +15,7 @@ t_token	*token_new(char *data, int type)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = ft_calloc(1, sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
 	token->data = data;

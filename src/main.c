@@ -82,8 +82,8 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		catch_signals();
 		line = prompt();
+		catch_signals();
 		if (!line)
 			continue ;
 		if (*line)
@@ -91,15 +91,15 @@ int	main(int argc, char **argv, char **envp)
 			tokens = tokenize(line);
 			if (tokens == NULL)
 				continue ;
-			//print_tokens(tokens);
+			print_tokens(tokens);
 			parse(tokens, &cmd);
-			//print_simples(&cmd);
+			print_simples(&cmd);
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				//continue;
 			}
-			ft_putstr_fd("\n", STDERR_FILENO);
+			//ft_putstr_fd("\n", STDERR_FILENO);
 			rl_on_new_line();
 			free_token_list(tokens);
 			clear_cmd(&cmd);
