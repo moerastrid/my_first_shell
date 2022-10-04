@@ -101,8 +101,8 @@ int	main(int argc, char **argv, char **envp)
 			if (tokens == NULL)
 				continue ;
 			parse(tokens, &cmd);
-			// print_tokens(tokens);
-			// print_simples(&cmd);
+			print_tokens(tokens);
+			print_simples(&cmd);
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");

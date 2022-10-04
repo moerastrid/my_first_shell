@@ -43,13 +43,17 @@ int	family_life(t_cmd cmds)
 	int			pfd[2][2];
 	int			i;
 	t_children	*new;
+	pid_t		id;
 
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
-		if (i + 1 != cmds.cmd_count)
+		if (i != cmds.cmd_count - 1)
 			pipe(pfd[i % 2]);
-		new = newchild(child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i));
+		id = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
+		if (id == -1)
+			exit(-1); //?
+		new = newchild(id);
 		childaddback(&g_children, new);
 		i++;
 	}
