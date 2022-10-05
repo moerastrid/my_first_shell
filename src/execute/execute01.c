@@ -89,6 +89,9 @@ static t_simple	*get_simple(t_cmd cmd, int num)
 	return (simple);
 }
 
+void redirect_infile(t_str_list *infiles);
+void redirect_outfile(t_str_list *outfiles);
+
 pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
 	pid_t		child_id;
@@ -106,6 +109,10 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		close(write_pipe[WRITE]);
 		return (child_id);
 	}
+	if (cmd_no == 0)
+		redirect_infile(cmds.infiles);
+	if (cmd_no == cmds.cmd_count - 1)
+		redirect_outfile(cmds.outfiles);
 	close(write_pipe[READ]);
 	child_redirect(cmds, write_pipe, read_pipe, cmd_no);
 	simple = get_simple(cmds, cmd_no);

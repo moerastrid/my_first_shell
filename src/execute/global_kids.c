@@ -30,7 +30,6 @@ void	child_add_back(t_children *root, t_children *new)
 	while (root->next != NULL)
 	{
 		root = root->next;
-
 	}
 	root->next = new;
 }
