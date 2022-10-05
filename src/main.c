@@ -9,8 +9,6 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
-	g_children.id = -1;
-	g_children.next = NULL;
 
 	paths = getpaths(envp);
 	if (!paths)
@@ -22,32 +20,6 @@ int	setup(t_cmd *cmd, char **envp)
 static void	run(void)
 {
 	system("leaks minishell");
-}
-
-static void	free_simple(t_simple *simple)
-{
-	int	i;
-
-	i = 0;
-	while (i < simple->argc)
-		free(simple->argv[i++]);
-	free(simple->argv);
-	free(simple->bin);
-	simple->argv = NULL;
-	simple->bin = NULL;
-}
-
-static void	free_simples(t_simple *simples)
-{
-	t_simple	*next;
-
-	while (simples != NULL)
-	{
-		free_simple(simples);
-		next = simples->next;
-		free(simples);
-		simples = next;
-	}
 }
 
 static void	clear_cmd(t_cmd *cmd)
@@ -71,11 +43,11 @@ void	freeset(void *ptr)
 
 void	kill_children(void)
 {
-	while (g_children.id != -1)
-	{
-		kill(g_children.id, SIGKILL);
-		g_children = *g_children.next;
-	}
+	// while (g_children.id != -1)
+	// {
+	// 	kill(g_children.id, SIGKILL);
+	// 	g_children = *g_children.next;
+	// }
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -84,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
-	//atexit(run);
+	// atexit(run);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
 	line = NULL;
@@ -110,7 +82,11 @@ int	main(int argc, char **argv, char **envp)
 			}
 			free_token_list(tokens);
 			clear_cmd(&cmd);
-			kill_children();
+			print_children(g_children);
+			free_children(g_children);
+			g_children = NULL;
+
+			// kill_children();
 			ft_putstr_fd("\n", STDOUT_FILENO);
 			rl_on_new_line();
 		}

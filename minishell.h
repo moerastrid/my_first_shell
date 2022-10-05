@@ -20,7 +20,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-// # include <sys/syslimits.h>
+// # include <sys/syslimits.h> Only works on MacOS.
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
@@ -66,18 +66,24 @@ typedef struct s_cmd {
 }	t_cmd;
 
 // GLOBAL VAR
-t_children	g_children;
+t_children	*g_children;
 
 // FILES & FUNCTIONS:
 //prompt
 char		*prompt(void);
 
-//parser
+// PARSER
+// parser.c
 int			parse(t_token *tokens, t_cmd *cmds);
+
+// cmd_builder.c
 int			set_bin(t_cmd *cmd, t_simple *simple);
+
+// simple.c
 t_simple	*new_simple(int argc, char **argv);
 void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
+void		free_simples(t_simple *simples);
 
 //buildins (00)
 void		bi_echo(void);
@@ -90,6 +96,13 @@ void		bi_exit(void);
 
 //execute
 int			execute(t_cmd cmds);
+void		free_children(t_children *root);
+t_children	*new_child(pid_t id);
+void		child_add_back(t_children *root, t_children *new);
+void		add_outfile(t_cmd *cmd, int append_mode, char *data);
+void		add_infile(t_cmd *cmd, char *data);
+void		add_delimiter(t_cmd *cmd, char *data);
+int			add_arg(t_simple *simple, char *arg);
 
 //signals
 void		catch_signals(void);
@@ -110,6 +123,7 @@ void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, int mode);
 void		print_tokens(t_token *root);
 void		print_simples(t_cmd *cmd);
+void		print_children(t_children *root);
 
 
 #endif

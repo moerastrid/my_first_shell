@@ -14,33 +14,9 @@
 
 // IN EXECUTE01, YOU CAN FIND THE CHILD PROCESSES AND THE PARENT :)
 
-t_children	*newchild(pid_t id)
-{
-	t_children	*new;
-
-	new = ft_calloc(1, sizeof(t_children));
-	if (new == NULL)
-		return (NULL);
-	new->id = id;
-	new->next = NULL;
-	return (new);
-}
-
-void	childaddback(t_children *current, t_children *new)
-{
-	t_children	*temp;
-
-	*temp = *current;
-	if (current == NULL)
-		current = new;
-	while (temp != NULL)
-		temp = temp->next;
-	temp = new;
-}
-
 int	family_life(t_cmd cmds)
 {
-	int			pfd[2][2];
+	int			pfd[2][2]; //not allowed;
 	int			i;
 	t_children	*new;
 	pid_t		id;
@@ -48,13 +24,16 @@ int	family_life(t_cmd cmds)
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
-		if (i != cmds.cmd_count - 1)
+		if (i + 1 != cmds.cmd_count)
 			pipe(pfd[i % 2]);
 		id = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
-			exit(-1); //?
-		new = newchild(id);
-		childaddback(&g_children, new);
+			exit(-1); // ?
+		new = new_child(id);
+		if (g_children == NULL)
+			g_children = new;
+		else
+			child_add_back(g_children, new);
 		i++;
 	}
 	return (parent(cmds, pfd[(i + 1) % 2]));
@@ -64,15 +43,15 @@ int	parent(t_cmd cmds, int *pfd)
 {
 	int			status;
 	int			exit_code;
-	t_children	*temp;
+	t_children	*child;
 
-	*temp = g_children;
+	child = g_children;
 	exit_code = 0;
 	status = 0;
-	while (temp)
+	while (child)
 	{
-		waitpid(temp->id, &status, 0);
-		temp = temp->next;
+		waitpid(child->id, &status, 0);
+		child = child->next;
 	}
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
@@ -93,9 +72,9 @@ void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
 	}
-}
+}	// system("lsof -c minishell");
 
-t_simple	*get_simple(t_cmd cmd, int num)
+static t_simple	*get_simple(t_cmd cmd, int num)
 {
 	int			i;
 	t_simple	*simple;
@@ -118,12 +97,13 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	child_id = fork();
 	if (child_id == -1)
 		return (-1);
-	else if (child_id != 0)
+	else if (child_id != 0) //parent
 	{
+		// close(read_pipe[WRITE]);
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
-		if (cmd_no != cmds.cmd_count)
-			close (write_pipe[WRITE]);
+		// if (cmd_no != cmds.cmd_count)
+		close(write_pipe[WRITE]);
 		return (child_id);
 	}
 	close(write_pipe[READ]);
@@ -132,3 +112,9 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	exec_cmd(*simple);
 	return (-1);
 }
+//											Parent
+// Pipes		[[write, read],[write, read]]			[[write, read],[write, read]]
+// cmd1							| 				cmd2				| cmd3
+// c1 							| 				c2 					| c3
+// Reads from stdin				| 				reads from pipe		| reads from pipe
+// Writes to pipe				| 				Writes to pipe		| Writes to stdout

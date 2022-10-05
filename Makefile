@@ -12,15 +12,17 @@ SRC =	src/main.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
 		src/parser/parser.c\
-		src/parser/generate_simple_command.c\
+		src/parser/simple.c\
 		src/parser/str_list.c\
+		src/parser/cmd_builder.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
+		src/execute/global_kids.c\
 		src/builtins/builtins00.c\
 		src/utils/utils00.c\
+		src/signals/signals.c\
 		src/debug/print.c\
-		src/signals/signals.c
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
