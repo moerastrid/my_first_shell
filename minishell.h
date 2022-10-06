@@ -77,13 +77,17 @@ char		*prompt(void);
 int			parse(t_token *tokens, t_cmd *cmds);
 
 // cmd_builder.c
-int			set_bin(t_cmd *cmd, t_simple *simple);
+void		add_outfile(t_cmd *cmd, int append_mode, char *data);
+void		add_infile(t_cmd *cmd, char *data);
+void		add_delimiter(t_cmd *cmd, char *data);
+int			add_arg(t_simple *simple, char *arg);
 
 // simple.c
 t_simple	*new_simple(int argc, char **argv);
 void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
 void		free_simples(t_simple *simples);
+int			set_bin(t_cmd *cmd, t_simple *simple);
 
 //buildins (00)
 void		bi_echo(void);
@@ -94,15 +98,26 @@ void		bi_unset(void);
 void		bi_env(void);
 void		bi_exit(void);
 
-//execute
+//EXECUTER
+// execute00.c
 int			execute(t_cmd cmds);
+// execute01.c
+int			family_life(t_cmd cmds);
+int			pickup(t_cmd cmds, int *pfd);
+void		child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+
+// execute02.c
+void		exec_cmd(t_simple simple);
+void		redirect_infile(t_str_list *infiles);
+void		redirect_outfile(t_str_list *outfiles);
+int			only_child(t_cmd cmds);
+
+// global_kids.c
 void		free_children(t_children *root);
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
-void		add_outfile(t_cmd *cmd, int append_mode, char *data);
-void		add_infile(t_cmd *cmd, char *data);
-void		add_delimiter(t_cmd *cmd, char *data);
-int			add_arg(t_simple *simple, char *arg);
+void	kill_children(t_children *kids);
 
 //signals
 void		catch_signals(void);
@@ -124,6 +139,7 @@ void		print_str_list(t_str_list *root, int mode);
 void		print_tokens(t_token *root);
 void		print_simples(t_cmd *cmd);
 void		print_children(t_children *root);
-
+void		run_leaks(void);
+void		run_lsof(void);
 
 #endif

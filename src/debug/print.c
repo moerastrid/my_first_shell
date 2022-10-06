@@ -118,3 +118,13 @@ void print_children(t_children *root)
 		ptr = ptr->next;
 	}
 }
+
+void	run_leaks(void)
+{
+	system("leaks minishell");
+}
+
+void	run_lsof(void)
+{
+	system("lsof -c minishell");
+}

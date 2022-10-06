@@ -33,3 +33,13 @@ void	child_add_back(t_children *root, t_children *new)
 	}
 	root->next = new;
 }
+
+void	kill_children(t_children *kids)
+{
+	while (kids != NULL)
+	{
+		printf("%d\n", kids->id);
+		kill(kids->id, SIGKILL);
+		kids = kids->next;
+	}
+}

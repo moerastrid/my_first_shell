@@ -92,9 +92,6 @@ static t_simple	*get_simple(t_cmd cmd, int num)
 	return (simple);
 }
 
-void redirect_infile(t_str_list *infiles);
-void redirect_outfile(t_str_list *outfiles);
-
 pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
 	pid_t		child_id;

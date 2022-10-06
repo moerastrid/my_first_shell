@@ -17,11 +17,6 @@ int	setup(t_cmd *cmd, char **envp)
 	return (0);
 }
 
-static void	run(void)
-{
-	system("leaks minishell");
-}
-
 static void	clear_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
@@ -41,22 +36,13 @@ void	freeset(void *ptr)
 	ptr = NULL;
 }
 
-void	kill_children(t_children *kids)
-{
-	while(kids != NULL)
-	{
-		printf("%d\n", kids->id);
-		kill(kids->id, SIGKILL);
-		kids = kids->next;
-	}
-}
-
 static void reset(t_cmd *cmd, t_children *kids, t_token *tokens)
 {
-	free_token_list(tokens);
-	clear_cmd(cmd);
-	free_children(g_children);
+	kill_children(kids);
+	free_children(kids);
 	g_children = NULL;
+	clear_cmd(cmd);
+	free_token_list(tokens);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -65,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
-	// atexit(run);
+	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
 	line = NULL;
@@ -79,10 +65,11 @@ int	main(int argc, char **argv, char **envp)
 		parse(tokens, &cmd);
 		if (execute(cmd) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
+
 		print_tokens(tokens);
 		print_simples(&cmd);
 		print_children(g_children);
-		kill_children(g_children);
+
 		reset(&cmd, g_children, tokens);
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
