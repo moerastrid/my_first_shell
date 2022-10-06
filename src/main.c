@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
+	close_all();
 	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
@@ -58,6 +59,7 @@ int	main(int argc, char **argv, char **envp)
 	catch_signals();
 	while (1)
 	{
+		system("ls /dev/fd");
 		line = prompt();
 		tokens = tokenize(line);
 		if (tokens == NULL)

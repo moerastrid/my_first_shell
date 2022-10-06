@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 22:16:52 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
+/*   Updated: 2022/10/06 17:31:15 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		bi_exit(void);
 int			execute(t_cmd cmds);
 // execute01.c
 int			family_life(t_cmd cmds);
-int			pickup(t_cmd cmds, int *pfd);
+int			pickup();//t_cmd cmds, int *pfd);
 void		child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 
@@ -141,5 +141,7 @@ void		print_simples(t_cmd *cmd);
 void		print_children(t_children *root);
 void		run_leaks(void);
 void		run_lsof(void);
+void		run_cat_fd(void);
+void		close_all(void);
 
 #endif
