@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 22:58:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/06 18:05:31 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	family_life(t_cmd cmds)
 	t_children	*new;
 
 	i = 0;
+	//pipe(pfd[0]);
+	//pipe(pfd[1]);
 	while (i < cmds.cmd_count)
 	{
 		if (i + 1 != cmds.cmd_count)
@@ -53,10 +55,10 @@ int	family_life(t_cmd cmds)
 		childaddback(&g_children, new);
 		i++;
 	}
-	return (parent(cmds, pfd[(i + 1) % 2]));
+	return (pickup_kids());
 }
 
-int	parent(t_cmd cmds, int *pfd)
+int	pickup_kids(void)
 {
 	int			status;
 	int			exit_code;
@@ -83,11 +85,13 @@ void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	{
 		if (dup2(read_pipe[READ], STDIN_FILENO) == -1)
 			exit (-1);
+		close (read_pipe[READ]);
 	}
 	if (cmd_no != cmds.cmd_count - 1)
 	{
 		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
+		close (write_pipe[WRITE]);
 	}
 }
 
@@ -114,17 +118,20 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	child_id = fork();
 	if (child_id == -1)
 		return (-1);
-	else if (child_id != 0)
+	if (child_id == 0)
+	{
+		close(write_pipe[READ]);
+		child_redirect(cmds, write_pipe, read_pipe, cmd_no);
+		simple = get_simple(cmds, cmd_no);
+		exec_cmd(*simple);
+		return (-1);
+	}
+	if (child_id != 0) // parent
 	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
-		if (cmd_no != cmds.cmd_count)
+		if (cmd_no != cmds.cmd_count - 1)
 			close (write_pipe[WRITE]);
 		return (child_id);
 	}
-	close(write_pipe[READ]);
-	child_redirect(cmds, write_pipe, read_pipe, cmd_no);
-	simple = get_simple(cmds, cmd_no);
-	exec_cmd(*simple);
-	return (-1);
 }
