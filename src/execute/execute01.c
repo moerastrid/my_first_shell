@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:18:38 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/06 17:41:40 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/10/06 18:05:27 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	family_life(t_cmd cmds)
 		if (i != cmds.cmd_count - 1) // Pipe for all but the last iteration
 		{
 			res = pipe(pfd[i % 2]);
-			if(res == -1)
+			if (res == -1)
 				perror("pipe error");
 		}
-		printf("Pipe0: [%d, ", pfd[0][0]);
-		printf("%d] => ", pfd[0][1]);
-		printf("Pipe1: [%d, ", pfd[1][0]);
-		printf("%d]\n", pfd[1][1]);
+		// printf("Pipe0: [%d, ", pfd[0][0]);
+		// printf("%d] => ", pfd[0][1]);
+		// printf("Pipe1: [%d, ", pfd[1][0]);
+		// printf("%d]\n", pfd[1][1]);
 		id = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
 			return(-1);
