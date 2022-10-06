@@ -1,5 +1,31 @@
 #include "../../minishell.h"
 
+static void	free_simple(t_simple *simple)
+{
+	int	i;
+
+	i = 0;
+	while (i < simple->argc)
+		free(simple->argv[i++]);
+	free(simple->argv);
+	free(simple->bin);
+	simple->argv = NULL;
+	simple->bin = NULL;
+}
+
+void	free_simples(t_simple *simples)
+{
+	t_simple	*next;
+
+	while (simples != NULL)
+	{
+		free_simple(simples);
+		next = simples->next;
+		free(simples);
+		simples = next;
+	}
+}
+
 void	simple_add_back(t_simple **lst, t_simple *new_elem)
 {
 	t_simple	*tmp;

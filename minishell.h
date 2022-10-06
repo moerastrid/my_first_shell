@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 22:16:52 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
+/*   Updated: 2022/10/06 17:31:15 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-# include <sys/syslimits.h>
+// # include <sys/syslimits.h> Only works on MacOS.
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
@@ -65,18 +66,28 @@ typedef struct s_cmd {
 }	t_cmd;
 
 // GLOBAL VAR
-t_children	g_children;
+t_children	*g_children;
 
 // FILES & FUNCTIONS:
 //prompt
 char		*prompt(void);
 
-//parser
+// PARSER
+// parser.c
 int			parse(t_token *tokens, t_cmd *cmds);
-int			set_bin(t_cmd *cmd, t_simple *simple);
+
+// cmd_builder.c
+void		add_outfile(t_cmd *cmd, int append_mode, char *data);
+void		add_infile(t_cmd *cmd, char *data);
+void		add_delimiter(t_cmd *cmd, char *data);
+int			add_arg(t_simple *simple, char *arg);
+
+// simple.c
 t_simple	*new_simple(int argc, char **argv);
 void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
+void		free_simples(t_simple *simples);
+int			set_bin(t_cmd *cmd, t_simple *simple);
 
 //buildins (00)
 void		bi_echo(void);
@@ -87,8 +98,26 @@ void		bi_unset(void);
 void		bi_env(void);
 void		bi_exit(void);
 
-//execute
+//EXECUTER
+// execute00.c
 int			execute(t_cmd cmds);
+// execute01.c
+int			family_life(t_cmd cmds);
+int			pickup();//t_cmd cmds, int *pfd);
+void		child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
+
+// execute02.c
+void		exec_cmd(t_simple simple);
+void		redirect_infile(t_str_list *infiles);
+void		redirect_outfile(t_str_list *outfiles);
+int			only_child(t_cmd cmds);
+
+// global_kids.c
+void		free_children(t_children *root);
+t_children	*new_child(pid_t id);
+void		child_add_back(t_children *root, t_children *new);
+void	kill_children(t_children *kids);
 
 //signals
 void		catch_signals(void);
@@ -109,6 +138,10 @@ void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, int mode);
 void		print_tokens(t_token *root);
 void		print_simples(t_cmd *cmd);
-
+void		print_children(t_children *root);
+void		run_leaks(void);
+void		run_lsof(void);
+void		run_cat_fd(void);
+void		close_all(void);
 
 #endif

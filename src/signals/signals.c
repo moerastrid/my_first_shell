@@ -16,7 +16,7 @@ void	handle_sigint(int sig)
 {
 	t_children *temp;
 
-	*temp = g_children;
+	temp = g_children;
 	ft_putstr_fd("\n", STDERR_FILENO);
 	rl_on_new_line();
 	rl_redisplay();

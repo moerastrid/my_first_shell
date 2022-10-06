@@ -9,45 +9,12 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
-	g_children.id = -1;
-	g_children.next = NULL;
 
 	paths = getpaths(envp);
 	if (!paths)
 		return (-1);
 	cmd->paths = paths;
 	return (0);
-}
-
-static void	run(void)
-{
-	system("leaks minishell");
-}
-
-static void	free_simple(t_simple *simple)
-{
-	int	i;
-
-	i = 0;
-	while (i < simple->argc)
-		free(simple->argv[i++]);
-	free(simple->argv);
-	free(simple->bin);
-	simple->argv = NULL;
-	simple->bin = NULL;
-}
-
-static void	free_simples(t_simple *simples)
-{
-	t_simple	*next;
-
-	while (simples != NULL)
-	{
-		free_simple(simples);
-		next = simples->next;
-		free(simples);
-		simples = next;
-	}
 }
 
 static void	clear_cmd(t_cmd *cmd)
@@ -69,13 +36,13 @@ void	freeset(void *ptr)
 	ptr = NULL;
 }
 
-void	kill_children(void)
+static void reset(t_cmd *cmd, t_children *kids, t_token *tokens)
 {
-	while (g_children.id != -1)
-	{
-		kill(g_children.id, SIGKILL);
-		g_children = *g_children.next;
-	}
+	kill_children(kids);
+	free_children(kids);
+	g_children = NULL;
+	clear_cmd(cmd);
+	free_token_list(tokens);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -84,36 +51,30 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
-	//atexit(run);
+	// close_all();
+	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
-	tokens = NULL;
 	line = NULL;
+	catch_signals();
 	while (1)
 	{
+		// system("ls /dev/fd");
 		line = prompt();
-		catch_signals();
-		if (!line)
+		tokens = tokenize(line);
+		if (tokens == NULL)
 			continue ;
-		if (*line)
-		{
-			tokens = tokenize(line);
-			if (tokens == NULL)
-				continue ;
-			print_tokens(tokens);
-			parse(tokens, &cmd);
-			print_simples(&cmd);
-			if (execute(cmd) == -1)
-			{
-				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
-				//continue;
-			}
-			free_token_list(tokens);
-			clear_cmd(&cmd);
-			kill_children();
-			ft_putstr_fd("\n", STDOUT_FILENO);
-			rl_on_new_line();
-		}
+		parse(tokens, &cmd);
+		if (execute(cmd) == -1)
+			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
+
+		print_tokens(tokens);
+		print_simples(&cmd);
+		print_children(g_children);
+
+		reset(&cmd, g_children, tokens);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_on_new_line();
 		free(line);
 		//rl_redisplay();
 	}

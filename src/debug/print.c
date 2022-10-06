@@ -101,11 +101,44 @@ void	print_simples(t_cmd *cmd)
 	}
 }
 
-// How will this ever end? Suggestion: Change children global to struct containing also the size of array
-void print_children(pid_t *pids)
+void print_children(t_children *root)
 {
-	while (*pids)
-	{
+	t_children *ptr;
 
+	ptr = root;
+	if (ptr == NULL)
+		return ;
+	printf("The kids: [");
+	while(ptr != NULL)
+	{
+		if(ptr->next == NULL)
+			printf("%d]\n", ptr->id);
+		else
+			printf("%d->", ptr->id);
+		ptr = ptr->next;
+	}
+}
+
+void	run_leaks(void)
+{
+	system("leaks minishell");
+}
+
+void	run_lsof(void)
+{
+	system("lsof -c minishell");
+}
+
+void	run_cat_fd(void)
+{
+	system("cat /dev/fd");
+}
+
+#include <sys/syslimits.h>
+void	close_all(void)
+{
+	for(int i = 3; i < OPEN_MAX; i++)
+	{
+		close(i);
 	}
 }

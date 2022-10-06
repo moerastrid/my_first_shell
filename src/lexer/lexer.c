@@ -111,6 +111,8 @@ t_token	*tokenize(char *input)
 			data = ft_substr(input, 1, quot_length(input) - 1);
 		if (type == DOLL)
 			data = ft_substr(input, 1, word_length(input + 1));
+		if (type == DOLLQ)
+			data = ft_substr(input, 0, 2);
 		new = token_new(data, type);
 		token_add_back(&root, new);
 		input += token_length(new);
