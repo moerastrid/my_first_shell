@@ -16,7 +16,7 @@
 
 int	family_life(t_cmd cmds)
 {
-	int			pfd[2][2]; //not allowed;
+	int			pfd[2][2]; //not allowed;?
 	int			i;
 	t_children	*new;
 	pid_t		id;
@@ -36,10 +36,10 @@ int	family_life(t_cmd cmds)
 			child_add_back(g_children, new);
 		i++;
 	}
-	return (parent(cmds, pfd[(i + 1) % 2]));
+	return (pickup(cmds, pfd[(i + 1) % 2]));
 }
 
-int	parent(t_cmd cmds, int *pfd)
+int	pickup(t_cmd cmds, int *pfd)
 {
 	int			status;
 	int			exit_code;
@@ -66,13 +66,16 @@ void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	{
 		if (dup2(read_pipe[READ], STDIN_FILENO) == -1)
 			exit (-1);
+		close(read_pipe[READ]);
 	}
 	if (cmd_no != cmds.cmd_count - 1)
 	{
 		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
+		close(write_pipe[WRITE]);
 	}
-}	// system("lsof -c minishell");
+	// system("lsof -c minishell");
+}
 
 static t_simple	*get_simple(t_cmd cmd, int num)
 {

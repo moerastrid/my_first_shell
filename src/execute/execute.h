@@ -17,7 +17,7 @@
 
 void	exec_cmd(t_simple simple);
 int		family_life(t_cmd cmds);
-int		parent(t_cmd cmds, int *pfd);
+int		pickup(t_cmd cmds, int *pfd);
 pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 int		only_child(t_cmd cmds);
 

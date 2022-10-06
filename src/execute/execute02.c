@@ -56,7 +56,7 @@ void redirect_outfile(t_str_list *outfiles)
 	{
 		fd = open(outfiles->str, O_CREAT, 0666);
 		close(fd);
-		if(outfiles->next == NULL)
+		if (outfiles->next == NULL)
 			break;
 		outfiles = outfiles->next;
 	}
@@ -88,6 +88,7 @@ int	only_child(t_cmd cmds)
 	}
 	else
 	{
+		g_children = new_child(child_one_id);
 		waitpid(child_one_id, &status, 0);
 		if (WIFEXITED(status))
 			exit_code = WEXITSTATUS(status);

@@ -50,6 +50,14 @@ void	kill_children(void)
 	// }
 }
 
+static void reset_for_loop(t_cmd *cmd, t_children *kids, t_token *tokens)
+{
+	free_token_list(tokens);
+	clear_cmd(cmd);
+	free_children(g_children);
+	g_children = NULL;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -73,20 +81,16 @@ int	main(int argc, char **argv, char **envp)
 			if (tokens == NULL)
 				continue ;
 			parse(tokens, &cmd);
-			print_tokens(tokens);
-			print_simples(&cmd);
 			if (execute(cmd) == -1)
 			{
 				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 				//continue;
 			}
-			free_token_list(tokens);
-			clear_cmd(&cmd);
+			print_tokens(tokens);
+			print_simples(&cmd);
 			print_children(g_children);
-			free_children(g_children);
-			g_children = NULL;
-
 			// kill_children();
+			reset_for_loop(&cmd, g_children, tokens);
 			ft_putstr_fd("\n", STDOUT_FILENO);
 			rl_on_new_line();
 		}
