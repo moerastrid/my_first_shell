@@ -16,7 +16,7 @@
 
 int	family_life(t_cmd cmds)
 {
-	int			pfd[2][2]; //not allowed;?
+	int			pfd[2][2]; //not allowed?
 	int			i;
 	t_children	*new;
 	pid_t		id;

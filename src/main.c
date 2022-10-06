@@ -41,16 +41,17 @@ void	freeset(void *ptr)
 	ptr = NULL;
 }
 
-void	kill_children(void)
+void	kill_children(t_children *kids)
 {
-	// while (g_children.id != -1)
-	// {
-	// 	kill(g_children.id, SIGKILL);
-	// 	g_children = *g_children.next;
-	// }
+	while(kids != NULL)
+	{
+		printf("%d\n", kids->id);
+		kill(kids->id, SIGKILL);
+		kids = kids->next;
+	}
 }
 
-static void reset_for_loop(t_cmd *cmd, t_children *kids, t_token *tokens)
+static void reset(t_cmd *cmd, t_children *kids, t_token *tokens)
 {
 	free_token_list(tokens);
 	clear_cmd(cmd);
@@ -68,32 +69,23 @@ int	main(int argc, char **argv, char **envp)
 	if (setup(&cmd, envp) == -1)
 		return (-1);
 	line = NULL;
+	catch_signals();
 	while (1)
 	{
 		line = prompt();
-		catch_signals();
-		if (!line)
+		tokens = tokenize(line);
+		if (tokens == NULL)
 			continue ;
-		if (*line)
-		{
-			tokens = NULL;
-			tokens = tokenize(line);
-			if (tokens == NULL)
-				continue ;
-			parse(tokens, &cmd);
-			if (execute(cmd) == -1)
-			{
-				dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
-				//continue;
-			}
-			print_tokens(tokens);
-			print_simples(&cmd);
-			print_children(g_children);
-			// kill_children();
-			reset_for_loop(&cmd, g_children, tokens);
-			ft_putstr_fd("\n", STDOUT_FILENO);
-			rl_on_new_line();
-		}
+		parse(tokens, &cmd);
+		if (execute(cmd) == -1)
+			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
+		print_tokens(tokens);
+		print_simples(&cmd);
+		print_children(g_children);
+		kill_children(g_children);
+		reset(&cmd, g_children, tokens);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_on_new_line();
 		free(line);
 		//rl_redisplay();
 	}
