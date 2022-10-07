@@ -15,6 +15,7 @@ SRC =	src/main.c\
 		src/parser/simple.c\
 		src/parser/str_list.c\
 		src/parser/cmd_builder.c\
+		src/substitutor/substitutor.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
@@ -50,6 +51,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/builtins
 	@mkdir -pv obj/utils
 	@mkdir -pv obj/parser
+	@mkdir -pv obj/substitutor
 	@mkdir -pv obj/debug
 	@mkdir -pv obj/signals
 	@$(CC) $(CFLAG) -o $@ -c $^

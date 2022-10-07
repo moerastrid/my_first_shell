@@ -9,6 +9,7 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
+	cmd->envp = envp;
 
 	paths = getpaths(envp);
 	if (!paths)
@@ -65,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		if (tokens == NULL)
 			continue ;
 		parse(tokens, &cmd);
+		substitute(&cmd);
 		if (execute(cmd) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 

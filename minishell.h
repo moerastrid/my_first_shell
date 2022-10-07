@@ -63,6 +63,7 @@ typedef struct s_cmd {
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
 	char		**paths;
+	char		**envp;
 }	t_cmd;
 
 // GLOBAL VAR
@@ -118,6 +119,10 @@ void		free_children(t_children *root);
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
 void	kill_children(t_children *kids);
+
+// SUBSTITUTOR
+// substitute.c
+void		substitute(t_cmd *cmd);
 
 //signals
 void		catch_signals(void);
