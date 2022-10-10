@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 16:14:19 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 16:32:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	handle_sigint(int sig)
 		temp->id = -1;
 		temp = temp->next;
 	}
+	// $? should be 1;
 }
 
 void	catch_signals(void)
