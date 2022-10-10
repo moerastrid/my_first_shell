@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 22:20:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 23:11:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void		kill_children(t_children *kids);
 // SUBSTITUTOR
 // substitute.c
 void		substitute(t_token *tokens, char **envp);
-
+void		redirect_outfile(t_str_list *outfiles);
 
 //signals
 void		catch_signals(void);

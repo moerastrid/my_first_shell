@@ -1,2 +1,4 @@
 
 
+ls | cat >out.txt 
+vergelijk output ls met de output in out.txt. Let op \n.

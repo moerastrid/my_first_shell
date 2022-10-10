@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 22:23:29 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 23:52:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	is_del(char c)
 
 int	is_buildin(t_simple	*t)
 {
-	if (!t)
-		return (0);
-	// printf("argc: %d\nargv: %s\nbin: %s\n\n", t->argc, t->argv[0], t->bin);
+	//if (t == NULL)
+	//	return (0);
+	//dprintf(2, "ASTRIDDEBUG\nargc: %d\nargv: %s\nbin: %s\n\n", t->argc, t->argv[0], t->bin);
 	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		return (1);
 	if (ft_strncmp(t->argv[0], "cd", 3) == 0)
@@ -43,20 +43,20 @@ int	is_buildin(t_simple	*t)
 	return (0);
 }
 
-void	exec_buildin(t_cmd cmd, t_token *tokens)
+void	exec_buildin(t_simple	*t, t_cmd cmd, t_token *tokens)
 {
-	if (ft_strncmp(cmd.simples->argv[0], "echo", 5) == 0)
+	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		bi_echo();
-	if (ft_strncmp(cmd.simples->argv[0], "cd", 3) == 0)
+	if (ft_strncmp(t->argv[0], "cd", 3) == 0)
 		bi_cd();
-	if (ft_strncmp(cmd.simples->argv[0], "pwd", 4) == 0)
+	if (ft_strncmp(t->argv[0], "pwd", 4) == 0)
 		bi_pwd();
-	if (ft_strncmp(cmd.simples->argv[0], "export", 7) == 0)
+	if (ft_strncmp(t->argv[0], "export", 7) == 0)
 		bi_export();
-	if (ft_strncmp(cmd.simples->argv[0], "unset", 6) == 0)
+	if (ft_strncmp(t->argv[0], "unset", 6) == 0)
 		bi_unset();
-	if (ft_strncmp(cmd.simples->argv[0], "env", 4) == 0)
+	if (ft_strncmp(t->argv[0], "env", 4) == 0)
 		bi_env(cmd);
-	if (ft_strncmp(cmd.simples->argv[0], "exit", 5) == 0)
+	if (ft_strncmp(t->argv[0], "exit", 5) == 0)
 		bi_exit(cmd, tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 21:50:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 23:51:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,11 @@ pid_t	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 		close(writep[READ]);
 		child_redirect(cmd, writep, readp, cmd_no);
 		simple = get_simple(cmd, cmd_no);
-		if (is_buildin(cmd.simples) == 1)
-			exec_buildin(cmd, NULL);
+		if (is_buildin(simple) == 1)
+		{
+			exec_buildin(simple, cmd, NULL);
+			exit (0);
+		}
 		else
 			exec_cmd(simple, cmd.envp);
 		return (-1);
