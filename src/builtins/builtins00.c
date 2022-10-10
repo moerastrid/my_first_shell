@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 21:50:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 22:27:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,18 @@ void	bi_unset(void)
 	//exit (0);
 }
 
-void	bi_env(void)
+void	bi_env(t_cmd cmd)
 {
-	ft_putstr_fd("buildin is executed\n", 1);
+	int	i;
+
+	ft_putstr_fd("buildin env is executed\n", STDOUT_FILENO);
+	i = 0;
+	//while (cmd.envp[i] != NULL)
+	//{
+	//	ft_putstr_fd(cmd.envp[i], STDOUT_FILENO);
+	//	ft_putstr_fd("\n", STDOUT_FILENO);
+	//	i++;
+	//}
 	//exit (0);
 }
 
