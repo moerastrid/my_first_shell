@@ -32,13 +32,21 @@ int	parse(t_token *tokens, t_cmd *cmd)
 			add_outfile(cmd, 1, tokens->data);
 		if (type == LESSLESS)
 			add_delimiter(cmd, tokens->data);
-		if (type == WORD || type == QUOT || type == DQUOT ||
-			type == DOLL || type == DOLLQ)
+		if (type == WORD)
+			add_arg(simple, tokens->data);
+		if (type == QUOT || type == DQUOT)
+			add_arg(simple, tokens->data);
+		if (type == DOLL || type == DOLLQ)
 			add_arg(simple, tokens->data);
 		if (type == PIPE)
 		{
+			int a;
+			if (!simple->argv && (a = set_bin(cmd, simple)) != 0)
+			{
+				printf("%s: %d\n", "Parse error", a);
+				return (-1);
+			}
 			simple_add_back(&cmd->simples, simple);
-			set_bin(cmd, simple);
 			simple = new_simple(0, NULL);
 		}
 		tokens = tokens->next;

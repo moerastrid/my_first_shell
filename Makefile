@@ -1,7 +1,7 @@
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 OBJ_DIR = ./obj
-CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft -fsanitize=address -g -fno-omit-frame-pointer #-Wall -Wextra -Werror
+CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft #-fsanitize=address -g -O3 -fno-omit-frame-pointer #-Wall -Wextra -Werror
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
@@ -21,8 +21,8 @@ SRC =	src/main.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
-		src/global_kids.c\
 		src/execute/redirect.c\
+		src/global_kids.c\
 		src/builtins/builtins00.c\
 		src/utils/utils00.c\
 		src/debug/print.c\
@@ -48,6 +48,7 @@ $(NAME): $(OBJ) libft
 
 obj/%.o : src/%.c
 	@mkdir -pv obj
+	@mkdir -pv obj/display
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute
 	@mkdir -pv obj/builtins
@@ -55,7 +56,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
 	@mkdir -pv obj/debug
-	@mkdir -pv obj/display
+	@mkdir -pv obj/signals
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :

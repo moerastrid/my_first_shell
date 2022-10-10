@@ -1,21 +1,46 @@
 #include "../../minishell.h"
 
-void substitute(t_cmd *cmd)
+static char* get_envp_var(char *str, char **envp)
 {
-	t_simple	*simple;
-	char		**envp;
-	char		**argv;
+	int		i;
+	char	*env_head;
+	int		comp;
 
-	envp = cmd->envp;
-	simple = cmd->simples;
+	i = 0;
+	while (envp && envp[i])
+	{
+		env_head = ft_substr(envp[i], 0, ft_strchr(envp[i], '=') - envp[i]);
+		comp = ft_strncmp(str, env_head, ft_strlen(env_head));
+		free(env_head);
+		if (comp == 0)
+		{
 
-	// while(simple)
-	// {
-	// 	argv = simple->argv;
-	// 	while(argv)
-	// 	{
-	// 		argv++;
-	// 	}
-	// 	simple = simple->next;
-	// }
+			return envp[i];
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void	substitute(t_token *tokens, char **envp)
+{
+	char *sub;
+	t_token *token;
+
+	token = tokens;
+	while (token)
+	{
+		if (token->type == DOLL)
+			if (token->data == NULL)
+				return ;
+			sub = get_envp_var(token->data, envp);
+			printf("%s\n", sub);
+			if (sub == NULL)
+				// Var not found
+			free(token->data);
+			token->data = sub;
+		if (token->type == DOLLQ)
+			;
+		token = token->next;
+	}
 }

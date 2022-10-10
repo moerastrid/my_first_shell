@@ -20,7 +20,7 @@ char	*prompt(void)
 	if (line == NULL)
 	{
 		ft_putstr_fd("exit on line = NULL\n", STDERR_FILENO);
-		exit(0);
+		exit(1);
 	}
 	if (*line)
 		add_history(line);
