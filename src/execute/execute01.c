@@ -17,7 +17,6 @@
 int	family_life(t_cmd cmds)
 {
 	int			pfd[2][2];
-	int			res;
 	int			i;
 	t_children	*new;
 	pid_t		id;
@@ -64,7 +63,7 @@ int	pickup_kids(void)
 	return (exit_code);
 }
 
-static void	child_redirect(t_cmd cmds, int *writep, int *readp, int cmd_no)
+static void	child_redirect(t_cmd cmd, int *writep, int *readp, int cmd_no)
 {
 	if (cmd_no != 0)
 	{
@@ -72,16 +71,16 @@ static void	child_redirect(t_cmd cmds, int *writep, int *readp, int cmd_no)
 			exit (-1);
 		close (readp[READ]);
 	}
-	if (cmd_no != cmds.cmd_count - 1)
+	if (cmd_no != cmd.cmd_count - 1)
 	{
 		if (dup2(writep[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
 		close (writep[WRITE]);
 	}
 	if (cmd_no == 0)
-		redirect_infile(cmds.infiles);
-	if (cmd_no == cmds.cmd_count - 1)
-		redirect_outfile(cmds.outfiles);
+		redirect_infile(cmd.infiles);
+	if (cmd_no == cmd.cmd_count - 1)
+		redirect_outfile(cmd.outfiles);
 }
 
 static t_simple	*get_simple(t_cmd cmd, int num)
@@ -99,7 +98,7 @@ static t_simple	*get_simple(t_cmd cmd, int num)
 	return (simple);
 }
 
-pid_t	child(t_cmd cmds, int *writep, int *readp, int cmd_no)
+pid_t	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 {
 	pid_t		child_id;
 	t_simple	*simple;
@@ -110,16 +109,16 @@ pid_t	child(t_cmd cmds, int *writep, int *readp, int cmd_no)
 	else if (child_id == 0)
 	{
 		close(writep[READ]);
-		child_redirect(cmds, writep, readp, cmd_no);
-		simple = get_simple(cmds, cmd_no);
-		exec_cmd(*simple);
+		child_redirect(cmd, writep, readp, cmd_no);
+		simple = get_simple(cmd, cmd_no);
+		exec_cmd(simple, cmd.envp);
 		return (-1);
 	}
 	else // parent
 	{
 		if (cmd_no != 0)
 			close(readp[READ]);
-		if (cmd_no != cmds.cmd_count - 1)
+		if (cmd_no != cmd.cmd_count - 1)
 			close (writep[WRITE]);
 		return (child_id);
 	}

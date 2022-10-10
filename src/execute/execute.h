@@ -21,7 +21,7 @@
 int			family_life(t_cmd cmds);
 int			pickup_kids(void);
 pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
-void		exec_cmd(t_simple simple);
+void		exec_cmd(t_simple *simple, char **envp);
 int			only_child(t_cmd cmds);
 void		redirect_infile(t_str_list *infiles);
 void		redirect_outfile(t_str_list *outfiles);

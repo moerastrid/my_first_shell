@@ -63,19 +63,21 @@ int	set_bin(t_cmd *cmd, t_simple *simple)
 	char		*temp;
 	int			i;
 
+	if (!simple || !simple->argv || !cmd)
+		return (-2);
 	if (access(simple->argv[0], X_OK) == 0)
 		simple->bin = simple->argv[0];
 	i = 0;
-	while (cmd->paths[i] != NULL)
+	while (cmd->paths && cmd->paths[i])
 	{
 		myexec = NULL;
 		temp = ft_strjoin(cmd->paths[i++], "/");
 		if (!temp)
 			return (-1);
 		myexec = ft_strjoin(temp, simple->argv[0]);
+		free(temp);
 		if (!myexec)
 			return (-1);
-		free (temp);
 		if (access(myexec, X_OK) == 0)
 		{
 			simple->bin = myexec;

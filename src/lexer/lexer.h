@@ -16,5 +16,6 @@
 # include "token.h"
 
 t_token	*tokenize(char *input);
+void	free_token_list(t_token *token);
 
 #endif

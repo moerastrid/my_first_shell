@@ -30,9 +30,6 @@
 // Libft
 # include "lib/libft/libft.h"
 
-// Lexer
-# include "src/lexer/lexer.h"
-
 //STRUCTS:
 typedef struct s_children {
 	pid_t				id;
@@ -63,12 +60,37 @@ typedef struct s_cmd {
 	char		**envp;
 }	t_cmd;
 
+enum	 e_token_type {
+	WORD = 0,
+	GREAT = 1,
+	LESS = 2,
+	PIPE = 3,
+	GREATGREAT = 4,
+	LESSLESS = 5,
+	DOLL = 6,
+	DOLLQ = 7,
+	QUOT = 8,
+	DQUOT = 9
+};
+
+typedef struct s_token {
+	enum e_token_type	type;
+	char				*data;
+	struct s_token		*next;
+}	t_token;
+
+# include "src/lexer/lexer.h"
+
 // GLOBAL VAR
 t_children	*g_children;
 
 // FILES & FUNCTIONS:
 //prompt
 char		*prompt(void);
+
+// LEXER
+// lexer.c
+	t_token	*tokenize(char *input);
 
 // PARSER
 // parser.c
@@ -99,7 +121,7 @@ void		bi_exit(void);
 //EXECUTER
 int			execute(t_cmd cmds);
 
-// global kids 
+// global kids
 void		free_children(t_children *root);
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
@@ -107,7 +129,8 @@ void		kill_children(t_children *kids);
 
 // SUBSTITUTOR
 // substitute.c
-void		substitute(t_cmd *cmd);
+void		substitute(t_token *tokens, char **envp);
+
 
 //signals
 void		catch_signals(void);
