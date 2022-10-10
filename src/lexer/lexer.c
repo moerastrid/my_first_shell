@@ -79,7 +79,7 @@ static int	quot_length(char *input)
 	type = token_type(input);
 	count = 1;
 	input++;
-	while(*input != '\0' && token_type(input) != type)
+	while (*input != '\0' && token_type(input) != type)
 	{
 		count++;
 		input++;

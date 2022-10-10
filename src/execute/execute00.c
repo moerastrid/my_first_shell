@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 21:52:15 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 14:21:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-// EXECUTE00 IS THE EXECUTE MAIN STRUCTURE 
+// EXECUTE00 IS THE EXECUTE MAIN
 
 int	execute(t_cmd cmds)
 {

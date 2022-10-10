@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/06 18:14:27 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 14:22:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,14 @@ int	family_life(t_cmd cmds)
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
-		if (i != cmds.cmd_count - 1) // Pipe for all but the last iteration
+		if (i != cmds.cmd_count - 1)
 		{
-			res = pipe(pfd[i % 2]);
-			if (res == -1)
+			if (pipe(pfd[i % 2]) == -1)
 				perror("pipe error");
 		}
-		// printf("Pipe0: [%d, ", pfd[0][0]);
-		// printf("%d] => ", pfd[0][1]);
-		// printf("Pipe1: [%d, ", pfd[1][0]);
-		// printf("%d]\n", pfd[1][1]);
 		id = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
-			return(-1);
+			return (-1);
 		new = new_child(id);
 		if (g_children == NULL)
 			g_children = new;
@@ -69,7 +64,7 @@ int	pickup_kids(void)
 	return (exit_code);
 }
 
-void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
+static void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 {
 	if (cmd_no != 0)
 	{
@@ -111,9 +106,9 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	t_simple	*simple;
 
 	child_id = fork();
-	if (child_id == -1)
+	if (child_id < 0)
 		return (-1);
-	if (child_id == 0)
+	else if (child_id == 0)
 	{
 		close(write_pipe[READ]);
 		child_redirect(cmds, write_pipe, read_pipe, cmd_no);
@@ -121,7 +116,7 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		exec_cmd(*simple);
 		return (-1);
 	}
-	if (child_id != 0) // parent
+	else // parent
 	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
@@ -130,6 +125,7 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		return (child_id);
 	}
 }
+
 //											Parent
 // Pipes		[[write, read],[write, read]]			[[write, read],[write, read]]
 // cmd1							| 				cmd2				| cmd3

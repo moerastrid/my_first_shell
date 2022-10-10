@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 22:51:34 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 14:21:10 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // this is a single command in a child process
 void	exec_cmd(t_simple simple)
 {
-	int i;
+	int	i;
 
 	execve(simple.bin, simple.argv, NULL);
 	ft_putstr_fd("Command not found: ", STDERR_FILENO);
@@ -30,43 +30,6 @@ void	exec_cmd(t_simple simple)
 	ft_putstr_fd("\n", STDERR_FILENO);
 	rl_on_new_line();
 	exit (0);
-}
-
-void redirect_infile(t_str_list *infiles)
-{
-	int	fd;
-
-	if (!infiles)
-		return ;
-	while (infiles->next)
-		infiles = infiles->next;
-	fd = open(infiles->str, O_RDONLY);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
-}
-
-void redirect_outfile(t_str_list *outfiles)
-{
-	int	fd;
-	int	flags;
-
-	if (outfiles == NULL)
-		return ;
-	while (outfiles != NULL)
-	{
-		fd = open(outfiles->str, O_CREAT, 0666);
-		close(fd);
-		if (outfiles->next == NULL)
-			break;
-		outfiles = outfiles->next;
-	}
-	if (outfiles->append_mode)
-		flags = O_RDWR | O_APPEND;
-	else
-		flags = O_WRONLY;
-	fd = open(outfiles->str, flags, 0666);
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
 }
 
 // this is a function for a single command

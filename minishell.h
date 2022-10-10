@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/06 17:31:15 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/10 14:29:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,25 +100,13 @@ void		bi_env(void);
 void		bi_exit(void);
 
 //EXECUTER
-// execute00.c
 int			execute(t_cmd cmds);
-// execute01.c
-int			family_life(t_cmd cmds);
-int			pickup();//t_cmd cmds, int *pfd);
-void		child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
-pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
 
-// execute02.c
-void		exec_cmd(t_simple simple);
-void		redirect_infile(t_str_list *infiles);
-void		redirect_outfile(t_str_list *outfiles);
-int			only_child(t_cmd cmds);
-
-// global_kids.c
+// global kids 
 void		free_children(t_children *root);
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
-void	kill_children(t_children *kids);
+void		kill_children(t_children *kids);
 
 // SUBSTITUTOR
 // substitute.c

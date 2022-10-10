@@ -37,7 +37,7 @@ void	freeset(void *ptr)
 	ptr = NULL;
 }
 
-static void reset(t_cmd *cmd, t_children *kids, t_token *tokens)
+static void	reset(t_cmd *cmd, t_children *kids, t_token *tokens)
 {
 	kill_children(kids);
 	free_children(kids);

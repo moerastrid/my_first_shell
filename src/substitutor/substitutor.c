@@ -18,5 +18,4 @@ void substitute(t_cmd *cmd)
 	// 	}
 	// 	simple = simple->next;
 	// }
-
 }
