@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   signals.c                                          :+:    :+:            */
+/*   prompt.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/04 16:46:17 by ageels        ########   odam.nl         */
+/*   Created: 2022/10/10 15:09:05 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/10 15:11:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal.h"
+#include "display.h"
 
-void	handle_sigint(int sig)
+char	*prompt(void)
 {
-	t_children *temp;
+	char	*line;
 
-	temp = g_children;
-	ft_putstr_fd("\n", STDERR_FILENO);
-	rl_on_new_line();
-	rl_redisplay();
-	while (temp != NULL)
+	line = readline(PROMPT);
+	if (line == NULL)
 	{
-		temp->id = -1;
-		temp = temp->next;
+		ft_putstr_fd("exit on line = NULL\n", STDERR_FILENO);
+		exit(0);
 	}
-}
-
-void	handle_sigquit(int sig)
-{
-	return ;
-}
-
-void	catch_signals(void)
-{
-	signal(SIGINT, &handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	if (*line)
+		add_history(line);
+	return (line);
 }

@@ -70,12 +70,12 @@ int	main(int argc, char **argv, char **envp)
 		if (execute(cmd) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 
-		print_tokens(tokens);
-		print_simples(&cmd);
-		print_children(g_children);
+		//print_tokens(tokens);
+		//print_simples(&cmd);
+		//print_children(g_children);
 
 		reset(&cmd, g_children, tokens);
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		//ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		free(line);
 		//rl_redisplay();

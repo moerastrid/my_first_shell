@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 14:29:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 15:10:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 
 // Lexer
 # include "src/lexer/lexer.h"
-
-# define READ 0
-# define WRITE 1
 
 //STRUCTS:
 typedef struct s_children {

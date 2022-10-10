@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 14:22:49 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 14:31:21 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,24 @@ int	pickup_kids(void)
 	return (exit_code);
 }
 
-static void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
+static void	child_redirect(t_cmd cmds, int *writep, int *readp, int cmd_no)
 {
 	if (cmd_no != 0)
 	{
-		if (dup2(read_pipe[READ], STDIN_FILENO) == -1)
+		if (dup2(readp[READ], STDIN_FILENO) == -1)
 			exit (-1);
-		close (read_pipe[READ]);
+		close (readp[READ]);
 	}
 	if (cmd_no != cmds.cmd_count - 1)
 	{
-		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
+		if (dup2(writep[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
-		close (write_pipe[WRITE]);
+		close (writep[WRITE]);
 	}
 	if (cmd_no == 0)
 		redirect_infile(cmds.infiles);
 	if (cmd_no == cmds.cmd_count - 1)
 		redirect_outfile(cmds.outfiles);
-	// system("lsof -c minishell");
 }
 
 static t_simple	*get_simple(t_cmd cmd, int num)
@@ -100,7 +99,7 @@ static t_simple	*get_simple(t_cmd cmd, int num)
 	return (simple);
 }
 
-pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
+pid_t	child(t_cmd cmds, int *writep, int *readp, int cmd_no)
 {
 	pid_t		child_id;
 	t_simple	*simple;
@@ -110,8 +109,8 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 		return (-1);
 	else if (child_id == 0)
 	{
-		close(write_pipe[READ]);
-		child_redirect(cmds, write_pipe, read_pipe, cmd_no);
+		close(writep[READ]);
+		child_redirect(cmds, writep, readp, cmd_no);
 		simple = get_simple(cmds, cmd_no);
 		exec_cmd(*simple);
 		return (-1);
@@ -119,9 +118,9 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	else // parent
 	{
 		if (cmd_no != 0)
-			close(read_pipe[READ]);
+			close(readp[READ]);
 		if (cmd_no != cmds.cmd_count - 1)
-			close (write_pipe[WRITE]);
+			close (writep[WRITE]);
 		return (child_id);
 	}
 }
