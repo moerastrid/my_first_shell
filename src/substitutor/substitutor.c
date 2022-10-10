@@ -15,7 +15,7 @@ static char* get_envp_var(char *str, char **envp)
 		comp = ft_strncmp(str, env_head, env_head_len);
 		free(env_head);
 		if (comp == 0)
-			return &envp[i][env_head_len + 1];
+			return (&(envp[i][env_head_len + 1]));
 		i++;
 	}
 	return (NULL);

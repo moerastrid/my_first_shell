@@ -78,7 +78,6 @@ int	main(int argc, char **argv, char **envp)
 		if (execute(cmd, tokens) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 
-
 		reset(&cmd, g_children, tokens);
 		rl_on_new_line();
 		free(line);
