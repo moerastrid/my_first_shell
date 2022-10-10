@@ -1,0 +1,76 @@
+Bash Manual Samenvatting
+
+(Useful) Definitions:
+
+	Metacharacter:
+		A metacharacter is a space, tab, newline, or one of the following characters:
+		‘|’, ‘&’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>’.
+	Control operator:
+		A token that performs a control function. It is a newline or one of the following: ‘||’, ‘&&’, ‘&’, ‘;’, ‘;;’, ‘;&’, ‘;;&’, ‘|’, ‘|&’, ‘(’, or ‘)’.
+
+Shell syntax:
+	When the shell reads input, it proceeds to divide the input into words and operators, employing the quoting rules.
+	The shell ignores the comment symbol (‘#’), and the rest of that line.
+	The shell then parses these tokens into commands and other constructs, removes the meaning of special words or characters, expands others, redirects input and output, executes the command, waits for the command’s exit status, and makes that exit status available for inspection.
+
+The following is a brief description of the shell’s operation when it reads and executes a command. Basically, the shell does the following:
+	1. Reads its input from the user’s terminal.
+	2. Breaks the input into words and operators, obeying the quoting rules. These tokens are separated by metacharacters.
+	3. Parses the tokens into simple commands.
+	4. Performs the various shell expansions, breaking the expanded tokens into lists of filenames and commands and arguments.
+	5. Performs any necessary redirections and removes the redirection operators and their operands from the argument list.
+	6. Executes the command.
+	7. Optionally waits for the command to complete and collects its exit status.
+
+Quoting:
+	Quoting is used to remove the meaning of special characters or words to the shell, and to prevent parameter expansion.
+	Each of the shell metacharacters has special meaning to the shell and must be quoted if it is to represent itself
+	There are three quoting mechanisms: the escape character, single quotes, and double quotes.
+
+Single quotes:
+	Enclosing characters in single quotes preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
+Double quotes:
+	Enclosing characters in double quotes preserves the literal value of all characters within the quotes, with the exception of ‘$’ which retains its special meaning.
+
+Shell commands:
+	A simple shell command such as ‘echo a b c‘ consists of the command itself followed by arguments, separated by spaces.
+	More complex shell commands are composed of simple commands arranged together by pipelines, in which the output of one command becomes the input of a second.
+
+Reserved words: 3.2.1
+	?
+
+Simple commands:
+	A simple command is a sequence of words separated by spaces, terminated by a control operator ('|'). The first word generally specifies a command to be executed, with the rest of the words being that command’s arguments.
+	The return status of a simple command is the exit status of the waitpid function, or 128+n if the command was terminated by signal n.
+
+Pipelines:
+	A pipeline is a sequence of one or more commands separated by ‘|’.
+	The output of each command in the pipeline is connected via a pipe to the input of the next command. This connection is performed before any redirections specified by command1.
+	The shell waits for all commands in the pipeline to complete.
+	Each command in a pipeline is executed in its own subshell, which is a separate process. The exit status of a pipeline is the exit status of the last command.
+	The shell waits for all commands in the pipeline to terminate before returning a value.
+
+Shell parameters: 3.4
+	?
+
+Expansion:
+Expansion is performed on the command line after it has been split into tokens. There are 4/5 kinds of expansion performed:
+
+	parameter and variable expansion ?
+	command substitution ?
+	arithmetic expansion ?
+	word splitting
+	filename expansion ?
+
+Parameter expansion:
+	The ‘$’ character introduces parameter expansion, command substitution, or arithmetic expansion.
+
+Command substitution:
+
+Arithmetic expansion:
+
+Word splitting:
+
+
+Redirections:
+	Before a command is executed, its input and output may be redirected. Redirection can change the files the command reads from and writes to.
