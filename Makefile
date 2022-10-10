@@ -23,7 +23,6 @@ SRC =	src/main.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
-		src/execute/buildin.c\
 		src/execute/redirect.c\
 		src/global_kids.c\
 		src/utils/utils00.c\
