@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "parser.h"
 
 static int	count_cmd(t_cmd *cmd)
 {

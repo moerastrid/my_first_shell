@@ -20,7 +20,7 @@ int	ft_putendl_fd(char *s, int fd)
 	temp = 0;
 	written = 0;
 	if (!s)
-		return 0;
+		return (0);
 	written = ft_putstr_fd(s, fd);
 	if (written == -1)
 		return (-1);

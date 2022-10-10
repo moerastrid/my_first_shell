@@ -25,7 +25,7 @@ int	is_buildin(t_simple	*t)
 {
 	if (!t)
 		return (0);
-	printf("argc: %d\nargv: %s\nbin: %s\n\n", t->argc, t->argv[0], t->bin);
+	// printf("argc: %d\nargv: %s\nbin: %s\n\n", t->argc, t->argv[0], t->bin);
 	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		return (1);
 	if (ft_strncmp(t->argv[0], "cd", 3) == 0)

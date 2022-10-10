@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "parser.h"
 
 void add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
