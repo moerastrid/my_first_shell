@@ -9,6 +9,7 @@ SRC =	src/main.c\
 		src/path.c\
 		src/display/prompt.c\
 		src/display/signals.c\
+		src/display/termios.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
