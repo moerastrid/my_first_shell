@@ -18,7 +18,7 @@ int	setup(t_cmd *cmd, char **envp)
 	return (0);
 }
 
-static void	clear_cmd(t_cmd *cmd)
+void	clear_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
 	cmd->simples = NULL;
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 			free_token_list(tokens);
 			continue;
 		}
-		if (execute(cmd) == -1)
+		if (execute(cmd, tokens) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 
 		print_tokens(tokens);

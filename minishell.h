@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 19:50:59 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 21:42:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <curses.h>
 # include <term.h>
 
-// Libft
 # include "lib/libft/libft.h"
 
 //STRUCTS:
@@ -79,18 +78,20 @@ typedef struct s_token {
 	struct s_token		*next;
 }	t_token;
 
-# include "src/lexer/lexer.h"
-
 // GLOBAL VAR
 t_children	*g_children;
 
 // FILES & FUNCTIONS:
+
+void		clear_cmd(t_cmd *cmd);
+
 //prompt
 char		*prompt(void);
 
 // LEXER
 // lexer.c
 	t_token	*tokenize(char *input);
+	void	free_token_list(t_token *token);
 
 // PARSER
 // parser.c
@@ -116,10 +117,10 @@ void		bi_pwd(void);
 void		bi_export(void);
 void		bi_unset(void);
 void		bi_env(void);
-void		bi_exit(void);
+void		bi_exit(t_cmd cmd, t_token *tokens);
 
 //EXECUTER
-int			execute(t_cmd cmds);
+int			execute(t_cmd cmds, t_token *tokens);
 
 // global kids
 void		free_children(t_children *root);

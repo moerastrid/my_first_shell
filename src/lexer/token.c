@@ -1,6 +1,4 @@
 #include "token.h"
-#include "stdlib.h"
-#include "../../lib/libft/libft.h"
 
 void	token_add_back(t_token *tokens, t_token *new)
 {

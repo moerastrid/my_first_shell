@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 14:33:28 by tnuyten       #+#    #+#                 */
-/*   Updated: 2021/10/13 21:48:07 by tnuyten       ########   odam.nl         */
+/*   Updated: 2022/10/10 21:20:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ char	*ft_strdup(const char *s1)
 	int		len;
 	char	*s2;
 
-	len = ft_strlen(s1);
+	if (!s1)
+		len = 0;
+	else
+		len = ft_strlen(s1);
 	s2 = malloc(len + 1);
 	if (s2)
 		ft_strlcpy(s2, s1, len + 1);

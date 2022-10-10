@@ -6,9 +6,12 @@ static void	free_simple(t_simple *simple)
 
 	i = 0;
 	while (i < simple->argc)
-		free(simple->argv[i++]);
+	{
+		free(simple->argv[i]);
+		i++;
+	}
 	free(simple->argv);
-	free(simple->bin);
+	//free(simple->bin);
 	simple->argv = NULL;
 	simple->bin = NULL;
 }

@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "token.h"
 
 static int	is_token_char(char *str)
 {

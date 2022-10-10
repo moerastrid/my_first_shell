@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 20:32:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/10 21:02:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	exec_cmd(t_simple *simple, char **envp)
 {
 	int	i;
 
-	if (!simple || !simple->argv)
-		return ;
+	//if (is_buildin(simple) == 1)
+	//	exec_buildin(simple);
+	//else
 	execve(simple->bin, simple->argv, envp);
 	ft_putstr_fd("Command not found: ", STDERR_FILENO);
 	i = 0;

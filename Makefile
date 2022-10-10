@@ -7,6 +7,7 @@ CC = clang
 
 SRC =	src/main.c\
 		src/path.c\
+		src/builtins/builtins00.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/termios.c\
@@ -18,14 +19,12 @@ SRC =	src/main.c\
 		src/parser/str_list.c\
 		src/parser/cmd_builder.c\
 		src/substitutor/substitutor.c\
+		src/execute/buildin.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
-		src/execute/buildin.c\
-		src/global_kids.c\
 		src/execute/redirect.c\
 		src/global_kids.c\
-		src/builtins/builtins00.c\
 		src/utils/utils00.c\
 		src/debug/print.c\
 
@@ -58,7 +57,6 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
 	@mkdir -pv obj/debug
-	@mkdir -pv obj/signals
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
