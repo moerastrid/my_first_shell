@@ -40,16 +40,21 @@ int	parse(t_token *tokens, t_cmd *cmd)
 			add_arg(simple, tokens->data);
 		if (type == PIPE)
 		{
-			int a;
-			if (!simple->argv && (a = set_bin(cmd, simple)) != 0)
+			if (simple->argv == NULL)
 			{
-				printf("%s: %d\n", "Parse error", a);
+				printf("%s\n", "Parse error");
 				return (-1);
 			}
+			set_bin(cmd, simple);
 			simple_add_back(&cmd->simples, simple);
 			simple = new_simple(0, NULL);
 		}
 		tokens = tokens->next;
+	}
+	if(simple->argv == NULL)
+	{
+		printf("%s\n", "Parse error");
+		return (-1);
 	}
 	simple_add_back(&cmd->simples, simple);
 	if (set_bin(cmd, simple) == -1)
