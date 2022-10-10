@@ -18,7 +18,7 @@ char	*prompt(void)
 
 	line = readline(PROMPT);
 	if (line == NULL)
-		exit(1);
+		exit(0);
 	if (*line)
 		add_history(line);
 	return (line);

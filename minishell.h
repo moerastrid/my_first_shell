@@ -94,23 +94,16 @@ char		*prompt(void);
 	void	free_token_list(t_token *token);
 
 // PARSER
+// cmd_builder.c
+// str_list.c
+void		free_str_list(t_str_list *root);
+// simple.c
+void		free_simples(t_simple *simples);
 // parser.c
 int			parse(t_token *tokens, t_cmd *cmds);
 
-// cmd_builder.c
-void		add_outfile(t_cmd *cmd, int append_mode, char *data);
-void		add_infile(t_cmd *cmd, char *data);
-void		add_delimiter(t_cmd *cmd, char *data);
-int			add_arg(t_simple *simple, char *arg);
 
-// simple.c
-t_simple	*new_simple(int argc, char **argv);
-void		simple_add_back(t_simple **lst, t_simple *new_elem);
-t_simple	*new_simple(int argc, char **argv);
-void		free_simples(t_simple *simples);
-int			set_bin(t_cmd *cmd, t_simple *simple);
-
-//buildins (00)
+// buildins (00)
 void		bi_echo(void);
 void		bi_cd(void);
 void		bi_pwd(void);
@@ -141,11 +134,6 @@ char		**single_split(char const *s, char c);
 
 //path
 char		**getpaths(char **envp);
-
-//str_list
-t_str_list	*str_list_new(char *str, int append_mode);
-void		str_list_add_back(t_str_list *root, t_str_list *new);
-void		free_str_list(t_str_list *root);
 
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
 void		print_token_type(enum e_token_type num);

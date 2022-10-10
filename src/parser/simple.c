@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "parser.h"
 
 static void	free_simple(t_simple *simple)
 {
