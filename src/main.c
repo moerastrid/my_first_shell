@@ -52,7 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
-	// close_all();
 	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
@@ -65,22 +64,22 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(line);
 		if (tokens == NULL)
 			continue ;
-		// substitute(tokens, envp);
+		// print_tokens(tokens);
+		substitute(tokens, envp);
 		if(parse(tokens, &cmd) == -1)
 		{
 			printf("%s\n", "Parse error main");
 			free_token_list(tokens);
 			continue;
 		}
+		// print_tokens(tokens);
+		// print_simples(&cmd);
+		// print_children(g_children);
 		if (execute(cmd) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 
-		print_tokens(tokens);
-		print_simples(&cmd);
-		//print_children(g_children);
 
 		reset(&cmd, g_children, tokens);
-		//ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		free(line);
 		//rl_redisplay();
