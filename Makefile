@@ -21,6 +21,7 @@ SRC =	src/main.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
+		src/execute/buildin.c\
 		src/global_kids.c\
 		src/execute/redirect.c\
 		src/builtins/builtins00.c\

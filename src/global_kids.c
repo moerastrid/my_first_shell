@@ -39,7 +39,8 @@ void	kill_children(t_children *kids)
 	while (kids != NULL)
 	{
 		//printf("%d\n", kids->id);
-		kill(kids->id, SIGKILL);
+		if (kids->id > 0)
+			kill(kids->id, SIGKILL);
 		kids = kids->next;
 	}
 }
