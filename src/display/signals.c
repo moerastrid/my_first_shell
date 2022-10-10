@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute.h                                          :+:    :+:            */
+/*   signals.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 15:10:24 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/10 16:14:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#include "display.h"
 
-# include "../../minishell.h"
+void	handle_sigint(int sig)
+{
+	t_children	*temp;
 
-# define READ 0
-# define WRITE 1
+	temp = g_children;
+	ft_putstr_fd("\n", STDERR_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	rl_redisplay();
+	while (temp != NULL)
+	{
+		temp->id = -1;
+		temp = temp->next;
+	}
+}
 
-int			family_life(t_cmd cmds);
-int			pickup_kids(void);
-pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
-void		exec_cmd(t_simple simple);
-int			only_child(t_cmd cmds);
-void		redirect_infile(t_str_list *infiles);
-void		redirect_outfile(t_str_list *outfiles);
-
-#endif
+void	catch_signals(void)
+{
+	signal(SIGINT, &handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	setup_termios();
+}

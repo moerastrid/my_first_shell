@@ -6,8 +6,10 @@ LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
 SRC =	src/main.c\
-		src/prompt.c\
 		src/path.c\
+		src/display/prompt.c\
+		src/display/signals.c\
+		src/display/termios.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
@@ -23,7 +25,6 @@ SRC =	src/main.c\
 		src/execute/redirect.c\
 		src/builtins/builtins00.c\
 		src/utils/utils00.c\
-		src/signals/signals.c\
 		src/debug/print.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
@@ -54,7 +55,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
 	@mkdir -pv obj/debug
-	@mkdir -pv obj/signals
+	@mkdir -pv obj/display
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :

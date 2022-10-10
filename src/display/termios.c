@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   signal.h                                           :+:    :+:            */
+/*   termios.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/09/30 16:29:47 by ageels        ########   odam.nl         */
+/*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/10 16:17:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#include "display.h"
 
-# include "../../minishell.h"
+void	setup_termios(void)
+{
+	struct termios	my_term;
 
-#endif
+	tcgetattr(0, &my_term);
+	my_term.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &my_term);
+}

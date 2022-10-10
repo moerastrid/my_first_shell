@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute.h                                          :+:    :+:            */
+/*   display.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 15:10:24 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/10 16:13:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
 # include "../../minishell.h"
+# include <termios.h>
 
-# define READ 0
-# define WRITE 1
+# define PROMPT " (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ "
 
-int			family_life(t_cmd cmds);
-int			pickup_kids(void);
-pid_t		child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no);
-void		exec_cmd(t_simple simple);
-int			only_child(t_cmd cmds);
-void		redirect_infile(t_str_list *infiles);
-void		redirect_outfile(t_str_list *outfiles);
+void	handle_sigint(int sig);
+void	setup_termios(void);
 
 #endif
