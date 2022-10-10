@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/03 22:58:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/06 18:14:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int	family_life(t_cmd cmds)
 {
-	int			pfd[2][2]; //not allowed?
+	int			pfd[2][2];
+	int			res;
 	int			i;
 	t_children	*new;
 	pid_t		id;
@@ -24,11 +25,19 @@ int	family_life(t_cmd cmds)
 	i = 0;
 	while (i < cmds.cmd_count)
 	{
-		if (i + 1 != cmds.cmd_count)
-			pipe(pfd[i % 2]);
+		if (i != cmds.cmd_count - 1) // Pipe for all but the last iteration
+		{
+			res = pipe(pfd[i % 2]);
+			if (res == -1)
+				perror("pipe error");
+		}
+		// printf("Pipe0: [%d, ", pfd[0][0]);
+		// printf("%d] => ", pfd[0][1]);
+		// printf("Pipe1: [%d, ", pfd[1][0]);
+		// printf("%d]\n", pfd[1][1]);
 		id = child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
-			exit(-1); // ?
+			return(-1);
 		new = new_child(id);
 		if (g_children == NULL)
 			g_children = new;
@@ -36,10 +45,10 @@ int	family_life(t_cmd cmds)
 			child_add_back(g_children, new);
 		i++;
 	}
-	return (pickup(cmds, pfd[(i + 1) % 2]));
+	return (pickup_kids());
 }
 
-int	pickup(t_cmd cmds, int *pfd)
+int	pickup_kids(void)
 {
 	int			status;
 	int			exit_code;
@@ -66,14 +75,18 @@ void	child_redirect(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	{
 		if (dup2(read_pipe[READ], STDIN_FILENO) == -1)
 			exit (-1);
-		close(read_pipe[READ]);
+		close (read_pipe[READ]);
 	}
 	if (cmd_no != cmds.cmd_count - 1)
 	{
 		if (dup2(write_pipe[WRITE], STDOUT_FILENO) == -1)
 			exit (-1);
-		close(write_pipe[WRITE]);
+		close (write_pipe[WRITE]);
 	}
+	if (cmd_no == 0)
+		redirect_infile(cmds.infiles);
+	if (cmd_no == cmds.cmd_count - 1)
+		redirect_outfile(cmds.outfiles);
 	// system("lsof -c minishell");
 }
 
@@ -100,24 +113,22 @@ pid_t	child(t_cmd cmds, int *write_pipe, int *read_pipe, int cmd_no)
 	child_id = fork();
 	if (child_id == -1)
 		return (-1);
-	else if (child_id != 0) //parent
+	if (child_id == 0)
 	{
-		// close(read_pipe[WRITE]);
+		close(write_pipe[READ]);
+		child_redirect(cmds, write_pipe, read_pipe, cmd_no);
+		simple = get_simple(cmds, cmd_no);
+		exec_cmd(*simple);
+		return (-1);
+	}
+	if (child_id != 0) // parent
+	{
 		if (cmd_no != 0)
 			close(read_pipe[READ]);
-		// if (cmd_no != cmds.cmd_count)
-		close(write_pipe[WRITE]);
+		if (cmd_no != cmds.cmd_count - 1)
+			close (write_pipe[WRITE]);
 		return (child_id);
 	}
-	if (cmd_no == 0)
-		redirect_infile(cmds.infiles);
-	if (cmd_no == cmds.cmd_count - 1)
-		redirect_outfile(cmds.outfiles);
-	close(write_pipe[READ]);
-	child_redirect(cmds, write_pipe, read_pipe, cmd_no);
-	simple = get_simple(cmds, cmd_no);
-	exec_cmd(*simple);
-	return (-1);
 }
 //											Parent
 // Pipes		[[write, read],[write, read]]			[[write, read],[write, read]]

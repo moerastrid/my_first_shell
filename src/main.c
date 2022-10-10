@@ -9,6 +9,7 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
+	cmd->envp = envp;
 
 	paths = getpaths(envp);
 	if (!paths)
@@ -51,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	t_cmd	cmd;
 
+	// close_all();
 	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
 		return (-1);
@@ -58,11 +60,13 @@ int	main(int argc, char **argv, char **envp)
 	catch_signals();
 	while (1)
 	{
+		// system("ls /dev/fd");
 		line = prompt();
 		tokens = tokenize(line);
 		if (tokens == NULL)
 			continue ;
 		parse(tokens, &cmd);
+		substitute(&cmd);
 		if (execute(cmd) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 

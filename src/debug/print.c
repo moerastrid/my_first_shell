@@ -128,3 +128,17 @@ void	run_lsof(void)
 {
 	system("lsof -c minishell");
 }
+
+void	run_cat_fd(void)
+{
+	system("cat /dev/fd");
+}
+
+#include <sys/syslimits.h>
+void	close_all(void)
+{
+	for(int i = 3; i < OPEN_MAX; i++)
+	{
+		close(i);
+	}
+}

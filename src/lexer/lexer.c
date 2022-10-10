@@ -55,8 +55,6 @@ static int	token_length(t_token *token)
 		len = 1;
 	if (type == QUOT || type == DQUOT)
 		len += 2;
-	if (type == DOLL)
-		len++;
 	return (len);
 }
 
@@ -110,7 +108,10 @@ t_token	*tokenize(char *input)
 		if (type == QUOT || type == DQUOT)
 			data = ft_substr(input, 1, quot_length(input) - 1);
 		if (type == DOLL)
-			data = ft_substr(input, 1, word_length(input + 1));
+		{
+			printf("input: [%s]\n", input);
+			data = ft_substr(input, 0, word_length(input + 1) + 1);
+		}
 		if (type == DOLLQ)
 			data = ft_substr(input, 0, 2);
 		new = token_new(data, type);
