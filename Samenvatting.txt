@@ -54,23 +54,21 @@ Shell parameters: 3.4
 	?
 
 Expansion:
-Expansion is performed on the command line after it has been split into tokens. There are 4/5 kinds of expansion performed:
+Expansion is performed on the command line after it has been split into tokens. There is only one kins of expansion performed in minishell:
 
-	parameter and variable expansion ?
-	command substitution ?
-	arithmetic expansion ?
+	parameter expansion
 	word splitting
-	filename expansion ?
 
-Parameter expansion:
-	The ‘$’ character introduces parameter expansion, command substitution, or arithmetic expansion.
-
-Command substitution:
-
-Arithmetic expansion:
+The ‘$’ character introduces parameter expansion.
+	Parameter expansion:
+		The basic form of parameter expansion is ${parameter}. The value of parameter is substituted. The braces are required when parameter is a positional parameter with more than one digit, or when parameter is followed by a character that is not to be interpreted as part of its name. When braces are used, the matching ending brace is the first ‘}’ not escaped by a backslash or within a quoted string, and not within an embedded arithmetic expansion, command substitution, or parameter expansion. The result of the expansion is subject to word splitting.
 
 Word splitting:
-
+	The shell scans the results of parameter expansion that did not occur within double quotes for word splitting.
+	The shell treats each character of $IFS as a delimiter, and splits the results of the other expansions into words using these characters as field terminators. If IFS is unset, or its value is exactly <space><tab><newline>, the default, then sequences of <space>, <tab>, and <newline> at the beginning and end of the results of the previous expansions are ignored, and any sequence of IFS characters not at the beginning or end serves to delimit words. If IFS has a value other than the default, then sequences of the whitespace characters space, tab, and newline are ignored at the beginning and end of the word, as long as the whitespace character is in the value of IFS (an IFS whitespace character). Any character in IFS that is not IFS whitespace, along with any adjacent IFS whitespace characters, delimits a field. A sequence of IFS whitespace characters is also treated as a delimiter. If the value of IFS is null, no word splitting occurs.
+	Explicit null arguments ("" or '') are retained and passed to commands as empty strings. Unquoted implicit null arguments, resulting from the expansion of parameters that have no values, are removed. If a parameter with no value is expanded within double quotes, a null argument results and is retained and passed to a command as an empty string. When a quoted null argument appears as part of a word whose expansion is non-null, the null argument is removed. That is, the word -d'' becomes -d after word splitting and null argument removal.
+	After the preceding expansions, all unquoted occurrences of the characters ‘'’, and ‘"’ that did not result from one of the above expansions are removed.
 
 Redirections:
 	Before a command is executed, its input and output may be redirected. Redirection can change the files the command reads from and writes to.
+	Redirections are processed in the order they appear, from left to right.
