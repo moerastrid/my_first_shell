@@ -1,12 +1,12 @@
 #include "substitutor.h"
 
-char* get_envp_var(char *str, char **envp)
+char	*get_envp_var(char *str, char **envp)
 {
 	int		i;
 	char	*env_head;
 	int		env_head_len;
 	int		comp;
-	char*	end;
+	char	*end;
 
 	i = 0;
 	while (envp && envp[i])
@@ -35,7 +35,7 @@ static void	substitute_doll(t_token *token, char **envp)
 			return ;
 		sub = get_envp_var(token->data, envp);
 		free(token->data);
-		if (sub == NULL) // Var not found
+		if (sub == NULL)
 		{
 			token->data = ft_strdup("");
 			return ;

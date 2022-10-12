@@ -83,7 +83,7 @@ void	substitute_dquot(t_token *token, char **envp)
 		while (*input != '$' && *input != '\0')
 			input++;
 		if (!*input)
-			break;
+			break ;
 		new_data = replace_once(input, token->data, &pre_sub_len, envp);
 		free(token->data);
 		token->data = new_data;
