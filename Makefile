@@ -18,7 +18,7 @@ SRC =	src/main.c\
 		src/parser/cmd_builder.c\
 		src/substitutor/substitutor.c\
 		src/substitutor/substitute_dquot.c\
-		src/execute/buildin.c\
+		src/execute/builtin.c\
 		src/execute/execute00.c\
 		src/execute/execute01.c\
 		src/execute/execute02.c\
