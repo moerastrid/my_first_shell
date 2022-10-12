@@ -9,6 +9,7 @@ SRC =	src/main.c\
 		src/builtins/builtins00.c\
 		src/display/prompt.c\
 		src/display/signals.c\
+		src/display/errors.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\

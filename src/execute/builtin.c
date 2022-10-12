@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:34:18 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 22:25:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int	is_del(char c)
 
 int	is_builtin(t_simple	*t)
 {
-	//if (t == NULL)
-	//	return (0);
-	//dprintf(2, "ASTRIDDEBUG\nargc: %d\nargv: %s\nbin: %s\n\n", t->argc, t->argv[0], t->bin);
 	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		return (1);
 	if (ft_strncmp(t->argv[0], "cd", 3) == 0)

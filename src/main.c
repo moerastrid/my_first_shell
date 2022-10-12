@@ -31,9 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		// print_simples(&cmd);
 		// print_children(g_children);
 		g_errno = execute(cmd, tokens);
-		if (g_errno != 0)
-			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error! %d\n", g_errno);
-
+		catch_errno(g_errno);
 		reset(&cmd, g_children, tokens);
 		rl_on_new_line();
 		free(line);
