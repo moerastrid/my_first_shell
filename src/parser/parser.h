@@ -16,7 +16,6 @@ int			add_arg(t_simple *simple, char *arg);
 void		free_simples(t_simple *simples);
 void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
-int			set_bin(t_cmd *cmd, t_simple *simple);
 
 // str_list.c
 t_str_list	*str_list_new(char *str, int append_mode);

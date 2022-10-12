@@ -105,13 +105,34 @@ static int	dquot_length(char *input)
 	return (count);
 }
 
+char *get_data(int type, char *input)
+{
+	char	*data;
+
+	if (type == WORD)
+		data = ft_substr(input, 0, word_length(input));
+	else if (type == QUOT)
+		data = ft_substr(input, 1, quot_length(input));
+	else if (type == DQUOT)
+		data = ft_substr(input, 1, dquot_length(input));
+	else if (type == DOLL)
+		data = ft_substr(input, 1, word_length(input + 1));
+	else if (type == DOLLQ)
+		data = ft_substr(input, 0, 2);
+	else
+		data = NULL;
+	return (data);
+}
+
 t_token	*tokenize(char *input)
 {
 	t_token	root;
 	char	*data;
 	int		type;
 	t_token	*new;
+	char	*end;
 
+	end = input + ft_strlen(input);
 	root.next = NULL;
 	while (*input != '\0')
 	{
@@ -120,22 +141,17 @@ t_token	*tokenize(char *input)
 		if (!*input)
 			break ;
 		type = token_type(input);
-		data = NULL;
-		if (type == WORD)
-			data = ft_substr(input, 0, word_length(input));
-		if (type == QUOT)
-			data = ft_substr(input, 1, quot_length(input));
-		if (type == DQUOT)
-			data = ft_substr(input, 1, dquot_length(input));
-		if (type == DOLL)
-			data = ft_substr(input, 1, word_length(input + 1));
-		if (type == DOLLQ)
-			data = ft_substr(input, 0, 2);
+		data = get_data(type, input);
 		new = token_new(data, type);
 		token_add_back(&root, new);
 		input += token_length(new);
+		if (input > end)
+		{
+			print_tokens(root.next);
+			free_token_list(root.next);
+			return (NULL);
+		}
 	}
-
 	merge_redirects(root.next);
 	return (root.next);
 }

@@ -13,12 +13,19 @@ int	main(int argc, char **argv, char **envp)
 	catch_signals();
 	while (1)
 	{
-		// system("ls /dev/fd");
 		line = prompt();
+		if (*line == '\0')
+		{
+			free(line);
+			continue ;
+		}
 		drop_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
+		{
+			printf("%s\n", "token error");
 			continue ;
+		}
 		print_tokens(tokens);
 		substitute(tokens, envp);
 		print_tokens(tokens);
@@ -28,15 +35,15 @@ int	main(int argc, char **argv, char **envp)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ parse error!\n");
 			continue;
 		}
-		// print_tokens(tokens);
+		print_tokens(tokens);
 		print_simples(&cmd);
 		// print_children(g_children);
 		if (execute(cmd, tokens) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
 
 		reset(&cmd, g_children, tokens);
-		rl_on_new_line();
 		free(line);
+		rl_on_new_line();
 		catch_signals();
 	}
 	free(cmd.paths);

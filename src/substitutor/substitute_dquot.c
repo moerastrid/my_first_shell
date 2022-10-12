@@ -1,36 +1,5 @@
 #include "substitutor.h"
 
-static void	free_four(char *s1, char *s2, char *s3, char *s4)
-{
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
-	if (s3)
-		free(s3);
-	if (s4)
-		free(s4);
-	s1 = NULL;
-	s2 = NULL;
-	s3 = NULL;
-	s4 = NULL;
-}
-
-static char	*ft_strjoin3_free(char *s1, char *s2, char *s3)
-{
-	char	*tmp;
-	char	*ret;
-
-	if (!s1 || !s2 || !s3)
-		return (NULL);
-	tmp = ft_strjoin(s1, s2);
-	if (tmp == NULL)
-		return (NULL);
-	ret = ft_strjoin(tmp, s3);
-	free_four(s1, s2, s3, tmp);
-	return (ret);
-}
-
 static char	*get_word(char *input)
 {
 	char	*var_end;

@@ -1,5 +1,30 @@
 #include "parser.h"
 
+static void	set_bin(t_cmd *cmd, t_simple *simple)
+{
+	char		*myexec;
+	int			i;
+
+	if (!simple || !simple->argv || !cmd)
+		return ;
+	if (access(simple->argv[0], X_OK) == 0)
+		simple->bin = simple->argv[0];
+	i = 0;
+	while (cmd->paths && cmd->paths[i])
+	{
+		myexec = ft_strjoin3(cmd->paths[i++], "/", simple->argv[0]);
+		if (!myexec)
+			return ;
+		if (access(myexec, X_OK) == 0)
+		{
+			simple->bin = myexec;
+			return ;
+		}
+		free (myexec);
+	}
+	return ;
+}
+
 static int	count_cmd(t_cmd *cmd)
 {
 	int			cmd_count;
@@ -15,7 +40,7 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
-static int add_data(t_token *token, t_cmd *cmd, t_simple *simple)
+static int	add_data(t_token *token, t_cmd *cmd, t_simple *simple)
 {
 	int	type;
 
@@ -42,28 +67,28 @@ int	parse(t_token *tokens, t_cmd *cmd)
 	t_simple	*simple;
 
 	simple = new_simple(0, NULL);
+	if (simple == NULL)
+		return (-1);
 	while (tokens != NULL)
 	{
 		if (tokens->type == PIPE)
 		{
 			if (simple->argv == NULL)
-			{
-				printf("%s\n", "Parse error");
 				return (-1);
-			}
 			set_bin(cmd, simple);
 			simple_add_back(&cmd->simples, simple);
 			simple = new_simple(0, NULL);
+			if (simple == NULL)
+				return (-1);
 		}
 		else
 			add_data(tokens, cmd, simple);
 		tokens = tokens->next;
 	}
-	if(simple->argv == NULL)
+	if (simple->argv == NULL)
 		return (-1);
 	simple_add_back(&cmd->simples, simple);
-	if (set_bin(cmd, simple) == -1)
-		return (-1);
+	set_bin(cmd, simple);
 	cmd->cmd_count = count_cmd(cmd);
 	return (0);
 }

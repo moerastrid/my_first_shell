@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:57:17 by tnuyten           #+#    #+#             */
-/*   Updated: 2022/09/29 17:19:50 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/10/12 19:04:08 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+// Self:
+char	*ft_strjoin3(char *s1, char *s2, char *s3);
+char	*ft_strjoin3_free(char *s1, char *s2, char *s3);
+
+// libft:
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
