@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:27:34 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:58:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	bi_env(t_cmd cmd)
 
 	ft_putstr_fd("buildin env is executed\n", STDOUT_FILENO);
 	i = 0;
-	while (cmd.envp[i] != NULL)
+	while (cmd.envc[i] != NULL)
 	{
-		ft_putstr_fd(cmd.envp[i], STDOUT_FILENO);
+		ft_putstr_fd(cmd.envc[i], STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}

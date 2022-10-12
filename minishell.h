@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:26:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:59:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_cmd {
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
 	char		**paths;
-	char		**envp;
+	char		**envc;
 }	t_cmd;
 
 enum	 e_token_type {

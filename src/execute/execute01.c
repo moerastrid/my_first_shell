@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:31:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:58:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ pid_t	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 			exit (ret_val);
 		}
 		else
-			exec_cmd(simple, cmd.envp);
+			exec_cmd(simple, cmd.envc);
 		return (-1);
 	}
 	else // parent

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 18:49:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:34:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	exec_builtin(t_simple	*t, t_cmd cmd, t_token *tokens)
 	else if (ft_strncmp(t->argv[0], "cd", 3) == 0)
 		return (bi_cd());
 	else if (ft_strncmp(t->argv[0], "pwd", 4) == 0)
-		return (bi_pwd());
+		return (bi_pwd(cmd));
 	else if (ft_strncmp(t->argv[0], "export", 7) == 0)
 		return (bi_export());
 	else if (ft_strncmp(t->argv[0], "unset", 6) == 0)
