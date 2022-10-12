@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 23:11:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 16:55:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,31 +79,12 @@ typedef struct s_token {
 }	t_token;
 
 // GLOBAL VAR
-t_children	*g_children;
+t_children		*g_children;
+unsigned int	g_errno;
 
 // FILES & FUNCTIONS:
 
-void		clear_cmd(t_cmd *cmd);
-
-//prompt
-char		*prompt(void);
-
-// LEXER
-// lexer.c
-	t_token	*tokenize(char *input);
-	void	free_token_list(t_token *token);
-
-// PARSER
-// cmd_builder.c
-// str_list.c
-void		free_str_list(t_str_list *root);
-// simple.c
-void		free_simples(t_simple *simples);
-// parser.c
-int			parse(t_token *tokens, t_cmd *cmds);
-
-
-// buildins (00)
+// buildins
 void		bi_echo(void);
 void		bi_cd(void);
 void		bi_pwd(void);
@@ -112,8 +93,33 @@ void		bi_unset(void);
 void		bi_env(t_cmd cmd);
 void		bi_exit(t_cmd cmd, t_token *tokens);
 
-//EXECUTER
+// display
+void		catch_signals(void);
+void		drop_signals(void);
+char		*prompt(void);
+
+// execute
 int			execute(t_cmd cmds, t_token *tokens);
+
+// lexer
+t_token		*tokenize(char *input);
+void		free_token_list(t_token *token);
+void		reset(t_cmd *cmd, t_children *kids, t_token *tokens);
+
+// parser
+void		free_str_list(t_str_list *root);
+void		free_simples(t_simple *simples);
+int			parse(t_token *tokens, t_cmd *cmds);
+
+// setup_reset
+char		**getpaths(char **envp);
+int			setup(t_cmd *cmd, char **envp);
+void		reset(t_cmd *cmd, t_children *kids, t_token *tokens);
+void		clear_cmd(t_cmd *cmd);
+
+// substitutor
+void		substitute(t_token *tokens, char **envp);
+void		redirect_outfile(t_str_list *outfiles);
 
 // global kids
 void		free_children(t_children *root);
@@ -121,19 +127,8 @@ t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
 void		kill_children(t_children *kids);
 
-// SUBSTITUTOR
-// substitute.c
-void		substitute(t_token *tokens, char **envp);
-void		redirect_outfile(t_str_list *outfiles);
-
-//signals
-void		catch_signals(void);
-
 //utils
 char		**single_split(char const *s, char c);
-
-//path
-char		**getpaths(char **envp);
 
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
 void		print_token_type(enum e_token_type num);
