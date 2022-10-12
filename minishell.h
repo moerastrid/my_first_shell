@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:55:41 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 17:16:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void		bi_exit(t_cmd cmd, t_token *tokens);
 
 // display
 void		catch_signals(void);
-void		drop_signals(void);
+void		default_signals(void);
+void		ignore_signals(void);
 char		*prompt(void);
 
 // execute

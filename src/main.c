@@ -15,7 +15,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		// system("ls /dev/fd");
 		line = prompt();
-		drop_signals();
+		ignore_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
 			continue ;
@@ -30,8 +30,9 @@ int	main(int argc, char **argv, char **envp)
 		// print_tokens(tokens);
 		print_simples(&cmd);
 		// print_children(g_children);
-		if (execute(cmd, tokens) == -1)
-			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
+		g_errno = execute(cmd, tokens);
+		if (g_errno != 0)
+			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error! %d\n", g_errno);
 
 		reset(&cmd, g_children, tokens);
 		rl_on_new_line();

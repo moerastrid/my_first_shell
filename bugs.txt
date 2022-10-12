@@ -1,4 +1,7 @@
 
 
-ls | cat >out.txt 
-vergelijk output ls met de output in out.txt. Let op \n.
+cmd.cmd_count increaset nu als er een outfile is (denk ik?)
+heb die nodig om 'exit' te printen als er daadwerkelijk geexit wordt, 
+maar niet als je bijvoobeeld " exit | wc " print :)
+
+

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:49:35 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 17:06:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	catch_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	drop_signals(void)
+void	default_signals(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);

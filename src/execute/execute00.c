@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:43:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 17:23:10 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ int	execute(t_cmd cmds, t_token *tokens)
 			dup2(1, STDOUT_FILENO);
 			return (-1);
 		}
-		if (only_child(cmds) != 0)
-			return (-1);
+		return (only_child(cmds));
 	}
 	else
-	{
-		if (family_life(cmds) != 0)
-			return (-1);
-	}
+		return (family_life(cmds));
 	return (0);
 }
