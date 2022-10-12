@@ -142,6 +142,7 @@ static void	substitute_dquot(t_token *token, char **envp)
 	char	*new_data;
 	int		pre_sub_len;
 
+	pre_sub_len = 0;
 	input = token->data;
 	while (input && *input != '\0')
 	{

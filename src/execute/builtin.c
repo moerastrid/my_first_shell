@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   buildin.c                                          :+:    :+:            */
+/*   builtin.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 23:52:29 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 16:42:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_del(char c)
 	return (0);
 }
 
-int	is_buildin(t_simple	*t)
+int	is_builtin(t_simple	*t)
 {
 	//if (t == NULL)
 	//	return (0);
@@ -43,7 +43,7 @@ int	is_buildin(t_simple	*t)
 	return (0);
 }
 
-void	exec_buildin(t_simple	*t, t_cmd cmd, t_token *tokens)
+void	exec_builtin(t_simple	*t, t_cmd cmd, t_token *tokens)
 {
 	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		bi_echo();

@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   signals.c                                          :+:    :+:            */
+/*   path.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:49:35 by ageels        ########   odam.nl         */
+/*   Created: 2022/10/12 16:37:30 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/12 16:38:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
+#include "../../minishell.h"
 
-void	handle_sigint(int sig)
+char	**getpaths(char **envp)
 {
-	ft_putstr_fd("\n", STDERR_FILENO);
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_redisplay();
-}
+	int		i;
+	char	**paths;
 
-void	catch_signals(void)
-{
-	signal(SIGINT, &handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	drop_signals(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
-
-void	ignore_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	i = 0;
+	paths = NULL;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH", 4) == 0)
+		{
+			paths = single_split(envp[i] + 5, ':');
+			if (paths == NULL)
+			{
+				ft_putstr_fd("ERROR: paths\n", 1);
+				return (NULL);
+			}
+			break ;
+		}
+		i++;
+	}
+	return (paths);
 }

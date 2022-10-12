@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 23:44:28 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 16:43:00 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		exec_cmd(t_simple *simple, char **envp);
 int			only_child(t_cmd cmds);
 void		redirect_infile(t_str_list *infiles);
 void		redirect_outfile(t_str_list *outfiles);
-int			is_buildin(t_simple	*simple);
-void		exec_buildin(t_simple *t, t_cmd cmd, t_token *tokens);
+int			is_builtin(t_simple	*simple);
+void		exec_builtin(t_simple *t, t_cmd cmd, t_token *tokens);
 
 #endif
