@@ -19,16 +19,16 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(line);
 		if (tokens == NULL)
 			continue ;
-		print_tokens(tokens);
+		//print_tokens(tokens);
 		substitute(tokens, envp);
-		print_tokens(tokens);
+		//print_tokens(tokens);
 		if(parse(tokens, &cmd) == -1)
 		{
 			free_token_list(tokens);
 			continue;
 		}
 		// print_tokens(tokens);
-		print_simples(&cmd);
+		// print_simples(&cmd);
 		// print_children(g_children);
 		g_errno = execute(cmd, tokens);
 		if (g_errno != 0)
