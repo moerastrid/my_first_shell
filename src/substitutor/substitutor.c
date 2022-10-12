@@ -51,13 +51,13 @@ static void	substitute_dollq(t_token *token)
 
 static void free_four(char *s1, char *s2, char *s3, char *s4)
 {
-	if(s1)
+	if (s1)
 		free(s1);
-	if(s2)
+	if (s2)
 		free(s2);
-	if(s3)
+	if (s3)
 		free(s3);
-	if(s4)
+	if (s4)
 		free(s4);
 	s1 = NULL;
 	s2 = NULL;
@@ -65,7 +65,7 @@ static void free_four(char *s1, char *s2, char *s3, char *s4)
 	s4 = NULL;
 }
 
-char	*ft_strjoin3(char *s1, char *s2, char *s3)
+static char	*ft_strjoin3(char *s1, char *s2, char *s3)
 {
 	char	*tmp;
 	char	*ret;
@@ -80,7 +80,7 @@ char	*ft_strjoin3(char *s1, char *s2, char *s3)
 	return (ret);
 }
 
-char	*ft_strjoin3_free(char *s1, char *s2, char *s3)
+static char	*ft_strjoin3_free(char *s1, char *s2, char *s3)
 {
 	char	*tmp;
 	char	*ret;
@@ -154,7 +154,7 @@ static void	substitute_dquot(t_token *token, char **envp)
 		token->data = new_data;
 		input = token->data + pre_sub_len;
 	}
-	if(input == NULL)
+	if (input == NULL)
 		printf("%s\n", "Substitution error");
 }
 
