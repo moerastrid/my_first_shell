@@ -64,16 +64,16 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(line);
 		if (tokens == NULL)
 			continue ;
-		// print_tokens(tokens);
+		print_tokens(tokens);
 		substitute(tokens, envp);
+		print_tokens(tokens);
 		if(parse(tokens, &cmd) == -1)
 		{
-			printf("%s\n", "Parse error main");
 			free_token_list(tokens);
 			continue;
 		}
 		// print_tokens(tokens);
-		// print_simples(&cmd);
+		print_simples(&cmd);
 		// print_children(g_children);
 		if (execute(cmd, tokens) == -1)
 			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");

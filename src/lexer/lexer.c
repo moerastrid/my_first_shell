@@ -79,7 +79,23 @@ static int	quot_length(char *input)
 	int	type;
 
 	type = token_type(input);
-	count = 1;
+	count = 0;
+	input++;
+	while (*input != '\0' && token_type(input) != type)
+	{
+		count++;
+		input++;
+	}
+	return (count);
+}
+
+static int	dquot_length(char *input)
+{
+	int	count;
+	int	type;
+
+	type = token_type(input);
+	count = 0;
 	input++;
 	while (*input != '\0' && token_type(input) != type)
 	{
@@ -107,8 +123,10 @@ t_token	*tokenize(char *input)
 		data = NULL;
 		if (type == WORD)
 			data = ft_substr(input, 0, word_length(input));
-		if (type == QUOT || type == DQUOT)
-			data = ft_substr(input, 1, quot_length(input) - 1);
+		if (type == QUOT)
+			data = ft_substr(input, 1, quot_length(input));
+		if (type == DQUOT)
+			data = ft_substr(input, 1, dquot_length(input));
 		if (type == DOLL)
 			data = ft_substr(input, 1, word_length(input + 1));
 		if (type == DOLLQ)
@@ -117,6 +135,7 @@ t_token	*tokenize(char *input)
 		token_add_back(&root, new);
 		input += token_length(new);
 	}
+
 	merge_redirects(root.next);
 	return (root.next);
 }

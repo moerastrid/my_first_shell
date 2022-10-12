@@ -62,7 +62,7 @@ Expansion is performed on the command line after it has been split into tokens. 
 
 The ‘$’ character introduces parameter expansion.
 	Parameter expansion:
-		The basic form of parameter expansion is ${parameter}. The value of parameter is substituted. The braces are required when parameter is a positional parameter with more than one digit, or when parameter is followed by a character that is not to be interpreted as part of its name. When braces are used, the matching ending brace is the first ‘}’ not escaped by a backslash or within a quoted string, and not within an embedded arithmetic expansion, command substitution, or parameter expansion. The result of the expansion is subject to word splitting.
+		The basic form of parameter expansion is $parameter. The value of parameter is substituted. The result of the expansion is subject to word splitting.
 
 Word splitting:
 	The shell scans the results of parameter expansion that did not occur within double quotes for word splitting.

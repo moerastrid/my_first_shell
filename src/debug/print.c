@@ -134,7 +134,8 @@ void	run_cat_fd(void)
 	system("cat /dev/fd");
 }
 
-#include <sys/syslimits.h>
+// #include <sys/syslimits.h>
+# define OPEN_MAX 1000
 void	close_all(void)
 {
 	for(int i = 3; i < OPEN_MAX; i++)

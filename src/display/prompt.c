@@ -18,7 +18,10 @@ char	*prompt(void)
 
 	line = readline(PROMPT);
 	if (line == NULL)
+	{
+		ft_putendl_fd("", 1); //Lijkt nodig te zijn op linux?
 		exit(0);
+	}
 	if (*line)
 		add_history(line);
 	return (line);
