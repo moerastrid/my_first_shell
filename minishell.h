@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:55:41 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:59:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <term.h>
 
 # include "lib/libft/libft.h"
+# include "src/display/display.h"
 
 //STRUCTS:
 typedef struct s_children {
@@ -56,7 +57,7 @@ typedef struct s_cmd {
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
 	char		**paths;
-	char		**envp;
+	char		**envc;
 }	t_cmd;
 
 enum	 e_token_type {
@@ -85,18 +86,13 @@ unsigned int	g_errno;
 // FILES & FUNCTIONS:
 
 // buildins
-void		bi_echo(void);
-void		bi_cd(void);
-void		bi_pwd(void);
-void		bi_export(void);
-void		bi_unset(void);
-void		bi_env(t_cmd cmd);
+int			bi_echo(t_simple *simple);
+int			bi_cd(void);
+int			bi_pwd(t_cmd cmd);
+int			bi_export(void);
+int			bi_unset(void);
+int			bi_env(t_cmd cmd);
 void		bi_exit(t_cmd cmd, t_token *tokens);
-
-// display
-void		catch_signals(void);
-void		drop_signals(void);
-char		*prompt(void);
 
 // execute
 int			execute(t_cmd cmds, t_token *tokens);

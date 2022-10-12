@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:48:36 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 22:14:00 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ void	setup_termios(void)
 	tcsetattr(0, 0, &my_term);
 }
 
+static char	**copy_env(char **og)
+{
+	char	**copy;
+	int		i;
+
+	copy = NULL;
+	i = 0;
+	while (og[i] != NULL)
+	{
+		i++;
+	}
+	copy = ft_calloc(i + 1, sizeof(char *));
+	if (copy == NULL)
+		return (NULL);
+	i = 0;
+	while (og[i] != NULL)
+	{
+		copy[i] = ft_strdup(og[i]);
+		i++;
+	}
+	return (copy);
+}
+
 int	setup(t_cmd *cmd, char **envp)
 {
 	char	**paths;
@@ -31,7 +54,9 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
-	cmd->envp = envp;
+	cmd->envc = copy_env(envp);
+	if (!cmd->envc)
+		return (-1);
 	paths = getpaths(envp);
 	if (!paths)
 		return (-1);

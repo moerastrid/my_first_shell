@@ -14,12 +14,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line = prompt();
-		if (*line == '\0')
-		{
-			free(line);
-			continue ;
-		}
-		drop_signals();
+		ignore_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
 		{
@@ -28,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		print_tokens(tokens);
 		substitute(tokens, envp);
-		print_tokens(tokens);
+		//print_tokens(tokens);
 		if(parse(tokens, &cmd) == -1)
 		{
 			free_token_list(tokens);
@@ -38,9 +33,8 @@ int	main(int argc, char **argv, char **envp)
 		print_tokens(tokens);
 		print_simples(&cmd);
 		// print_children(g_children);
-		if (execute(cmd, tokens) == -1)
-			dprintf(STDERR_FILENO, "OH NOOOO ~ execute error!\n");
-
+		g_errno = execute(cmd, tokens);
+		catch_errno(g_errno);
 		reset(&cmd, g_children, tokens);
 		free(line);
 		rl_on_new_line();

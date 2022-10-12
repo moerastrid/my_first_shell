@@ -6,54 +6,79 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/10 23:13:10 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 22:25:05 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	bi_echo(void)
+int	bi_echo(t_simple *sm)
 {
-	ft_putstr_fd("buildin is executed\n", 1);
-	//exit (0);
+	int	flag;
+	int	i;
+
+	flag = 0;
+	i = 1;
+	if (sm->argc == 1)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return (0);
+	}
+	if (ft_strlen(sm->argv[1]) > 1 && ft_strncmp("-n", sm->argv[1], 3) == 0)
+	{
+		flag = 1;
+		i++;
+	}
+	while (sm->argv[i] != NULL)
+	{
+		ft_putstr_fd(sm->argv[i], STDOUT_FILENO);
+		if (sm->argv[i + 1] != NULL)
+			ft_putstr_fd(" ", STDOUT_FILENO);
+		if (sm->argv[i + 1] == NULL && flag == 0)
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		i++;
+	}
+	return (0);
 }
 
-void	bi_cd(void)
+int	bi_cd(void)
 {
 	ft_putstr_fd("buildin is executed\n", 1);
-	//exit (0);
+	return (0);
 }
 
-void	bi_pwd(void)
+int	bi_pwd(t_cmd cmd)
+{
+	ft_putstr_fd("buildin pwd is executed\n", STDERR_FILENO);
+	
+	return (0);
+}
+
+int	bi_export(void)
 {
 	ft_putstr_fd("buildin is executed\n", 1);
-	//exit (0);
+	return (0);
 }
 
-void	bi_export(void)
+int	bi_unset(void)
 {
 	ft_putstr_fd("buildin is executed\n", 1);
-	//exit (0);
+	return (0);
 }
 
-void	bi_unset(void)
-{
-	ft_putstr_fd("buildin is executed\n", 1);
-	//exit (0);
-}
-
-void	bi_env(t_cmd cmd)
+int	bi_env(t_cmd cmd)
 {
 	int	i;
 
 	ft_putstr_fd("buildin env is executed\n", STDOUT_FILENO);
 	i = 0;
-	while (cmd.envp[i] != NULL)
+	while (cmd.envc[i] != NULL)
 	{
-		ft_putstr_fd(cmd.envp[i], STDOUT_FILENO);
+		ft_putstr_fd(cmd.envc[i], STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
+	return (0);
 }
 
 void	bi_exit(t_cmd cmd, t_token *tokens)
@@ -64,6 +89,7 @@ void	bi_exit(t_cmd cmd, t_token *tokens)
 	clear_cmd(&cmd);
 	if (tokens)
 		free_token_list(tokens);
-	ft_putstr_fd("exit\n", 1);
+	if (cmd.cmd_count == 1)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit (0);
 }
