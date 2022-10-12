@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 18:50:37 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:26:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ unsigned int	g_errno;
 // FILES & FUNCTIONS:
 
 // buildins
-int		bi_echo(t_simple *simple);
+int			bi_echo(t_simple *simple);
 int			bi_cd(void);
-int			bi_pwd(void);
+int			bi_pwd(t_cmd cmd);
 int			bi_export(void);
 int			bi_unset(void);
 int			bi_env(t_cmd cmd);

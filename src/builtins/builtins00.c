@@ -6,35 +6,35 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:21:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:27:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	bi_echo(t_simple *simple)
+int	bi_echo(t_simple *sm)
 {
 	int	flag;
-	int i;
+	int	i;
 
 	flag = 0;
 	i = 1;
-	if (simple->argc == 1)
+	if (sm->argc == 1)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return (0);
 	}
-	if (ft_strlen(simple->argv[1]) > 1 && ft_strncmp("-n", simple->argv[1], 3) == 0)
+	if (ft_strlen(sm->argv[1]) > 1 && ft_strncmp("-n", sm->argv[1], 3) == 0)
 	{
 		flag = 1;
 		i++;
 	}
-	while(simple->argv[i] != NULL)
+	while (sm->argv[i] != NULL)
 	{
-		ft_putstr_fd(simple->argv[i], STDOUT_FILENO);
-		if (simple->argv[i+1] != NULL)
+		ft_putstr_fd(sm->argv[i], STDOUT_FILENO);
+		if (sm->argv[i + 1] != NULL)
 			ft_putstr_fd(" ", STDOUT_FILENO);
-		if (simple->argv[i+1] == NULL && flag == 0)
+		if (sm->argv[i + 1] == NULL && flag == 0)
 			ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
@@ -47,9 +47,10 @@ int	bi_cd(void)
 	return (0);
 }
 
-int	bi_pwd(void)
+int	bi_pwd(t_cmd cmd)
 {
-	ft_putstr_fd("buildin is executed\n", 1);
+	ft_putstr_fd("buildin pwd is executed\n", STDERR_FILENO);
+	
 	return (0);
 }
 

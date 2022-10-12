@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 16:52:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 19:31:39 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ pid_t	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 {
 	pid_t		child_id;
 	t_simple	*simple;
+	int			ret_val;
 
+	ret_val = 0;
 	child_id = fork();
 	if (child_id < 0)
 		return (-1);
@@ -113,8 +115,10 @@ pid_t	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 		simple = get_simple(cmd, cmd_no);
 		if (is_builtin(simple) == 1)
 		{
-			exec_builtin(simple, cmd, NULL);
-			exit (0);
+			ret_val = exec_builtin(simple, cmd, NULL);
+			dup2(0, STDIN_FILENO);
+			dup2(1, STDOUT_FILENO);
+			exit (ret_val);
 		}
 		else
 			exec_cmd(simple, cmd.envp);
