@@ -70,6 +70,7 @@ int	main(int argc, char **argv, char **envp)
 		if(parse(tokens, &cmd) == -1)
 		{
 			free_token_list(tokens);
+			dprintf(STDERR_FILENO, "OH NOOOO ~ parse error!\n");
 			continue;
 		}
 		// print_tokens(tokens);
