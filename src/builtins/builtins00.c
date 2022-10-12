@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 17:41:28 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 18:09:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	bi_exit(t_cmd cmd, t_token *tokens)
 	clear_cmd(&cmd);
 	if (tokens)
 		free_token_list(tokens);
-	dprintf("%d\n", cmd.cmd_count);
+	dprintf(2, "command count : %d\n", cmd.cmd_count);
 	if (cmd.cmd_count == 1)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit (0);

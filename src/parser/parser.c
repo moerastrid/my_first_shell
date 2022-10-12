@@ -54,6 +54,7 @@ int	parse(t_token *tokens, t_cmd *cmd)
 	if(simple->argv == NULL)
 	{
 		printf("%s\n", "Parse error");
+		// free & reset alles hiervoor
 		return (-1);
 	}
 	simple_add_back(&cmd->simples, simple);

@@ -1,7 +1,8 @@
 
-
+CMD.CMD_COUNT PROBLEMS
 cmd.cmd_count increaset nu als er een outfile is (denk ik?)
 heb die nodig om 'exit' te printen als er daadwerkelijk geexit wordt, 
 maar niet als je bijvoobeeld " exit | wc " print :)
-
+also : de token list (en dus cmd_count) wordt niet gereset bij parse error? voorbeeld: 
+type 'ls | | exit' en dan alleen 'exit', dan zie je dat er nog 3 simples zijn.
 
