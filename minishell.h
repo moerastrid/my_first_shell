@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 17:16:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/12 18:23:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <term.h>
 
 # include "lib/libft/libft.h"
+# include "src/display/display.h"
 
 //STRUCTS:
 typedef struct s_children {
@@ -92,12 +93,6 @@ void		bi_export(void);
 void		bi_unset(void);
 void		bi_env(t_cmd cmd);
 void		bi_exit(t_cmd cmd, t_token *tokens);
-
-// display
-void		catch_signals(void);
-void		default_signals(void);
-void		ignore_signals(void);
-char		*prompt(void);
 
 // execute
 int			execute(t_cmd cmds, t_token *tokens);
