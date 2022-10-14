@@ -10,10 +10,12 @@ int	main(int argc, char **argv, char **envp)
 	if (setup(&cmd, envp) == -1)
 		return (-1);
 	line = NULL;
-	catch_signals();
 	while (1)
 	{
+		catch_signals();
 		line = prompt();
+		if (!ft_strlen(line))
+			continue;
 		ignore_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
@@ -38,7 +40,6 @@ int	main(int argc, char **argv, char **envp)
 		reset(&cmd, g_children, tokens);
 		free(line);
 		rl_on_new_line();
-		catch_signals();
 	}
 	free(cmd.paths);
 	rl_clear_history();
