@@ -17,7 +17,6 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd.tokens == NULL)
 			continue ;
 
-		print_tokens(cmd.tokens);
 		substitute(cmd.tokens, envp); //What's the order here?
 		cmd.paths = getpaths(envp); //What's the order here?
 		if (parse(&cmd) != 0)
@@ -25,8 +24,7 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		print_simples(&cmd);
-		printf("\n");
+		print_cmd(cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}

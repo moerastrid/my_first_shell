@@ -49,14 +49,14 @@ typedef struct s_str_list
 }	t_str_list;
 
 typedef struct s_cmd {
+	char		**envc;
+	char		**paths;
 	int			cmd_count;
+	t_token		*tokens;
 	t_simple	*simples;
 	t_str_list	*outfiles;
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
-	t_token		*tokens;
-	char		**paths;
-	char		**envc;
 }	t_cmd;
 
 //typedef struct s_token {
@@ -64,6 +64,9 @@ typedef struct s_cmd {
 //	char				*data;
 //	struct s_token		*next;
 //}	t_token;
+
+// #remove before handin
+# include "src/debug/debug.h"
 
 // GLOBAL VAR
 int	g_errno;
@@ -97,17 +100,8 @@ void		redirect_outfile(t_str_list *outfiles);
 //utils
 char		**single_split(char const *s, char c);
 
-//DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
-void		print_token_type(enum e_token_type num);
-void		print_str_list(t_str_list *root, int mode);
-//void		print_tokens(t_token *root); (in token.h)
-void		print_simples(t_cmd *cmd);
-void		run_leaks(void);
-void		run_lsof(void);
-void		run_cat_fd(void);
-void		close_all(void);
-
-char	**env_add(char *to_add, char **envp);
-char	**env_remove(char *var_name, char **envp);
+char		**env_add(char *to_add, char **envp);
+char		**env_remove(char *var_name, char **envp);
+int			count_envp(char **envp);
 
 #endif

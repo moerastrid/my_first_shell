@@ -26,6 +26,7 @@ void	clear_cmd(t_cmd *cmd)
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
 	cmd->paths = NULL;
+	cmd->tokens = NULL;
 }
 
 void	reset(t_cmd *cmd, char *line)

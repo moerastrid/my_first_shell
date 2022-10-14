@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-static int	count_envp(char **envp)
+int	count_envp(char **envp)
 {
 	int	i;
 
