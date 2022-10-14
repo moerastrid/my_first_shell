@@ -5,6 +5,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_token	*tokens;
 	t_cmd	cmd;
+	char	**paths;
 
 	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
@@ -13,6 +14,10 @@ int	main(int argc, char **argv, char **envp)
 	catch_signals();
 	while (1)
 	{
+		paths = getpaths(envp);
+		if (!paths)
+			return (-1);
+		cmd.paths = paths;
 		line = prompt();
 		ignore_signals();
 		tokens = tokenize(line);
@@ -37,10 +42,11 @@ int	main(int argc, char **argv, char **envp)
 		catch_errno(g_errno);
 		reset(&cmd, g_children, tokens);
 		free(line);
+		free(cmd.paths);
 		rl_on_new_line();
 		catch_signals();
 	}
-	free(cmd.paths);
+
 	// free env (still have to write this function)
 	rl_clear_history();
 	return (EXIT_SUCCESS);

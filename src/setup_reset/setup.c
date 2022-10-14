@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 22:14:00 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 12:03:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static char	**copy_env(char **og)
 
 int	setup(t_cmd *cmd, char **envp)
 {
-	char	**paths;
-
 	setup_termios();
 	cmd->cmd_count = 0;
 	cmd->simples = NULL;
@@ -57,9 +55,5 @@ int	setup(t_cmd *cmd, char **envp)
 	cmd->envc = copy_env(envp);
 	if (!cmd->envc)
 		return (-1);
-	paths = getpaths(envp);
-	if (!paths)
-		return (-1);
-	cmd->paths = paths;
 	return (0);
 }
