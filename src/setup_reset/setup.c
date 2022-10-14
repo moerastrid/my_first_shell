@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:12:14 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 12:39:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,13 @@ static char	**copy_env(char **og)
 	return (copy);
 }
 
-int	setup(t_cmd *cmd, char **envp)
+int	setup(t_cmd *cmd, char **envp, int argc)
 {
+	if (argc != 1)
+	{
+		ft_putstr_fd("Minishell doesn't want an argument, please try again\n", STDERR_FILENO);
+		return (-1);
+	}
 	setup_termios();
 	catch_signals();
 	cmd->cmd_count = 0;
