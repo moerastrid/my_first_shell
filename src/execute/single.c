@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:00:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 18:41:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	exec_cmd(t_simple *simple, char **envp)
 		ft_putstr_fd(simple->argv[i], STDERR_FILENO);
 		i++;
 	}
-	ft_putstr_fd(": ", STDERR_FILENO);
-	g_errno = -2;
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	g_errno = 2;
 	exit (1);
 }
 
