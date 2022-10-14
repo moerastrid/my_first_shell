@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 17:56:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 18:26:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ static void	set_bin(t_cmd *cmd, t_simple *simple)
 
 	if (!simple || !simple->argv || !cmd)
 		return ;
-	if (access(simple->argv[0], X_OK) == 0)
+	if (ft_strchr(simple->argv[0], '/') || access(simple->argv[0], X_OK) == 0)
 	{
 		simple->bin = ft_strdup(simple->argv[0]);
-		errno = 0;
 		return ;
 	}
 	i = 0;
