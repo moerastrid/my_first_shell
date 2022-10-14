@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/14 12:45:01 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/10/14 12:51:02 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			parse(t_token *tokens, t_cmd *cmds);
 
 // setup_reset
 char		**getpaths(char **envp);
-int			setup(t_cmd *cmd, char **envp);
+int			setup(t_cmd *cmd, char **envp, int argc);
 void		reset(t_cmd *cmd, t_children *kids, t_token *tokens);
 void		clear_cmd(t_cmd *cmd);
 
