@@ -6,14 +6,33 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 16:07:28 by tnuyten       #+#    #+#                 */
-/*   Updated: 2022/10/10 21:12:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 14:36:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# include "../../minishell.h"
+# include "../../lib/libft/libft.h"
+
+enum	e_token_type {
+	WORD = 0,
+	GREAT = 1,
+	LESS = 2,
+	PIPE = 3,
+	GREATGREAT = 4,
+	LESSLESS = 5,
+	DOLL = 6,
+	DOLLQ = 7,
+	QUOT = 8,
+	DQUOT = 9
+};
+
+typedef struct s_token {
+	enum e_token_type	type;
+	char				*data;
+	struct s_token		*next;
+}	t_token;
 
 void	token_add_back(t_token *tokens, t_token *new);
 t_token	*token_new(char *data, int type);
@@ -22,5 +41,14 @@ void	merge_redirects(t_token *token);
 void	free_token(t_token *token);
 void	free_token_list(t_token *token);
 t_token	*tokenize(char *input);
+void	print_tokens(t_token *root);
+
+//length fun
+int		is_token_char(char *str);
+int		token_type(char *str);
+int		token_length(t_token *token);
+int		word_length(char *input);
+int		quot_length(char *input);
+int		dquot_length(char *input);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:15:37 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 14:19:51 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # include "lib/libft/libft.h"
 # include "src/display/display.h"
+# include "src/lexer/token.h"
 
 //STRUCTS:
 
@@ -56,39 +57,16 @@ typedef struct s_cmd {
 	char		**envc;
 }	t_cmd;
 
-enum	 e_token_type {
-	WORD = 0,
-	GREAT = 1,
-	LESS = 2,
-	PIPE = 3,
-	GREATGREAT = 4,
-	LESSLESS = 5,
-	DOLL = 6,
-	DOLLQ = 7,
-	QUOT = 8,
-	DQUOT = 9
-};
-
-typedef struct s_token {
-	enum e_token_type	type;
-	char				*data;
-	struct s_token		*next;
-}	t_token;
+//typedef struct s_token {
+//	enum e_token_type	type;
+//	char				*data;
+//	struct s_token		*next;
+//}	t_token;
 
 // GLOBAL VAR
 unsigned int	g_errno;
 
 // FILES & FUNCTIONS:
-
-// buildins
-int			bi_echo(t_simple *simple);
-int			bi_cd(void);
-int			bi_pwd(t_cmd cmd);
-int			bi_export(void);
-int			bi_unset(void);
-int			bi_env(t_cmd cmd);
-void		bi_exit(t_cmd cmd, t_token *tokens);
-
 //display
 char		*prompt(t_cmd	*cmd);
 
@@ -120,7 +98,7 @@ char		**single_split(char const *s, char c);
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
 void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, int mode);
-void		print_tokens(t_token *root);
+//void		print_tokens(t_token *root); (in token.h)
 void		print_simples(t_cmd *cmd);
 void		run_leaks(void);
 void		run_lsof(void);
