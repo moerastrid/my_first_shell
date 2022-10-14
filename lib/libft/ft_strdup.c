@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 14:33:28 by tnuyten       #+#    #+#                 */
-/*   Updated: 2022/10/10 21:20:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 17:29:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s1)
 	int		len;
 	char	*s2;
 
-	if (!s1)
+	if (!s1 || s1 == '\0')
 		len = 0;
 	else
 		len = ft_strlen(s1);

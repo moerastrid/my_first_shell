@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:07 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 15:43:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 17:27:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	add_arg(t_simple *simple, char *arg)
 		argv[i] = simple->argv[i];
 		i++;
 	}
-	if (simple->argv)
-		free(simple->argv);
+	//if (simple->argv)
+	//	free(simple->argv);
 	argv[i++] = ft_strdup(arg);
 	simple->argv = argv;
 	simple->argc = i;

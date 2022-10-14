@@ -19,3 +19,13 @@ Token list:             [WORD, ../../../../../bin/echo]->[DQUOT, hoi]
 Token list:             [WORD, ../../../../../bin/echo]->[DQUOT, hoi]
 Simple {bin:/Users/tnuyten/.brew/bin/../../../../../bin/echo, argv:[../../../../../bin/echo, hoi]}
 hoi
+
+
+DIFF OUTPUT: (aaa is bestand met chmod 000);
+US:
+		 (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ echo "hoi" >aaa
+		hoi
+		Bad file descriptor
+BASH:
+		bash-3.2$ echo "hoi" >aaa
+		bash: aaa: Permission denied

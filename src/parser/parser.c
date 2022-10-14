@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 15:47:45 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 17:56:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ static void	set_bin(t_cmd *cmd, t_simple *simple)
 	if (!simple || !simple->argv || !cmd)
 		return ;
 	if (access(simple->argv[0], X_OK) == 0)
-		simple->bin = simple->argv[0];
+	{
+		simple->bin = ft_strdup(simple->argv[0]);
+		errno = 0;
+		return ;
+	}
 	i = 0;
 	while (cmd->paths && cmd->paths[i])
 	{
@@ -29,6 +33,7 @@ static void	set_bin(t_cmd *cmd, t_simple *simple)
 			return ;
 		if (access(myexec, X_OK) == 0)
 		{
+			errno = 0;
 			simple->bin = myexec;
 			return ;
 		}
@@ -86,7 +91,10 @@ int	parse(t_token *tokens, t_cmd *cmd)
 		if (tokens->type == PIPE)
 		{
 			if (simple->argv == NULL)
+			{
+				g_errno = -1;
 				return (-1);
+			}
 			set_bin(cmd, simple);
 			simple_add_back(&cmd->simples, simple);
 			simple = new_simple(0, NULL);
@@ -98,7 +106,10 @@ int	parse(t_token *tokens, t_cmd *cmd)
 		tokens = tokens->next;
 	}
 	if (simple->argv == NULL)
+	{
+		g_errno = -1;
 		return (-1);
+	}
 	simple_add_back(&cmd->simples, simple);
 	set_bin(cmd, simple);
 	cmd->cmd_count = count_cmd(cmd);
