@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:03:49 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 12:12:14 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static char	**copy_env(char **og)
 int	setup(t_cmd *cmd, char **envp)
 {
 	setup_termios();
+	catch_signals();
 	cmd->cmd_count = 0;
 	cmd->simples = NULL;
 	cmd->outfiles = NULL;
