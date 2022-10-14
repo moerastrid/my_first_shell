@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:55:55 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 14:08:10 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXECUTE_H
 
 # include "../../minishell.h"
+# include "./builtins/builtins.h"
 
 typedef struct s_children {
 	pid_t				id;
