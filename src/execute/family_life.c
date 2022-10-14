@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:21:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 14:28:05 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	family_life(t_cmd cmds)
 {
 	int			pfd[2][2];
 	int			i;
-	t_children	*new;
 	t_children	*kids;
 	pid_t		id;
 
@@ -48,16 +47,15 @@ int	family_life(t_cmd cmds)
 		if (i != cmds.cmd_count - 1)
 		{
 			if (pipe(pfd[i % 2]) == -1)
-				perror("pipe error");
+				ft_putstr_fd("pipe error", STDERR_FILENO);
 		}
 		id = create_child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
 			return (-1);
-		new = new_child(id);
 		if (kids == NULL)
-			kids = new;
+			kids = new_child(id);
 		else
-			child_add_back(kids, new);
+			child_add_back(kids, new_child(id));
 		i++;
 	}
 	return (pickup_kids(kids));

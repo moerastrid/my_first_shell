@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   touch_children.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 14:24:45 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/14 14:25:07 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execute.h"
 
 void	free_children(t_children *root)
 {
 	t_children	*next;
-	while(root != NULL)
+
+	while (root != NULL)
 	{
 		next = root->next;
 		free(root);
@@ -38,7 +51,6 @@ void	kill_children(t_children *kids)
 {
 	while (kids != NULL)
 	{
-		//printf("%d\n", kids->id);
 		if (kids->id > 0)
 			kill(kids->id, SIGKILL);
 		kids = kids->next;

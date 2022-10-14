@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   lexer.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/14 14:35:59 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "token.h"
 
-static int	is_token_char(char *str)
+int	is_token_char(char *str)
 {
 	if (ft_strncmp(str, "$", 1) == 0)
 		return (1);
@@ -13,7 +25,7 @@ static int	is_token_char(char *str)
 	return (0);
 }
 
-static int	token_type(char *str)
+int	token_type(char *str)
 {
 	if (ft_strncmp(str, "'", 1) == 0)
 		return (QUOT);
@@ -36,76 +48,7 @@ static int	token_type(char *str)
 	return (0);
 }
 
-// GREATGREAT, LESSLESS and DOLLQ have a fixed length of two.
-// WORD has length of the strlen of its data
-// QUOT and DQUOT have strlen(data) + 2 length, the quotes are skipped.
-// DOLL has length strlen(data) + 1, the dollar is skipped.
-// All other types have length 1.
-static int	token_length(t_token *token)
-{
-	int	len;
-	int	type;
-
-	type = token->type;
-	if (type == GREATGREAT || type == LESSLESS || type == DOLLQ)
-		len = 2;
-	else if (type == WORD || type == QUOT || type == DQUOT || type == DOLL)
-		len = ft_strlen(token->data);
-	else
-		len = 1;
-	if (type == QUOT || type == DQUOT)
-		len += 2;
-	if (type == DOLL)
-		len ++;
-	return (len);
-}
-
-static int	word_length(char *input)
-{
-	int	len;
-
-	len = 0;
-	while (*input != ' ' && *input != '\0' && !is_token_char(input))
-	{
-		len++;
-		input++;
-	}
-	return (len);
-}
-
-static int	quot_length(char *input)
-{
-	int	count;
-	int	type;
-
-	type = token_type(input);
-	count = 0;
-	input++;
-	while (*input != '\0' && token_type(input) != type)
-	{
-		count++;
-		input++;
-	}
-	return (count);
-}
-
-static int	dquot_length(char *input)
-{
-	int	count;
-	int	type;
-
-	type = token_type(input);
-	count = 0;
-	input++;
-	while (*input != '\0' && token_type(input) != type)
-	{
-		count++;
-		input++;
-	}
-	return (count);
-}
-
-char *get_data(int type, char *input)
+static char	*get_data(int type, char *input)
 {
 	char	*data;
 

@@ -7,7 +7,6 @@ static int	count_envp(char **envp)
 	i = 0;
 	while (envp && *envp++)
 		i++;
-
 	return (i);
 }
 
