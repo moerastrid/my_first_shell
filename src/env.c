@@ -17,7 +17,7 @@ char	**env_add(char *to_add, char **envp)
 	int		i;
 
 	size = count_envp(envp) + 2;
-	new_envp = malloc(sizeof(envp) * size);
+	new_envp = ft_calloc(sizeof(envp), size);
 	i = 0;
 	while (envp && envp[i])
 	{
@@ -26,7 +26,6 @@ char	**env_add(char *to_add, char **envp)
 		i++;
 	}
 	new_envp[i++] = ft_strdup(to_add);
-	new_envp[i] = NULL;
 	free(envp);
 	return (new_envp);
 }

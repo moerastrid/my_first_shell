@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 			free_token_list(tokens);
 			continue ;
 		}
-		g_errno = execute(cmd, tokens);
+		g_errno = execute(&cmd, tokens);
 		reset(&cmd, tokens);
 		free(line);
 		rl_on_new_line();

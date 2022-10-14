@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   children.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 13:09:08 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:17:17 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   children.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 13:09:08 by ageels            #+#    #+#             */
+/*   Updated: 2022/10/14 18:31:32 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static t_simple	*get_simple(t_cmd cmd, int num)
 	return (simple);
 }
 
-void	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
+void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 {
 	int			ret_val;
 	t_simple	*simple;
 
 	ret_val = 0;
 	close(writep[READ]);
-	child_redirect(cmd, writep, readp, cmd_no);
-	simple = get_simple(cmd, cmd_no);
+	child_redirect(*cmd, writep, readp, cmd_no);
+	simple = get_simple(*cmd, cmd_no);
 	if (is_builtin(simple) == 1)
 	{
 		ret_val = exec_builtin(simple, cmd, NULL);
@@ -64,5 +64,5 @@ void	child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 		exit (ret_val);
 	}
 	else
-		exec_cmd(simple, cmd.envc);
+		exec_cmd(simple, cmd->envc);
 }

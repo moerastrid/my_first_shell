@@ -34,7 +34,7 @@ int add_arg(t_simple *simple, char *arg)
 	{
 		argv = ft_calloc(sizeof(char *), 2);
 		if (argv == NULL)
-			return (-1);
+			return -1;
 		argv[i++] = ft_strdup(arg);
 		argv[i] = NULL;
 	}
