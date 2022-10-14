@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/14 18:32:54 by tnuyten          ###   ########.fr       */
+/*   Updated: 2022/10/14 18:40:58 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdbool.h>
 # include <curses.h>
 # include <term.h>
+# include <errno.h>
 
 # include "lib/libft/libft.h"
 # include "src/display/display.h"
@@ -64,7 +65,7 @@ typedef struct s_cmd {
 //}	t_token;
 
 // GLOBAL VAR
-unsigned int	g_errno;
+int	g_errno;
 
 // FILES & FUNCTIONS:
 //display
@@ -85,7 +86,7 @@ int			parse(t_token *tokens, t_cmd *cmds);
 // setup_reset
 char		**getpaths(char **envp);
 int			setup(t_cmd *cmd, char **envp, int argc);
-void		reset(t_cmd *cmd, t_token *tokens);
+void		reset(t_cmd *cmd, t_token *tokens, char *line);
 void		clear_cmd(t_cmd *cmd);
 
 // substitutor

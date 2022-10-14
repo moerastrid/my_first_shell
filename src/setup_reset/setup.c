@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:39:38 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 16:56:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ void	setup_termios(void)
 {
 	struct termios	my_term;
 
-	tcgetattr(0, &my_term);
+	if (tcgetattr(0, &my_term) == -1)
+		g_errno = errno;
 	my_term.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, 0, &my_term);
+	if (tcsetattr(0, 0, &my_term) == -1)
+		g_errno = errno;
 }
 
 static char	**copy_env(char **og)
@@ -48,10 +50,14 @@ int	setup(t_cmd *cmd, char **envp, int argc)
 {
 	if (argc != 1)
 	{
-		ft_putstr_fd("Minishell doesn't want an argument, please try again\n", STDERR_FILENO);
+		ft_putstr_fd("Minishell doesn't want an argument, please try again\n", \
+		STDERR_FILENO);
 		return (-1);
 	}
+	g_errno = 0;
 	setup_termios();
+	if (g_errno != 0)
+		return (-1);
 	catch_signals();
 	cmd->cmd_count = 0;
 	cmd->simples = NULL;

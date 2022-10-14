@@ -21,13 +21,11 @@ int	main(int argc, char **argv, char **envp)
 		substitute(tokens, envp);
 		if (parse(tokens, &cmd) != 0)
 		{
-			free_token_list(tokens);
+			reset(&cmd, tokens, line);
 			continue ;
 		}
 		g_errno = execute(&cmd, tokens);
-		reset(&cmd, tokens);
-		free(line);
-		rl_on_new_line();
+		reset(&cmd, tokens, line);
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);

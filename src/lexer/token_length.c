@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer01.c                                          :+:    :+:            */
+/*   token_length.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:30:28 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 14:31:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 15:42:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // QUOT and DQUOT have strlen(data) + 2 length, the quotes are skipped.
 // DOLL has length strlen(data) + 1, the dollar is skipped.
 // All other types have length 1.
+
 int	token_length(t_token *token)
 {
 	int	len;

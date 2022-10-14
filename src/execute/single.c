@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:23:51 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 18:00:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	exec_cmd(t_simple *simple, char **envp)
 
 	default_signals();
 	execve(simple->bin, simple->argv, envp);
-	ft_putstr_fd("Command not found: ", STDERR_FILENO);
 	i = 0;
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	while (simple->argv[i])
 	{
 		ft_putstr_fd(simple->argv[i], STDERR_FILENO);
 		i++;
 	}
-	ft_putstr_fd("\n", STDERR_FILENO);
-	rl_on_new_line();
+	ft_putstr_fd(": ", STDERR_FILENO);
+	g_errno = -2;
 	exit (1);
 }
 

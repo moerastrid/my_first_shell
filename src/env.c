@@ -12,7 +12,7 @@ static int	count_envp(char **envp)
 
 char	**env_add(char *to_add, char **envp)
 {
-	int	size;
+	int		size;
 	char	**new_envp;
 	int		i;
 
@@ -59,7 +59,7 @@ char	**env_remove(char *var_name, char **envp)
 	j = 0;
 	while (envp && envp[i])
 	{
-		if(envp[i] != to_remove)
+		if (envp[i] != to_remove)
 			new_envp[j++] = ft_strdup(envp[i]);
 		free(envp[i]);
 		i++;
