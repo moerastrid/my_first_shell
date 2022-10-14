@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			free_token_list(tokens);
 			dprintf(STDERR_FILENO, "OH NOOOO ~ parse error!\n");
-			continue;
+			continue ;
 		}
 		print_tokens(tokens);
 		print_simples(&cmd);
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		catch_signals();
 	}
 	free(cmd.paths);
+	// free env (still have to write this function)
 	rl_clear_history();
 	return (EXIT_SUCCESS);
 }
