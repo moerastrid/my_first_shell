@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 17:25:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 18:14:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	clear_cmd(t_cmd *cmd)
 
 void	reset(t_cmd *cmd, t_token *tokens, char *line)
 {
+	catch_errno(g_errno);
+	g_errno = 0;
 	clear_cmd(cmd);
 	free_token_list(tokens);
 	catch_signals();

@@ -11,8 +11,6 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
-		catch_errno(g_errno);
-		g_errno = 0;
 		cmd.paths = getpaths(envp);
 		line = prompt(&cmd);
 		if (ft_strlen(line) == 0)
