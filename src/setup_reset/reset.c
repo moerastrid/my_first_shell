@@ -16,23 +16,23 @@ void	clear_cmd(t_cmd *cmd)
 {
 	if (cmd->simples)
 		free_simples(cmd->simples);
-	cmd->simples = NULL;
 	free_str_list(cmd->outfiles);
-	cmd->outfiles = NULL;
 	free_str_list(cmd->infiles);
-	cmd->infiles = NULL;
 	free_str_list(cmd->delimiters);
-	cmd->delimiters = NULL;
+	free_token_list(cmd->tokens);
 	free(cmd->paths);
+	cmd->simples = NULL;
+	cmd->outfiles = NULL;
+	cmd->infiles = NULL;
+	cmd->delimiters = NULL;
 	cmd->paths = NULL;
 }
 
-void	reset(t_cmd *cmd, t_token *tokens, char *line)
+void	reset(t_cmd *cmd, char *line)
 {
 	catch_errno(g_errno);
 	g_errno = 0;
 	clear_cmd(cmd);
-	free_token_list(tokens);
 	catch_signals();
 	free(line);
 }

@@ -60,7 +60,7 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 	{
 		if (errno == 2)
 			errno = 0;
-		ret_val = exec_builtin(simple, cmd, NULL);
+		ret_val = exec_builtin(simple, cmd);
 		dup2(0, STDIN_FILENO);
 		dup2(1, STDOUT_FILENO);
 		exit (ret_val);

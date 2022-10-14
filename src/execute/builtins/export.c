@@ -12,19 +12,10 @@
 
 #include "../execute.h"
 
+//cmd pointer needs to be passed by reference back to main and envp not freed at reset.
 int	bi_export(t_simple simple, t_cmd *cmd)
 {
-	print_simples(cmd);
-
 	cmd->envc = env_add(simple.argv[0], cmd->envc);
 
-	char **envc_c = cmd->envc;
-
-	while(*envc_c)
-	{
-		printf("%s\n", *envc_c++);
-	}
-
-	ft_putstr_fd("buildin is executed\n", 1);
 	return (0);
 }

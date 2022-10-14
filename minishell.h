@@ -54,6 +54,7 @@ typedef struct s_cmd {
 	t_str_list	*outfiles;
 	t_str_list	*infiles;
 	t_str_list	*delimiters;
+	t_token		*tokens;
 	char		**paths;
 	char		**envc;
 }	t_cmd;
@@ -72,7 +73,7 @@ int	g_errno;
 char		*prompt(t_cmd	*cmd);
 
 // execute
-int			execute(t_cmd *cmds, t_token *tokens);
+int			execute(t_cmd *cmds);
 
 // lexer
 t_token		*tokenize(char *input);
@@ -81,12 +82,12 @@ void		free_token_list(t_token *token);
 // parser
 void		free_str_list(t_str_list *root);
 void		free_simples(t_simple *simples);
-int			parse(t_token *tokens, t_cmd *cmds);
+int			parse(t_cmd *cmds);
 
 // setup_reset
 char		**getpaths(char **envp);
 int			setup(t_cmd *cmd, char **envp, int argc);
-void		reset(t_cmd *cmd, t_token *tokens, char *line);
+void		reset(t_cmd *cmd, char *line);
 void		clear_cmd(t_cmd *cmd);
 
 // substitutor

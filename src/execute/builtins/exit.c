@@ -12,11 +12,9 @@
 
 #include "../execute.h"
 
-void	bi_exit(t_cmd cmd, t_token *tokens)
+void	bi_exit(t_cmd cmd)
 {
-	clear_cmd(&cmd);
-	if (tokens)
-		free_token_list(tokens);
+	clear_cmd(&cmd); //What's the point in taking the reference here?
 	if (cmd.cmd_count == 1)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit (0);

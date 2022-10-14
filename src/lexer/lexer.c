@@ -22,6 +22,10 @@ int	is_token_char(char *str)
 		return (1);
 	if (ft_strncmp(str, "<", 1) == 0)
 		return (1);
+	if (ft_strncmp(str, "\"", 1) == 0)
+		return (1);
+	if (ft_strncmp(str, "'", 1) == 0)
+		return (1);
 	return (0);
 }
 

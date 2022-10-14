@@ -14,7 +14,7 @@
 
 // EXECUTE00 IS THE EXECUTE MAIN
 
-int	execute(t_cmd *cmd, t_token *tokens)
+int	execute(t_cmd *cmd)
 {
 	int	ret_val;
 
@@ -30,7 +30,7 @@ int	execute(t_cmd *cmd, t_token *tokens)
 				errno = 0;
 			redirect_infile(cmd->infiles);
 			redirect_outfile(cmd->outfiles);
-			ret_val = exec_builtin(cmd->simples, cmd, tokens);
+			ret_val = exec_builtin(cmd->simples, cmd);
 			dup2(0, STDIN_FILENO);
 			dup2(1, STDOUT_FILENO);
 			// system("lsof -c minishell");

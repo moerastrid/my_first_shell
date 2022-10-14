@@ -40,7 +40,7 @@ int	is_builtin(t_simple	*t)
 	return (0);
 }
 
-int	exec_builtin(t_simple	*t, t_cmd *cmd, t_token *tokens)
+int	exec_builtin(t_simple	*t, t_cmd *cmd)
 {
 	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
 		return (bi_echo(t));
@@ -56,7 +56,7 @@ int	exec_builtin(t_simple	*t, t_cmd *cmd, t_token *tokens)
 		return (bi_env(*cmd));
 	else if (ft_strncmp(t->argv[0], "exit", 5) == 0)
 	{
-		bi_exit(*cmd, tokens);
+		bi_exit(*cmd);
 		ft_putstr_fd("exit error\n", STDERR_FILENO);
 		exit(1);
 	}

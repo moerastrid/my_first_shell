@@ -33,6 +33,7 @@ char	*prompt(t_cmd *cmd)
 	if (line == NULL)
 	{
 		free_envc(cmd->envc);
+		free(cmd->paths);
 		exit(0);
 	}
 	if (*line)

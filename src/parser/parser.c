@@ -80,16 +80,18 @@ static int	add_data(t_token *token, t_cmd *cmd, t_simple *simple)
 	return (0);
 }
 
-int	parse(t_token *tokens, t_cmd *cmd)
+int	parse(t_cmd *cmd)
 {
 	t_simple	*simple;
+	t_token		*token;
 
+	token = cmd->tokens;
 	simple = new_simple(0, NULL);
 	if (simple == NULL)
 		return (-1);
-	while (tokens != NULL)
+	while (token != NULL)
 	{
-		if (tokens->type == PIPE)
+		if (token->type == PIPE)
 		{
 			if (simple->argv == NULL)
 			{
@@ -103,8 +105,8 @@ int	parse(t_token *tokens, t_cmd *cmd)
 				return (-1);
 		}
 		else
-			add_data(tokens, cmd, simple);
-		tokens = tokens->next;
+			add_data(token, cmd, simple);
+		token = token->next;
 	}
 	if (simple->argv == NULL)
 	{
