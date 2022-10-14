@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:38:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 12:52:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ int			bi_export(void);
 int			bi_unset(void);
 int			bi_env(t_cmd cmd);
 void		bi_exit(t_cmd cmd, t_token *tokens);
+
+//display
+char	*prompt(t_cmd	*cmd);
 
 // execute
 int			execute(t_cmd cmds, t_token *tokens);

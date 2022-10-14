@@ -1,24 +1,5 @@
 #include "../minishell.h"
 
-void	free_envc(char	**envc)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (envc[i] != NULL)
-	{
-		j = 0;
-		while (&envc[i][j] != NULL)
-		{
-			free(&envc[i][j]);
-			j++;
-		}
-		free(envc[i]);
-		i++;
-	}
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -31,7 +12,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd.paths = getpaths(envp);
-		line = prompt();
+		line = prompt(&cmd);
 		if (ft_strlen(line) == 0)
 			continue ;
 		tokens = tokenize(line);
@@ -48,7 +29,6 @@ int	main(int argc, char **argv, char **envp)
 		free(line);
 		rl_on_new_line();
 	}
-	free_envc(cmd.envc);
 	rl_clear_history();
 	return (EXIT_SUCCESS);
 }
