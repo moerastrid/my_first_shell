@@ -62,7 +62,7 @@ char	**env_remove(char *var_name, char **envp)
 	while(envp && envp[i])
 	{
 		if(envp[i] != to_remove)
-			new_envp[j++] = envp[i];
+			new_envp[j++] = ft_strdup(envp[i]);
 		free(envp[i]);
 		i++;
 	}
