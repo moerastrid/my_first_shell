@@ -6,9 +6,6 @@ maar niet als je bijvoobeeld " exit | wc " print :)
 also : de token list (en dus cmd_count) wordt niet gereset bij parse error? voorbeeld:
 type 'ls | | exit' en dan alleen 'exit', dan zie je dat er nog 3 simples zijn.
 
-children signals:
-^C in children moet wel zichtbaar zijn
-^\ in children moet ^\Quit:3 zijn
 
 
 
@@ -29,3 +26,10 @@ US:
 BASH:
 		bash-3.2$ echo "hoi" >aaa
 		bash: aaa: Permission denied
+
+
+
+if it's a builtin, set_bin is still called, so errno is set to 2 by access() but doesn't get reset, because there is no bin.
+Do we need to add binary for builtin or can we leave it at 0? 
+
+
