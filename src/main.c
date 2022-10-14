@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 		if (tokens == NULL)
 			continue ;
 		substitute(tokens, envp);
-		if (parse(tokens, &cmd) == -1)
+		if (parse(tokens, &cmd) != 0)
 		{
 			free_token_list(tokens);
 			continue ;
