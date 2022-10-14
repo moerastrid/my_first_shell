@@ -5,6 +5,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_token	*tokens;
 	t_cmd	cmd;
+	char	**paths;
 
 	// atexit(run_leaks);
 	if (setup(&cmd, envp) == -1)
@@ -12,11 +13,9 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	while (1)
 	{
+		cmd.paths = getpaths(envp);
 		catch_signals();
 		line = prompt();
-		if (!ft_strlen(line))
-			continue;
-		ignore_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
 		{
@@ -30,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			free_token_list(tokens);
 			dprintf(STDERR_FILENO, "OH NOOOO ~ parse error!\n");
-			continue;
+			continue ;
 		}
 		print_tokens(tokens);
 		print_simples(&cmd);
@@ -41,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		free(line);
 		rl_on_new_line();
 	}
-	free(cmd.paths);
+	// free env (still have to write this function)
 	rl_clear_history();
 	return (EXIT_SUCCESS);
 }

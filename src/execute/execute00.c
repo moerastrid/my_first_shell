@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 18:44:00 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 12:08:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	execute(t_cmd cmds, t_token *tokens)
 	int	ret_val;
 
 	ret_val = 0;
+	ignore_signals();
 	if (cmds.cmd_count <= 0)
 		return (-1);
 	if (cmds.cmd_count == 1)
