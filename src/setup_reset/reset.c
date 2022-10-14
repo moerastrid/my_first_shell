@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:14:03 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 13:25:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	clear_cmd(t_cmd *cmd)
 	cmd->paths = NULL;
 }
 
-void	reset(t_cmd *cmd, t_children *kids, t_token *tokens)
+void	reset(t_cmd *cmd, t_token *tokens)
 {
-	kill_children(kids);
-	free_children(kids);
-	g_children = NULL;
 	clear_cmd(cmd);
 	free_token_list(tokens);
 	catch_signals();

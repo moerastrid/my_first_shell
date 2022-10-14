@@ -19,13 +19,13 @@ int	main(int argc, char **argv, char **envp)
 		if (tokens == NULL)
 			continue ;
 		substitute(tokens, envp);
-		if(parse(tokens, &cmd) == -1)
+		if (parse(tokens, &cmd) == -1)
 		{
 			free_token_list(tokens);
 			continue ;
 		}
 		g_errno = execute(cmd, tokens);
-		reset(&cmd, g_children, tokens);
+		reset(&cmd, tokens);
 		free(line);
 		rl_on_new_line();
 	}

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 11:50:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 13:16:05 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	bi_cd(void)
 
 int	bi_pwd(t_cmd cmd)
 {
-	char buf[10000];
+	char	buf[10000];
+
 	ft_putstr_fd("buildin pwd is executed\n", STDERR_FILENO);
 	ft_putstr_fd(getcwd(buf, 10000), STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
@@ -85,9 +86,6 @@ int	bi_env(t_cmd cmd)
 
 void	bi_exit(t_cmd cmd, t_token *tokens)
 {
-	kill_children(g_children);
-	free_children(g_children);
-	g_children = NULL;
 	clear_cmd(&cmd);
 	if (tokens)
 		free_token_list(tokens);

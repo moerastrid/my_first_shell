@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 12:55:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 13:15:37 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@
 # include "src/display/display.h"
 
 //STRUCTS:
-typedef struct s_children {
-	pid_t				id;
-	struct s_children	*next;
-}	t_children;
 
 typedef struct s_simple {
 	char			**argv;
@@ -80,7 +76,6 @@ typedef struct s_token {
 }	t_token;
 
 // GLOBAL VAR
-t_children		*g_children;
 unsigned int	g_errno;
 
 // FILES & FUNCTIONS:
@@ -95,7 +90,7 @@ int			bi_env(t_cmd cmd);
 void		bi_exit(t_cmd cmd, t_token *tokens);
 
 //display
-char	*prompt(t_cmd	*cmd);
+char		*prompt(t_cmd	*cmd);
 
 // execute
 int			execute(t_cmd cmds, t_token *tokens);
@@ -103,7 +98,6 @@ int			execute(t_cmd cmds, t_token *tokens);
 // lexer
 t_token		*tokenize(char *input);
 void		free_token_list(t_token *token);
-void		reset(t_cmd *cmd, t_children *kids, t_token *tokens);
 
 // parser
 void		free_str_list(t_str_list *root);
@@ -113,18 +107,12 @@ int			parse(t_token *tokens, t_cmd *cmds);
 // setup_reset
 char		**getpaths(char **envp);
 int			setup(t_cmd *cmd, char **envp, int argc);
-void		reset(t_cmd *cmd, t_children *kids, t_token *tokens);
+void		reset(t_cmd *cmd, t_token *tokens);
 void		clear_cmd(t_cmd *cmd);
 
 // substitutor
 void		substitute(t_token *tokens, char **envp);
 void		redirect_outfile(t_str_list *outfiles);
-
-// global kids
-void		free_children(t_children *root);
-t_children	*new_child(pid_t id);
-void		child_add_back(t_children *root, t_children *new);
-void		kill_children(t_children *kids);
 
 //utils
 char		**single_split(char const *s, char c);
@@ -134,7 +122,6 @@ void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, int mode);
 void		print_tokens(t_token *root);
 void		print_simples(t_cmd *cmd);
-void		print_children(t_children *root);
 void		run_leaks(void);
 void		run_lsof(void);
 void		run_cat_fd(void);

@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "execute.h"
 
 void	free_children(t_children *root)
 {

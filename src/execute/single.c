@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute02.c                                        :+:    :+:            */
+/*   single.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/12 19:59:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 13:23:51 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-// IN EXECUTE02, THE SINGLE COMMANDS ARE EXECUTED
+// IN EXECUTE03, THE SINGLE COMMANDS ARE EXECUTED
 
 // this is a single command in a child process
 void	exec_cmd(t_simple *simple, char **envp)
@@ -53,7 +53,6 @@ int	only_child(t_cmd cmd)
 	}
 	else
 	{
-		g_children = new_child(child_one_id);
 		waitpid(child_one_id, &status, 0);
 		if (WIFEXITED(status))
 			exit_code = WEXITSTATUS(status);

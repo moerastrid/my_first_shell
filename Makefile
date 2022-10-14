@@ -20,11 +20,12 @@ SRC =	src/main.c\
 		src/substitutor/substitutor.c\
 		src/substitutor/substitute_dquot.c\
 		src/execute/builtin.c\
-		src/execute/execute00.c\
-		src/execute/execute01.c\
-		src/execute/execute02.c\
+		src/execute/children.c\
+		src/execute/execute.c\
+		src/execute/family_life.c\
 		src/execute/redirect.c\
-		src/global_kids.c\
+		src/execute/single.c\
+		src/execute/touch_children.c\
 		src/setup_reset/path.c\
 		src/setup_reset/setup.c\
 		src/setup_reset/reset.c\

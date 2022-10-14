@@ -101,23 +101,23 @@ void	print_simples(t_cmd *cmd)
 	}
 }
 
-void print_children(t_children *root)
-{
-	t_children *ptr;
+//void print_children(t_children *root)
+//{
+//	t_children *ptr;
 
-	ptr = root;
-	if (ptr == NULL)
-		return ;
-	printf("The kids: [");
-	while(ptr != NULL)
-	{
-		if(ptr->next == NULL)
-			printf("%d]\n", ptr->id);
-		else
-			printf("%d->", ptr->id);
-		ptr = ptr->next;
-	}
-}
+//	ptr = root;
+//	if (ptr == NULL)
+//		return ;
+//	printf("The kids: [");
+//	while(ptr != NULL)
+//	{
+//		if(ptr->next == NULL)
+//			printf("%d]\n", ptr->id);
+//		else
+//			printf("%d->", ptr->id);
+//		ptr = ptr->next;
+//	}
+//}
 
 void	run_leaks(void)
 {
