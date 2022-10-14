@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		g_errno = execute(&cmd, tokens);
+		print_simples(&cmd);
 		reset(&cmd, tokens, line);
 	}
 	rl_clear_history();
