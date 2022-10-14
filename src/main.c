@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char **envp)
 			return (-1);
 		cmd.paths = paths;
 		line = prompt();
-		ignore_signals();
 		tokens = tokenize(line);
 		if (tokens == NULL)
 		{
@@ -42,11 +41,8 @@ int	main(int argc, char **argv, char **envp)
 		catch_errno(g_errno);
 		reset(&cmd, g_children, tokens);
 		free(line);
-		free(cmd.paths);
 		rl_on_new_line();
-		catch_signals();
 	}
-
 	// free env (still have to write this function)
 	rl_clear_history();
 	return (EXIT_SUCCESS);
