@@ -3,20 +3,14 @@
 void	free_envc(char	**envc)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (envc[i] != NULL)
+	while (envc && envc[i])
 	{
-		j = 0;
-		while (&envc[i][j] != NULL)
-		{
-			free(&envc[i][j]);
-			j++;
-		}
 		free(envc[i]);
 		i++;
 	}
+	free(envc);
 }
 
 int	main(int argc, char **argv, char **envp)
