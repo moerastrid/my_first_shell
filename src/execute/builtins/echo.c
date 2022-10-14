@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtins00.c                                       :+:    :+:            */
+/*   echo.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:16:05 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/14 14:03:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../execute.h"
 
 int	bi_echo(t_simple *sm)
 {
@@ -39,57 +39,4 @@ int	bi_echo(t_simple *sm)
 		i++;
 	}
 	return (0);
-}
-
-int	bi_cd(void)
-{
-	ft_putstr_fd("buildin is executed\n", 1);
-	return (0);
-}
-
-int	bi_pwd(t_cmd cmd)
-{
-	char	buf[10000];
-
-	ft_putstr_fd("buildin pwd is executed\n", STDERR_FILENO);
-	ft_putstr_fd(getcwd(buf, 10000), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-	return (0);
-}
-
-int	bi_export(void)
-{
-	ft_putstr_fd("buildin is executed\n", 1);
-	return (0);
-}
-
-int	bi_unset(void)
-{
-	ft_putstr_fd("buildin is executed\n", 1);
-	return (0);
-}
-
-int	bi_env(t_cmd cmd)
-{
-	int	i;
-
-	ft_putstr_fd("buildin env is executed\n", STDOUT_FILENO);
-	i = 0;
-	while (cmd.envc[i] != NULL)
-	{
-		ft_putstr_fd(cmd.envc[i], STDOUT_FILENO);
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		i++;
-	}
-	return (0);
-}
-
-void	bi_exit(t_cmd cmd, t_token *tokens)
-{
-	clear_cmd(&cmd);
-	if (tokens)
-		free_token_list(tokens);
-	if (cmd.cmd_count == 1)
-		ft_putstr_fd("exit\n", STDERR_FILENO);
-	exit (0);
 }
