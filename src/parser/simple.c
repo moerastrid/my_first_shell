@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   simple.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 15:43:22 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/14 15:45:17 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static void	free_simple(t_simple *simple)
@@ -11,7 +23,7 @@ static void	free_simple(t_simple *simple)
 		i++;
 	}
 	free(simple->argv);
-	//free(simple->bin);
+	free(simple->bin);
 	simple->argv = NULL;
 	simple->bin = NULL;
 }

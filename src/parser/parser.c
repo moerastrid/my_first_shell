@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 15:43:14 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/14 15:47:45 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static void	set_bin(t_cmd *cmd, t_simple *simple)
 {
-	char		*myexec;
-	int			i;
+	char	*myexec;
+	int		i;
 
 	if (!simple || !simple->argv || !cmd)
 		return ;
