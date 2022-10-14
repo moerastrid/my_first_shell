@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 17:21:48 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 22:19:40 by ageels            #+#    #+#             */
+/*   Updated: 2022/10/14 18:40:58 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	g_errno;
 char		*prompt(t_cmd	*cmd);
 
 // execute
-int			execute(t_cmd cmds, t_token *tokens);
+int			execute(t_cmd *cmds, t_token *tokens);
 
 // lexer
 t_token		*tokenize(char *input);
@@ -105,5 +105,8 @@ void		run_leaks(void);
 void		run_lsof(void);
 void		run_cat_fd(void);
 void		close_all(void);
+
+char	**env_add(char *to_add, char **envp);
+char	**env_remove(char *var_name, char **envp);
 
 #endif

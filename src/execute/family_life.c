@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   family_life.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 14:28:05 by ageels        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   family_life.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 22:18:38 by ageels            #+#    #+#             */
+/*   Updated: 2022/10/14 18:35:20 by tnuyten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	pickup_kids(t_children *kids)
 	return (exit_code);
 }
 
-int	family_life(t_cmd cmds)
+int	family_life(t_cmd *cmd)
 {
 	int			pfd[2][2];
 	int			i;
@@ -42,14 +42,14 @@ int	family_life(t_cmd cmds)
 
 	i = 0;
 	kids = NULL;
-	while (i < cmds.cmd_count)
+	while (i < cmd->cmd_count)
 	{
-		if (i != cmds.cmd_count - 1)
+		if (i != cmd->cmd_count - 1)
 		{
 			if (pipe(pfd[i % 2]) == -1)
 				ft_putstr_fd("pipe error", STDERR_FILENO);
 		}
-		id = create_child(cmds, pfd[i % 2], pfd[(i + 1) % 2], i);
+		id = create_child(cmd, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)
 			return (-1);
 		if (kids == NULL)
@@ -69,7 +69,7 @@ void	parent(t_cmd cmd, int *writep, int *readp, int cmd_no)
 		close (writep[WRITE]);
 }
 
-pid_t	create_child(t_cmd cmd, int *writep, int *readp, int cmd_no)
+pid_t	create_child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 {
 	pid_t		child_id;
 
@@ -83,7 +83,7 @@ pid_t	create_child(t_cmd cmd, int *writep, int *readp, int cmd_no)
 	}
 	else
 	{
-		parent(cmd, writep, readp, cmd_no);
+		parent(*cmd, writep, readp, cmd_no);
 		return (child_id);
 	}
 }
