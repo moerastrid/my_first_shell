@@ -6,7 +6,6 @@ LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
 SRC =	src/main.c\
-		src/builtins/builtins00.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/errors.c\
@@ -19,7 +18,14 @@ SRC =	src/main.c\
 		src/parser/cmd_builder.c\
 		src/substitutor/substitutor.c\
 		src/substitutor/substitute_dquot.c\
-		src/execute/builtin.c\
+		src/execute/builtins/cd.c\
+		src/execute/builtins/echo.c\
+		src/execute/builtins/env.c\
+		src/execute/builtins/exit.c\
+		src/execute/builtins/export.c\
+		src/execute/builtins/pwd.c\
+		src/execute/builtins/unset.c\
+		src/execute/call_builtin.c\
 		src/execute/children.c\
 		src/execute/execute.c\
 		src/execute/family_life.c\
@@ -56,7 +62,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/display
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute
-	@mkdir -pv obj/builtins
+	@mkdir -pv obj/execute/builtins
 	@mkdir -pv obj/utils
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor

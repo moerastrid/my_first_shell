@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   errors.c                                           :+:    :+:            */
+/*   env.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/12 22:16:11 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 13:59:58 by ageels        ########   odam.nl         */
+/*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/14 14:02:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
+#include "../execute.h"
 
-void	catch_errno(int err)
+int	bi_env(t_cmd cmd)
 {
-	//if (g_errno != 0)
-	//	dprintf(STDERR_FILENO, "OH NOOOO ~ error! %d\n", g_errno);
-	if (g_errno == 130)
-		ft_putstr_fd("^C\n", STDERR_FILENO);
-	if (g_errno == 131)
-		ft_putstr_fd("^\\Quit:3\n", STDERR_FILENO);
+	int	i;
+
+	ft_putstr_fd("buildin env is executed\n", STDOUT_FILENO);
+	i = 0;
+	while (cmd.envc[i] != NULL)
+	{
+		ft_putstr_fd(cmd.envc[i], STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		i++;
+	}
+	return (0);
 }
