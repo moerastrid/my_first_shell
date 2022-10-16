@@ -12,19 +12,6 @@
 
 #include "display.h"
 
-void	free_envc(char	**envc)
-{
-	int	i;
-
-	i = 0;
-	while (envc && envc[i])
-	{
-		free(envc[i]);
-		i++;
-	}
-	free(envc);
-}
-
 char	*prompt(t_cmd *cmd)
 {
 	char	*line;
@@ -32,8 +19,7 @@ char	*prompt(t_cmd *cmd)
 	line = readline(PROMPT);
 	if (line == NULL)
 	{
-		free_envc(cmd->envc);
-		free(cmd->paths);
+		clear_cmd(cmd);
 		exit(0);
 	}
 	if (*line)

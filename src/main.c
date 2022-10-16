@@ -13,10 +13,15 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = prompt(&cmd);
 		if (ft_strlen(line) == 0)
+		{
+			free(line);
 			continue ;
-		cmd.tokens = tokenize(line);
-		if (cmd.tokens == NULL)
-			continue ;
+		}
+		if(tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
+		{
+			reset(&cmd, line);
+			continue;
+		}
 		substitute(cmd.tokens, envp); //What's the order here?
 		cmd.paths = getpaths(envp); //What's the order here?
 		if (parse(&cmd) != 0)
@@ -25,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		g_errno = execute(&cmd);
-		print_cmd(cmd);
 		reset(&cmd, line);
 	}
 	rl_clear_history();

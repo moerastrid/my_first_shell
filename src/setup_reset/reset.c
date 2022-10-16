@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+# include "../env/env.h"
 
 // Reset for next loop.
 void	reset_cmd(t_cmd *cmd)
@@ -20,7 +21,8 @@ void	reset_cmd(t_cmd *cmd)
 	free_str_list(cmd->infiles);
 	free_str_list(cmd->delimiters);
 	free_token_list(cmd->tokens);
-	free(cmd->paths);
+	if(cmd->paths)
+		free(cmd->paths);
 	cmd->simples = NULL;
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
@@ -32,6 +34,7 @@ void	reset_cmd(t_cmd *cmd)
 // Clear command for exit.
 void	clear_cmd(t_cmd *cmd)
 {
+	free_envc(cmd->envc);
 	reset_cmd(cmd);
 }
 
@@ -39,7 +42,7 @@ void	reset(t_cmd *cmd, char *line)
 {
 	catch_errno(g_errno);
 	g_errno = 0;
-	clear_cmd(cmd);
+	reset_cmd(cmd);
 	catch_signals();
 	free(line);
 }

@@ -21,6 +21,8 @@ void	catch_errno(int err)
 		ft_putstr_fd("minishell : syntax error near unexpected token '|'\n", STDERR_FILENO);
 	else if (g_errno == 2)
 		return ;
+	else if (g_errno == 10 || g_errno == 11 || g_errno == 12 || g_errno == 13)
+		ft_putstr_fd("minishell: syntax error near unexpected token: [??]\n", STDERR_FILENO);
 	else if (g_errno == 130)
 		ft_putstr_fd("^C\n", STDERR_FILENO);
 	else if (g_errno == 131)

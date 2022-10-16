@@ -41,6 +41,7 @@ int	setup(t_cmd *cmd, char **envp, int argc)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
+	cmd->tokens = NULL;
 	cmd->envc = copy_env(envp);
 	if (!cmd->envc)
 		return (-1);

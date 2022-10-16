@@ -19,7 +19,9 @@ t_str_list	*str_list_new(char *str, int append_mode)
 	new = ft_calloc(1, sizeof(t_str_list));
 	if (new == NULL)
 		return (NULL);
-	new->str = ft_strdup(str);
+	new->str = NULL;
+	if (str)
+		new->str = ft_strdup(str);
 	new->append_mode = append_mode;
 	new->next = NULL;
 	return (new);

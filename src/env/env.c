@@ -87,3 +87,17 @@ char	**env_remove(char *var_name, char **envp)
 	free(envp);
 	return (new_envp);
 }
+
+void	free_envc(char	**envc)
+{
+	int	i;
+
+	i = 0;
+	while (envc && envc[i])
+	{
+		free(envc[i]);
+		i++;
+	}
+	if (envc)
+		free(envc);
+}

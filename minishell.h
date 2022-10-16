@@ -47,7 +47,7 @@ char		*prompt(t_cmd	*cmd);
 int			execute(t_cmd *cmds);
 
 // lexer
-t_token		*tokenize(char *input);
+int			tokenize(t_cmd *cmd, char *input);
 void		free_token_list(t_token *token);
 
 // parser

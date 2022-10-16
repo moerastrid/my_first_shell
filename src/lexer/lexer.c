@@ -71,16 +71,45 @@ static char	*get_data(int type, char *input)
 	return (data);
 }
 
-t_token	*tokenize(char *input)
+// error values?
+static int	check_token(t_token *token)
 {
-	t_token	root;
-	char	*data;
+	int	type;
+
+	type = token->type;
+	if (token->data == NULL)
+	{
+		if (type == WORD)
+		{
+			g_errno = 10;
+			return (-1);
+		}
+		if (type == GREATGREAT || type == GREAT)
+		{
+			g_errno = 11;
+			return (-1);
+		}
+		if (type == LESS)
+		{
+			g_errno = 12;
+			return (-1);
+		}
+		if (type == LESSLESS)
+		{
+			g_errno = 13;
+			return (-1);
+		}
+	}
+	return (0);
+}
+
+int	tokenize(t_cmd *cmd, char *input)
+{
 	int		type;
 	t_token	*new;
 	char	*end;
 
 	end = input + ft_strlen(input);
-	root.next = NULL;
 	while (*input != '\0')
 	{
 		while (*input == ' ')
@@ -88,16 +117,17 @@ t_token	*tokenize(char *input)
 		if (!*input)
 			break ;
 		type = token_type(input);
-		data = get_data(type, input);
-		new = token_new(data, type);
-		token_add_back(&root, new);
+		new = token_new(get_data(type, input), type);
+		token_add_back(&(cmd->tokens), new);
+		if (check_token(new) == -1)
+			return (-1);
 		input += token_length(new);
 		if (input > end)
 		{
-			free_token_list(root.next);
-			return (NULL);
+			free_token_list(cmd->tokens);
+			return (-1);
 		}
 	}
-	merge_redirects(root.next);
-	return (root.next);
+	merge_redirects(cmd->tokens);
+	return (0);
 }

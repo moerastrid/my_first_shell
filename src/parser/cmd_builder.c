@@ -2,6 +2,8 @@
 
 int	add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
+	if (data == NULL)
+		return (-1);
 	if (cmd->outfiles == NULL)
 		cmd->outfiles = str_list_new(data, append_mode);
 	else

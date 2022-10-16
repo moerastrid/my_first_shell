@@ -12,13 +12,21 @@
 
 #include "token.h"
 
-void	token_add_back(t_token *tokens, t_token *new)
+void	token_add_back(t_token **root, t_token *new)
 {
-	if (tokens == NULL)
+	t_token *node;
+
+	if (!root)
 		return ;
-	while (tokens->next != NULL)
-		tokens = tokens->next;
-	tokens->next = new;
+	node = root[0];
+	if (node != NULL)
+	{
+		while (node->next != NULL)
+		node = node->next;
+		node->next = new;
+	}
+	else
+		*root = new;
 }
 
 t_token	*token_new(char *data, int type)
