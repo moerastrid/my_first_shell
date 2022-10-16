@@ -35,7 +35,7 @@ int			is_builtin(t_simple	*simple);
 int			exec_builtin(t_simple *t, t_cmd *cmd);
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
-//void		free_children(t_children *root);
+void		free_children(t_children *root);
 //void		kill_children(t_children *kids);
 
 #endif

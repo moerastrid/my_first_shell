@@ -18,13 +18,16 @@ static int	pickup_kids(t_children *kids)
 {
 	int			status;
 	int			exit_code;
+	t_children	*next;
 
 	exit_code = 0;
 	status = 0;
 	while (kids)
 	{
 		waitpid(kids->id, &status, 0);
-		kids = kids->next;
+		next = kids->next;
+		free(kids);
+		kids = next;
 	}
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);

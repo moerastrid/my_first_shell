@@ -12,17 +12,17 @@
 
 #include "execute.h"
 
-//void	free_children(t_children *root)
-//{
-//	t_children	*next;
+void	free_children(t_children *root)
+{
+	t_children	*next;
 
-//	while (root != NULL)
-//	{
-//		next = root->next;
-//		free(root);
-//		root = next;
-//	}
-//}
+	while (root != NULL)
+	{
+		next = root->next;
+		free(root);
+		root = next;
+	}
+}
 
 t_children	*new_child(pid_t id)
 {
