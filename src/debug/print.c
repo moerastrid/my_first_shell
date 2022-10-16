@@ -43,7 +43,7 @@ void	print_tokens(t_token *root)
 	t_token	*i;
 
 	i = root;
-	printf("Token list:\t\t");
+	printf("Token list:\t");
 	while (i != NULL)
 	{
 		printf("[");
@@ -73,42 +73,35 @@ void	print_str_list(t_str_list *root, char *name)
 
 void	print_simples(t_simple *root)
 {
-	t_simple	*simple;
 	char		**argv;
 	int			i;
 
 	while (root != NULL)
 	{
 		argv = root->argv;
-		printf("Simple {bin:%s, argv:[", root->bin);
+		printf("Simple {bin:%s\n\t", root->bin);
 		i = 0;
 		while (i < root->argc)
 		{
-			if (i + 1 == root->argc)
-				printf("%s", argv[i++]);
-			else
-				printf("%s, ", argv[i++]);
+			printf("[%s]", argv[i++]);
 		}
 		root = root->next;
-		printf("]}\n");
+		printf("}\n");
 	}
 }
 
 void print_cmd(t_cmd cmd)
 {
+	printf("%s\n", "=================================");
 	printf("%s\n", "Command struct breakdown:");
-	printf("cmd_count: %d\n\n", cmd.cmd_count);
+	printf("cmd_count: %d\n", cmd.cmd_count);
 	print_tokens(cmd.tokens);
 	print_simples(cmd.simples);
 	print_str_list(cmd.outfiles, "Outfiles");
 	print_str_list(cmd.infiles, "Infiles");
 	print_str_list(cmd.delimiters, "Delimiters");
-
-	printf("\n%s\n", "Env size: ");
-	printf("%d\n", count_envp(cmd.envc));
-
-	// printf("\n%s\n", "Paths: ");
-
+	printf("%s: %d\n", "Env size", count_envp(cmd.envc));
+	printf("%s\n", "=================================");
 }
 
 //void print_children(t_children *root)

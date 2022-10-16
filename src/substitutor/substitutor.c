@@ -46,28 +46,19 @@ static void	substitute_doll(t_token *token, char **envp)
 
 static void	substitute_dollq(t_token *token)
 {
-	;
+	(void)token;
 }
 
 void	substitute(t_token *tokens, char **envp)
 {
-	t_token	*token;
-
-	token = tokens;
-	while (token)
+	while (tokens)
 	{
-		if (token->type == DOLL)
-		{
-			substitute_doll(token, envp);
-		}
-		if (token->type == DOLLQ)
-		{
-			substitute_dollq(token);
-		}
-		if (token->type == DQUOT)
-		{
-			substitute_dquot(token, envp);
-		}
-		token = token->next;
+		if (tokens->type == DOLL)
+			substitute_doll(tokens, envp);
+		if (tokens->type == DOLLQ)
+			substitute_dollq(tokens);
+		if (tokens->type == DQUOT)
+			substitute_dquot(tokens, envp);
+		tokens = tokens->next;
 	}
 }

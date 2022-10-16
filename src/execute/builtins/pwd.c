@@ -14,6 +14,7 @@
 
 int	bi_pwd(t_cmd cmd)
 {
+	(void)cmd;
 	ft_putstr_fd(getcwd(NULL, 0), STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 	return (0);

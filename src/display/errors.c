@@ -14,6 +14,7 @@
 
 void	catch_errno(int err)
 {
+	(void)err;
 	//if (g_errno != 0)
 	//	dprintf(STDERR_FILENO, "OH NOOOO ~ error! %d\n", g_errno);
 	if (g_errno == -1)

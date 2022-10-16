@@ -18,15 +18,15 @@ static void	free_simple(t_simple *simple)
 
 	i = 0;
 	while (i < simple->argc)
-	{	
-		if(simple->argv[i])
+	{
+		if (simple->argv[i])
 			free(simple->argv[i]);
 		simple->argv[i] = NULL;
 		i++;
 	}
 	if (simple->argv)
 		free(simple->argv);
-	if (simple->bin) 
+	if (simple->bin)
 		free(simple->bin);
 	simple->argv = NULL;
 	simple->bin = NULL;
@@ -73,4 +73,15 @@ t_simple	*new_simple(int argc, char **argv)
 	new_simple->argc = argc;
 	new_simple->argv = argv;
 	return (new_simple);
+}
+
+t_simple	*simple_tail(t_simple *simple)
+{
+	if (!simple)
+		return (simple);
+	if (!simple->next)
+		return (simple);
+	while(simple->next != NULL)
+		simple = simple->next;
+	return (simple);
 }

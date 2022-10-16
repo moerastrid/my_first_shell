@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parser.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 15:43:14 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:36:56 by ageels        ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
-
-static void	set_bin(t_cmd *cmd, t_simple *simple)
+void	set_bin(t_cmd *cmd, t_simple *simple)
 {
 	char	*myexec;
 	int		i;
@@ -58,63 +45,53 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
-static int	add_data(t_token *token, t_cmd *cmd, t_simple *simple)
+static int	add_word(t_cmd *cmd, char *data)
+{
+	int			ret;
+	t_simple	*tail;
+
+	ret = add_arg(cmd, data);
+	tail = simple_tail(cmd->simples);
+	if (tail->argc == 1)
+		set_bin(cmd, tail);
+	return (ret);
+}
+
+static int	add_data(t_cmd *cmd, t_token *token)
 {
 	int	type;
 
 	type = token->type;
 	if (type == GREAT)
-		add_outfile(cmd, 0, token->data);
+		return(add_outfile(cmd, 0, token->data));
 	if (type == LESS)
-		add_infile(cmd, token->data);
+		return(add_infile(cmd, token->data));
 	if (type == GREATGREAT)
-		add_outfile(cmd, 1, token->data);
+		return(add_outfile(cmd, 1, token->data));
 	if (type == LESSLESS)
-		add_delimiter(cmd, token->data);
+		return(add_delimiter(cmd, token->data));
 	if (type == WORD)
-		add_arg(simple, token->data);
+		return(add_word(cmd, token->data));
 	if (type == QUOT || type == DQUOT)
-		add_arg(simple, token->data);
+		return(add_arg(cmd, token->data));
 	if (type == DOLL || type == DOLLQ)
-		add_arg(simple, token->data);
+		return(add_arg(cmd, token->data));
+	if (token->type == PIPE)
+		return(add_pipe(cmd));
 	return (0);
 }
 
 int	parse(t_cmd *cmd)
 {
-	t_simple	*simple;
 	t_token		*token;
 
+	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;
-	simple = new_simple(0, NULL);
-	if (simple == NULL)
-		return (-1);
 	while (token != NULL)
 	{
-		if (token->type == PIPE)
-		{
-			if (simple->argv == NULL)
-			{
-				g_errno = -1;
-				return (-1);
-			}
-			set_bin(cmd, simple);
-			simple_add_back(&cmd->simples, simple);
-			simple = new_simple(0, NULL);
-			if (simple == NULL)
-				return (-1);
-		}
-		else
-			add_data(token, cmd, simple);
+		add_data(cmd, token);
 		token = token->next;
 	}
-	if (simple->argv == NULL)
-	{
-		g_errno = -1;
-		return (-1);
-	}
-	simple_add_back(&cmd->simples, simple);
-	set_bin(cmd, simple);
 	cmd->cmd_count = count_cmd(cmd);
 	return (0);
 }

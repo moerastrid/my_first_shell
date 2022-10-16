@@ -14,6 +14,7 @@
 
 void	handle_sigint(int sig)
 {
+	(void)sig;
 	g_errno = 1;
 	ft_putstr_fd("\n", STDERR_FILENO);
 	rl_on_new_line();

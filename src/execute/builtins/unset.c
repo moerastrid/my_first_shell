@@ -14,6 +14,8 @@
 
 int	bi_unset(t_simple simple, t_cmd *cmd)
 {
+	(void)simple;
+	(void)cmd;
 	ft_putstr_fd("unset is executed\n", 1);
 	return (0);
 }

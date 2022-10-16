@@ -94,7 +94,6 @@ t_token	*tokenize(char *input)
 		input += token_length(new);
 		if (input > end)
 		{
-			print_tokens(root.next);
 			free_token_list(root.next);
 			return (NULL);
 		}

@@ -1,59 +1,66 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   cmd_builder.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ageels <ageels@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 15:43:07 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:43:56 by ageels        ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "parser.h"
 
-void	add_outfile(t_cmd *cmd, int append_mode, char *data)
+int	add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
 	if (cmd->outfiles == NULL)
 		cmd->outfiles = str_list_new(data, append_mode);
 	else
 		str_list_add_back(cmd->outfiles, str_list_new(data, append_mode));
+	return (0);
 }
 
-void	add_infile(t_cmd *cmd, char *data)
+int	add_infile(t_cmd *cmd, char *data)
 {
 	if (cmd->infiles == NULL)
 		cmd->infiles = str_list_new(data, -1);
 	else
 		str_list_add_back(cmd->infiles, str_list_new(data, -1));
+	return (0);
 }
 
-void	add_delimiter(t_cmd *cmd, char *data)
+int	add_delimiter(t_cmd *cmd, char *data)
 {
 	if (cmd->delimiters == NULL)
 		cmd->delimiters = str_list_new(data, -1);
 	else
 		str_list_add_back(cmd->delimiters, str_list_new(data, -1));
+	return (0);
 }
 
-int	add_arg(t_simple *simple, char *arg)
+int	add_arg(t_cmd *cmd, char *arg)
 {
-	char	**argv;
-	int		i;
+	char		**argv;
+	t_simple	*tail;
+	int			i;
 
-	i = 0;
-	argv = ft_calloc(sizeof(char *), (simple->argc + 2));
+	tail = simple_tail(cmd->simples);
+	argv = ft_calloc(sizeof(char **), (tail->argc + 2));
 	if (argv == NULL)
 		return (-1);
-	while (i < simple->argc)
+	i = 0;
+	while (i < tail->argc)
 	{
-		argv[i] = simple->argv[i];
+		argv[i] = tail->argv[i];
 		i++;
 	}
-	if (simple->argv)
-		free(simple->argv);
+	if (tail->argv)
+		free(tail->argv);
 	argv[i++] = ft_strdup(arg);
-	simple->argv = argv;
-	simple->argc = i;
+	tail->argv = argv;
+	tail->argc = i;
+	return (0);
+}
+
+int add_pipe(t_cmd *cmd)
+{
+	t_simple *new;
+
+	new = new_simple(0, NULL);
+	if (simple_tail(cmd->simples)->argv == NULL)
+	{
+		g_errno = -1;
+		return (-1);
+	}
+	simple_add_back(&cmd->simples, new);
 	return (0);
 }
