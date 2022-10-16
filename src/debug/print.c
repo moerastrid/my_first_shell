@@ -79,7 +79,8 @@ void	print_simples(t_simple *root)
 	while (root != NULL)
 	{
 		argv = root->argv;
-		printf("Simple {bin:%s\n\t", root->bin);
+		printf("Simple {bin:%s\n", root->bin);
+		printf("\targc: %d\n\t", root->argc);
 		i = 0;
 		while (i < root->argc)
 		{

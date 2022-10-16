@@ -12,24 +12,30 @@
 
 #include "parser.h"
 
-static void	free_simple(t_simple *simple)
+static void free_argv(char **argv, int argc)
 {
 	int	i;
 
 	i = 0;
-	while (i < simple->argc)
+	while (i < argc)
 	{
-		if (simple->argv[i])
-			free(simple->argv[i]);
-		simple->argv[i] = NULL;
+		if (argv[i])
+			free(argv[i]);
+		argv[i] = NULL;
 		i++;
 	}
+	free(argv);
+}
+
+static void	free_simple(t_simple *simple)
+{
 	if (simple->argv)
-		free(simple->argv);
+		free_argv(simple->argv, simple->argc);
 	if (simple->bin)
 		free(simple->bin);
 	simple->argv = NULL;
 	simple->bin = NULL;
+	free(simple);
 }
 
 void	free_simples(t_simple *simples)

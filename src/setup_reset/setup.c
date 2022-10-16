@@ -23,29 +23,6 @@ void	setup_termios(void)
 		g_errno = errno;
 }
 
-static char	**copy_env(char **og)
-{
-	char	**copy;
-	int		i;
-
-	copy = NULL;
-	i = 0;
-	while (og[i] != NULL)
-	{
-		i++;
-	}
-	copy = ft_calloc(i + 1, sizeof(char *));
-	if (copy == NULL)
-		return (NULL);
-	i = 0;
-	while (og[i] != NULL)
-	{
-		copy[i] = ft_strdup(og[i]);
-		i++;
-	}
-	return (copy);
-}
-
 int	setup(t_cmd *cmd, char **envp, int argc)
 {
 	if (argc != 1)

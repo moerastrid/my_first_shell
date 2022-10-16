@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s1)
 	int		len;
 	char	*s2;
 
-	if (!s1 || s1 == '\0')
+	if (!s1 || *s1 == '\0')
 		len = 0;
 	else
 		len = ft_strlen(s1);

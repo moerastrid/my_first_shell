@@ -55,12 +55,15 @@ static int	add_data(t_cmd *cmd, t_token *token)
 int	parse(t_cmd *cmd)
 {
 	t_token		*token;
-
+	int			ret;
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;
 	while (token != NULL)
 	{
-		add_data(cmd, token);
+		ret = add_data(cmd, token);
+		if (ret != 0)
+			return (ret);
+
 		token = token->next;
 	}
 	cmd->cmd_count = count_simples(cmd);

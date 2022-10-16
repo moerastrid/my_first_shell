@@ -14,25 +14,7 @@
 # define TOKEN_H
 
 # include "../../lib/libft/libft.h"
-
-enum	e_token_type {
-	WORD = 0,
-	GREAT = 1,
-	LESS = 2,
-	PIPE = 3,
-	GREATGREAT = 4,
-	LESSLESS = 5,
-	DOLL = 6,
-	DOLLQ = 7,
-	QUOT = 8,
-	DQUOT = 9
-};
-
-typedef struct s_token {
-	enum e_token_type	type;
-	char				*data;
-	struct s_token		*next;
-}	t_token;
+# include "../../structs.h"
 
 void	token_add_back(t_token *tokens, t_token *new);
 t_token	*token_new(char *data, int type);

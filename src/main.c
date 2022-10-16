@@ -17,18 +17,14 @@ int	main(int argc, char **argv, char **envp)
 		cmd.tokens = tokenize(line);
 		if (cmd.tokens == NULL)
 			continue ;
-		// print_tokens(cmd.tokens);
 		substitute(cmd.tokens, envp); //What's the order here?
 		cmd.paths = getpaths(envp); //What's the order here?
-		// print_tokens(cmd.tokens);
 		if (parse(&cmd) != 0)
 		{
 			reset(&cmd, line);
 			continue ;
 		}
-		// print_cmd(cmd);
 		g_errno = execute(&cmd);
-		// print_cmd(cmd);
 		reset(&cmd, line);
 	}
 	rl_clear_history();

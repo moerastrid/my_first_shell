@@ -6,7 +6,7 @@ LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
 SRC =	src/main.c\
-		src/env.c\
+		src/env/env.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/errors.c\
@@ -14,12 +14,13 @@ SRC =	src/main.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
 		src/lexer/token_length.c\
+		src/parser/cmd_builder.c\
 		src/parser/parser.c\
+		src/parser/set_bin.c\
 		src/parser/simple.c\
 		src/parser/str_list.c\
-		src/parser/cmd_builder.c\
-		src/substitutor/substitutor.c\
 		src/substitutor/substitute_dquot.c\
+		src/substitutor/substitutor.c\
 		src/execute/builtins/cd.c\
 		src/execute/builtins/echo.c\
 		src/execute/builtins/env.c\
@@ -69,6 +70,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
 	@mkdir -pv obj/debug
+	@mkdir -pv obj/env
 	@mkdir -pv obj/setup_reset
 	@$(CC) $(CFLAG) -o $@ -c $^
 

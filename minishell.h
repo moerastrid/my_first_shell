@@ -28,43 +28,11 @@
 # include <term.h>
 # include <errno.h>
 
+# include "structs.h"
 # include "lib/libft/libft.h"
 # include "src/display/display.h"
 # include "src/lexer/token.h"
-
-//STRUCTS:
-
-typedef struct s_simple {
-	char			**argv;
-	int				argc;
-	char			*bin;
-	struct s_simple	*next;
-}	t_simple;
-
-typedef struct s_str_list
-{
-	char				*str;
-	int					append_mode;
-	struct s_str_list	*next;
-}	t_str_list;
-
-typedef struct s_cmd {
-	char		**envc;
-	char		**paths;
-	int			cmd_count;
-	t_token		*tokens;
-	t_simple	*simples;
-	t_str_list	*outfiles;
-	t_str_list	*infiles;
-	t_str_list	*delimiters;
-}	t_cmd;
-
-//typedef struct s_token {
-//	enum e_token_type	type;
-//	char				*data;
-//	struct s_token		*next;
-//}	t_token;
-
+# include "src/setup_reset/setup.h"
 // #remove before handin
 # include "src/debug/debug.h"
 
@@ -87,12 +55,6 @@ void		free_str_list(t_str_list *root);
 void		free_simples(t_simple *simples);
 int			parse(t_cmd *cmds);
 
-// setup_reset
-char		**getpaths(char **envp);
-int			setup(t_cmd *cmd, char **envp, int argc);
-void		reset(t_cmd *cmd, char *line);
-void		clear_cmd(t_cmd *cmd);
-
 // substitutor
 void		substitute(t_token *tokens, char **envp);
 void		redirect_outfile(t_str_list *outfiles);
@@ -100,8 +62,5 @@ void		redirect_outfile(t_str_list *outfiles);
 //utils
 char		**single_split(char const *s, char c);
 
-char		**env_add(char *to_add, char **envp);
-char		**env_remove(char *var_name, char **envp);
-int			count_envp(char **envp);
 
 #endif

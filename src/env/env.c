@@ -1,4 +1,21 @@
-#include "../minishell.h"
+#include "env.h"
+
+char	**copy_env(char **og)
+{
+	char	**copy;
+	int		i;
+
+	copy = ft_calloc(count_envp(og) + 1, sizeof(char *));
+	if (copy == NULL)
+		return (NULL);
+	i = 0;
+	while (og[i] != NULL)
+	{
+		copy[i] = ft_strdup(og[i]);
+		i++;
+	}
+	return (copy);
+}
 
 int	count_envp(char **envp)
 {
@@ -17,7 +34,7 @@ char	**env_add(char *to_add, char **envp)
 	int		i;
 
 	size = count_envp(envp) + 2;
-	new_envp = ft_calloc(sizeof(envp), size);
+	new_envp = ft_calloc(size, sizeof(envp));
 	if(!new_envp)
 		return (envp);
 	i = 0;

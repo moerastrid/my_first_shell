@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 #include "../../../minishell.h"
+#include "../../env/env.h"
 
 int			bi_echo(t_simple *simple);
 int			bi_cd(void);

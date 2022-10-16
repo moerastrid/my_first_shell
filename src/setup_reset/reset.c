@@ -12,10 +12,10 @@
 
 #include "../../minishell.h"
 
-void	clear_cmd(t_cmd *cmd)
+// Reset for next loop.
+void	reset_cmd(t_cmd *cmd)
 {
-	if (cmd->simples)
-		free_simples(cmd->simples);
+	free_simples(cmd->simples);
 	free_str_list(cmd->outfiles);
 	free_str_list(cmd->infiles);
 	free_str_list(cmd->delimiters);
@@ -25,8 +25,14 @@ void	clear_cmd(t_cmd *cmd)
 	cmd->outfiles = NULL;
 	cmd->infiles = NULL;
 	cmd->delimiters = NULL;
-	cmd->paths = NULL;
 	cmd->tokens = NULL;
+	cmd->paths = NULL;
+}
+
+// Clear command for exit.
+void	clear_cmd(t_cmd *cmd)
+{
+	reset_cmd(cmd);
 }
 
 void	reset(t_cmd *cmd, char *line)
