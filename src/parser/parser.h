@@ -36,4 +36,7 @@ t_str_list	*str_list_new(char *str, int append_mode);
 void		str_list_add_back(t_str_list *root, t_str_list *new);
 //void		free_str_list(t_str_list *root);
 
+//set_bin.c
+void		set_bin(t_cmd *cmd, t_simple *simple);
+
 #endif

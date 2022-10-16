@@ -1,36 +1,6 @@
 #include "parser.h"
-void	set_bin(t_cmd *cmd, t_simple *simple)
-{
-	char	*myexec;
-	int		i;
 
-	if (!simple || !simple->argv || !cmd)
-		return ;
-	if (ft_strchr(simple->argv[0], '/') != NULL || access(simple->argv[0], X_OK) == 0)
-	{
-		simple->bin = ft_strdup(simple->argv[0]);
-		if (access(simple->bin, X_OK) == -1)
-			errno = 2;
-		return ;
-	}
-	i = 0;
-	while (cmd->paths && cmd->paths[i])
-	{
-		myexec = ft_strjoin3(cmd->paths[i++], "/", simple->argv[0]);
-		if (!myexec)
-			return ;
-		if (access(myexec, X_OK) == 0)
-		{
-			errno = 0;
-			simple->bin = myexec;
-			return ;
-		}
-		free (myexec);
-	}
-	return ;
-}
-
-static int	count_cmd(t_cmd *cmd)
+static int	count_simples(t_cmd *cmd)
 {
 	int			cmd_count;
 	t_simple	*simples;
@@ -45,6 +15,7 @@ static int	count_cmd(t_cmd *cmd)
 	return (cmd_count);
 }
 
+// Not sure about this one yet..
 static int	add_word(t_cmd *cmd, char *data)
 {
 	int			ret;
@@ -53,7 +24,7 @@ static int	add_word(t_cmd *cmd, char *data)
 	ret = add_arg(cmd, data);
 	tail = simple_tail(cmd->simples);
 	if (tail->argc == 1)
-		set_bin(cmd, tail);
+		set_bin(cmd, tail); // Waar moet dit komen te staan?
 	return (ret);
 }
 
@@ -92,6 +63,6 @@ int	parse(t_cmd *cmd)
 		add_data(cmd, token);
 		token = token->next;
 	}
-	cmd->cmd_count = count_cmd(cmd);
+	cmd->cmd_count = count_simples(cmd);
 	return (0);
 }
