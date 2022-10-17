@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if(tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
 		{
+			printf("%s\n", "Token error");
 			print_cmd(cmd);
 			reset(&cmd, line);
 			continue;

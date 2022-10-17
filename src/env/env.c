@@ -7,7 +7,7 @@ static char	*find_str(char *str, char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0)
+		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0 && *(envp[i] + ft_strlen(str)) == '=')
 			return (envp[i]);
 		i++;
 	}
@@ -63,8 +63,6 @@ char	**env_add(char *to_add, char **envp)
 	return (new_envp);
 }
 
-
-
 char	**env_remove(char *var_name, char **envp)
 {
 	char	*to_remove;
@@ -73,20 +71,24 @@ char	**env_remove(char *var_name, char **envp)
 	int		j;
 	int		size;
 
+	to_remove = find_str(var_name, envp);
+	printf("to_remove: %s\n", to_remove);
+	if (to_remove == NULL)
+		return (envp);
 	size = count_envp(envp);
-	new_envp = malloc(sizeof(envp));
+	new_envp = ft_calloc(size, sizeof(envp));
 	if (new_envp == NULL)
 		return (envp);
-	to_remove = find_str(var_name, envp);
 	i = 0;
 	j = 0;
 	while (envp && envp[i])
 	{
 		if (envp[i] != to_remove)
 			new_envp[j++] = ft_strdup(envp[i]);
+		else
+			printf("%s\n", "Found it");
 		free(envp[i++]);
 	}
-	new_envp[i] = NULL;
 	free(envp);
 	return (new_envp);
 }
