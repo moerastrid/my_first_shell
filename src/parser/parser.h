@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:18 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 17:21:27 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 16:55:51 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 // cmd_builder.c
 int			add_outfile(t_cmd *cmd, int append_mode, char *data);
-int			add_infile(t_cmd *cmd, char *data);
-int			add_delimiter(t_cmd *cmd, char *data);
+int			add_infile(t_cmd *cmd, int append_mode, char *data);
+//int			add_delimiter(t_cmd *cmd, char *data);
 int			add_arg(t_cmd *cmd, char *arg);
 int			add_pipe(t_cmd *cmd);
 

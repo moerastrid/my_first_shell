@@ -36,11 +36,11 @@ static int	add_data(t_cmd *cmd, t_token *token)
 	if (type == GREAT)
 		return (add_outfile(cmd, 0, token->data));
 	if (type == LESS)
-		return (add_infile(cmd, token->data));
+		return (add_infile(cmd, 0, token->data));
 	if (type == GREATGREAT)
 		return (add_outfile(cmd, 1, token->data));
 	if (type == LESSLESS)
-		return (add_delimiter(cmd, token->data));
+		return (add_infile(cmd, 1, token->data));
 	if (type == WORD)
 		return (add_word(cmd, token->data));
 	if (type == QUOT || type == DQUOT)

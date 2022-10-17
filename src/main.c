@@ -17,12 +17,12 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		if(tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
+		if (tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
 		{
 			printf("%s\n", "Token error");
 			print_cmd(cmd);
 			reset(&cmd, line);
-			continue;
+			continue ;
 		}
 		substitute(cmd.tokens, envp); //What's the order here?
 		cmd.paths = getpaths(envp); //What's the order here?
