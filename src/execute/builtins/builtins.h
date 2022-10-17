@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:06:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 14:20:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 15:33:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../env/env.h"
 
 int			bi_echo(t_simple *simple);
-int			bi_cd(void);
+int			bi_cd(t_simple *simple);
 int			bi_pwd(t_cmd cmd);
 int			bi_export(t_simple simple, t_cmd *cmd);
 int			bi_unset(t_simple simple, t_cmd *cmd);
