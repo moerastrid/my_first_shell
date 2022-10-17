@@ -18,12 +18,10 @@ static char	*get_word(char *input)
 {
 	char	*var_end;
 
-	var_end = ft_strchr(input, ' ');
-	if (var_end == NULL)
-		var_end = ft_strchr(input, '\0');
-	else
-		var_end -= 1;
-	return (ft_substr(input, 1, var_end - input));
+	var_end = input + 1;
+	while(is_word_char(*var_end))
+		var_end++;
+	return (ft_substr(input, 1, var_end - 1 - input));
 }
 
 static char	*replace_once(char *input, char *full_input,
