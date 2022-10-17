@@ -72,7 +72,6 @@ char	**env_remove(char *var_name, char **envp)
 	int		size;
 
 	to_remove = find_str(var_name, envp);
-	printf("to_remove: %s\n", to_remove);
 	if (to_remove == NULL)
 		return (envp);
 	size = count_envp(envp);
@@ -85,8 +84,6 @@ char	**env_remove(char *var_name, char **envp)
 	{
 		if (envp[i] != to_remove)
 			new_envp[j++] = ft_strdup(envp[i]);
-		else
-			printf("%s\n", "Found it");
 		free(envp[i++]);
 	}
 	free(envp);
@@ -99,10 +96,7 @@ void	free_envc(char	**envc)
 
 	i = 0;
 	while (envc && envc[i])
-	{
-		free(envc[i]);
-		i++;
-	}
+		free(envc[i++]);
 	if (envc)
 		free(envc);
 }
