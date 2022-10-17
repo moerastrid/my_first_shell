@@ -84,21 +84,21 @@ static int	check_token(t_token *token)
 			g_errno = 10;
 			return (-1);
 		}
-		if (type == GREATGREAT || type == GREAT)
-		{
-			g_errno = 11;
-			return (-1);
-		}
-		if (type == LESS)
-		{
-			g_errno = 12;
-			return (-1);
-		}
-		if (type == LESSLESS)
-		{
-			g_errno = 13;
-			return (-1);
-		}
+		// if (type == GREATGREAT || type == GREAT)
+		// {
+		// 	g_errno = 11;
+		// 	return (-1);
+		// }
+		// if (type == LESS)
+		// {
+		// 	g_errno = 12;
+		// 	return (-1);
+		// }
+		// if (type == LESSLESS)
+		// {
+		// 	g_errno = 13;
+		// 	return (-1);
+		// }
 	}
 	return (0);
 }
@@ -120,10 +120,14 @@ int	tokenize(t_cmd *cmd, char *input)
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
 		if (check_token(new) == -1)
+		{
+			printf("%s\n", "check_token error");
 			return (-1);
+		}
 		input += token_length(new);
 		if (input > end)
 		{
+			printf("%s\n", "Input past end error");
 			free_token_list(cmd->tokens);
 			return (-1);
 		}

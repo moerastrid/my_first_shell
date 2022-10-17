@@ -14,8 +14,15 @@
 
 int	bi_unset(t_simple simple, t_cmd *cmd)
 {
-	(void)simple;
-	(void)cmd;
-	ft_putstr_fd("unset is executed\n", 1);
+	int	i;
+	char **new_envc;
+	i = 1;
+	while (simple.argv[i])
+	{
+		printf("Removing argv[%d]: %s\n", i, simple.argv[i]);
+		new_envc = env_remove(simple.argv[i], cmd->envc);
+		cmd->envc = new_envc;
+		i++;
+	}
 	return (0);
 }
