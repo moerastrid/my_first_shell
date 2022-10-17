@@ -28,8 +28,15 @@ BASH:
 		bash: aaa: Permission denied
 
 
-
 if it's a builtin, set_bin is still called, so errno is set to 2 by access() but doesn't get reset, because there is no bin.
-Do we need to add binary for builtin or can we leave it at 0? 
+Do we need to add binary for builtin or can we leave it at 0?
 
 
+bash-3.2$ echo "ho" <Makefile | wc -l | cat
+       1
+bash-3.2$ echo "ho" | wc -l <Makefile | cat
+      87
+
+(⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ echo $HOI/a/b
+	hoi /a/b ==> should be ==> hoi/a/b
+tl;dr : Lexer should lex spaces too.

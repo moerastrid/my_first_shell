@@ -63,7 +63,11 @@ static char	*get_data(int type, char *input)
 	else if (type == DQUOT)
 		data = ft_substr(input, 1, dquot_length(input));
 	else if (type == DOLL)
-		data = ft_substr(input, 1, word_length(input + 1));
+	{
+		int len = doll_length(input + 1);
+		printf("len: %d\n", len);
+		data = ft_substr(input, 1, len);
+	}
 	else if (type == DOLLQ)
 		data = ft_substr(input, 0, 2);
 	else
@@ -120,17 +124,10 @@ int	tokenize(t_cmd *cmd, char *input)
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
 		if (check_token(new) == -1)
-		{
-			printf("%s\n", "check_token error");
 			return (-1);
-		}
 		input += token_length(new);
 		if (input > end)
-		{
-			printf("%s\n", "Input past end error");
-			free_token_list(cmd->tokens);
 			return (-1);
-		}
 	}
 	merge_redirects(cmd->tokens);
 	return (0);

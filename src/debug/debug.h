@@ -6,7 +6,7 @@
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
 void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, char *name);
-//void		print_tokens(t_token *root); (in token.h)
+void		print_tokens(t_token *root);
 void		print_simples(t_simple *root);
 void		print_envc(char **envc);
 void		run_leaks(void);
