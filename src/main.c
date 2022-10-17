@@ -19,11 +19,10 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
 		{
-			printf("%s\n", "Token error");
-			print_cmd(cmd);
 			reset(&cmd, line);
 			continue ;
 		}
+		print_tokens(cmd.tokens);
 		substitute(cmd.tokens, envp); //What's the order here?
 		cmd.paths = getpaths(envp); //What's the order here?
 		if (parse(&cmd) != 0)
@@ -35,6 +34,5 @@ int	main(int argc, char **argv, char **envp)
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}
-	rl_clear_history();
 	return (EXIT_SUCCESS);
 }

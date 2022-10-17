@@ -33,7 +33,10 @@ int	bi_echo(t_simple *sm)
 	{
 		ft_putstr_fd(sm->argv[i], STDOUT_FILENO);
 		if (sm->argv[i + 1] != NULL)
+		{
+			// check if needed?
 			ft_putstr_fd(" ", STDOUT_FILENO);
+		}
 		if (sm->argv[i + 1] == NULL && flag == 0)
 			ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;

@@ -81,3 +81,16 @@ int	dquot_length(char *input)
 	}
 	return (count);
 }
+
+int	doll_length(char *input)
+{
+	int	len;
+
+	len = 0;
+	while (ft_isalnum(*input) || *input == '_')
+	{
+		len++;
+		input++;
+	}
+	return (len);
+}
