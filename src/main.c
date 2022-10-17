@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
+		print_cmd(cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}

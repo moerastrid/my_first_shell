@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:45:42 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 14:20:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	exec_builtin(t_simple	*t, t_cmd *cmd)
 	else if (ft_strncmp(t->argv[0], "unset", 6) == 0)
 		return (bi_unset(*t, cmd));
 	else if (ft_strncmp(t->argv[0], "env", 4) == 0)
-		return (bi_env(*cmd));
+		return (bi_env(cmd));
 	else if (ft_strncmp(t->argv[0], "exit", 5) == 0)
 	{
 		bi_exit(*cmd);

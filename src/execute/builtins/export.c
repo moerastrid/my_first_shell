@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 14:12:13 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/14 18:29:29 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   export.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/17 14:28:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 //cmd pointer needs to be passed by reference back to main and envp not freed at reset.
 int	bi_export(t_simple simple, t_cmd *cmd)
 {
-	cmd->envc = env_add(simple.argv[0], cmd->envc);
+	int	i;
 
+	i = 1;
+	while (simple.argv[i])
+	{
+		cmd->envc = env_add(simple.argv[i], cmd->envc);
+		i++;
+	}
 	return (0);
 }
