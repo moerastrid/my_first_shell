@@ -11,25 +11,14 @@ int	add_outfile(t_cmd *cmd, int append_mode, char *data)
 	return (0);
 }
 
-int	add_infile(t_cmd *cmd, char *data)
+int	add_infile(t_cmd *cmd, int append_mode, char *data)
 {
 	if (data == NULL)
 		return (-1);
 	if (cmd->infiles == NULL)
-		cmd->infiles = str_list_new(data, -1);
+		cmd->infiles = str_list_new(data, append_mode);
 	else
-		str_list_add_back(cmd->infiles, str_list_new(data, -1));
-	return (0);
-}
-
-int	add_delimiter(t_cmd *cmd, char *data)
-{
-	if (data == NULL)
-		return (-1);
-	if (cmd->delimiters == NULL)
-		cmd->delimiters = str_list_new(data, -1);
-	else
-		str_list_add_back(cmd->delimiters, str_list_new(data, -1));
+		str_list_add_back(cmd->infiles, str_list_new(data, append_mode));
 	return (0);
 }
 
