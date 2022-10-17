@@ -1,6 +1,6 @@
 #include "env.h"
 
-static char	*find_str(char *str, char **envp)
+char	*find_str(char *str, char **envp)
 {
 	int	i;
 

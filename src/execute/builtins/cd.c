@@ -6,27 +6,18 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 14:46:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 15:38:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-int	bi_cd(void)
+int	bi_cd(t_simple *simple)
 {
-	char *path;
-	char *prevp;
-	char *end;
-
-	prevp = NULL;
-	end = NULL;
-	ft_putstr_fd("buildin is executed\n", 1);
-	prevp = ft_strdup(getcwd(NULL, 0));
-	end = ft_strrchr(prevp, '/');
-	ft_bzero(end, ft_strlen(end));
-	path = ft_strdup(prevp);
-	free(prevp);
-	if (chdir(path) != 0)
-		g_errno = errno;
+	if (simple->argc == 1)
+		chdir("~");
+	else
+		chdir(simple->argv[1]);
+	// update pwd in envc
 	return (0);
 }
