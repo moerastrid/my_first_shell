@@ -105,6 +105,14 @@ void print_cmd(t_cmd cmd)
 	printf("%s\n", "=================================");
 }
 
+void print_envc(char **envc)
+{
+	while(envc && *envc)
+	{
+		printf("%s\n", envc++);
+	}
+}
+
 //void print_children(t_children *root)
 //{
 //	t_children *ptr;
