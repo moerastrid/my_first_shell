@@ -56,6 +56,7 @@ int	parse(t_cmd *cmd)
 {
 	t_token		*token;
 	int			ret;
+	t_simple	*tail;
 
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;
@@ -67,12 +68,8 @@ int	parse(t_cmd *cmd)
 		token = token->next;
 	}
 	cmd->cmd_count = count_simples(cmd);
-	tail = simple_tail(cmd);
-	if (tail.type == 0)
-	{
-		clear_cmd(cmd);
-		return (-1)
-	}
-
+	tail = simple_tail(cmd->simples);
+	if (tail->argv == NULL)
+		return (-1);
 	return (0);
 }
