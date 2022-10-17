@@ -109,7 +109,7 @@ void print_envc(char **envc)
 {
 	while(envc && *envc)
 	{
-		printf("%s\n", envc++);
+		printf("%s\n", *envc++);
 	}
 }
 

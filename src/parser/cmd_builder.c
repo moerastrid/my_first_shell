@@ -13,6 +13,8 @@ int	add_outfile(t_cmd *cmd, int append_mode, char *data)
 
 int	add_infile(t_cmd *cmd, char *data)
 {
+	if (data == NULL)
+		return (-1);
 	if (cmd->infiles == NULL)
 		cmd->infiles = str_list_new(data, -1);
 	else
@@ -22,6 +24,8 @@ int	add_infile(t_cmd *cmd, char *data)
 
 int	add_delimiter(t_cmd *cmd, char *data)
 {
+	if (data == NULL)
+		return (-1);
 	if (cmd->delimiters == NULL)
 		cmd->delimiters = str_list_new(data, -1);
 	else
@@ -35,6 +39,8 @@ int	add_arg(t_cmd *cmd, char *arg)
 	t_simple	*tail;
 	int			i;
 
+	if (arg == NULL)
+		return (-1);
 	tail = simple_tail(cmd->simples);
 	argv = ft_calloc(sizeof(char **), (tail->argc + 2));
 	if (argv == NULL)
