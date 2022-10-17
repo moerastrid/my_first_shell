@@ -1,5 +1,19 @@
 #include "substitutor.h"
 
+int	is_start_word_char(char c)
+{
+	if(ft_isdigit(c) || c == '_')
+		return (1);
+	return (0);
+}
+
+int	is_word_char(char c)
+{
+	if(ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
+}
+
 static char	*get_word(char *input)
 {
 	char	*var_end;
