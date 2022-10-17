@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:41:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 20:18:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	exec_cmd(t_simple *simple, char **envp)
 	int	i;
 
 	default_signals();
+	system("lsof -c minishell");
 	execve(simple->bin, simple->argv, envp);
 	i = 0;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -47,6 +48,7 @@ int	only_child(t_cmd cmd)
 		return (-1);
 	else if (child_one_id == 0)
 	{
+		print_cmd(cmd);
 		redirect_infile(cmd.infiles);
 		redirect_outfile(cmd.outfiles);
 		exec_cmd(cmd.simples, cmd.envc);
