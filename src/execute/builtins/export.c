@@ -12,7 +12,6 @@
 
 #include "../execute.h"
 
-//cmd pointer needs to be passed by reference back to main and envp not freed at reset.
 int	bi_export(t_simple simple, t_cmd *cmd)
 {
 	int	i;

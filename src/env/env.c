@@ -1,5 +1,19 @@
 #include "env.h"
 
+static char	*find_str(char *str, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0)
+			return (envp[i]);
+		i++;
+	}
+	return (NULL);
+}
+
 char	**copy_env(char **og)
 {
 	char	**copy;
@@ -49,19 +63,7 @@ char	**env_add(char *to_add, char **envp)
 	return (new_envp);
 }
 
-static char	*find_str(char *str, char **envp)
-{
-	int	i;
 
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0)
-			return (envp[i]);
-		i++;
-	}
-	return (NULL);
-}
 
 char	**env_remove(char *var_name, char **envp)
 {
@@ -73,6 +75,8 @@ char	**env_remove(char *var_name, char **envp)
 
 	size = count_envp(envp);
 	new_envp = malloc(sizeof(envp));
+	if (new_envp == NULL)
+		return (envp);
 	to_remove = find_str(var_name, envp);
 	i = 0;
 	j = 0;
@@ -80,8 +84,7 @@ char	**env_remove(char *var_name, char **envp)
 	{
 		if (envp[i] != to_remove)
 			new_envp[j++] = ft_strdup(envp[i]);
-		free(envp[i]);
-		i++;
+		free(envp[i++]);
 	}
 	new_envp[i] = NULL;
 	free(envp);
