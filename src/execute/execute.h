@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 00:43:26 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/14 18:41:57 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execute.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/17 23:10:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			family_life(t_cmd *cmds);
 void		child(t_cmd *cmd, int *writep, int *readp, int cmd_no);
 pid_t		create_child(t_cmd *cmds, int *wpipe, int *rpipe, int cmd_no);
 void		exec_cmd(t_simple *simple, char **envp);
-int			only_child(t_cmd cmds);
+int			only_child(t_cmd *cmds);
 void		redirect_infile(t_str_list *infiles);
 void		redirect_outfile(t_str_list *outfiles);
 int			is_builtin(t_simple	*simple);

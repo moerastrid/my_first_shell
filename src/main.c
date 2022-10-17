@@ -20,7 +20,6 @@ int	main(int argc, char **argv, char **envp)
 		if (tokenize(&cmd, line) == -1 || cmd.tokens == NULL)
 		{
 			printf("%s\n", "Token error");
-			print_cmd(cmd);
 			reset(&cmd, line);
 			continue ;
 		}
@@ -31,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		//print_cmd(cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}

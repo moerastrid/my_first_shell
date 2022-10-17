@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 14:12:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/17 23:21:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,9 @@ int	execute(t_cmd *cmd)
 		return (-1);
 	if (cmd->cmd_count == 1)
 	{
-		if (is_builtin(cmd->simples) == 1)
-		{
-			if (errno == 2)
-				errno = 0;
-			redirect_infile(cmd->infiles);
-			redirect_outfile(cmd->outfiles);
-			ret_val = exec_builtin(cmd->simples, cmd);
-			dup2(0, STDIN_FILENO);
-			dup2(1, STDOUT_FILENO);
-			// system("lsof -c minishell");
-			return (ret_val);
-		}
-		return (only_child(*cmd));
+		if (ft_strncmp(cmd->simples->argv[0], "exit", 5) == 0)
+			exit (0);
+		return (only_child(cmd));
 	}
 	else
 		return (family_life(cmd));

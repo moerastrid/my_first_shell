@@ -1,81 +1,0 @@
-Removing argv[1]: A
-Found it
-New_envc: 
-B=2
-TERM_PROGRAM=platformio-ide-terminal
-TERM=xterm-256color
-SHELL=/bin/zsh
-TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0009blc002_wv/T/
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.1xucYhgsiE/Render
-ORIGINAL_XDG_CURRENT_DESKTOP=undefined
-USER=tnuyten
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.umzSZJwD6h/Listeners
-__CF_USER_TEXT_ENCODING=0x12B9B:0x0:0x0
-PATH=/Users/tnuyten/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/tnuyten/.brew/bin
-PWD=/Users/tnuyten/Documents/Projects/minishell_repo
-LANG=en_US.UTF-8
-XPC_FLAGS=0x0
-XPC_SERVICE_NAME=0
-SHLVL=2
-HOME=/Users/tnuyten
-LOGNAME=tnuyten
-_=./minishell
-A=1
-B=2
-
-
-
-Removing argv[2]: B
-Found it
-New_envc: 
-TERM_PROGRAM=platformio-ide-terminal
-TERM=xterm-256color
-SHELL=/bin/zsh
-TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0009blc002_wv/T/
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.1xucYhgsiE/Render
-ORIGINAL_XDG_CURRENT_DESKTOP=undefined
-USER=tnuyten
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.umzSZJwD6h/Listeners
-__CF_USER_TEXT_ENCODING=0x12B9B:0x0:0x0
-PATH=/Users/tnuyten/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/tnuyten/.brew/bin
-PWD=/Users/tnuyten/Documents/Projects/minishell_repo
-LANG=en_US.UTF-8
-XPC_FLAGS=0x0
-XPC_SERVICE_NAME=0
-SHLVL=2
-HOME=/Users/tnuyten
-LOGNAME=tnuyten
-_=./minishell
-A=1
-B=2
-
-
-
-[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ ]
-[?2004l=================================
-Command struct breakdown:
-cmd_count: 1
-Token list:	[WORD, ]]
-Simple {bin:(null)
-	argc: 1
-	[]]}
-Env size: 20
-=================================
-[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ asdf
-[?2004l=================================
-Command struct breakdown:
-cmd_count: 1
-Token list:	[WORD, asdf]
-Simple {bin:(null)
-	argc: 1
-	[asdf]}
-Env size: 20
-=================================
-[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ 
-[?2004l[?2004h (⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻ [?2004l
