@@ -14,11 +14,13 @@ SRC =	src/main.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
 		src/lexer/token_length.c\
-		src/parser/cmd_builder.c\
 		src/parser/parser.c\
-		src/parser/set_bin.c\
 		src/parser/simple.c\
+		src/parser/simple_free.c\
 		src/parser/str_list.c\
+		src/parser/cmd_builder.c\
+		src/parser/simple_argv_builder.c\
+		src/parser/set_bin.c\
 		src/substitutor/substitute_dquot.c\
 		src/substitutor/substitutor.c\
 		src/execute/builtins/cd.c\

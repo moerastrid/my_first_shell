@@ -19,17 +19,21 @@
 //int			parse(t_token *tokens, t_cmd *cmd);
 
 // cmd_builder.c
-int			add_outfile(t_cmd *cmd, int append_mode, char *data);
-int			add_infile(t_cmd *cmd, int append_mode, char *data);
-//int			add_delimiter(t_cmd *cmd, char *data);
+int			cmd_add_pipe(t_cmd *cmd);
 int			add_arg(t_cmd *cmd, char *arg);
-int			add_pipe(t_cmd *cmd);
+int			add_to_last_arg(t_cmd *cmd, char *arg);
+
+
+// simple_argv_builder.c
+int			simple_add_outfile(t_cmd *cmd, int append_mode, char *data);
+int			simple_add_infile(t_cmd *cmd, int append_mode, char *data);
 
 // simple.c
 //void		free_simples(t_simple *simples);
 void		simple_add_back(t_simple **lst, t_simple *new_elem);
 t_simple	*new_simple(int argc, char **argv);
 t_simple	*simple_tail(t_simple *simple);
+int			count_simples(t_cmd *cmd);
 
 // str_list.c
 t_str_list	*str_list_new(char *str, int append_mode);
@@ -37,6 +41,5 @@ void		str_list_add_back(t_str_list *root, t_str_list *new);
 //void		free_str_list(t_str_list *root);
 
 //set_bin.c
-void		set_bin(t_cmd *cmd, t_simple *simple);
 
 #endif

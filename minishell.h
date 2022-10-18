@@ -54,6 +54,7 @@ void		free_token_list(t_token *token);
 void		free_str_list(t_str_list *root);
 void		free_simples(t_simple *simples);
 int			parse(t_cmd *cmds);
+void		cmd_simples_set_bin(t_cmd *cmd);
 
 // substitutor
 void		substitute(t_token *tokens, char **envp);

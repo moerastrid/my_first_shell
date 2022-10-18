@@ -12,42 +12,18 @@
 
 #include "parser.h"
 
-static void free_argv(char **argv, int argc)
+t_simple	*new_simple(int argc, char **argv)
 {
-	int	i;
+	t_simple	*new_simple;
 
-	i = 0;
-	while (i < argc)
-	{
-		if (argv[i])
-			free(argv[i]);
-		argv[i] = NULL;
-		i++;
-	}
-	free(argv);
-}
-
-static void	free_simple(t_simple *simple)
-{
-	if (simple->argv)
-		free_argv(simple->argv, simple->argc);
-	if (simple->bin)
-		free(simple->bin);
-	simple->argv = NULL;
-	simple->bin = NULL;
-	free(simple);
-}
-
-void	free_simples(t_simple *simples)
-{
-	t_simple	*next;
-
-	while (simples != NULL)
-	{
-		next = simples->next;
-		free_simple(simples);
-		simples = next;
-	}
+	new_simple = (t_simple *)ft_calloc(1, sizeof(t_simple));
+	if (!new_simple)
+		return (NULL);
+	new_simple->bin = NULL;
+	new_simple->next = NULL;
+	new_simple->argc = argc;
+	new_simple->argv = argv;
+	return (new_simple);
 }
 
 void	simple_add_back(t_simple **lst, t_simple *new_elem)
@@ -67,20 +43,6 @@ void	simple_add_back(t_simple **lst, t_simple *new_elem)
 	tmp->next = new_elem;
 }
 
-t_simple	*new_simple(int argc, char **argv)
-{
-	t_simple	*new_simple;
-
-	new_simple = (t_simple *)ft_calloc(1, sizeof(t_simple));
-	if (!new_simple)
-		return (NULL);
-	new_simple->bin = NULL;
-	new_simple->next = NULL;
-	new_simple->argc = argc;
-	new_simple->argv = argv;
-	return (new_simple);
-}
-
 t_simple	*simple_tail(t_simple *simple)
 {
 	if (!simple)
@@ -90,4 +52,19 @@ t_simple	*simple_tail(t_simple *simple)
 	while(simple->next != NULL)
 		simple = simple->next;
 	return (simple);
+}
+
+int	count_simples(t_cmd *cmd)
+{
+	int			cmd_count;
+	t_simple	*simples;
+
+	cmd_count = 0;
+	simples = cmd->simples;
+	while (simples != NULL)
+	{
+		cmd_count++;
+		simples = simples->next;
+	}
+	return (cmd_count);
 }

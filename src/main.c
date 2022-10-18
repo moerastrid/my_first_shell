@@ -22,14 +22,15 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		print_tokens(cmd.tokens);
 		substitute(cmd.tokens, envp); //What's the order here?
-		cmd.paths = getpaths(envp); //What's the order here?
+		cmd.paths = getpaths(envp); //What's the order here? Should we get PATH before or after loading the new ENV? export PATH=$PATH/test && echo $PATH Seems to say after, as it uses the new path.
 		if (parse(&cmd) != 0)
 		{
+			printf("%s\n", "parse error");
 			reset(&cmd, line);
 			continue ;
 		}
+		cmd_simples_set_bin(&cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}

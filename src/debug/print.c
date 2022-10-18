@@ -35,6 +35,9 @@ void	print_token_type(enum e_token_type num)
 		case 9:
 			printf("%s", "DQUOT");
 		break ;
+		case 10:
+			printf("%s", "WSPACE");
+		break ;
 	}
 }
 
@@ -80,7 +83,7 @@ void	print_simples(t_simple *root)
 	{
 		argv = root->argv;
 		printf("Simple {bin:%s\n", root->bin);
-		printf("\targc: %d\n\t", root->argc);
+		printf("\targc: %d\n\targv: ", root->argc);
 		i = 0;
 		while (i < root->argc)
 		{

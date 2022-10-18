@@ -1,11 +1,11 @@
 #include "parser.h"
 
-void	set_bin(t_cmd *cmd, t_simple *simple)
+static void	set_bin(t_simple *simple, char **paths)
 {
 	char	*myexec;
 	int		i;
 
-	if (!simple || !simple->argv || !cmd)
+	if (!simple || !simple->argv)
 		return ;
 	if (ft_strchr(simple->argv[0], '/') != NULL || access(simple->argv[0], X_OK) == 0)
 	{
@@ -15,9 +15,9 @@ void	set_bin(t_cmd *cmd, t_simple *simple)
 		return ;
 	}
 	i = 0;
-	while (cmd->paths && cmd->paths[i])
+	while (paths && paths[i])
 	{
-		myexec = ft_strjoin3(cmd->paths[i++], "/", simple->argv[0]);
+		myexec = ft_strjoin3(paths[i++], "/", simple->argv[0]);
 		if (!myexec)
 			return ;
 		if (access(myexec, X_OK) == 0)
@@ -28,5 +28,18 @@ void	set_bin(t_cmd *cmd, t_simple *simple)
 		}
 		free (myexec);
 	}
+	print_simples(simple);
 	return ;
+}
+
+void cmd_simples_set_bin(t_cmd *cmd)
+{
+	t_simple *simples;
+
+	simples = cmd->simples;
+	while(simples)
+	{
+		set_bin(simples, cmd->paths);
+		simples = simples->next;
+	}
 }

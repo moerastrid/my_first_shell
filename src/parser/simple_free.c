@@ -1,0 +1,39 @@
+#include "parser.h"
+
+static void free_argv(char **argv, int argc)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if (argv[i])
+			free(argv[i]);
+		argv[i] = NULL;
+		i++;
+	}
+	free(argv);
+}
+
+static void	free_simple(t_simple *simple)
+{
+	if (simple->argv)
+		free_argv(simple->argv, simple->argc);
+	if (simple->bin)
+		free(simple->bin);
+	simple->argv = NULL;
+	simple->bin = NULL;
+	free(simple);
+}
+
+void	free_simples(t_simple *simples)
+{
+	t_simple	*next;
+
+	while (simples != NULL)
+	{
+		next = simples->next;
+		free_simple(simples);
+		simples = next;
+	}
+}

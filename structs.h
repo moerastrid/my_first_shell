@@ -11,7 +11,8 @@ enum	e_token_type {
 	DOLL = 6,
 	DOLLQ = 7,
 	QUOT = 8,
-	DQUOT = 9
+	DQUOT = 9,
+	WSPACE = 10
 };
 
 typedef struct s_token {
