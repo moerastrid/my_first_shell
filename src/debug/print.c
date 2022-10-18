@@ -82,13 +82,19 @@ void	print_simples(t_simple *root)
 	while (root != NULL)
 	{
 		argv = root->argv;
-		printf("Simple {bin:%s\n", root->bin);
-		printf("\targc: %d\n\targv: ", root->argc);
+		printf("Simple {bin     : %s\n", root->bin);
+		printf("\targc    : %d\n\targv    : ", root->argc);
 		i = 0;
 		while (i < root->argc)
 		{
-			printf("[%s]", argv[i++]);
+			if(i != root->argc - 1)
+				printf("[%s]->", argv[i++]);
+			else
+				printf("[%s]\n\t", argv[i++]);
 		}
+		print_str_list(root->outfiles, "Outfiles");
+		printf("\t");
+		print_str_list(root->infiles, "Infiles ");
 		root = root->next;
 		printf("}\n");
 	}
@@ -101,9 +107,6 @@ void print_cmd(t_cmd cmd)
 	printf("cmd_count: %d\n", cmd.cmd_count);
 	print_tokens(cmd.tokens);
 	print_simples(cmd.simples);
-	print_str_list(cmd.outfiles, "Outfiles");
-	print_str_list(cmd.infiles, "Infiles");
-	print_str_list(cmd.delimiters, "Delimiters");
 	printf("%s: %d\n", "Env size", count_envp(cmd.envc));
 	printf("%s\n", "=================================");
 }

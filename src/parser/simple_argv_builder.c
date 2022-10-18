@@ -1,34 +1,30 @@
 #include "parser.h"
 
-// int simple_add_arg(t_simple *simple, char *arg)
-// {
-// 	char **argv;
-// }
-//
-// int simple_replace_arg(t_cmd *cmd, char *arg)
-// {
-//
-// }
-
 int	simple_add_outfile(t_cmd *cmd, int append_mode, char *data)
 {
+	t_simple *simple;
+
+	simple = simple_tail(cmd->simples);
 	if (data == NULL)
 		return (-1);
-	if (cmd->outfiles == NULL)
-		cmd->outfiles = str_list_new(data, append_mode);
+	if (simple->outfiles == NULL)
+		simple->outfiles = str_list_new(data, append_mode);
 	else
-		str_list_add_back(cmd->outfiles, str_list_new(data, append_mode));
+		str_list_add_back(simple->outfiles, str_list_new(data, append_mode));
 	return (0);
 }
 
 int	simple_add_infile(t_cmd *cmd, int append_mode, char *data)
 {
+	t_simple *simple;
+
+	simple = simple_tail(cmd->simples);
 	if (data == NULL)
 		return (-1);
-	if (cmd->infiles == NULL)
-		cmd->infiles = str_list_new(data, append_mode);
+	if (simple->infiles == NULL)
+		simple->infiles = str_list_new(data, append_mode);
 	else
-		str_list_add_back(cmd->infiles, str_list_new(data, append_mode));
+		str_list_add_back(simple->infiles, str_list_new(data, append_mode));
 	return (0);
 }
 

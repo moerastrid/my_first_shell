@@ -21,6 +21,8 @@ static void	free_simple(t_simple *simple)
 		free_argv(simple->argv, simple->argc);
 	if (simple->bin)
 		free(simple->bin);
+	free_str_list(simple->infiles);
+	free_str_list(simple->outfiles);
 	simple->argv = NULL;
 	simple->bin = NULL;
 	free(simple);

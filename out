@@ -1,0 +1,13 @@
+Makefile
+Samenvatting.txt
+astrid_notes.txt
+bugs.txt
+explain.c
+lib
+minishell
+minishell.h
+obj
+out
+out.txt
+src
+structs.h

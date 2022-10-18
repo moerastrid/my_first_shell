@@ -48,8 +48,8 @@ int	only_child(t_cmd *cmd)
 		return (-1);
 	else if (child_one_id == 0)
 	{
-		redirect_infile(cmd->infiles);
-		redirect_outfile(cmd->outfiles);
+		redirect_infile(cmd->simples->infiles);
+		redirect_outfile(cmd->simples->outfiles);
 		if (is_builtin(cmd->simples) == 1)
 		{
 			if (errno == 2)

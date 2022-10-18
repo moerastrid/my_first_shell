@@ -17,16 +17,10 @@
 void	reset_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
-	free_str_list(cmd->outfiles);
-	free_str_list(cmd->infiles);
-	free_str_list(cmd->delimiters);
 	free_token_list(cmd->tokens);
 	if(cmd->paths)
 		free(cmd->paths);
 	cmd->simples = NULL;
-	cmd->outfiles = NULL;
-	cmd->infiles = NULL;
-	cmd->delimiters = NULL;
 	cmd->tokens = NULL;
 	cmd->paths = NULL;
 }

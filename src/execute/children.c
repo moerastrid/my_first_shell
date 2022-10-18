@@ -27,9 +27,9 @@ static void	child_redirect(t_cmd cmd, int *writep, int *readp, int cmd_no)
 		close (writep[WRITE]);
 	}
 	if (cmd_no == 0)
-		redirect_infile(cmd.infiles);
+		;// redirect_infile(cmd.infiles);
 	if (cmd_no == cmd.cmd_count - 1)
-		redirect_outfile(cmd.outfiles);
+		;// redirect_outfile(cmd.outfiles);
 }
 
 static t_simple	*get_simple(t_cmd cmd, int num)

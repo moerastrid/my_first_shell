@@ -21,6 +21,8 @@ t_simple	*new_simple(int argc, char **argv)
 		return (NULL);
 	new_simple->bin = NULL;
 	new_simple->next = NULL;
+	new_simple->infiles = NULL;
+	new_simple->outfiles = NULL;
 	new_simple->argc = argc;
 	new_simple->argv = argv;
 	return (new_simple);
@@ -46,8 +48,6 @@ void	simple_add_back(t_simple **lst, t_simple *new_elem)
 t_simple	*simple_tail(t_simple *simple)
 {
 	if (!simple)
-		return (simple);
-	if (!simple->next)
 		return (simple);
 	while(simple->next != NULL)
 		simple = simple->next;

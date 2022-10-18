@@ -21,13 +21,6 @@ typedef struct s_token {
 	struct s_token		*next;
 }	t_token;
 
-typedef struct s_simple {
-	char			**argv;
-	int				argc;
-	char			*bin;
-	struct s_simple	*next;
-}	t_simple;
-
 typedef struct s_str_list
 {
 	char				*str;
@@ -35,15 +28,23 @@ typedef struct s_str_list
 	struct s_str_list	*next;
 }	t_str_list;
 
+typedef struct s_simple {
+	char			**argv;
+	int				argc;
+	char			*bin;
+	t_str_list						*outfiles;
+	t_str_list						*infiles;
+	struct s_simple	*next;
+}	t_simple;
+
 typedef struct s_cmd {
 	char		**envc;
 	char		**paths;
 	int			cmd_count;
 	t_token		*tokens;
 	t_simple	*simples;
-	t_str_list	*outfiles;
-	t_str_list	*infiles;
-	t_str_list	*delimiters;
+	// t_str_list	*outfiles; // Currently in the process of moving these to simples
+	// t_str_list	*infiles;
 }	t_cmd;
 
 #endif

@@ -121,6 +121,8 @@ int	tokenize(t_cmd *cmd, char *input)
 		if (input > end)
 			return (-1);
 	}
+	print_tokens(cmd->tokens);
 	merge_redirects(cmd->tokens);
+	print_tokens(cmd->tokens);
 	return (0);
 }
