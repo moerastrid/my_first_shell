@@ -1,30 +1,34 @@
 #include "parser.h"
 
-int	simple_add_outfile(t_cmd *cmd, int append_mode, char *data)
+int	simple_add_outfile(t_cmd *cmd, t_token *token)
 {
 	t_simple *simple;
 
+	int append_mode = token->type == GREATGREAT;
+
 	simple = simple_tail(cmd->simples);
-	if (data == NULL)
+	if (token->data == NULL)
 		return (-1);
 	if (simple->outfiles == NULL)
-		simple->outfiles = str_list_new(data, append_mode);
+		simple->outfiles = str_list_new(token->data, append_mode);
 	else
-		str_list_add_back(simple->outfiles, str_list_new(data, append_mode));
+		str_list_add_back(simple->outfiles, str_list_new(token->data, append_mode));
 	return (0);
 }
 
-int	simple_add_infile(t_cmd *cmd, int append_mode, char *data)
+int	simple_add_infile(t_cmd *cmd, t_token *token)
 {
 	t_simple *simple;
 
+	int append_mode = token->type == LESSLESS;
+
 	simple = simple_tail(cmd->simples);
-	if (data == NULL)
+	if (token->data == NULL)
 		return (-1);
 	if (simple->infiles == NULL)
-		simple->infiles = str_list_new(data, append_mode);
+		simple->infiles = str_list_new(token->data, append_mode);
 	else
-		str_list_add_back(simple->infiles, str_list_new(data, append_mode));
+		str_list_add_back(simple->infiles, str_list_new(token->data, append_mode));
 	return (0);
 }
 
@@ -71,6 +75,6 @@ int add_to_last_arg(t_cmd *cmd, char *arg)
 	i--;
 	tail_argv_last = tail->argv[i];
 	tail->argv[i] = ft_strjoin(tail->argv[i], arg);
-
+	free(tail_argv_last);
 	return (0);
 }

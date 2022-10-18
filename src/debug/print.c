@@ -49,9 +49,9 @@ void	print_tokens(t_token *root)
 	printf("Token list:\t");
 	while (i != NULL)
 	{
-		printf("[");
+		printf("(");
 		print_token_type(i->type);
-		printf(", %s]", i->data);
+		printf(": '%s')", i->data);
 		i = i->next;
 		if (i != NULL)
 			printf("->");
@@ -82,7 +82,7 @@ void	print_simples(t_simple *root)
 	while (root != NULL)
 	{
 		argv = root->argv;
-		printf("Simple {bin     : %s\n", root->bin);
+		printf("Simple: bin     : %s\n", root->bin);
 		printf("\targc    : %d\n\targv    : ", root->argc);
 		i = 0;
 		while (i < root->argc)
@@ -90,13 +90,15 @@ void	print_simples(t_simple *root)
 			if(i != root->argc - 1)
 				printf("[%s]->", argv[i++]);
 			else
-				printf("[%s]\n\t", argv[i++]);
+				printf("[%s]\n", argv[i++]);
 		}
+		if(root->outfiles)
+			printf("\t");
 		print_str_list(root->outfiles, "Outfiles");
-		printf("\t");
+		if(root->infiles)
+			printf("\t");
 		print_str_list(root->infiles, "Infiles ");
 		root = root->next;
-		printf("}\n");
 	}
 }
 

@@ -21,9 +21,10 @@
 int		is_token_char(char *str);
 int		token_type(char *str);
 int		tokenize(t_cmd *cmd, char *input);
+int		token_length(t_token *token);
 
 //token_length.c
-int		token_length(t_token *token);
+int		redir_length(char *input);
 int		word_length(char *input);
 int		quot_length(char *input);
 int		dquot_length(char *input);

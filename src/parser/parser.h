@@ -25,8 +25,8 @@ int			add_to_last_arg(t_cmd *cmd, char *arg);
 
 
 // simple_argv_builder.c
-int			simple_add_outfile(t_cmd *cmd, int append_mode, char *data);
-int			simple_add_infile(t_cmd *cmd, int append_mode, char *data);
+int			simple_add_outfile(t_cmd *cmd, t_token *token);
+int			simple_add_infile(t_cmd *cmd, t_token *token);
 
 // simple.c
 //void		free_simples(t_simple *simples);

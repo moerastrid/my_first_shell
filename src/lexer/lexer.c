@@ -58,6 +58,7 @@ static char	*get_data(int type, char *input)
 {
 	char	*data;
 
+	data = NULL;
 	if (type == WORD)
 		data = ft_substr(input, 0, word_length(input));
 	else if (type == QUOT)
@@ -66,9 +67,27 @@ static char	*get_data(int type, char *input)
 		data = ft_substr(input, 1, dquot_length(input));
 	else if (type == DOLL)
 		data = ft_substr(input, 1, doll_length(input + 1));
-	else
-		data = NULL;
+	// else if (type == GREAT || type == LESS)
+	// 	data = ft_substr(input, 1, redir_length(input + 1));
+	// else if (type == GREATGREAT)
+	// 	data = ft_substr(input, 2, redir_length(input + 2));
 	return (data);
+}
+
+int	token_length(t_token *token)
+{
+	int	len;
+	int	type;
+
+	type = token->type;
+	len = 1;
+	if (type == WORD || type == QUOT || type == DQUOT || type == DOLL)
+		len = ft_strlen(token->data);
+	if (type == QUOT || type == DQUOT)
+		len += 2;
+	if (type == DOLL)
+		len += 1;
+	return (len);
 }
 
 // error values?
@@ -84,21 +103,6 @@ static int	check_token(t_token *token)
 			g_errno = 10;
 			return (-1);
 		}
-		// if (type == GREATGREAT || type == GREAT)
-		// {
-		// 	g_errno = 11;
-		// 	return (-1);
-		// }
-		// if (type == LESS)
-		// {
-		// 	g_errno = 12;
-		// 	return (-1);
-		// }
-		// if (type == LESSLESS)
-		// {
-		// 	g_errno = 13;
-		// 	return (-1);
-		// }
 	}
 	return (0);
 }
@@ -115,14 +119,18 @@ int	tokenize(t_cmd *cmd, char *input)
 		type = token_type(input);
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
+		print_tokens(cmd->tokens);
 		if (check_token(new) == -1)
+		{
+			printf("%s\n", "check token error");
 			return (-1);
+		}
 		input += token_length(new);
 		if (input > end)
+		{
+			printf("%s\n", "past end error");
 			return (-1);
+		}
 	}
-	print_tokens(cmd->tokens);
-	merge_redirects(cmd->tokens);
-	print_tokens(cmd->tokens);
 	return (0);
 }
