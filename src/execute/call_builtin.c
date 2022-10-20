@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 23:22:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 20:51:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exec_builtin(t_simple	*t, t_cmd *cmd)
 		return (bi_env(cmd));
 	else if (ft_strncmp(t->argv[0], "exit", 5) == 0)
 	{
-		bi_exit(*cmd);
+		bi_exit(cmd);
 		ft_putstr_fd("exit error\n", STDERR_FILENO);
 		exit(1);
 	}
