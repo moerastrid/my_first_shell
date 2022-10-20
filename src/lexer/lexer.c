@@ -72,7 +72,7 @@ static char	*get_data(int type, char *input)
 	else if (type == DOLL)
 		data = ft_substr(input, 1, doll_length(input + 1));
 	// else if (type == LESSLESS)
-	// 	data = ft_substr(input, 2, redir_length(input + 2));
+	// 	data = ft_substr(input, 2, lessless_length(input + 2));
 	// else if (type == GREAT || type == LESS)
 	// 	data = ft_substr(input, 1, redir_length(input + 1));
 	// else if (type == GREATGREAT)
@@ -89,7 +89,7 @@ int	token_length(t_token *token)
 
 	type = token->type;
 	len = 1;
-	if (type & (WORD + QUOT + DQUOT + DOLL))
+	if (type & (WORD + QUOT + DQUOT + DOLL + LESSLESS))
 		len = ft_strlen(token->data);
 	if (type & (QUOT + DQUOT))
 		len += 2;

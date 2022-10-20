@@ -22,6 +22,7 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
+		print_tokens(cmd.tokens);
 		cmd.paths = getpaths(envp);
 		substitute(cmd, envp);
 		if (parse(&cmd) != 0)

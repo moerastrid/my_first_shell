@@ -93,6 +93,11 @@ int	lessless_length(char *input)
 		input++;
 		len++;
 	}
-	return (len + word_length(input));
+	while (*input != ' ' && *input != '\0')
+	{
+		input++;
+		len++;
+	}
+	return (len);
 }
 

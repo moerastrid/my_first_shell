@@ -29,6 +29,7 @@ int		word_length(char *input);
 int		quot_length(char *input);
 int		dquot_length(char *input);
 int		doll_length(char *input);
+int		lessless_length(char *input);
 
 // token_free.c
 void	free_token(t_token *token);
