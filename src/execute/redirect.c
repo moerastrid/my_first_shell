@@ -76,7 +76,7 @@ void	redirect_infile(t_str_list *infiles)
 	heredoccount = 0;
 	if (!infiles)
 		return ;
-	while (infiles->next)
+	while (infiles->next) //Skips to last infile.
 	{
 		if (infiles->append_mode == 1)
 			heredoccount++;
@@ -84,7 +84,7 @@ void	redirect_infile(t_str_list *infiles)
 	}
 	if (infiles->append_mode == 1)
 	{
-		heredocfile = heredoc_loop(infiles->str);
+		heredocfile = heredoc_loop(infiles->str); //Hier heb je vanwege de loop hierboven alleen maar toegang tot de laatste infile.
 		fd = open(heredocfile, O_CREAT | O_RDWR, 0664);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
@@ -93,6 +93,11 @@ void	redirect_infile(t_str_list *infiles)
 	}
 	else if (infiles->append_mode == 0)
 	{
+		if(access(infiles->str, R_OK) != 0)
+		{
+			perror(infiles->str); //Prints the correct error, except for "bash:"
+			exit(errno);
+		}
 		fd = open(infiles->str, O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
@@ -105,26 +110,24 @@ void	redirect_outfile(t_str_list *outfiles)
 	int	flags;
 
 	if (outfiles == NULL)
-	{
 		return ;
-	}
 	while (outfiles != NULL)
 	{
-		fd = open(outfiles->str, O_CREAT, 0666);
+		fd = open(outfiles->str, O_CREAT, 0664);
 		close(fd);
 		if (outfiles->next == NULL)
 			break ;
 		if (outfiles->append_mode == 0)
-			close(open(outfiles->str, O_WRONLY | O_CREAT | O_TRUNC, 0666));
+			close(open(outfiles->str, O_WRONLY | O_CREAT | O_TRUNC, 0664));
 		else if (outfiles->append_mode == 1)
-			close(open(outfiles->str, O_RDWR | O_APPEND, 0666));
+			close(open(outfiles->str, O_RDWR | O_APPEND, 0664));
 		outfiles = outfiles->next;
 	}
 	if (outfiles->append_mode)
 		flags = O_RDWR | O_APPEND;
 	else
 		flags = O_WRONLY | O_CREAT | O_TRUNC;
-	fd = open(outfiles->str, flags, 0666);
+	fd = open(outfiles->str, flags, 0664);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }

@@ -37,7 +37,7 @@ void	reset(t_cmd *cmd, char *line)
 	dup2(STDIN_FILENO, 0);
 	dup2(STDOUT_FILENO, 1);
 	catch_errno(g_errno);
-	g_errno = 0;
+	// g_errno = 0;
 	reset_cmd(cmd);
 	catch_signals();
 	free(line);

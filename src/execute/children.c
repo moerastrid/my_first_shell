@@ -12,7 +12,7 @@
 
 #include "execute.h"
 
-static void	child_redirect(t_cmd cmd, int *writep, int *readp, int cmd_no)
+static void	child_connect_pipe(t_cmd cmd, int *writep, int *readp, int cmd_no)
 {
 	if (cmd_no != 0)
 	{
@@ -26,10 +26,6 @@ static void	child_redirect(t_cmd cmd, int *writep, int *readp, int cmd_no)
 			exit (-1);
 		close (writep[WRITE]);
 	}
-	if (cmd_no == 0)
-		;// redirect_infile(cmd.infiles);
-	if (cmd_no == cmd.cmd_count - 1)
-		;// redirect_outfile(cmd.outfiles);
 }
 
 static t_simple	*get_simple(t_cmd cmd, int num)
@@ -54,12 +50,12 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 
 	ret_val = 0;
 	close(writep[READ]);
-	child_redirect(*cmd, writep, readp, cmd_no);
+	child_connect_pipe(*cmd, writep, readp, cmd_no);
 	simple = get_simple(*cmd, cmd_no);
 	if (is_builtin(simple) == 1)
 	{
-		if (errno == 2)
-			errno = 0;
+		// if (errno == 2)
+		// 	errno = 0; Dit zal je nooit hoeven doen. Errno wordt gezet door system calls.
 		ret_val = exec_builtin(simple, cmd);
 		dup2(0, STDIN_FILENO);
 		dup2(1, STDOUT_FILENO);

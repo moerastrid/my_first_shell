@@ -14,8 +14,9 @@
 
 int	bi_unset(t_simple simple, t_cmd *cmd)
 {
-	int	i;
-	char **new_envc;
+	int		i;
+	char	**new_envc;
+
 	i = 1;
 	while (simple.argv[i])
 	{

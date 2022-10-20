@@ -51,6 +51,10 @@ int	token_type(char *str)
 		return (LESS);
 	if (ft_strncmp(str, " ", 1) == 0)
 		return (WSPACE);
+	if (ft_strncmp(str, "\t", 1) == 0)
+		return (WSPACE);
+	if (ft_strncmp(str, "\n", 1) == 0)
+		return (WSPACE);
 	return (WORD);
 }
 
@@ -71,6 +75,8 @@ static char	*get_data(int type, char *input)
 	// 	data = ft_substr(input, 1, redir_length(input + 1));
 	// else if (type == GREATGREAT)
 	// 	data = ft_substr(input, 2, redir_length(input + 2));
+	else if (type == WSPACE)
+		data = ft_substr(input, 0, 1);
 	return (data);
 }
 

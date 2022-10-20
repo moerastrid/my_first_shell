@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		cmd_simples_set_bin(&cmd);
-		// print_cmd(cmd);
+		print_cmd(cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}
