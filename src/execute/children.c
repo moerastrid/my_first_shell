@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:09:08 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 18:46:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 14:22:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,9 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 		exit (ret_val);
 	}
 	else
+	{
+		redirect_infile(simple->infiles);
+		redirect_outfile(simple->outfiles);
 		exec_cmd(simple, cmd->envc);
+	}
 }

@@ -32,8 +32,8 @@ typedef struct s_simple {
 	char			**argv;
 	int				argc;
 	char			*bin;
-	t_str_list						*outfiles;
-	t_str_list						*infiles;
+	t_str_list		*outfiles;
+	t_str_list		*infiles;
 	struct s_simple	*next;
 }	t_simple;
 
