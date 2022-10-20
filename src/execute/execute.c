@@ -26,8 +26,8 @@ int	execute(t_cmd *cmd)
 	{
 		if (is_builtin(cmd->simples) == 1)
 		{
-			if (errno == 2)
-				errno = 0;
+			// if (errno == 2)
+			// 	errno = 0; ?
 			ret_val = exec_builtin(cmd->simples, cmd);
 			dup2(0, STDIN_FILENO);
 			dup2(1, STDOUT_FILENO);

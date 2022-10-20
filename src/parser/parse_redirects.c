@@ -20,7 +20,6 @@ int parse_redirect(t_cmd *cmd, t_token **tokens)
 
 	start_type = (*tokens)->type;
 	*tokens = (*tokens)->next;
-
 	while(1)
 	{
 		if ((*tokens) == NULL)

@@ -34,6 +34,7 @@ SRC =	src/main.c\
 		src/execute/call_builtin.c\
 		src/execute/children.c\
 		src/execute/execute.c\
+		src/execute/heredoc.c\
 		src/execute/family_life.c\
 		src/execute/redirect.c\
 		src/execute/single.c\

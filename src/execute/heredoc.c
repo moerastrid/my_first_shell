@@ -6,53 +6,119 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 16:49:03 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 19:46:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-
-typedef struct s_doc {
-	char	*name;
-	int		no;
-}	t_doc;
-
-void	redirect_infile(t_str_list *infiles)
+static char	*nextfilename(char *s)
 {
-	int		fd;
-	t_doc	heredoc;
+	char	*ret;
+	int		i;
 
-	heredoc = NULL;
-	if (infiles == NULL)
-		return ;
-	while (infiles->next)
+	i = 0;
+	ret = NULL;
+	ret = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!ret)
+		return (NULL);
+	while (s[i])
 	{
-		if (infiles->append_mode == 1)
-			add_to_heredoc(heredoc);
-		infiles = infiles->next;
+		ret[i] = s[i];
+		i++;
 	}
-	if ()
+	ret[i - 1] = s[i - 1] + 1;
+	free(s);
+	if (access(ret, F_OK) == 0)
+		ret = nextfilename(ret);
+	return (ret);
 }
 
-void	redirect_outfile(t_str_list *outfiles)
+void	docadd_back(t_doc **doc, t_doc *new_doc)
 {
-	int	fd;
-	int	flags;
+	t_doc	*temp;
 
-	if (outfiles == NULL)
+	if (!doc)
 		return ;
-	while (outfiles->next != NULL)
+	temp = doc[0];
+	if (temp == NULL)
 	{
-		close(open(outfiles->str, O_CREAT, 0664));
-		g_errno = errno;
-		outfiles = outfiles->next;
+		doc[0] = new_doc;
+		return ;
 	}
-	if (outfiles->append_mode)
-		flags = O_RDWR | O_CREAT | O_APPEND;
-	else
-		flags = O_WRONLY | O_CREAT | O_TRUNC;
-	fd = open(outfiles->str, flags, 0664);
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = new_doc;
+}
+
+t_doc	*docnew(char *eof, int no)
+{
+	t_doc	*new;
+
+	new = malloc(sizeof(t_doc));
+	if (!new)
+		return (NULL);
+	new->name = nextfilename(ft_strdup("heredob"));
+	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
+	new->no = no;
+	new->eof = ft_strdup(eof);
+	new->next = NULL;
+	return (new);
+}
+
+//t_doc	*doclast(t_doc *doc)
+//{
+//	if (!doc)
+//		return (NULL);
+//	while (doc->next)
+//		doc = doc->next;
+//	return (doc);
+//}
+
+static t_doc	*doc_delfirst(t_doc *heredoc)
+{
+	t_doc	*temp;
+	t_doc	*retdoc;
+
+	retdoc = heredoc->next;
+	temp = heredoc;
+	close(temp->fd);
+	if (retdoc)
+		unlink(temp->name);
+	free(temp->name);
+	free(temp);
+	return (retdoc);
+}
+
+char	*heredoc_loop(t_doc *heredoc)
+{
+	char	*line;
+	char	*retstr;
+
+	retstr = NULL;
+	while (heredoc)
+	{
+		retstr = ft_strdup(heredoc->name);
+		line = readline(" > ");
+		if (!line || !retstr)
+			exit (-1);
+		if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
+		{
+			heredoc = doc_delfirst(heredoc);
+			if (heredoc == NULL)
+				return (retstr);
+			else
+			{
+				free (retstr);
+				retstr = ft_strdup(heredoc->name);
+			}
+		}
+		else
+		{
+			write(heredoc->fd, line, ft_strlen(line));
+			write(heredoc->fd, "\n", ft_strlen("\n"));
+		}
+		free(line);
+	}
+	return (retstr);
 }
