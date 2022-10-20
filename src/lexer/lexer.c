@@ -71,6 +71,8 @@ static char	*get_data(int type, char *input)
 		data = ft_substr(input, 1, dquot_length(input));
 	else if (type == DOLL)
 		data = ft_substr(input, 1, doll_length(input + 1));
+	// else if (type == LESSLESS)
+	// 	data = ft_substr(input, 2, redir_length(input + 2));
 	// else if (type == GREAT || type == LESS)
 	// 	data = ft_substr(input, 1, redir_length(input + 1));
 	// else if (type == GREATGREAT)

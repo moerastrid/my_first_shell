@@ -82,3 +82,17 @@ int	redir_length(char *input)
 	}
 	return (len + word_length(input));
 }
+
+int	lessless_length(char *input)
+{
+	int	len;
+
+	len = 0;
+	while (*input == ' ')
+	{
+		input++;
+		len++;
+	}
+	return (len + word_length(input));
+}
+

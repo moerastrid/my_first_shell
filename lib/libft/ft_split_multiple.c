@@ -41,8 +41,8 @@ static int in(char s, char *c)
 	while(c && *c)
 	{
 		if(*c == s)
-		return (1);
-		s++;
+			return (1);
+		c++;
 	}
 	return (0);
 }
