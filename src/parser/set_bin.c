@@ -32,12 +32,12 @@ static void	set_bin(t_simple *simple, char **paths)
 	return ;
 }
 
-void cmd_simples_set_bin(t_cmd *cmd)
+void	cmd_simples_set_bin(t_cmd *cmd)
 {
-	t_simple *simples;
+	t_simple	*simples;
 
 	simples = cmd->simples;
-	while(simples)
+	while (simples)
 	{
 		set_bin(simples, cmd->paths);
 		simples = simples->next;

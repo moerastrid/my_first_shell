@@ -23,8 +23,8 @@ typedef struct s_list
 }	t_list;
 
 // Self:
-char	*ft_strjoin3(char *s1, char *s2, char *s3);
-char	*ft_strjoin3_free(char *s1, char *s2, char *s3);
+char		*ft_strjoin3(char *s1, char *s2, char *s3);
+char		*ft_strjoin3_free(char *s1, char *s2, char *s3);
 
 // libft:
 int			ft_isalpha(int c);

@@ -63,5 +63,4 @@ void		redirect_outfile(t_str_list *outfiles);
 //utils
 char		**single_split(char const *s, char c);
 
-
 #endif

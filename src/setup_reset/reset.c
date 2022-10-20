@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-# include "../env/env.h"
+#include "../env/env.h"
 
 // Reset for next loop.
 void	reset_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
 	free_token_list(cmd->tokens);
-	if(cmd->paths)
+	if (cmd->paths)
 		free(cmd->paths);
 	cmd->simples = NULL;
 	cmd->tokens = NULL;

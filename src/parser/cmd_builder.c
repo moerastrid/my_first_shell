@@ -1,8 +1,8 @@
 #include "parser.h"
 
-int cmd_add_pipe(t_cmd *cmd)
+int	cmd_add_pipe(t_cmd *cmd)
 {
-	t_simple *new;
+	t_simple	*new;
 
 	new = new_simple(0, NULL);
 	if (simple_tail(cmd->simples)->argv == NULL)

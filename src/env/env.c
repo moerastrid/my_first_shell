@@ -7,9 +7,10 @@ char	*find_str(char *str, char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if(ft_strlen(envp[i]) < ft_strlen(str))
+		if (ft_strlen(envp[i]) < ft_strlen(str))
 			continue ;
-		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0 && *(envp[i] + ft_strlen(str)) == '=')
+		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0 \
+		&& *(envp[i] + ft_strlen(str)) == '=')
 			return (envp[i]);
 		i++;
 	}
@@ -50,7 +51,7 @@ int	env_replace(char *var_name, char *insert, char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if(ft_strlen(envp[i]) < ft_strlen(var_name))
+		if (ft_strlen(envp[i]) < ft_strlen(var_name))
 			continue ;
 		if (ft_strncmp(envp[i], var_name, ft_strlen(var_name)) == 0 && *(envp[i] + ft_strlen(var_name)) == '=')
 		{
@@ -75,7 +76,7 @@ char	**env_add(char *to_add, char **envp)
 		return (envp);
 	head = ft_substr(to_add, 0, head_end - to_add);
 	if (env_replace(head, to_add, envp) == 0)
-		return envp;
+		return (envp);
 	new_envp = ft_calloc(count_envp(envp) + 2, sizeof(envp));
 	if (!new_envp)
 		return (envp);

@@ -49,7 +49,7 @@ t_simple	*simple_tail(t_simple *simple)
 {
 	if (!simple)
 		return (simple);
-	while(simple->next != NULL)
+	while (simple->next != NULL)
 		simple = simple->next;
 	return (simple);
 }

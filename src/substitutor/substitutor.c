@@ -51,7 +51,7 @@ static void	substitute_dollq(t_token *token)
 
 void	substitute(t_cmd cmd, char **envp)
 {
-	t_token *tokens;
+	t_token	*tokens;
 
 	tokens = cmd.tokens;
 	while (tokens)

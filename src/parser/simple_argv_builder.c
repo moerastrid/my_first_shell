@@ -1,20 +1,20 @@
 #include "parser.h"
 
-int	simple_add_outfile(t_simple *simple, char *filename, int append_mode)
+int	simple_add_outfile(t_simple *simple, char *fname, int append)
 {
 	if (simple->outfiles == NULL)
-		simple->outfiles = str_list_new(filename, append_mode);
+		simple->outfiles = str_list_new(fname, append);
 	else
-		str_list_add_back(simple->outfiles, str_list_new(filename, append_mode));
+		str_list_add_back(simple->outfiles, str_list_new(fname, append));
 	return (0);
 }
 
-int	simple_add_infile(t_simple *simple, char *filename, int append_mode)
+int	simple_add_infile(t_simple *simple, char *fname, int append)
 {
 	if (simple->infiles == NULL)
-		simple->infiles = str_list_new(filename, append_mode);
+		simple->infiles = str_list_new(fname, append);
 	else
-		str_list_add_back(simple->infiles, str_list_new(filename, append_mode));
+		str_list_add_back(simple->infiles, str_list_new(fname, append));
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int	add_arg(t_cmd *cmd, char *arg)
 	return (0);
 }
 
-int add_to_last_arg(t_cmd *cmd, char *arg)
+int	add_to_last_arg(t_cmd *cmd, char *arg)
 {
 	t_simple	*tail;
 	char		*tail_argv_last;
@@ -56,7 +56,7 @@ int add_to_last_arg(t_cmd *cmd, char *arg)
 	if (tail->argv == NULL)
 		return (-1);
 	i = 0;
-	while(tail->argv[i] != NULL)
+	while (tail->argv[i] != NULL)
 		i++;
 	i--;
 	tail_argv_last = tail->argv[i];

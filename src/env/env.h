@@ -1,7 +1,7 @@
 #ifndef ENV_H
 # define ENV_H
 
-#include "../../minishell.h"
+# include "../../minishell.h"
 
 char	*find_str(char *str, char **envp);
 char	**copy_env(char **og);

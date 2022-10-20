@@ -87,7 +87,7 @@ int	token_length(t_token *token)
 
 	type = token->type;
 	len = 1;
-	if (type & (WORD +  QUOT +  DQUOT +  DOLL))
+	if (type & (WORD + QUOT + DQUOT + DOLL))
 		len = ft_strlen(token->data);
 	if (type & (QUOT + DQUOT))
 		len += 2;

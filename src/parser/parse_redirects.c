@@ -1,9 +1,7 @@
 #include "parser.h"
 #include "../../minishell.h"
 
-typedef int simple_add_func(t_simple *simple, char *data, int append_mode);
-
-static void simple_add(int type, t_simple *simple, char *data)
+static void	simple_add(int type, t_simple *simple, char *data)
 {
 	if (type == GREAT || type == GREATGREAT)
 	{
@@ -13,14 +11,14 @@ static void simple_add(int type, t_simple *simple, char *data)
 	simple_add_infile(simple, data, type == LESSLESS);
 }
 
-int parse_redirect(t_cmd *cmd, t_token **tokens)
+int	parse_redirect(t_cmd *cmd, t_token **tokens)
 {
 	int		type;
 	int		start_type;
 
 	start_type = (*tokens)->type;
 	*tokens = (*tokens)->next;
-	while(1)
+	while (1)
 	{
 		if ((*tokens) == NULL)
 			return (1);
@@ -29,7 +27,7 @@ int parse_redirect(t_cmd *cmd, t_token **tokens)
 			*tokens = (*tokens)->next;
 		else if (type & (QUOT + DQUOT + WORD + DOLL + DOLLQ))
 		{
-			simple_add(start_type, simple_tail(cmd->simples),(*tokens)->data);
+			simple_add(start_type, simple_tail(cmd->simples), (*tokens)->data);
 			return (0);
 		}
 		else

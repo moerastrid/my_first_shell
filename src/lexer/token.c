@@ -14,7 +14,7 @@
 
 void	token_add_back(t_token **root, t_token *new)
 {
-	t_token *node;
+	t_token	*node;
 
 	if (!root)
 		return ;
@@ -22,7 +22,7 @@ void	token_add_back(t_token **root, t_token *new)
 	if (node != NULL)
 	{
 		while (node->next != NULL)
-		node = node->next;
+			node = node->next;
 		node->next = new;
 	}
 	else
@@ -49,7 +49,6 @@ void	merge_token_with_next(t_token *token)
 
 	if (token->next == NULL)
 		return ;
-
 	new_data = ft_strjoin(token->data, token->next->data);
 	free(token->data);
 	token->data = new_data;
@@ -58,7 +57,7 @@ void	merge_token_with_next(t_token *token)
 	free_token(temp);
 }
 
-void merge_words(t_token *token)
+void	merge_words(t_token *token)
 {
 	int		type;
 	t_token	*next_token;
