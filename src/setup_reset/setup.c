@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 16:56:52 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 21:22:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@ void	setup_termios(void)
 		g_errno = errno;
 }
 
+static int	setup_cmd(t_cmd *cmd, char **envp)
+{
+	char	*str;
+	int		lvl;
+
+	cmd->cmd_count = 0;
+	cmd->simples = NULL;
+	cmd->tokens = NULL;
+	cmd->paths = NULL;
+	cmd->envc = copy_env(envp);
+	if (!cmd->envc)
+		return (-1);
+	str = find_str("SHLVL", cmd->envc) + 6;
+	if (str == NULL)
+		return (0);
+	lvl = ft_atoi(str) + 1;
+	str = NULL;
+	str = ft_strjoin("SHLVL=", ft_itoa(lvl));
+	if (env_replace("SHLVL", str, cmd->envc) == -1)
+		free(str);
+	return (0);
+}
+
 int	setup(t_cmd *cmd, char **envp, int argc)
 {
 	if (argc != 1)
@@ -36,12 +59,5 @@ int	setup(t_cmd *cmd, char **envp, int argc)
 	if (g_errno != 0)
 		return (-1);
 	catch_signals();
-	cmd->cmd_count = 0;
-	cmd->simples = NULL;
-	cmd->tokens = NULL;
-	cmd->envc = copy_env(envp);
-	cmd->paths = NULL;
-	if (!cmd->envc)
-		return (-1);
-	return (0);
+	return (setup_cmd(cmd, envp));
 }

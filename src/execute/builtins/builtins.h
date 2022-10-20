@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:06:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 16:15:09 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 20:50:44 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 int			bi_echo(t_simple *simple);
 int			bi_cd(t_simple *simple, t_cmd *cmd);
-int			bi_pwd(t_cmd cmd);
+int			bi_pwd();
 int			bi_export(t_simple simple, t_cmd *cmd);
 int			bi_unset(t_simple simple, t_cmd *cmd);
 int			bi_env(t_cmd *cmd);
-void		bi_exit(t_cmd cmd);
+void		bi_exit(t_cmd *cmd);
 
 #endif
