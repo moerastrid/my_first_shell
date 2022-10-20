@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 19:46:23 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 20:19:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,6 @@ t_doc	*docnew(char *eof, int no)
 	return (new);
 }
 
-//t_doc	*doclast(t_doc *doc)
-//{
-//	if (!doc)
-//		return (NULL);
-//	while (doc->next)
-//		doc = doc->next;
-//	return (doc);
-//}
-
 static t_doc	*doc_delfirst(t_doc *heredoc)
 {
 	t_doc	*temp;
@@ -95,7 +86,6 @@ char	*heredoc_loop(t_doc *heredoc)
 	char	*line;
 	char	*retstr;
 
-	retstr = NULL;
 	while (heredoc)
 	{
 		retstr = ft_strdup(heredoc->name);
@@ -105,9 +95,7 @@ char	*heredoc_loop(t_doc *heredoc)
 		if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
 		{
 			heredoc = doc_delfirst(heredoc);
-			if (heredoc == NULL)
-				return (retstr);
-			else
+			if (heredoc != NULL)
 			{
 				free (retstr);
 				retstr = ft_strdup(heredoc->name);
@@ -120,5 +108,5 @@ char	*heredoc_loop(t_doc *heredoc)
 		}
 		free(line);
 	}
-	return (retstr);
+	return (NULL);
 }
