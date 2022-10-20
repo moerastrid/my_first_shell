@@ -13,8 +13,8 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "../../../minishell.h"
-#include "../../env/env.h"
+# include "../../../minishell.h"
+# include "../../env/env.h"
 
 int			bi_echo(t_simple *simple);
 int			bi_cd(t_simple *simple, t_cmd *cmd);

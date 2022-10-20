@@ -1,20 +1,9 @@
 #include "parser.h"
 
-// TESTS ALL TOKENS:
-// word >out.txt <in.txt >>out.txt <<in "$SHLVL" $SHLVL 'hi' $? |
-
-static int add_to_argv(int space, t_cmd *cmd, t_token **tokens)
-{
-	if (simple_tail(cmd->simples)->argv == NULL || space == 1)
-		return (add_arg(cmd, (*tokens)->data));
-	else
-		return (add_to_last_arg(cmd, (*tokens)->data));
-}
-
 static int	parse_words(t_cmd *cmd, t_token **tokens)
 {
 	int	type;
-	int spaced;
+	int	spaced;
 
 	spaced = 0;
 	while (1)
@@ -24,7 +13,7 @@ static int	parse_words(t_cmd *cmd, t_token **tokens)
 		type = (*tokens)->type;
 		if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		{
-			add_to_argv(1, cmd, tokens);
+			add_arg(cmd, (*tokens)->data);
 			return (0);
 			*tokens = (*tokens)->next;
 			spaced = 0;
@@ -43,13 +32,12 @@ static int	parse_words(t_cmd *cmd, t_token **tokens)
 static int	parse_token(t_cmd *cmd, t_token **token)
 {
 	int	type;
-	(void)parse_words;
 
 	type = (*token)->type;
 	if (type & (GREAT + LESS + GREATGREAT + LESSLESS))
 		return (parse_redirect(cmd, token));
 	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
-		return (add_to_argv(1, cmd, token));
+		return (parse_words(cmd, token));
 	if (type == PIPE)
 		return (cmd_add_pipe(cmd));
 	return (0);
@@ -71,7 +59,7 @@ int	parse(t_cmd *cmd)
 		if (ret != 0)
 			return (ret);
 		if (token == NULL)
-			break;
+			break ;
 		token = token->next;
 	}
 	cmd->cmd_count = count_simples(cmd);

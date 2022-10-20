@@ -1,6 +1,6 @@
 #include "parser.h"
 
-static void free_argv(char **argv, int argc)
+static void	free_argv(char **argv, int argc)
 {
 	int	i;
 

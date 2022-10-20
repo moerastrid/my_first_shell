@@ -23,7 +23,6 @@ int			cmd_add_pipe(t_cmd *cmd);
 int			add_arg(t_cmd *cmd, char *arg);
 int			add_to_last_arg(t_cmd *cmd, char *arg);
 
-
 // simple_argv_builder.c
 int			simple_add_outfile(t_simple *simple, char *data, int append_mode);
 int			simple_add_infile(t_simple *simple, char *data, int append_mode);
@@ -41,11 +40,6 @@ void		str_list_add_back(t_str_list *root, t_str_list *new);
 //void		free_str_list(t_str_list *root);
 
 //parse_token.c
-int parse_great(t_cmd *cmd, t_token **tokens);
-int parse_less(t_cmd *cmd, t_token **token);
-int parse_greatgreat(t_cmd *cmd, t_token **token);
-int parse_lessless(t_cmd *cmd, t_token **token);
-int parse_redirect(t_cmd *cmd, t_token **token);
-
+int			parse_redirect(t_cmd *cmd, t_token **token);
 
 #endif

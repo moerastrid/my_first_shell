@@ -14,8 +14,8 @@
 
 int	ft_putstr_fd(char *s, int fd)
 {
-	int written;
-	int temp;
+	int	written;
+	int	temp;
 
 	temp = 0;
 	written = 0;
@@ -24,10 +24,8 @@ int	ft_putstr_fd(char *s, int fd)
 	while (*s)
 	{
 		temp = ft_putchar_fd(*s++, fd);
-		if(temp == -1)
-		{
+		if (temp == -1)
 			return (-1);
-		}
 		written += temp;
 	}
 	return (written);

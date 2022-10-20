@@ -70,16 +70,15 @@ int	doll_length(char *input)
 	return (len);
 }
 
-int redir_length(char *input)
+int	redir_length(char *input)
 {
-	int len;
+	int	len;
 
 	len = 0;
-	while(*input == ' ')
+	while (*input == ' ')
 	{
 		input++;
 		len++;
 	}
-
 	return (len + word_length(input));
 }

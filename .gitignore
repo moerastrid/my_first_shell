@@ -1,5 +1,9 @@
 *.o
 *.a
+*.txt
+!astrid_notes.txt
+!bugs.txt
+!Samenvattting.txt
 minishell
-.txt
 .tags
+*.sh

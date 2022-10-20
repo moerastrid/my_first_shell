@@ -2,14 +2,14 @@
 
 int	is_start_word_char(char c)
 {
-	if(ft_isdigit(c) || c == '_')
+	if (ft_isdigit(c) || c == '_')
 		return (1);
 	return (0);
 }
 
 int	is_word_char(char c)
 {
-	if(ft_isalnum(c) || c == '_')
+	if (ft_isalnum(c) || c == '_')
 		return (1);
 	return (0);
 }
@@ -19,7 +19,7 @@ static char	*get_word(char *input)
 	char	*var_end;
 
 	var_end = input + 1;
-	while(is_word_char(*var_end))
+	while (is_word_char(*var_end))
 		var_end++;
 	return (ft_substr(input, 1, var_end - 1 - input));
 }

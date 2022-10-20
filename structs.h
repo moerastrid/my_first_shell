@@ -43,8 +43,6 @@ typedef struct s_cmd {
 	int			cmd_count;
 	t_token		*tokens;
 	t_simple	*simples;
-	// t_str_list	*outfiles; // Currently in the process of moving these to simples
-	// t_str_list	*infiles;
 }	t_cmd;
 
 #endif
