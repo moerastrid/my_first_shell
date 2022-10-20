@@ -46,7 +46,7 @@ static void	substitute_doll(t_token *token, char **envp)
 
 static void	substitute_dollq(t_token *token)
 {
-	(void)token;
+	token->data = ft_itoa(g_errno);
 }
 
 void	substitute(t_cmd cmd, char **envp)
