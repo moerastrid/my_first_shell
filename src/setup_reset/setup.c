@@ -40,6 +40,7 @@ int	setup(t_cmd *cmd, char **envp, int argc)
 	cmd->simples = NULL;
 	cmd->tokens = NULL;
 	cmd->envc = copy_env(envp);
+	cmd->paths = NULL;
 	if (!cmd->envc)
 		return (-1);
 	return (0);

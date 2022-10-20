@@ -45,13 +45,42 @@ t_token	*token_new(char *data, int type)
 void	merge_token_with_next(t_token *token)
 {
 	t_token	*temp;
+	char	*new_data;
 
 	if (token->next == NULL)
 		return ;
-	token->data = token->next->data;
+
+	new_data = ft_strjoin(token->data, token->next->data);
+	free(token->data);
+	token->data = new_data;
 	temp = token->next;
 	token->next = token->next->next;
-	free(temp);
+	free_token(temp);
+}
+
+void merge_words(t_token *token)
+{
+	int		type;
+	t_token	*next_token;
+	int		next_type;
+
+	while (token != NULL)
+	{
+		type = token->type;
+		if (type & (WSPACE + PIPE + GREAT + GREATGREAT + LESS + LESSLESS))
+		{
+			token = token->next;
+			continue ;
+		}
+		next_token = token->next;
+		if (next_token == NULL)
+			return ;
+		next_type = next_token->type;
+		if (next_type & (WORD + DOLL + QUOT + DQUOT + DOLLQ))
+			merge_token_with_next(token);
+		else
+			token = token->next;
+	}
 }
 
 void	merge_redirects(t_token *token)
@@ -61,11 +90,8 @@ void	merge_redirects(t_token *token)
 	while (token != NULL)
 	{
 		type = token->type;
-		if (type == LESS || type == GREAT || type == LESSLESS
-			|| type == GREATGREAT)
-		{
+		if (type & (LESS + GREAT + LESSLESS + GREATGREAT))
 			merge_token_with_next(token);
-		}
 		token = token->next;
 	}
 }

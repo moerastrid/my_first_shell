@@ -1,34 +1,20 @@
 #include "parser.h"
 
-int	simple_add_outfile(t_cmd *cmd, t_token *token)
+int	simple_add_outfile(t_simple *simple, char *filename, int append_mode)
 {
-	t_simple *simple;
-
-	int append_mode = token->type == GREATGREAT;
-
-	simple = simple_tail(cmd->simples);
-	if (token->data == NULL)
-		return (-1);
 	if (simple->outfiles == NULL)
-		simple->outfiles = str_list_new(token->data, append_mode);
+		simple->outfiles = str_list_new(filename, append_mode);
 	else
-		str_list_add_back(simple->outfiles, str_list_new(token->data, append_mode));
+		str_list_add_back(simple->outfiles, str_list_new(filename, append_mode));
 	return (0);
 }
 
-int	simple_add_infile(t_cmd *cmd, t_token *token)
+int	simple_add_infile(t_simple *simple, char *filename, int append_mode)
 {
-	t_simple *simple;
-
-	int append_mode = token->type == LESSLESS;
-
-	simple = simple_tail(cmd->simples);
-	if (token->data == NULL)
-		return (-1);
 	if (simple->infiles == NULL)
-		simple->infiles = str_list_new(token->data, append_mode);
+		simple->infiles = str_list_new(filename, append_mode);
 	else
-		str_list_add_back(simple->infiles, str_list_new(token->data, append_mode));
+		str_list_add_back(simple->infiles, str_list_new(filename, append_mode));
 	return (0);
 }
 

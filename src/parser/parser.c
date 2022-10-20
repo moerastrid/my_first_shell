@@ -1,35 +1,55 @@
 #include "parser.h"
 
-int	add_arg(t_cmd *cmd, char *arg);
+// TESTS ALL TOKENS:
+// word >out.txt <in.txt >>out.txt <<in "$SHLVL" $SHLVL 'hi' $? |
 
-static int	add_stuff(t_cmd *cmd, t_token *token, int space_flag)
+static int add_to_argv(int space, t_cmd *cmd, t_token **tokens)
 {
-	if (space_flag != 0 || simple_tail(cmd->simples)->argv == NULL)
-		return (add_arg(cmd, token->data));
+	if (simple_tail(cmd->simples)->argv == NULL || space == 1)
+		return (add_arg(cmd, (*tokens)->data));
 	else
-		return (add_to_last_arg(cmd, token->data));
+		return (add_to_last_arg(cmd, (*tokens)->data));
+}
+
+static int	parse_words(t_cmd *cmd, t_token **tokens)
+{
+	int	type;
+	int spaced;
+
+	spaced = 0;
+	while (1)
+	{
+		if ((*tokens) == NULL)
+			return (0);
+		type = (*tokens)->type;
+		if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
+		{
+			add_to_argv(1, cmd, tokens);
+			return (0);
+			*tokens = (*tokens)->next;
+			spaced = 0;
+		}
+		else if (type & WSPACE)
+		{
+			*tokens = (*tokens)->next;
+			spaced = 1;
+		}
+		else
+			return (0);
+	}
 	return (0);
 }
 
-static int	add_data(t_cmd *cmd, t_token *token, int space_flag)
+static int	parse_token(t_cmd *cmd, t_token **token)
 {
 	int	type;
+	(void)parse_words;
 
-	type = token->type;
-	if (type == GREAT)
-		return (simple_add_outfile(cmd, token));
-	if (type == LESS)
-		return (simple_add_infile(cmd, token));
-	if (type == GREATGREAT)
-		return (simple_add_outfile(cmd, token));
-	if (type == LESSLESS)
-		return (simple_add_infile(cmd, token));
-	if (type == WORD)
-		return (add_stuff(cmd, token, space_flag));
-	if (type == QUOT || type == DQUOT)
-		return (add_stuff(cmd, token, space_flag));
-	if (type == DOLL || type == DOLLQ)
-		return (add_stuff(cmd, token, space_flag));
+	type = (*token)->type;
+	if (type & (GREAT + LESS + GREATGREAT + LESSLESS))
+		return (parse_redirect(cmd, token));
+	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
+		return (add_to_argv(1, cmd, token));
 	if (type == PIPE)
 		return (cmd_add_pipe(cmd));
 	return (0);
@@ -47,10 +67,11 @@ int	parse(t_cmd *cmd)
 	space_flag = 0;
 	while (token != NULL)
 	{
-		ret = add_data(cmd, token, space_flag);
+		ret = parse_token(cmd, &token);
 		if (ret != 0)
 			return (ret);
-		space_flag = token->type == WSPACE;
+		if (token == NULL)
+			break;
 		token = token->next;
 	}
 	cmd->cmd_count = count_simples(cmd);

@@ -16,9 +16,9 @@ char	*get_envp_var(char *str, char **envp)
 			return (NULL);
 		env_head = ft_substr(envp[i], 0, end - envp[i]);
 		env_head_len = ft_strlen(env_head);
-		comp = ft_strncmp(str, env_head, ft_strlen(str));
+		comp = ft_strlen(str) && ft_strncmp(str, env_head, ft_strlen(str)) == 0;
 		free(env_head);
-		if (comp == 0)
+		if (comp == 1)
 			return (ft_strdup(&(envp[i][env_head_len + 1])));
 		i++;
 	}
@@ -49,8 +49,11 @@ static void	substitute_dollq(t_token *token)
 	(void)token;
 }
 
-void	substitute(t_token *tokens, char **envp)
+void	substitute(t_cmd cmd, char **envp)
 {
+	t_token *tokens;
+
+	tokens = cmd.tokens;
 	while (tokens)
 	{
 		if (tokens->type == DOLL)
@@ -61,4 +64,5 @@ void	substitute(t_token *tokens, char **envp)
 			substitute_dquot(tokens, envp);
 		tokens = tokens->next;
 	}
+	merge_words(cmd.tokens);
 }

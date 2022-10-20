@@ -22,11 +22,10 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		// print_tokens(cmd.tokens);
-		substitute(cmd.tokens, envp); //What's the order here?
 		print_tokens(cmd.tokens);
-		cmd.paths = getpaths(envp); //What's the order here? Should we get PATH before or after loading the new ENV?
-		//`export PATH=$PATH/test && echo $PATH` Seems to say after, as it uses the new path.
+		substitute(cmd, envp);
+		print_tokens(cmd.tokens);
+		cmd.paths = getpaths(envp);
 		if (parse(&cmd) != 0)
 		{
 			printf("%s\n", "parse error");
@@ -40,3 +39,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
+
+//ls | cat >out.txt <in.txt >>out2.txt | echo -e -r -m $SHLVL=a/b

@@ -5,37 +5,37 @@ void	print_token_type(enum e_token_type num)
 {
 	switch (num)
 	{
-		case 0:
+		case WORD:
 			printf("%s", "WORD");
 		break ;
-		case 1:
+		case GREAT:
 			printf("%s", "GREAT");
 		break ;
-		case 2:
+		case LESS:
 			printf("%s", "LESS");
 		break ;
-		case 3:
+		case PIPE:
 			printf("%s", "PIPE");
 		break ;
-		case 4:
+		case GREATGREAT:
 			printf("%s", "GREATGREAT");
 		break ;
-		case 5:
+		case LESSLESS:
 			printf("%s", "LESSLESS");
 		break ;
-		case 6:
+		case DOLL:
 			printf("%s", "DOLL");
 		break ;
-		case 7:
+		case DOLLQ:
 			printf("%s", "DOLLQ");
 		break ;
-		case 8:
+		case QUOT:
 			printf("%s", "QUOT");
 		break ;
-		case 9:
+		case DQUOT:
 			printf("%s", "DQUOT");
 		break ;
-		case 10:
+		case WSPACE:
 			printf("%s", "WSPACE");
 		break ;
 	}
@@ -46,7 +46,7 @@ void	print_tokens(t_token *root)
 	t_token	*i;
 
 	i = root;
-	printf("Token list:\t");
+	printf("Token list\t: ");
 	while (i != NULL)
 	{
 		printf("(");
@@ -105,11 +105,11 @@ void	print_simples(t_simple *root)
 void print_cmd(t_cmd cmd)
 {
 	printf("%s\n", "=================================");
-	printf("%s\n", "Command struct breakdown:");
-	printf("cmd_count: %d\n", cmd.cmd_count);
+	printf("%s\n", "\tCommand struct breakdown");
+	printf("cmd_count\t: %d\n", cmd.cmd_count);
 	print_tokens(cmd.tokens);
 	print_simples(cmd.simples);
-	printf("%s: %d\n", "Env size", count_envp(cmd.envc));
+	printf("%s\t: %d\n", "Env size", count_envp(cmd.envc));
 	printf("%s\n", "=================================");
 }
 

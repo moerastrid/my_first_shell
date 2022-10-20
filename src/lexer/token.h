@@ -39,5 +39,7 @@ void	token_add_back(t_token **root, t_token *new);
 t_token	*token_new(char *data, int type);
 void	merge_token_with_next(t_token *token);
 void	merge_redirects(t_token *token);
+void	merge_words(t_token *token);
+
 
 #endif

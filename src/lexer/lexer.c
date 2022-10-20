@@ -51,7 +51,7 @@ int	token_type(char *str)
 		return (LESS);
 	if (ft_strncmp(str, " ", 1) == 0)
 		return (WSPACE);
-	return (0);
+	return (WORD);
 }
 
 static char	*get_data(int type, char *input)
@@ -85,7 +85,7 @@ int	token_length(t_token *token)
 		len = ft_strlen(token->data);
 	if (type == QUOT || type == DQUOT)
 		len += 2;
-	if (type == DOLL)
+	if (type == DOLL || type == GREATGREAT || type == LESSLESS)
 		len += 1;
 	return (len);
 }
@@ -119,7 +119,6 @@ int	tokenize(t_cmd *cmd, char *input)
 		type = token_type(input);
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
-		print_tokens(cmd->tokens);
 		if (check_token(new) == -1)
 		{
 			printf("%s\n", "check token error");

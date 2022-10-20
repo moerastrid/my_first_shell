@@ -57,7 +57,7 @@ int			parse(t_cmd *cmds);
 void		cmd_simples_set_bin(t_cmd *cmd);
 
 // substitutor
-void		substitute(t_token *tokens, char **envp);
+void		substitute(t_cmd cmd, char **envp);
 void		redirect_outfile(t_str_list *outfiles);
 
 //utils

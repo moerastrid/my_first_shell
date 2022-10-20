@@ -2,17 +2,17 @@
 # define STRUCTS_H
 
 enum	e_token_type {
-	WORD = 0,
-	GREAT = 1,
-	LESS = 2,
-	PIPE = 3,
-	GREATGREAT = 4,
-	LESSLESS = 5,
-	DOLL = 6,
-	DOLLQ = 7,
-	QUOT = 8,
-	DQUOT = 9,
-	WSPACE = 10
+	WORD = 1,
+	GREAT = 2,
+	LESS = 4,
+	PIPE = 8,
+	GREATGREAT = 16,
+	LESSLESS = 32,
+	DOLL = 64,
+	DOLLQ = 128,
+	QUOT = 256,
+	DQUOT = 512,
+	WSPACE = 1024
 };
 
 typedef struct s_token {

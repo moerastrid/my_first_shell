@@ -15,6 +15,7 @@ SRC =	src/main.c\
 		src/lexer/token_free.c\
 		src/lexer/token_length.c\
 		src/parser/parser.c\
+		src/parser/parse_redirects.c\
 		src/parser/simple.c\
 		src/parser/simple_free.c\
 		src/parser/str_list.c\
