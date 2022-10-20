@@ -127,6 +127,7 @@ int	tokenize(t_cmd *cmd, char *input)
 		input += token_length(new);
 		if (input > end)
 		{
+			print_tokens(cmd->tokens);
 			printf("%s\n", "past end error");
 			return (-1);
 		}

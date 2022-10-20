@@ -28,7 +28,7 @@ int parse_redirect(t_cmd *cmd, t_token **tokens)
 		type = (*tokens)->type;
 		if (type == WSPACE)
 			*tokens = (*tokens)->next;
-		else if (type & (QUOT + DQUOT + WORD))
+		else if (type & (QUOT + DQUOT + WORD + DOLL + DOLLQ))
 		{
 			simple_add(start_type, simple_tail(cmd->simples),(*tokens)->data);
 			return (0);
