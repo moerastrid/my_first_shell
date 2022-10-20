@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 19:47:31 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 19:58:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	redirect_infile(t_str_list *infiles)
 		close(fd);
 		unlink(lastname);
 	}
-//	if (heredoc_count != 0)
-//		reset_heredoc(heredoc);
 }
 
 void	redirect_outfile(t_str_list *outfiles)

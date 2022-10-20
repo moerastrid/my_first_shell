@@ -22,8 +22,8 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		substitute(cmd, envp);
 		cmd.paths = getpaths(envp);
+		substitute(cmd, envp);
 		if (parse(&cmd) != 0)
 		{
 			printf("%s\n", "parse error");
