@@ -77,5 +77,62 @@ Word splitting:
 	After the preceding expansions, all unquoted occurrences of the characters ‘'’, and ‘"’ that did not result from one of the above expansions are removed.
 
 Redirections:
-	Before a command is executed, its input and output may be redirected. Redirection can change the files the command reads from and writes to.
+	Before a command is executed, its input and output may be redirected. Redirection can change the files the command reads from and writes to. The redirection operators may precede or appear anywhere within a simple command or may follow a command.
 	Redirections are processed in the order they appear, from left to right.
+	If the first character of the redirection operator is ‘<’, the redirection refers to the standard input (file descriptor 0). If the first character of the redirection operator is ‘>’, the redirection refers to the standard output (file descriptor 1). The word following the redirection operator is subjected to parameter expansion, quote removal and word splitting. ***If it expands to more than one word, Bash reports an error.***
+
+	A failure to open or create a file causes the redirection to fail.
+
+3.6.1 Redirecting Input
+	The general format for redirecting input is:
+		<word
+
+	Redirection of input causes the file whose name results from the expansion of word to be opened for reading on the standard input (file descriptor 0).
+
+3.6.2 Redirecting Output
+	The general format for redirecting output is:
+		>word
+
+	Redirection of output causes the file whose name results from the expansion of word to be opened for writing on the standard output (file descriptor 1). If the file does not exist it is created; if it does exist it is truncated to zero size.
+
+3.6.3 Appending Redirected Output
+	The general format for appending output is:
+		>>word
+	Redirection of output in this fashion causes the file whose name results from the expansion of word to be opened for appending on the standard output (file descriptor 1). If the file does not exist it is created.
+
+3.6.6 Here Documents
+	The format of here-documents is:
+		<<word
+				here-document
+			delimiter
+
+	This type of redirection instructs the shell to read input from the current source until a line containing only word (with no trailing blanks) is seen. All of the lines read up to that point are then used as the standard input for a command.
+
+	No parameter and variable expansion is performed on word. If any part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document are not expanded. If word is unquoted, all lines of the here-document are subjected to parameter expansion, the character sequence \newline is ignored, and ‘\’ must be used to quote the characters ‘\’, ‘$’, and ‘`’.
+
+	If the redirection operator is ‘<<-’, then all leading tab characters are stripped from input lines and the line containing delimiter. This allows here-documents within shell scripts to be indented in a natural fashion.
+
+3.7 Executing Commands
+	3.7.1 Simple Command Expansion
+	When a simple command is executed, the shell performs the following expansions, assignments, and redirections, from left to right, in the following order.
+
+	Redirections are saved for later processing.
+	The words that are not redirections are expanded. If any words remain after expansion, the first word is taken to be the name of the command and the remaining words are the arguments.
+	Redirections are performed as described above.
+
+	If no command name results, redirections are performed, but do not affect the current shell environment. A redirection error causes the command to exit with a non-zero status.
+
+	If there is a command name left after expansion, execution proceeds as described below. Otherwise, the command exits. The command exits with a status of zero.
+
+3.7.2 Command Search and Execution
+	After a command has been split into words, if it results in a simple command and an optional list of arguments, the following actions are taken.
+
+		1. The shell searches for it in the list of shell builtins. If a match is found, that builtin is invoked.
+
+		2. If the name is not a builtin, and contains no slashes, Bash searches each element of $PATH for a directory containing an executable file by that name. If the search is unsuccessful, the shell searches for a defined shell function named command_not_found_handle. If that function exists, it is invoked in a separate execution environment with the original command and the original command’s arguments as its arguments, and the function’s exit status becomes the exit status of that subshell. If that function is not defined, the shell prints an error message and returns an exit status of 127. //Now I get why execve's perror does not work. 
+
+		3. If the search is successful, or if the command name contains one or more slashes, the shell executes the named program in a separate execution environment. Argument 0 is set to the name given, and the remaining arguments to the command are set to the arguments supplied, if any.
+
+		4. If this execution fails because the file is not in executable format, and the file is not a directory, it is assumed to be a shell script and the shell executes it as described in Shell Scripts.
+
+		5. The shell waits for the command to complete and collects its exit status.
