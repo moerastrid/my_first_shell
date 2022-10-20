@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 23:24:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 13:58:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	only_child(t_cmd *cmd)
 	{
 		redirect_infile(cmd->simples->infiles);
 		redirect_outfile(cmd->simples->outfiles);
+		//hier stond isbuildin
 		exec_cmd(cmd->simples, cmd->envc);
 	}
 	else
