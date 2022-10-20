@@ -25,6 +25,44 @@ char	*get_envp_var(char *str, char **envp)
 	return (NULL);
 }
 
+static int count_split(char **arr)
+{
+	int count;
+
+	count = 0;
+	while(arr && *arr)
+	{
+		count ++;
+		arr++;
+	}
+	return (count);
+}
+
+static void split_token(t_token *token)
+{
+	char	**splitted;
+	int		num_strings;
+	int		i;
+	t_token	*old_next;
+	t_token	*iter;
+
+	splitted = ft_split_multiple(token->data, " \t\n");
+	if (splitted == NULL)
+		return ;
+	num_strings = count_split(splitted);
+	if (num_strings >= 1)
+		token->data = splitted[0];
+	if (num_strings > 1)
+		old_next = token->next;
+	i = 1;
+	iter = token;
+	while(i < num_strings)
+	{
+		iter->next = token_new(splitted[i], token->type);
+		iter = iter->next;
+	}
+}
+
 static void	substitute_doll(t_token *token, char **envp)
 {
 	char	*sub;
@@ -42,6 +80,7 @@ static void	substitute_doll(t_token *token, char **envp)
 		}
 		token->data = sub;
 	}
+	split_token(token);
 }
 
 static void	substitute_dollq(t_token *token)
