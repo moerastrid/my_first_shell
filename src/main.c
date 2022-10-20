@@ -22,9 +22,7 @@ int	main(int argc, char **argv, char **envp)
 			reset(&cmd, line);
 			continue ;
 		}
-		print_tokens(cmd.tokens);
 		substitute(cmd, envp);
-		print_tokens(cmd.tokens);
 		cmd.paths = getpaths(envp);
 		if (parse(&cmd) != 0)
 		{
@@ -33,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		cmd_simples_set_bin(&cmd);
-		print_cmd(cmd);
+		// print_cmd(cmd);
 		g_errno = execute(&cmd);
 		reset(&cmd, line);
 	}
