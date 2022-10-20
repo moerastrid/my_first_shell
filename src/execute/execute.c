@@ -24,8 +24,15 @@ int	execute(t_cmd *cmd)
 		return (-1);
 	if (cmd->cmd_count == 1)
 	{
-		if (ft_strncmp(cmd->simples->argv[0], "exit", 5) == 0)
-			exit (0);
+		if (is_builtin(cmd->simples) == 1)
+		{
+			if (errno == 2)
+				errno = 0;
+			ret_val = exec_builtin(cmd->simples, cmd);
+			dup2(0, STDIN_FILENO);
+			dup2(1, STDOUT_FILENO);
+			return (ret_val);
+		}
 		return (only_child(cmd));
 	}
 	else

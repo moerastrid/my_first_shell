@@ -40,7 +40,6 @@ int	only_child(t_cmd *cmd)
 	pid_t	child_one_id;
 	int		status;
 	int		exit_code;
-	int		ret_val;
 
 	exit_code = 0;
 	child_one_id = fork();
@@ -50,17 +49,7 @@ int	only_child(t_cmd *cmd)
 	{
 		redirect_infile(cmd->simples->infiles);
 		redirect_outfile(cmd->simples->outfiles);
-		if (is_builtin(cmd->simples) == 1)
-		{
-			if (errno == 2)
-				errno = 0;
-			ret_val = exec_builtin(cmd->simples, cmd);
-			dup2(0, STDIN_FILENO);
-			dup2(1, STDOUT_FILENO);
-			exit (ret_val);
-		}
-		else
-			exec_cmd(cmd->simples, cmd->envc);
+		exec_cmd(cmd->simples, cmd->envc);
 	}
 	else
 	{
