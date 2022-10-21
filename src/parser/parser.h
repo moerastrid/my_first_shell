@@ -41,5 +41,6 @@ void		str_list_add_back(t_str_list *root, t_str_list *new);
 
 //parse_token.c
 int			parse_redirect(t_cmd *cmd, t_token **token);
+int			parse_heredoc(t_cmd *cmd, t_token *token);
 
 #endif
