@@ -50,6 +50,7 @@ int	parse(t_cmd *cmd)
 	int			ret;
 	t_simple	*tail;
 
+	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;
 	space_flag = 0;

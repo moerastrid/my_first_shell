@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 19:58:56 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/20 22:26:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,83 +104,3 @@ void	redirect_outfile(t_str_list *outfiles)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
-
-//void	redirect_infile(t_str_list *infiles)
-//{
-//	int		fd;
-//	int		heredoccount;
-//	char	*heredocfile;
-
-//	fd = 0;
-//	heredoccount = 0;
-//	if (!infiles)
-//		return ;
-//	//while (infiles->next)
-//	//{
-//	//	if (infiles->append_mode == 1)
-//	//		heredoccount++;
-//	//	infiles = infiles->next;
-//	//}
-//	if (infiles->append_mode == 1)
-//	{
-//		heredocfile = heredoc_loop(infiles->str);
-//		fd = open(heredocfile, O_CREAT | O_RDWR, 0664);
-//		dup2(fd, STDIN_FILENO);
-//		close(fd);
-//		unlink(heredocfile);
-//		//return ;
-//	}
-//	else if (infiles->append_mode == 0)
-//	{
-//		fd = open(infiles->str, O_RDONLY);
-//		dup2(fd, STDIN_FILENO);
-//		close(fd);
-//	}
-//}
-
-//typedef struct s_doc {
-//	char	*name;
-//	int		no;
-//}	t_doc;
-
-//void	redirect_infile(t_str_list *infiles)
-//{
-//	int		fd;
-//	t_doc	heredoc;
-
-//	heredoc = NULL;
-//	if (infiles == NULL)
-//		return ;
-//	while (infiles->next) //Skips to last infile.
-//	{
-//		if (infiles->append_mode == 1)
-//			add_to_heredoc(heredoc);
-//		infiles = infiles->next;
-//	}
-//<<<<<<< HEAD
-//	if ()
-//=======
-//	if (infiles->append_mode == 1)
-//	{
-//		heredocfile = heredoc_loop(infiles->str);
-// Hier heb je vanwege de loop hierboven alleen maar 
-// toegang tot de laatste infile
-//		fd = open(heredocfile, O_CREAT | O_RDWR, 0664);
-//		dup2(fd, STDIN_FILENO);
-//		close(fd);
-//		unlink(heredocfile);
-//		return ;
-//	}
-//	else if (infiles->append_mode == 0)
-//	{
-//		if(access(infiles->str, R_OK) != 0)
-//		{
-//			perror(infiles->str); //Prints the correct error, except for "bash:"
-//			exit(errno);
-//		}
-//		fd = open(infiles->str, O_RDONLY);
-//		dup2(fd, STDIN_FILENO);
-//		close(fd);
-//	}
-//>>>>>>> a9c5c043dd9c9ada7c21432fb0706b9dc12c430d
-//}
