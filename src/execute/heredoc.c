@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 15:36:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 16:06:35 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,42 +67,21 @@ t_doc	*docnew(char *eof, int no, t_token *lessless)
 	return (new);
 }
 
-//static t_doc	*doc_delfirst(t_doc *heredoc)
-//{
-//	t_doc	*temp;
-//	t_doc	*retdoc;
-
-//	retdoc = heredoc->next;
-//	temp = heredoc;
-//	close(temp->fd);
-//	//if (retdoc)
-//	//	unlink(temp->name);
-//	//free(temp->name);
-//	free(temp);
-//	return (retdoc);
-//}
-
 char	*heredoc_loop(t_doc *heredoc)
 {
 	char	*line;
-
-	//retstr -> lessless (null)
+	t_doc	*temp;
 
 	while (heredoc)
 	{
-		//retstr = ft_strdup(heredoc->name);
 		line = readline(" > ");
 		if (!line)
 			exit (-1);
 		if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
 		{
+			temp = heredoc;
 			heredoc = heredoc->next;
-			//heredoc = doc_delfirst(heredoc);
-			//if (heredoc != NULL)
-			//{
-				//free (retstr);
-				//retstr = ft_strdup(heredoc->name);
-			//}
+			free (temp);
 		}
 		else
 		{
@@ -149,6 +128,8 @@ void	heredoc(t_cmd *cmd)
 		tokens = tokens->next;
 	}
 	if (heredoc_count != 0)
+	{
 		heredoc_loop(doc);
+	}
 	return ;
 }

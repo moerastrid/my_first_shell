@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 15:29:49 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 16:08:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	redirect_infile(t_str_list *infiles)
 	{
 		if (infiles->next == NULL)
 			last_infile = infiles;
+		else if (infiles->append_mode == 1)
+			unlink(infiles->str);
 		infiles = infiles->next;
 	}
 	if (last_infile->append_mode == 0)
@@ -70,6 +72,7 @@ void	redirect_infile(t_str_list *infiles)
 		fd = open(last_infile->str, O_RDONLY, 0664);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
+		unlink(last_infile->str);
 	}
 }
 
