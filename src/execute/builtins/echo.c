@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 22:46:22 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:50:03 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	bi_echo(t_simple *sm)
 	{
 		ft_putstr_fd(sm->argv[i], STDOUT_FILENO);
 		if (sm->argv[i + 1] != NULL)
-		{
-			// check if needed?
 			ft_putstr_fd(" ", STDOUT_FILENO);
-		}
 		if (sm->argv[i + 1] == NULL && flag == 0)
 			ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
