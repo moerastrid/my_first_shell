@@ -6,7 +6,8 @@ LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
 SRC =	src/main.c\
-		src/env/env.c\
+		src/env/env00.c\
+		src/env/env01.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/errors.c\
