@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 14:35:59 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 18:50:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static char	*get_data(int type, char *input)
 		data = ft_substr(input, 1, dquot_length(input));
 	else if (type == DOLL)
 		data = ft_substr(input, 1, doll_length(input + 1));
+	else if (type == DOLLQ)
+		data = ft_substr(input, 0, 2);
 	// else if (type == LESSLESS)
 	// 	data = ft_substr(input, 2, lessless_length(input + 2));
 	// else if (type == GREAT || type == LESS)

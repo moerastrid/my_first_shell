@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 18:43:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 19:00:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*heredoc_loop(t_doc *heredoc)
 	return (NULL);
 }
 
-char	*heredoc(t_cmd *cmd)
+int	heredoc(t_cmd *cmd, char **retstr)
 {
 	t_token	*token;
 	t_token	*lessless;
@@ -108,18 +108,26 @@ char	*heredoc(t_cmd *cmd)
 			while (token && token->type == WSPACE)
 				token = token->next;
 			if (!token)
-				return (NULL);
+			{
+				printf("%s\n", "unexptected token newline");
+				return (1);
+			}
 			if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
 				docadd_back(&cmd->doc, docnew(token->data, lessless));
 				remove_token_from_list(&cmd->tokens, token);
 				token = lessless;
 			}
+			else
+			{
+				printf("%s - %u\n", "unexptected token ", token->type);
+				return (1);
+			}
 		}
 		token = token->next;
 	}
 	if (cmd->doc != NULL)
-		return(heredoc_loop(cmd->doc));
+		*retstr = heredoc_loop(cmd->doc);
 	catch_signals();
-	return (NULL);
+	return (0);
 }
