@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:18:35 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 23:16:31 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	setup_termios(void)
 static int	setup_cmd(t_cmd *cmd, char **envp)
 {
 	char	*str;
+	char	*num;
 	int		lvl;
 
 	cmd->cmd_count = 0;
@@ -40,9 +41,11 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 		return (0);
 	lvl = ft_atoi(str) + 1;
 	str = NULL;
-	str = ft_strjoin("SHLVL=", ft_itoa(lvl));
-	if (env_replace("SHLVL", str, cmd->envc) == -1)
-		free(str);
+	num = ft_itoa(lvl);
+	str = ft_strjoin("SHLVL=", num);
+	env_replace("SHLVL", str, cmd->envc);
+	free(str);
+	free(num);
 	return (0);
 }
 
