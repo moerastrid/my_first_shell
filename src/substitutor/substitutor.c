@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:33:18 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 23:10:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_envp_var(char *str, char **envp)
 		env_head = ft_substr(envp[i], 0, end - envp[i]);
 		env_head_len = ft_strlen(env_head);
 		comp = ft_strlen(str) && ft_strncmp(str, env_head, ft_strlen(str)) == 0;
-		free(env_head);
+		free(env_head); 
 		if (comp == 1)
 			return (ft_strdup(&(envp[i][env_head_len + 1])));
 		i++;
