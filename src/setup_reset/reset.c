@@ -6,23 +6,35 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 22:45:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 18:36:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include "../env/env.h"
 
+void	unlink_docs(t_doc *docs)
+{
+	while (docs)
+	{
+		if (access(docs->name, F_OK) == 0)
+			unlink(docs->name);
+		docs = docs->next;
+	}
+}
+
 // Reset for next loop.
 void	reset_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
+	unlink_docs(cmd->doc);
 	free_token_list(cmd->tokens);
 	if (cmd->paths)
 		free(cmd->paths);
 	cmd->simples = NULL;
 	cmd->tokens = NULL;
 	cmd->paths = NULL;
+	cmd->doc = NULL;
 }
 
 // Clear command for exit.

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 16:16:08 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 16:19:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 18:28:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 # define HEREDOC_H
 
 #include "../../minishell.h"
-
-typedef struct s_doc {
-	char			*name;
-	int				fd;
-	char			*eof;
-	struct s_doc	*next;
-}	t_doc;
 
 #endif

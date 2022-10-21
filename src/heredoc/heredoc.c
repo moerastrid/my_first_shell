@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 18:24:14 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 18:43:39 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static t_doc	*docnew(char *eof, t_token *lessless)
 char	*heredoc_loop(t_doc *heredoc)
 {
 	char	*line;
-	t_doc	*temp;
 
 	while (heredoc)
 	{
@@ -77,19 +76,10 @@ char	*heredoc_loop(t_doc *heredoc)
 		line = readline(" ");
 		if (g_errno == 1)
 			return (line);
-		if (!line)
+		if (!line || ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
 		{
-			temp = heredoc;
+			close(heredoc->fd);
 			heredoc = heredoc->next;
-			close(temp->fd);
-			free (temp);
-		}
-		else if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
-		{
-			temp = heredoc;
-			heredoc = heredoc->next;
-			close(temp->fd);
-			free (temp);
 		}
 		else
 		{
@@ -97,19 +87,17 @@ char	*heredoc_loop(t_doc *heredoc)
 			write(heredoc->fd, "\n", ft_strlen("\n"));
 		}
 		free(line);
-		//ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	return (NULL);
 }
 
 char	*heredoc(t_cmd *cmd)
 {
-	t_doc	*doc;
 	t_token	*token;
 	t_token	*lessless;
 
 	heredoc_signals();
-	doc = NULL;
+	cmd->doc = NULL;
 	token = cmd->tokens;
 	while (token)
 	{
@@ -123,15 +111,15 @@ char	*heredoc(t_cmd *cmd)
 				return (NULL);
 			if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
-				docadd_back(&doc, docnew(token->data, lessless));
+				docadd_back(&cmd->doc, docnew(token->data, lessless));
 				remove_token_from_list(&cmd->tokens, token);
 				token = lessless;
 			}
 		}
 		token = token->next;
 	}
-	if (doc != NULL)
-		return(heredoc_loop(doc));
+	if (cmd->doc != NULL)
+		return(heredoc_loop(cmd->doc));
 	catch_signals();
 	return (NULL);
 }

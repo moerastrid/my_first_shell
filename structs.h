@@ -37,12 +37,20 @@ typedef struct s_simple {
 	struct s_simple	*next;
 }	t_simple;
 
+typedef struct s_doc {
+	char			*name;
+	int				fd;
+	char			*eof;
+	struct s_doc	*next;
+}	t_doc;
+
 typedef struct s_cmd {
 	char		**envc;
 	char		**paths;
 	int			cmd_count;
 	t_token		*tokens;
 	t_simple	*simples;
+	t_doc		*doc;
 }	t_cmd;
 
 #endif
