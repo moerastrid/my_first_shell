@@ -76,7 +76,7 @@ static void heredoc_loop(t_doc *heredoc)
 		line = readline(" > ");
 		if (!line)
 			heredoc = heredoc->next;
-		if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
+		else if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
 		{
 			temp = heredoc;
 			heredoc = heredoc->next;
@@ -95,29 +95,29 @@ static void heredoc_loop(t_doc *heredoc)
 void	heredoc(t_cmd *cmd)
 {
 	t_doc	*doc;
-	t_token	*tokens;
+	t_token	*token;
 	t_token	*lessless;
 
 	doc = NULL;
-	tokens = cmd->tokens;
-	while (tokens)
+	token = cmd->tokens;
+	while (token)
 	{
-		if (tokens->type == LESSLESS)
+		if (token->type == LESSLESS)
 		{
-			lessless = tokens;
-			tokens = tokens->next;
-			while (tokens && tokens->type == WSPACE)
-				tokens = tokens->next;
-			if (!tokens)
+			lessless = token;
+			token = token->next;
+			while (token && token->type == WSPACE)
+				token = token->next;
+			if (!token)
 				return ;
-			if (tokens->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
+			if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
-				docadd_back(&doc, docnew(tokens->data, lessless));
-				remove_token_from_list(&cmd->tokens, tokens);
-				tokens = lessless;
+				docadd_back(&doc, docnew(token->data, lessless));
+				remove_token_from_list(&cmd->tokens, token);
+				token = lessless;
 			}
 		}
-		tokens = tokens->next;
+		token = token->next;
 	}
 	if (doc != NULL)
 		heredoc_loop(doc);
