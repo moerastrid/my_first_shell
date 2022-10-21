@@ -1,76 +1,52 @@
 #include "../minishell.h"
 
-void	minishell(t_cmd *cmd, char **input)
+int	minishell(t_cmd *cmd, char **input, char **line)
 {
-	char	*line;
 	char	*retstr;
+	int		err;
 
+	err = 0;
 	retstr = NULL;
 	if (*input == NULL)
-	{
-
-		printf("%s\n", "prompting");
-		line = prompt(cmd);
-	}
+		*line = prompt(cmd);
 	else
-		line = ft_strdup(*input);
-	if (ft_strlen(line) == 0)
-	{
-		*input = NULL;
-		free(line);
-		return ;
-	}
-	ft_putstr_fd(line, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-	if (tokenize(cmd, line) == -1 || cmd->tokens == NULL)
-	{
-		*input = NULL;
-		reset(cmd, line);
-		return ;
-	}
-	print_tokens(cmd->tokens);
-	int err = heredoc(cmd, &retstr);
-	if (err)
-	{
-		*input = NULL;
-		reset(cmd, line);
-		return ;
-	}
+		*line = ft_strdup(*input);
+	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
+	|| cmd->tokens == NULL)
+		return (1);
+	if (heredoc(cmd, &retstr))
+		return (1);
 	if (retstr != NULL)
 	{
-		*input = NULL;
-		reset(cmd, line);
+		reset(cmd, *line);
 		*input = retstr;
-		return ;
+		return (2);
 	}
-	substitute(*cmd, cmd->envc);
 	if (parse(cmd) != 0)
-	{
-		printf("%s\n", "parse error");
-		*input = NULL;
-		reset(cmd, line);
-		return ;
-	}
+		return (1);
 	cmd_simples_set_bin(cmd);
-	print_tokens(cmd->tokens);
-	print_cmd(*cmd);
 	g_errno = execute(cmd);
-	reset(cmd, line);
-	*input = NULL;
-	return ;
+	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
+	char	*input;
+	char	*line;
 
-	char *input = NULL;
 	(void)argv;
+	input = NULL;
+	line = NULL;
 	if (setup(&cmd, envp, argc) == -1)
 		return (-1);
 	while (1)
 	{
-		minishell(&cmd, &input);
+		if (minishell(&cmd, &input, &line) == 1)
+		{
+			input = NULL;
+			reset(&cmd, line);
+		}
 	}
 	return (EXIT_SUCCESS);
 }

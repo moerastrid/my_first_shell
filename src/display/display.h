@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 17:32:56 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 20:23:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	catch_signals(void);
 void	heredoc_signals(void);
 void	default_signals(void);
 void	ignore_signals(void);
-void	catch_errno(int err);
+void	catch_errno(void);
 
 #endif

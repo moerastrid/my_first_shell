@@ -28,7 +28,6 @@ static void	set_bin(t_simple *simple, char **paths)
 		}
 		free (myexec);
 	}
-	print_simples(simple);
 	return ;
 }
 

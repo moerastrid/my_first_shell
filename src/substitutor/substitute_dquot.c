@@ -34,7 +34,6 @@ static char	*replace_once(char *input, char *full_input,
 	char	*post_begin;
 
 	var_name = get_word(input);
-	printf("var_name: %s\n", var_name);
 	if (var_name == NULL)
 		return (NULL);
 	if (ft_strlen(var_name) == 0)

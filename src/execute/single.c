@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 17:15:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:09:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ int	only_child(t_cmd *cmd)
 	exit_code = 0;
 	child_one_id = fork();
 	if (child_one_id == -1)
-		return (-1);
+		return (10);
 	else if (child_one_id == 0)
 	{
 		redirect_infile(cmd->simples->infiles);
 		redirect_outfile(cmd->simples->outfiles);
-		//hier stond isbuildin (maar waarom?)
 		exec_cmd(cmd->simples, cmd->envc);
 	}
 	else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/21 20:21:56 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/21 20:21:57 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static int	parse_words(t_cmd *cmd, t_token **tokens)
@@ -36,7 +48,7 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 	type = (*token)->type;
 	if (type & (GREAT + LESS + GREATGREAT))
 		return (parse_redirect(cmd, token));
-	 if (type & LESSLESS)
+	if (type & LESSLESS)
 	 	return (parse_heredoc(cmd, *token));
 	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		return (parse_words(cmd, token));
@@ -52,6 +64,7 @@ int	parse(t_cmd *cmd)
 	int			ret;
 	t_simple	*tail;
 
+	substitute(*cmd, cmd->envc);
 	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;

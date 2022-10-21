@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 19:00:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:11:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int	heredoc(t_cmd *cmd, char **retstr)
 				token = token->next;
 			if (!token)
 			{
-				printf("%s\n", "unexptected token newline");
+				printf("%s\n", "minishell : unexptected token newline");
+				g_errno = 258;
 				return (1);
 			}
 			if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
@@ -120,7 +121,8 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			}
 			else
 			{
-				printf("%s - %u\n", "unexptected token ", token->type);
+				printf("%s - %u\n", "minishell : unexptected token ", token->type);
+				g_errno = 258;
 				return (1);
 			}
 		}

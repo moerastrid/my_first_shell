@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 18:50:49 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 20:57:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,10 @@ int	tokenize(t_cmd *cmd, char *input)
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
 		if (check_token(new) == -1)
-		{
-			printf("%s\n", "check token error");
 			return (-1);
-		}
 		input += token_length(new);
 		if (input > end)
-		{
-			print_tokens(cmd->tokens);
-			printf("%s\n", "past end error");
 			return (-1);
-		}
 	}
 	return (0);
 }

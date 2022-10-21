@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 13:40:45 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:09:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	execute(t_cmd *cmd)
 	{
 		if (is_builtin(cmd->simples) == 1)
 		{
-			// if (errno == 2)
-			// 	errno = 0; ?
 			ret_val = exec_builtin(cmd->simples, cmd);
 			dup2(0, STDIN_FILENO);
 			dup2(1, STDOUT_FILENO);

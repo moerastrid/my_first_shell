@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 18:36:27 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 20:33:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	reset(t_cmd *cmd, char *line)
 {
 	dup2(STDIN_FILENO, 0);
 	dup2(STDOUT_FILENO, 1);
-	catch_errno(g_errno);
-	// g_errno = 0;
+	catch_errno();
 	reset_cmd(cmd);
 	catch_signals();
 	free(line);
