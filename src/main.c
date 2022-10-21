@@ -35,6 +35,29 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 
+	// t_token *root = token_new("hi", 1);
+	// token_add_back(&root, token_new("bye1", 2));
+	// token_add_back(&root, token_new("bye2", 4));
+	// token_add_back(&root, token_new("bye3", 8));
+	// token_add_back(&root, token_new("bye4", 16));
+	// token_add_back(&root, token_new("bye5", 32));
+	//
+	//
+	// print_tokens(root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// remove_token_from_list(&root, root);
+	// print_tokens(root);
+	//
+	// return (0);
+
 	(void)argv;
 	if (setup(&cmd, envp, argc) == -1)
 		return (-1);

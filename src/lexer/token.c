@@ -82,15 +82,23 @@ void	merge_words(t_token *token)
 	}
 }
 
-void	merge_redirects(t_token *token)
+void remove_token_from_list(t_token **root, t_token *to_remove)
 {
-	int		type;
+	t_token *iter;
 
-	while (token != NULL)
+	if (!root || !*root || !to_remove)
+		return ;
+	if (*root == to_remove)
 	{
-		type = token->type;
-		if (type & (LESS + GREAT + LESSLESS + GREATGREAT))
-			merge_token_with_next(token);
-		token = token->next;
+		*root = to_remove->next;
+		to_remove->next = NULL;
+		return ;
 	}
+	iter = *root;
+	while (iter != NULL && iter->next != to_remove && iter != to_remove)
+		iter = iter->next;
+	if (iter == NULL)
+		return ;
+	iter->next = iter->next->next;
+	to_remove->next = NULL;
 }

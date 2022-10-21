@@ -92,6 +92,7 @@ char	*heredoc_loop(t_doc *heredoc)
 	{
 		//retstr = ft_strdup(heredoc->name);
 		line = readline(" > ");
+		printf("line: [%s]\n", line);
 		if (!line)
 			exit (-1);
 		if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
@@ -137,12 +138,14 @@ void	heredoc(t_cmd *cmd)
 			if(tokens->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
 				docadd_back(&doc, docnew(tokens->data, heredoc_count++, lessless));
+				remove_token_from_list(&cmd->tokens, tokens);
+
 				//t_token *next_token = tokens->next; todo: remove word after LESSLESS.
 				//lessless->next = lessless->next->next;
 			}
 			else
 			{
-				//parse error near ' ' 
+				//parse error near ' '
 				g_errno = -1;
 			}
 		}
