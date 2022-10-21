@@ -115,6 +115,7 @@ void	heredoc(t_cmd *cmd)
 			{
 				docadd_back(&doc, docnew(tokens->data, lessless));
 				remove_token_from_list(&cmd->tokens, tokens);
+				tokens = lessless->next;
 			}
 			else
 			{
