@@ -42,11 +42,6 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 
 int	parse_heredoc(t_cmd *cmd, t_token *token)
 {
-	char	*data_ptr;
-
-	data_ptr = token->data;
-	while (*data_ptr == ' ' && *data_ptr != '\0')
-		data_ptr++;
-	simple_add_infile(simple_tail(cmd->simples), data_ptr, 1);
+	simple_add_infile(simple_tail(cmd->simples), token->data, 1);
 	return (0);
 }

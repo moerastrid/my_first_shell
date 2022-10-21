@@ -15,7 +15,7 @@ void	minishell(t_cmd *cmd)
 		reset(cmd, line);
 		return ;
 	}
-		//heredoc?
+	heredoc(cmd);
 	substitute(*cmd, cmd->envc);
 	if (parse(cmd) != 0)
 	{
@@ -24,6 +24,7 @@ void	minishell(t_cmd *cmd)
 		return ;
 	}
 	cmd_simples_set_bin(cmd);
+	print_tokens(cmd->tokens);
 	print_cmd(*cmd);
 	g_errno = execute(cmd);
 	reset(cmd, line);

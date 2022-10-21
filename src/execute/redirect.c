@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 22:26:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 15:29:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,17 @@
 void	redirect_infile(t_str_list *infiles)
 {
 	int			fd;
-	char		*lastname;
-	t_doc		*heredoc;
 	t_str_list	*last_infile;
-	int			heredoc_count;
 
 	if (infiles == NULL)
 		return ;
 	last_infile = infiles;
-	heredoc = NULL;
-	heredoc_count = 0;
 	while (infiles != NULL)
 	{
-		if (infiles->append_mode == 1)
-			docadd_back(&heredoc, docnew(infiles->str, heredoc_count++));
 		if (infiles->next == NULL)
 			last_infile = infiles;
 		infiles = infiles->next;
 	}
-	if (heredoc_count != 0)
-		lastname = heredoc_loop(heredoc);
 	if (last_infile->append_mode == 0)
 	{
 		if (access(last_infile->str, R_OK) != 0)
@@ -76,10 +67,9 @@ void	redirect_infile(t_str_list *infiles)
 	}
 	else if (last_infile->append_mode == 1)
 	{
-		fd = open(lastname, O_RDONLY, 0664);
+		fd = open(last_infile->str, O_RDONLY, 0664);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
-		unlink(lastname);
 	}
 }
 

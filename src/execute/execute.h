@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/20 19:28:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 15:12:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
 void		free_children(t_children *root);
 //void		kill_children(t_children *kids);
-t_doc		*docnew(char *eof, int no);
+t_doc		*docnew(char *eof, int no, t_token *lessless);
 void		docadd_back(t_doc **doc, t_doc *new_doc);
 char		*heredoc_loop(t_doc *heredoc);
 
