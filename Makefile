@@ -34,11 +34,11 @@ SRC =	src/main.c\
 		src/execute/call_builtin.c\
 		src/execute/children.c\
 		src/execute/execute.c\
-		src/execute/heredoc.c\
 		src/execute/family_life.c\
 		src/execute/redirect.c\
 		src/execute/single.c\
 		src/execute/touch_children.c\
+		src/heredoc/heredoc.c\
 		src/setup_reset/path.c\
 		src/setup_reset/setup.c\
 		src/setup_reset/reset.c\
@@ -76,6 +76,7 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/debug
 	@mkdir -pv obj/env
 	@mkdir -pv obj/setup_reset
+	@mkdir -pv obj/heredoc
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :

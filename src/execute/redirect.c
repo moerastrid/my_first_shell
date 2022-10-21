@@ -6,43 +6,39 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 16:08:38 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 16:23:31 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-//char	*heredoc_loop(char *eof)
-//{
-//	char	*line;
-//	char	*filename;
-//	int		fd;
+static void	set_infile(t_str_list *last_infile)
+{
+	int			fd;
 
-//	fd = 0;
-//	filename = NULL;
-//	filename = ft_strdup("heredob");
-//	filename = nextfilename(filename);
-//	fd = open(filename, O_CREAT | O_RDWR, 0664);
-//	dprintf(2, "fd: %d\n", fd);
-//	while (1)
-//	{
-//		line = readline(" > ");
-//		if (!line)
-//			exit (0);
-//		if (ft_strncmp(line, eof, ft_strlen(eof) + 1) == 0)
-//		{
-//			close (fd);
-//			return (filename);
-//		}
-//		write(fd, line, ft_strlen(line));
-//		write(fd, "\n", ft_strlen("\n"));
-//		free(line);
-//	}
-//}
+	fd = 0;
+	if (last_infile->append_mode == 0)
+	{
+		if (access(last_infile->str, R_OK) != 0)
+		{
+			perror(last_infile->str);
+			exit(errno);
+		}
+		fd = open(last_infile->str, O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+	}
+	else if (last_infile->append_mode == 1)
+	{
+		fd = open(last_infile->str, O_RDONLY, 0664);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+		unlink(last_infile->str);
+	}
+}
 
 void	redirect_infile(t_str_list *infiles)
 {
-	int			fd;
 	t_str_list	*last_infile;
 
 	if (infiles == NULL)
@@ -56,24 +52,7 @@ void	redirect_infile(t_str_list *infiles)
 			unlink(infiles->str);
 		infiles = infiles->next;
 	}
-	if (last_infile->append_mode == 0)
-	{
-		if (access(last_infile->str, R_OK) != 0)
-		{
-			perror(last_infile->str);
-			exit(errno);
-		}
-		fd = open(infiles->str, O_RDONLY);
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
-	else if (last_infile->append_mode == 1)
-	{
-		fd = open(last_infile->str, O_RDONLY, 0664);
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-		unlink(last_infile->str);
-	}
+	set_infile(last_infile);
 }
 
 void	redirect_outfile(t_str_list *outfiles)
