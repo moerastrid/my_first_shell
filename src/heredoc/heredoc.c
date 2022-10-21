@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 16:17:18 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 17:05:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_doc	*docnew(char *eof, t_token *lessless)
 	return (new);
 }
 
-static void heredoc_loop(t_doc *heredoc)
+static void	heredoc_loop(t_doc *heredoc)
 {
 	char	*line;
 	t_doc	*temp;
@@ -75,11 +75,17 @@ static void heredoc_loop(t_doc *heredoc)
 	{
 		line = readline(" > ");
 		if (!line)
+		{
+			temp = heredoc;
 			heredoc = heredoc->next;
+			close(temp->fd);
+			free (temp);
+		}
 		else if (ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
 		{
 			temp = heredoc;
 			heredoc = heredoc->next;
+			close(temp->fd);
 			free (temp);
 		}
 		else
