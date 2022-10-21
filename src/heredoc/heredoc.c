@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 17:05:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 18:18:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,17 @@ static t_doc	*docnew(char *eof, t_token *lessless)
 	return (new);
 }
 
-static void	heredoc_loop(t_doc *heredoc)
+char	*heredoc_loop(t_doc *heredoc)
 {
 	char	*line;
 	t_doc	*temp;
 
 	while (heredoc)
 	{
-		line = readline(" > ");
+		ft_putstr_fd(" >", STDERR_FILENO);
+		line = readline(" ");
+		if (g_errno == 1)
+			return (line);
 		if (!line)
 		{
 			temp = heredoc;
@@ -94,16 +97,18 @@ static void	heredoc_loop(t_doc *heredoc)
 			write(heredoc->fd, "\n", ft_strlen("\n"));
 		}
 		free(line);
+		//ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	return ;
+	return (NULL);
 }
 
-void	heredoc(t_cmd *cmd)
+char	*heredoc(t_cmd *cmd)
 {
 	t_doc	*doc;
 	t_token	*tokens;
 	t_token	*lessless;
 
+	heredoc_signals();
 	doc = NULL;
 	tokens = cmd->tokens;
 	while (tokens)
@@ -115,7 +120,7 @@ void	heredoc(t_cmd *cmd)
 			while (tokens && tokens->type == WSPACE)
 				tokens = tokens->next;
 			if (!tokens)
-				return ;
+				return (NULL);
 			if (tokens->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
 				docadd_back(&doc, docnew(tokens->data, lessless));
@@ -126,5 +131,7 @@ void	heredoc(t_cmd *cmd)
 		tokens = tokens->next;
 	}
 	if (doc != NULL)
-		heredoc_loop(doc);
+		return(heredoc_loop(doc));
+	catch_signals();
+	return (NULL);
 }
