@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:43 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:29:16 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 22:21:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	merge_words(t_token *token)
 	}
 }
 
-void remove_token_from_list(t_token **root, t_token *to_remove)
+void	remove_token_from_list(t_token **root, t_token *to_remove)
 {
-	t_token *iter;
+	t_token	*iter;
 
 	if (!root || !*root || !to_remove)
 		return ;

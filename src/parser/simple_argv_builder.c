@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   simple_argv_builder.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/21 22:29:57 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/21 22:29:58 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 int	simple_add_outfile(t_simple *simple, char *fname, int append)

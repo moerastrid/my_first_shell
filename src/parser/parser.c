@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 20:21:56 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 20:21:57 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 22:29:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 	if (type & (GREAT + LESS + GREATGREAT))
 		return (parse_redirect(cmd, token));
 	if (type & LESSLESS)
-	 	return (parse_heredoc(cmd, *token));
+		return (parse_heredoc(cmd, *token));
 	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		return (parse_words(cmd, token));
 	if (type == PIPE)

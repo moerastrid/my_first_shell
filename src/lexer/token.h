@@ -6,7 +6,7 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 16:07:28 by tnuyten       #+#    #+#                 */
-/*   Updated: 2022/10/14 14:36:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 22:28:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 // lexer.c
 int		is_token_char(char *str);
 int		token_type(char *str);
-int		tokenize(t_cmd *cmd, char *input);
 int		token_length(t_token *token);
+
+//tokenize.c
+int		tokenize(t_cmd *cmd, char *input);
+int		lessless_length(char *input);
 
 //token_length.c
 int		redir_length(char *input);
@@ -29,7 +32,6 @@ int		word_length(char *input);
 int		quot_length(char *input);
 int		dquot_length(char *input);
 int		doll_length(char *input);
-int		lessless_length(char *input);
 
 // token_free.c
 void	free_token(t_token *token);

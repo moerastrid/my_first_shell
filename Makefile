@@ -1,7 +1,7 @@
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 OBJ_DIR = ./obj
-CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft -fsanitize=address -g -O3 -fno-omit-frame-pointer -Wall -Wextra -Werror
+CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft #-fsanitize=address -g -O3 -fno-omit-frame-pointer -Wall -Wextra -Werror
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
@@ -13,8 +13,11 @@ SRC =	src/main.c\
 		src/display/errors.c\
 		src/lexer/lexer.c\
 		src/lexer/token.c\
+		src/lexer/tokenize.c\
 		src/lexer/token_free.c\
 		src/lexer/token_length.c\
+		src/heredoc/heredoc.c\
+		src/heredoc/doclst.c\
 		src/parser/parser.c\
 		src/parser/parse_redirects.c\
 		src/parser/simple.c\
@@ -39,7 +42,6 @@ SRC =	src/main.c\
 		src/execute/redirect.c\
 		src/execute/single.c\
 		src/execute/touch_children.c\
-		src/heredoc/heredoc.c\
 		src/setup_reset/path.c\
 		src/setup_reset/setup.c\
 		src/setup_reset/reset.c\

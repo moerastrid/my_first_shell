@@ -6,95 +6,59 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:29:11 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 22:03:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-static char	*nextfilename(char *s)
-{
-	char	*ret;
-	int		i;
-
-	i = 0;
-	ret = NULL;
-	ret = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-	if (!ret)
-	{
-		g_errno = 12;
-		return (NULL);
-	}
-	while (s[i])
-	{
-		ret[i] = s[i];
-		i++;
-	}
-	ret[i - 1] = s[i - 1] + 1;
-	free(s);
-	if (access(ret, F_OK) == 0)
-		ret = nextfilename(ret);
-	return (ret);
-}
-
-static void	docadd_back(t_doc **doc, t_doc *new_doc)
-{
-	t_doc	*temp;
-
-	if (!doc)
-		return ;
-	temp = doc[0];
-	if (temp == NULL)
-	{
-		doc[0] = new_doc;
-		return ;
-	}
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = new_doc;
-}
-
-static t_doc	*docnew(char *eof, t_token *lessless)
-{
-	t_doc	*new;
-
-	new = malloc(sizeof(t_doc));
-	if (!new)
-	{
-		g_errno = 12;
-		return (NULL);
-	}
-	new->name = nextfilename(ft_strdup("heredob"));
-	lessless->data = new->name;
-	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
-	new->eof = ft_strdup(eof);
-	new->next = NULL;
-	return (new);
-}
-
-char	*heredoc_loop(t_doc *heredoc)
+static char	*heredoc_loop(t_doc *hd)
 {
 	char	*line;
 
-	while (heredoc)
+	heredoc_signals();
+	while (hd)
 	{
 		ft_putstr_fd(" >", STDERR_FILENO);
 		line = readline(" ");
 		if (g_errno == 1)
 			return (line);
-		if (!line || ft_strncmp(line, heredoc->eof, ft_strlen(heredoc->eof) + 1) == 0)
+		if (!line || ft_strncmp(line, hd->eof, ft_strlen(hd->eof) + 1) == 0)
 		{
-			close(heredoc->fd);
-			heredoc = heredoc->next;
+			close(hd->fd);
+			hd = hd->next;
 		}
 		else
 		{
-			write(heredoc->fd, line, ft_strlen(line));
-			write(heredoc->fd, "\n", ft_strlen("\n"));
+			write(hd->fd, line, ft_strlen(line));
+			write(hd->fd, "\n", ft_strlen("\n"));
 		}
 		free(line);
 	}
 	return (NULL);
+}
+
+static int	token_check(t_cmd *cmd, t_token **lessless, t_token **token)
+{
+	if (!(*token))
+	{
+		printf("%s\n", "minishell : unexptected token newline");
+		g_errno = 258;
+		return (1);
+	}
+	if ((*token)->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
+	{
+		docadd_back(&cmd->doc, docnew((*token)->data, *lessless));
+		remove_token_from_list(&cmd->tokens, *token);
+		*token = *lessless;
+	}
+	else
+	{
+		printf("%s - %u\n", "minishell : unexptected token ", (*token)->type);
+		g_errno = 258;
+		return (1);
+	}
+	return (0);
 }
 
 int	heredoc(t_cmd *cmd, char **retstr)
@@ -102,7 +66,6 @@ int	heredoc(t_cmd *cmd, char **retstr)
 	t_token	*token;
 	t_token	*lessless;
 
-	heredoc_signals();
 	cmd->doc = NULL;
 	token = cmd->tokens;
 	while (token)
@@ -113,24 +76,8 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			token = token->next;
 			while (token && token->type == WSPACE)
 				token = token->next;
-			if (!token)
-			{
-				printf("%s\n", "minishell : unexptected token newline");
-				g_errno = 258;
+			if (token_check(cmd, &lessless, &token) == 1)
 				return (1);
-			}
-			if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
-			{
-				docadd_back(&cmd->doc, docnew(token->data, lessless));
-				remove_token_from_list(&cmd->tokens, token);
-				token = lessless;
-			}
-			else
-			{
-				printf("%s - %u\n", "minishell : unexptected token ", token->type);
-				g_errno = 258;
-				return (1);
-			}
 		}
 		token = token->next;
 	}

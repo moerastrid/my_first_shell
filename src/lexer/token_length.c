@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:30:28 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/14 15:42:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 22:23:36 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,3 @@ int	redir_length(char *input)
 	}
 	return (len + word_length(input));
 }
-
-int	lessless_length(char *input)
-{
-	int	len;
-
-	len = 0;
-	while (*input == ' ')
-	{
-		input++;
-		len++;
-	}
-	while (*input != ' ' && *input != '\0')
-	{
-		input++;
-		len++;
-	}
-	return (len);
-}
-

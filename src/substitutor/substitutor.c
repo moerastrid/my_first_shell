@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   substitutor.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/21 22:33:18 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "substitutor.h"
 
 char	*get_envp_var(char *str, char **envp)
@@ -25,12 +37,12 @@ char	*get_envp_var(char *str, char **envp)
 	return (NULL);
 }
 
-static int count_split(char **arr)
+static int	count_split(char **arr)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(arr && *arr)
+	while (arr && *arr)
 	{
 		count ++;
 		arr++;
@@ -38,7 +50,7 @@ static int count_split(char **arr)
 	return (count);
 }
 
-static void split_token(t_token *token)
+static void	split_token(t_token *token)
 {
 	char	**splitted;
 	int		num_strings;
@@ -56,7 +68,7 @@ static void split_token(t_token *token)
 		old_next = token->next;
 	i = 1;
 	iter = token;
-	while(i < num_strings)
+	while (i < num_strings)
 	{
 		iter->next = token_new(splitted[i], token->type);
 		iter = iter->next;
@@ -83,10 +95,10 @@ static void	substitute_doll(t_token *token, char **envp)
 	split_token(token);
 }
 
-static void	substitute_dollq(t_token *token)
-{
-	token->data = ft_itoa(g_errno);
-}
+//static void	substitute_dollq(t_token *token)
+//{
+//	token->data = ft_itoa(g_errno);
+//}
 
 void	substitute(t_cmd cmd, char **envp)
 {
@@ -98,7 +110,7 @@ void	substitute(t_cmd cmd, char **envp)
 		if (tokens->type == DOLL)
 			substitute_doll(tokens, envp);
 		if (tokens->type == DOLLQ)
-			substitute_dollq(tokens);
+			tokens->data = ft_itoa(g_errno);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
 		tokens = tokens->next;

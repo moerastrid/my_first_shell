@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   set_bin.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/21 22:29:44 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/21 22:29:50 by ageels        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static void	set_bin(t_simple *simple, char **paths)
@@ -7,7 +19,8 @@ static void	set_bin(t_simple *simple, char **paths)
 
 	if (!simple || !simple->argv)
 		return ;
-	if (ft_strchr(simple->argv[0], '/') != NULL || access(simple->argv[0], X_OK) == 0)
+	if (ft_strchr(simple->argv[0], '/') != NULL \
+	|| access(simple->argv[0], X_OK) == 0)
 	{
 		simple->bin = ft_strdup(simple->argv[0]);
 		return ;
