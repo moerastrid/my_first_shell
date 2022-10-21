@@ -15,6 +15,7 @@ void	minishell(t_cmd *cmd)
 		reset(cmd, line);
 		return ;
 	}
+	print_tokens(cmd->tokens);
 	heredoc(cmd);
 	substitute(*cmd, cmd->envc);
 	if (parse(cmd) != 0)
