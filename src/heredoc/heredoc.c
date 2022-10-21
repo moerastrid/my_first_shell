@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 16:51:00 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 17:05:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,8 @@ void	heredoc(t_cmd *cmd)
 			if (tokens->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 			{
 				docadd_back(&doc, docnew(tokens->data, lessless));
-				//remove_token_from_list(&cmd->tokens, tokens);
-			}
-			else
-			{
-				//parse error near ' '
-				g_errno = -1;
+				remove_token_from_list(&cmd->tokens, tokens);
+				tokens = lessless;
 			}
 		}
 		tokens = tokens->next;
