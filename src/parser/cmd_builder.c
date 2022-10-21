@@ -25,7 +25,10 @@ int	cmd_add_arg(t_cmd *cmd, char *arg)
 	tail = simple_tail(cmd->simples);
 	argv = ft_calloc(sizeof(char **), (tail->argc + 2));
 	if (argv == NULL)
+	{
+		g_errno = 12;
 		return (-1);
+	}
 	i = 0;
 	while (i < tail->argc)
 	{

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:22 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 22:46:18 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:29:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_simple	*new_simple(int argc, char **argv)
 
 	new_simple = (t_simple *)ft_calloc(1, sizeof(t_simple));
 	if (!new_simple)
+	{
+		g_errno = 12;
 		return (NULL);
+	}
 	new_simple->bin = NULL;
 	new_simple->next = NULL;
 	new_simple->infiles = NULL;

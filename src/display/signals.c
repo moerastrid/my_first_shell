@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 18:20:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:32:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,4 @@ void	default_signals(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-}
-
-void	ignore_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 }

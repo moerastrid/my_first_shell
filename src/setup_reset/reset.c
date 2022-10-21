@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 20:33:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 21:46:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	unlink_docs(t_doc *docs)
 	{
 		if (access(docs->name, F_OK) == 0)
 			unlink(docs->name);
+		if (errno == 2)
+			errno = 0;
 		docs = docs->next;
 	}
 }

@@ -10,8 +10,6 @@ static void	set_bin(t_simple *simple, char **paths)
 	if (ft_strchr(simple->argv[0], '/') != NULL || access(simple->argv[0], X_OK) == 0)
 	{
 		simple->bin = ft_strdup(simple->argv[0]);
-		if (access(simple->bin, X_OK) == -1)
-			errno = 2;
 		return ;
 	}
 	i = 0;
@@ -22,7 +20,6 @@ static void	set_bin(t_simple *simple, char **paths)
 			return ;
 		if (access(myexec, X_OK) == 0)
 		{
-			errno = 0;
 			simple->bin = myexec;
 			return ;
 		}
@@ -39,6 +36,8 @@ void	cmd_simples_set_bin(t_cmd *cmd)
 	while (simples)
 	{
 		set_bin(simples, cmd->paths);
+		if (errno == 2)
+			errno = 0;
 		simples = simples->next;
 	}
 }
