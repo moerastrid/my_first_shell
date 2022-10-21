@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 15:12:19 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/21 16:20:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void		redirect_outfile(t_str_list *outfiles);
 char		**single_split(char const *s, char c);
 
 //heredoc
-void	heredoc(t_cmd *cmd);
+void		heredoc(t_cmd *cmd);
 
 #endif
