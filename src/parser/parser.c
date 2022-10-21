@@ -36,6 +36,8 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 	type = (*token)->type;
 	if (type & (GREAT + LESS + GREATGREAT + LESSLESS))
 		return (parse_redirect(cmd, token));
+	// if (type & LESSLESS)
+	// 	return (parse_heredoc(cmd, *token));
 	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		return (parse_words(cmd, token));
 	if (type == PIPE)
