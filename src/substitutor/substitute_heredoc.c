@@ -25,13 +25,18 @@ int	check_heredoc_for_substitution(t_doc *doc)
 			break ;
 		ptr = ft_strchr(line, '$');
 		if (ptr == NULL)
+		{
+			free(line);
 			continue ;
+		}
 		else if (ft_strlen(ptr) > 1 && ft_isalpha(*(ptr + 1)))
 		{
 			ret = true;
 			close(fd);
+			free(line);
 			return (ret);
 		}
+		free(line);
 	}
 	close(fd);
 	return (ret);
@@ -58,13 +63,15 @@ char	*substitute_line(char *line, char **envp)
 	return (line);
 }
 
-int	substitute_heredoc(t_doc *doc, char **envp)
+int	substitute_heredoc(t_doc **docs, char **envp)
 {
 	int	fd;
 	int	new_fd;
 	char	*new_name;
 	char	*line;
+	t_doc	*doc;
 
+	doc = *docs;
 	fd = doc->fd;
 	close(fd);
 	fd = open(doc->name, O_RDONLY);
@@ -81,7 +88,7 @@ int	substitute_heredoc(t_doc *doc, char **envp)
 		perror(new_name);
 		return (-1);
 	}
-	while(1)
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
@@ -90,5 +97,6 @@ int	substitute_heredoc(t_doc *doc, char **envp)
 		ft_putstr_fd(line, new_fd);
 		free(line);
 	}
+	free(new_name);
 	return(0);
 }

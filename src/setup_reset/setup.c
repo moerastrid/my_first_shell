@@ -33,6 +33,7 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 	cmd->simples = NULL;
 	cmd->tokens = NULL;
 	cmd->paths = NULL;
+	cmd->doc = NULL;
 	cmd->envc = copy_env(envp);
 	if (!cmd->envc)
 		return (-1);
@@ -40,7 +41,6 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 	if (str == NULL)
 		return (0);
 	lvl = ft_atoi(str) + 1;
-	str = NULL;
 	num = ft_itoa(lvl);
 	str = ft_strjoin("SHLVL=", num);
 	env_replace("SHLVL", str, cmd->envc);

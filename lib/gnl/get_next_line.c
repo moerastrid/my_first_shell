@@ -18,7 +18,7 @@ char	*do_read(int fd, char *buf, char *storage, ssize_t *stored)
 
 	stored_temp = 1;
 	if (ft_strlen(buf))
-		storage = ft_strjoin(storage, take_line_from_buffer(buf));
+		storage = ft_strjoin_free(storage, take_line_from_buffer(buf));
 	while (ft_strchr(storage, '\n') == NULL && stored_temp > 0)
 	{
 		stored_temp = read(fd, buf, BUFFER_SIZE);
@@ -30,7 +30,7 @@ char	*do_read(int fd, char *buf, char *storage, ssize_t *stored)
 		if (stored_temp == 0)
 			break ;
 		*stored += stored_temp;
-		storage = ft_strjoin(storage, take_line_from_buffer(buf));
+		storage = ft_strjoin_free(storage, take_line_from_buffer(buf));
 	}
 	return (storage);
 }

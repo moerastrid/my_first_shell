@@ -104,4 +104,7 @@ void	remove_token_from_list(t_token **root, t_token *to_remove)
 		return ;
 	iter->next = iter->next->next;
 	to_remove->next = NULL;
+	if (to_remove->data)
+		free(to_remove->data);
+	free(to_remove);
 }

@@ -26,6 +26,7 @@ typedef struct s_list
 char		*ft_strjoin3(char *s1, char *s2, char *s3);
 char		*ft_strjoin3_free(char *s1, char *s2, char *s3);
 char		**ft_split_multiple(char const *s, char *c);
+char		*ft_strjoin_free(char const *s1, char const *s2);
 
 // libft:
 int			ft_isalpha(int c);

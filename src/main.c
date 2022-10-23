@@ -63,6 +63,14 @@ int	main(int argc, char **argv, char **envp)
 	// free(sysstr);
 	// return 0;
 
+	// #include "../lib/gnl/get_next_line.h"
+	//
+	// int fd = open("Makefile", O_RDONLY);
+	// char *s1 = get_next_line(fd);
+	// printf("%s\n", s1);
+	// free(s1);
+	// return 0;
+
 	(void)argv;
 	input = NULL;
 	line = NULL;

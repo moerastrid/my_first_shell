@@ -21,7 +21,7 @@
 
 char	*do_read(int fd, char *buf, char *storage, ssize_t *stored);
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free(char const *s1, char const *s2);
 char	*take_line_from_buffer(char *buf);
 size_t	ft_strlen(const char *c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

@@ -16,7 +16,7 @@ char	*get_envp_var(char *str, char **envp)
 {
 	int		i;
 	char	*env_head;
-	int		env_head_len;
+	size_t	env_head_len;
 	int		comp;
 	char	*end;
 
@@ -25,54 +25,47 @@ char	*get_envp_var(char *str, char **envp)
 	{
 		end = ft_strchr(envp[i], '=');
 		if (end == NULL)
-			return (NULL);
+			continue;
 		env_head = ft_substr(envp[i], 0, end - envp[i]);
 		env_head_len = ft_strlen(env_head);
-		comp = ft_strlen(str) && ft_strncmp(str, env_head, ft_strlen(str)) == 0;
-		free(env_head); 
-		if (comp == 1)
-			return (ft_strdup(&(envp[i][env_head_len + 1])));
+		if(env_head_len == ft_strlen(str))
+		{
+			comp = ft_strncmp(str, env_head, ft_strlen(env_head)) == 0;
+			if (comp == 1)
+			{
+				free(env_head);
+				return (ft_strdup(&(envp[i][env_head_len + 1])));
+			}
+		}
+		free(env_head);
 		i++;
 	}
 	return (NULL);
 }
 
-static int	count_split(char **arr)
-{
-	int	count;
-
-	count = 0;
-	while (arr && *arr)
-	{
-		count ++;
-		arr++;
-	}
-	return (count);
-}
-
 static void	split_token(t_token *token)
 {
 	char	**splitted;
-	int		num_strings;
-	int		i;
+	char	**s;
 	t_token	*old_next;
-	t_token	*iter;
 
 	splitted = ft_split_multiple(token->data, " \t\n");
 	if (splitted == NULL)
 		return ;
-	num_strings = count_split(splitted);
-	if (num_strings >= 1)
-		token->data = splitted[0];
-	if (num_strings > 1)
-		old_next = token->next;
-	i = 1;
-	iter = token;
-	while (i < num_strings)
+	s = splitted;
+	free(token->data);
+	token->data = *s++;
+	old_next = token->next;
+	while (s && *s)
 	{
-		iter->next = token_new(splitted[i], token->type);
-		iter = iter->next;
+		token->next = token_new(ft_strdup(" "), WSPACE);
+		token = token->next;
+		token->next = token_new(ft_strdup(*s), WORD);
+		token = token->next;
+		free(*s++);
 	}
+	token->next = old_next;
+	free(splitted);
 }
 
 static void	substitute_doll(t_token *token, char **envp)
@@ -92,18 +85,17 @@ static void	substitute_doll(t_token *token, char **envp)
 		}
 		token->data = sub;
 	}
-	split_token(token);
+	if(ft_strchr(token->data, ' ') || ft_strchr(token->data, '\t')\
+	|| ft_strchr(token->data, '\n'))
+		split_token(token);
 }
-
-//static void	substitute_dollq(t_token *token)
-//{
-//	token->data = ft_itoa(g_errno);
-//}
 
 void	substitute(t_cmd cmd, char **envp)
 {
 	t_token	*tokens;
+	t_doc	*doc;
 
+	doc = cmd.doc;
 	tokens = cmd.tokens;
 	while (tokens)
 	{
@@ -113,6 +105,15 @@ void	substitute(t_cmd cmd, char **envp)
 			tokens->data = ft_itoa(g_errno);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
+		if (tokens->type == LESSLESS)
+		{
+			if(check_heredoc_for_substitution(doc))
+			{
+				substitute_heredoc(&doc, envp);
+				tokens->data = ft_strjoin(doc->name, "_42cpy");
+			}
+			doc = doc->next;
+		}
 		tokens = tokens->next;
 	}
 	merge_words(cmd.tokens);
