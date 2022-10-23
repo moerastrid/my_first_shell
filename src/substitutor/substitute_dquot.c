@@ -36,8 +36,7 @@ static char	*get_word(char *input)
 	return (ft_substr(input, 1, var_end - 1 - input));
 }
 
-static char	*replace_once(char *input, char *full_input,
-		int *pre_sub_len, char **envp)
+char	*replace_once(char *input, char *full_input, int *pre_sub_len, char **envp)
 {
 	char	*var_name;
 	char	*sub;

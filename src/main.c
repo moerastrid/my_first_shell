@@ -12,6 +12,9 @@
 
 #include "../minishell.h"
 
+
+#include "substitutor/substitutor.h"
+
 int	minishell(t_cmd *cmd, char **input, char **line)
 {
 	char	*retstr;
@@ -41,11 +44,24 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	return (1);
 }
 
+#include "heredoc/heredoc.h"
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 	char	*input;
 	char	*line;
+
+	// // Heredoc substitution test.
+	// t_doc *doc = docnew("EOF", token_new(NULL, 0));
+	// // sleep(10); //time to put $something into the doc manually.
+	// char *sysstr = ft_strjoin("echo ' $PATH/a/b ' >> ", doc->name);
+	// system(sysstr);
+	// if (check_heredoc_for_substitution(doc)) // AND delimiter token is not DQUOT
+	// 	substitute_heredoc(doc, envp);
+	// free(doc);
+	// free(sysstr);
+	// return 0;
 
 	(void)argv;
 	input = NULL;

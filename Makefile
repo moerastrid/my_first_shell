@@ -1,7 +1,7 @@
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 OBJ_DIR = ./obj
-CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft #-fsanitize=address -g -O3 -fno-omit-frame-pointer -Wall -Wextra -Werror
+CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft -fsanitize=address -g -O3 -fno-omit-frame-pointer -Wall -Wextra -Werror
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
@@ -28,6 +28,7 @@ SRC =	src/main.c\
 		src/parser/set_bin.c\
 		src/substitutor/substitute_dquot.c\
 		src/substitutor/substitutor.c\
+		src/substitutor/substitute_heredoc.c\
 		src/execute/builtins/cd.c\
 		src/execute/builtins/echo.c\
 		src/execute/builtins/env.c\
@@ -47,6 +48,7 @@ SRC =	src/main.c\
 		src/setup_reset/reset.c\
 		src/utils/utils00.c\
 		src/debug/print.c\
+		lib/gnl/get_next_line.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:

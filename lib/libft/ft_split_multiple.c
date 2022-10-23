@@ -55,7 +55,7 @@ static int	fill_array(char **res, char *s, size_t len, char *c)
 	i = 0;
 	while (i + 1 < len)
 	{
-		while (in(*s, c) && c != '\0')
+		while (in(*s, c) && !in('\0', c))
 			s++;
 		end_index = get_end_index(s, c);
 		if (end_index - s < 0)
