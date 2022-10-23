@@ -15,6 +15,7 @@
 
 # include "../../minishell.h"
 # include "../env/env.h"
+# include "../heredoc/heredoc.h"
 
 char		**getpaths(char **envp);
 int			setup(t_cmd *cmd, char **envp, int argc);

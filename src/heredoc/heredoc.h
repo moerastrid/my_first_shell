@@ -16,6 +16,7 @@
 # include "../../minishell.h"
 
 void	docadd_back(t_doc **doc, t_doc *new_doc);
+void	docs_free(t_doc *doc);
 t_doc	*docnew(char *eof, t_token *lessless);
 
 #endif

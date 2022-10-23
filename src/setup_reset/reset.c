@@ -30,6 +30,7 @@ void	reset_cmd(t_cmd *cmd)
 {
 	free_simples(cmd->simples);
 	unlink_docs(cmd->doc);
+	docs_free(cmd->doc);
 	free_token_list(cmd->tokens);
 	if (cmd->paths)
 		free(cmd->paths);

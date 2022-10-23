@@ -92,7 +92,7 @@ int	substitute_heredoc(t_doc **docs, char **envp)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return (0);
+			break ;
 		line = substitute_line(line, envp);
 		ft_putstr_fd(line, new_fd);
 		free(line);

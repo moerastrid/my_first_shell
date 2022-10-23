@@ -95,6 +95,7 @@ void	substitute(t_cmd cmd, char **envp)
 	t_token	*tokens;
 	t_doc	*doc;
 
+	print_tokens(cmd.tokens);
 	doc = cmd.doc;
 	tokens = cmd.tokens;
 	while (tokens)

@@ -3,7 +3,7 @@
 *.txt
 !astrid_notes.txt
 !bugs.txt
-!Samenvattting.txt
+!Samenvatting.txt
 minishell
 .tags
 *.sh

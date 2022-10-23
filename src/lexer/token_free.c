@@ -17,8 +17,12 @@ void	free_token(t_token *token)
 	if (token == NULL)
 		return ;
 	if (token->data != NULL)
+	{
 		free(token->data);
+		token->data = NULL;
+	}
 	free(token);
+	token = NULL;
 }
 
 void	free_token_list(t_token *token)

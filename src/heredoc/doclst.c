@@ -65,9 +65,29 @@ t_doc	*docnew(char *eof, t_token *lessless)
 		return (NULL);
 	}
 	new->name = nextfilename(ft_strdup("heredob"));
-	lessless->data = new->name;
+	lessless->data = ft_strdup(new->name);
 	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
 	new->eof = ft_strdup(eof);
 	new->next = NULL;
 	return (new);
+}
+
+static void	doc_free(t_doc *doc)
+{
+	if (!doc)
+		return ;
+	if (doc->name)
+		free(doc->name);
+	close(doc->fd);
+	if (doc->eof)
+		free(doc->eof);
+}
+
+void	docs_free(t_doc *doc)
+{
+	while(doc)
+	{
+		doc_free(doc);
+		doc = doc->next;
+	}
 }
