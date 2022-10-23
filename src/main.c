@@ -52,25 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 
-	// // Heredoc substitution test.
-	// t_doc *doc = docnew("EOF", token_new(NULL, 0));
-	// // sleep(10); //time to put $something into the doc manually.
-	// char *sysstr = ft_strjoin("echo ' $PATH/a/b ' >> ", doc->name);
-	// system(sysstr);
-	// if (check_heredoc_for_substitution(doc)) // AND delimiter token is not DQUOT
-	// 	substitute_heredoc(doc, envp);
-	// free(doc);
-	// free(sysstr);
-	// return 0;
-
-	// #include "../lib/gnl/get_next_line.h"
-	//
-	// int fd = open("Makefile", O_RDONLY);
-	// char *s1 = get_next_line(fd);
-	// printf("%s\n", s1);
-	// free(s1);
-	// return 0;
-
 	(void)argv;
 	input = NULL;
 	line = NULL;
