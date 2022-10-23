@@ -90,6 +90,11 @@ static void	substitute_doll(t_token *token, char **envp)
 		split_token(token);
 }
 
+// static void sub_heredoc()
+// {
+//
+// }
+
 void	substitute(t_cmd cmd, char **envp)
 {
 	t_token	*tokens;
@@ -108,11 +113,16 @@ void	substitute(t_cmd cmd, char **envp)
 			substitute_dquot(tokens, envp);
 		if (tokens->type == LESSLESS)
 		{
-			if(check_heredoc_for_substitution(doc))
+			tokens = tokens->next;
+			while (tokens->type == WSPACE)
+				tokens = tokens->next;
+			if(tokens->type == WORD && check_heredoc_for_substitution(doc))
 			{
 				substitute_heredoc(&doc, envp);
 				tokens->data = ft_strjoin(doc->name, "_42cpy");
 			}
+
+			// remove_token_from_list(&cmd.tokens, tokens);
 			doc = doc->next;
 		}
 		tokens = tokens->next;

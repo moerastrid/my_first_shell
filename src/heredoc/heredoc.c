@@ -49,7 +49,7 @@ static int	token_check(t_cmd *cmd, t_token **lessless, t_token **token)
 	if ((*token)->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 	{
 		docadd_back(&cmd->doc, docnew((*token)->data, *lessless));
-		remove_token_from_list(&cmd->tokens, *token);
+		// remove_token_from_list(&cmd->tokens, *token);
 		*token = *lessless;
 	}
 	else

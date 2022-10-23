@@ -29,6 +29,7 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
 	|| cmd->tokens == NULL)
 		return (1);
+	print_tokens(cmd->tokens);
 	if (heredoc(cmd, &retstr))
 		return (1);
 	if (retstr != NULL)
@@ -52,6 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 
+	atexit(run_leaks);
 	(void)argv;
 	input = NULL;
 	line = NULL;

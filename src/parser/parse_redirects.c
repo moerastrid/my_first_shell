@@ -52,8 +52,11 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	return (1);
 }
 
-int	parse_heredoc(t_cmd *cmd, t_token *token)
+int	parse_heredoc(t_cmd *cmd, t_token **token)
 {
-	simple_add_infile(simple_tail(cmd->simples), token->data, 1);
+	simple_add_infile(simple_tail(cmd->simples), (*token)->data, 1);
+	*token = (*token)->next;
+	while (*token && (*token)->type == WSPACE)
+		*token = (*token)->next;
 	return (0);
 }
