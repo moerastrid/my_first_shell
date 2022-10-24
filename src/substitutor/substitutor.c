@@ -90,6 +90,13 @@ static void	substitute_doll(t_token *token, char **envp)
 		split_token(token);
 }
 
+static void substitute_dollq(t_token **tokens)
+{
+	if ((*tokens)->data)
+		free((*tokens)->data);
+	(*tokens)->data = ft_itoa(g_errno);
+}
+
 void	substitute(t_cmd cmd, char **envp)
 {
 	t_token	*tokens;
@@ -102,7 +109,7 @@ void	substitute(t_cmd cmd, char **envp)
 		if (tokens->type == DOLL)
 			substitute_doll(tokens, envp);
 		if (tokens->type == DOLLQ)
-			tokens->data = ft_itoa(g_errno);
+			substitute_dollq(&cmd.tokens);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
 		if (tokens->type == LESSLESS)
