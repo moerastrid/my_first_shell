@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 21:03:43 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 21:04:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	substitute_dquot(t_token *token, char **envp)
 	{
 		while (*input != '$' && *input != '\0')
 			input++;
-		if (!*(input) && !*(input + 1))
+		if (!*input || !*(input + 1))
 			break ;
 		if (!ft_isalpha(*(input + 1)))
 		{

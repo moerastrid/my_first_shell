@@ -1,6 +1,6 @@
 *.o
 *.a
-#*.txt
+*.txt
 !astrid_notes.txt
 !bugs.txt
 !Samenvatting.txt
@@ -9,3 +9,5 @@ minishell
 *.sh
 .vscode
 heredo*
+minishell_tester
+minishell_tester/*
