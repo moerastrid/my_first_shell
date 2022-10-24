@@ -64,7 +64,7 @@ int	env_replace(char *var_name, char *insert, char **envp)
 	int		i;
 
 	i = 0;
-	while (envp[i] != NULL)
+	while (envp && envp[i] != NULL)
 	{
 		if (ft_strlen(envp[i]) < ft_strlen(var_name))
 			continue ;
@@ -90,7 +90,10 @@ char	**env_add(char *to_add, char **envp)
 		return (envp);
 	head = ft_substr(to_add, 0, ft_strchr(to_add, '=') - to_add);
 	if (env_replace(head, to_add, envp) == 0)
+	{
+		free(head);
 		return (envp);
+	}
 	new_envp = ft_calloc(count_envp(envp) + 2, sizeof(envp));
 	if (!new_envp)
 	{
