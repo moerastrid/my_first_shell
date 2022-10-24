@@ -17,7 +17,7 @@ char	*find_str(char *str, char **envp)
 	int	i;
 
 	i = 0;
-	while (envp[i] != NULL)
+	while (envp && envp[i] != NULL)
 	{
 		if (ft_strlen(envp[i]) < ft_strlen(str))
 			continue ;
