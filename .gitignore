@@ -6,6 +6,6 @@
 !Samenvatting.txt
 minishell
 .tags
-*.sh
+#*.sh
 .vscode
 heredo*
