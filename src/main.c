@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 15:00:38 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 15:44:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	if (*input == NULL)
 		*line = prompt(cmd);
 	else
+	{
 		*line = ft_strdup(*input);
+		free (*input);
+	}
 	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
 	|| cmd->tokens == NULL)
 		return (1);
