@@ -1,0 +1,101 @@
+cd
+cd ..
+cd .
+cd /Users
+cd //
+cd '//'
+cd //////
+cd ./././
+cd /
+cd '/////' 2>/dev/null
+cd '/etc'
+cd '/var'
+cd "$PWD/file_tests"
+cd ../../..
+cd ..
+cd ..
+cd '/'
+cd $PWD/file_tests
+echo
+echo echo
+eCho
+eChO
+eCHO
+ECHO
+echo rhobebou
+echo stop barking
+echo "bonjour"
+echo bonjour
+echo 'bonjour'
+echo -n bonjour
+echo "-n" bonjour
+echo -n"-n" bonjour
+echo "-n -n -n"-n bonjour
+echo "-n '-n'" bonjour
+echo "~"
+echo '~'
+echo ~123
+echo 123~
+echo $USER
+echo ' $USER '
+echo ''''''''''$USER''''''''''
+echo """"""""$USER""""""""
+echo $USER'$USER'text oui oui oui oui $USER oui $USER ''
+echo $USER '' $USER $USER '' $USER '' $USER -n $USER
+echo ' ' ' '
+echo '" ' " """
+echo '$USER'
+echo $USER " "
+echo $USER=4
+echo $USER=thallard
+echo $USER
+echo $?
+echo $USER213
+echo $PWD/file
+echo $PWD
+test
+
+cat wouaf wouaf
+
+echo
+echo -n
+echo -n
+echo
+echo something
+rm -f something
+cat something
+echo -n oui
+nice to meet you if these tests are green
+exit 42
+exit 259
+exit -12030
+exit +0
+exit "1"
+exit "2"
+exit "+102"
+exit "1230"
+exit "1"23
+exit "2"32"32"
+exit '42'"42"42
+exit +'42'"42"42
+exit -'42'"42"42
+exit 9223372036854775807
+exit -4
+exit 1
+exit -1
+exit 42
+exit 0
+export TEST
+export TEST=
+export TEST=123
+export ___TEST=123
+export TE\ST=100
+export _TEST=100
+export TEST
+export TEST
+export TES=T=""
+export TES=T=123
+export _TEST=123
+export TES_T=123
+export TEST_=123
+export TES$?T=123
