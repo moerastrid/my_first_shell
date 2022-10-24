@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 17:17:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 18:10:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,10 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	int		to_exit;
 
-	printf("%s\n", "hi");
-
-	(void)argv;
 	input = NULL;
-	to_exit = 0;
-	if (argc >= 2 && ft_strlen(argv[1]) == 2 && argv[1][0] == '-' && argv[1][1] == 'c')
-	{
-		input = argv[2];
-		to_exit = 1;
-	}
+	to_exit = check_c_mode(argc, argv, &input);
 	line = NULL;
-	if (setup(&cmd, envp, argc) == -1)
+	if (setup(&cmd, envp) == -1)
 		return (-1);
 	while (1)
 	{
@@ -65,10 +57,10 @@ int	main(int argc, char **argv, char **envp)
 			input = NULL;
 			reset(&cmd, line);
 		}
-		if(to_exit)
-			break;
+		if (to_exit)
+			break ;
 	}
-	return (EXIT_SUCCESS);
+	return (g_errno);
 }
 
 //ls | cat >out.txt <in.txt >>out2.txt | echo -e -r -m $SHLVL=a/b
