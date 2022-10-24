@@ -82,17 +82,17 @@ static void	doc_free(t_doc *doc)
 	close(doc->fd);
 	if (doc->eof)
 		free(doc->eof);
+	free(doc);
 }
 
 void	docs_free(t_doc *doc)
 {
-	t_doc *prev;
+	t_doc *next;
 
 	while (doc)
 	{
+		next = doc->next;
 		doc_free(doc);
-		prev = doc;
-		doc = doc->next;
-		free (prev);
+		doc = next;
 	}
 }
