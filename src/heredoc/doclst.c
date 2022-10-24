@@ -67,7 +67,10 @@ t_doc	*docnew(t_token *token, t_token *lessless)
 	new->name = nextfilename(ft_strdup("heredob"));
 	lessless->data = ft_strdup(new->name);
 	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
-	new->eof = ft_strdup(token->data);
+	if (token->type == DOLL)
+		new->eof = ft_strjoin("$", token->data);
+	else
+		new->eof = ft_strdup(token->data);
 	new->type = token->type;
 	new->next = NULL;
 	return (new);

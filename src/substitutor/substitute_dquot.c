@@ -30,6 +30,8 @@ static char	*get_word(char *input)
 {
 	char	*var_end;
 
+	if(ft_strlen(input) <= 1)
+		return (NULL);
 	var_end = input + 1;
 	while (is_word_char(*var_end))
 		var_end++;
@@ -76,6 +78,11 @@ void	substitute_dquot(t_token *token, char **envp)
 			input++;
 		if (!*input)
 			break ;
+		if (!ft_isalpha(*input))
+		{
+			input++;
+			continue ;
+		}
 		new_data = rep_once(input, token->data, &presublen, envp);
 		free(token->data);
 		token->data = new_data;

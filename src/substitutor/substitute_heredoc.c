@@ -24,8 +24,13 @@ char	*substitute_line(char *line, char **envp)
 	{
 		while (*ptr != '$' && *ptr != '\0')
 			ptr++;
-		if (*ptr == '\0')
+		if (!*ptr)
 			break ;
+		if (!ft_isalpha(*ptr))
+		{
+			ptr++;
+			continue ;
+		}
 		new_line = rep_once(ptr, line, &pre_sub_len, envp);
 		free(line);
 		line = new_line;
