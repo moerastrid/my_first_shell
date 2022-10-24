@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 19:38:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 22:08:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 	int		to_exit;
-	int res;
+	int		res;
 
 	input = NULL;
 	to_exit = check_c_mode(argc, argv, &input);

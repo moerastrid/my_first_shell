@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 19:38:09 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 21:32:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_envp_var(char *str, char **envp)
 	{
 		end = ft_strchr(envp[i], '=');
 		if (end == NULL)
-			continue;
+			continue ;
 		if (ft_strlen(envp[i]) > ft_strlen(str)
 			&& !ft_strncmp(str, envp[i], ft_strlen(str))
 			&& envp[i][ft_strlen(str)] == '=')

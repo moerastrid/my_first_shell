@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 21:04:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 21:32:14 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*get_word(char *input)
 {
 	char	*var_end;
 
-	if(ft_strlen(input) <= 1)
+	if (ft_strlen(input) <= 1)
 		return (NULL);
 	var_end = input + 1;
 	while (is_word_char(*var_end))
