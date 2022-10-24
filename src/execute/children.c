@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:09:08 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:49:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 19:26:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 	simple = get_simple(*cmd, cmd_no);
 	if (is_builtin(simple) == 1)
 	{
+		redirect_infile(simple->infiles);
+		redirect_outfile(simple->outfiles);
 		ret_val = exec_builtin(simple, cmd);
 		dup2(0, STDIN_FILENO);
 		dup2(1, STDOUT_FILENO);
