@@ -53,7 +53,6 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 
-	atexit(run_leaks);
 	(void)argv;
 	input = NULL;
 	line = NULL;
