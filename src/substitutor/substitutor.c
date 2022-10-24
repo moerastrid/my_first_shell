@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 23:10:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:54:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,20 +111,20 @@ void	substitute(t_cmd cmd, char **envp)
 			tokens->data = ft_itoa(g_errno);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
-		if (tokens->type == LESSLESS)
-		{
-			tokens = tokens->next;
-			while (tokens->type == WSPACE)
-				tokens = tokens->next;
-			if(tokens->type == WORD && check_heredoc_for_substitution(doc))
-			{
-				substitute_heredoc(&doc, envp);
-				tokens->data = ft_strjoin(doc->name, "_42cpy");
-			}
+		//if (tokens->type == LESSLESS)
+		//{
+		//	tokens = tokens->next;
+		//	while (tokens->type == WSPACE)
+		//		tokens = tokens->next;
+		//	if(tokens->type == WORD && check_heredoc_for_substitution(doc))
+		//	{
+		//		substitute_heredoc(&doc, envp);
+		//		tokens->data = ft_strjoin(doc->name, "_42cpy");
+		//	}
 
-			// remove_token_from_list(&cmd.tokens, tokens);
-			doc = doc->next;
-		}
+		//	// remove_token_from_list(&cmd.tokens, tokens);
+		//	doc = doc->next;
+		//}
 		tokens = tokens->next;
 	}
 	merge_words(cmd.tokens);

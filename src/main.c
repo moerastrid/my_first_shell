@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:31:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:57:03 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 
-	atexit(run_leaks);
+	//atexit(run_leaks);
 	(void)argv;
 	input = NULL;
 	line = NULL;

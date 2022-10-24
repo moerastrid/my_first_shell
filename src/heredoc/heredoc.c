@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:37:19 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:58:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-static char	*heredoc_loop(t_doc *hd)
+static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 {
 	char	*line;
 
@@ -30,6 +30,8 @@ static char	*heredoc_loop(t_doc *hd)
 		}
 		else
 		{
+			if (hd->type == WORD)
+				line = substitute_line(line, cmd->envc);
 			write(hd->fd, line, ft_strlen(line));
 			write(hd->fd, "\n", ft_strlen("\n"));
 		}
@@ -82,7 +84,7 @@ int	heredoc(t_cmd *cmd, char **retstr)
 		token = token->next;
 	}
 	if (cmd->doc != NULL)
-		*retstr = heredoc_loop(cmd->doc);
+		*retstr = heredoc_loop(cmd->doc, cmd);
 	catch_signals();
 	return (0);
 }
