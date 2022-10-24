@@ -22,6 +22,6 @@ int			bi_pwd(void);
 int			bi_export(t_simple simple, t_cmd *cmd);
 int			bi_unset(t_simple simple, t_cmd *cmd);
 int			bi_env(t_cmd *cmd);
-void		bi_exit(t_cmd *cmd);
+void		bi_exit(t_cmd *cmd, t_simple *simple);
 
 #endif

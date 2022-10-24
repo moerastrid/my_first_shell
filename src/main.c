@@ -28,7 +28,6 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
 	|| cmd->tokens == NULL)
 		return (1);
-	print_tokens(cmd->tokens);
 	if (heredoc(cmd, &retstr))
 		return (1);
 	if (retstr != NULL)
@@ -51,9 +50,18 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	cmd;
 	char	*input;
 	char	*line;
+	int		to_exit;
+
+	printf("%s\n", "hi");
 
 	(void)argv;
 	input = NULL;
+	to_exit = 0;
+	if (argc >= 2 && ft_strlen(argv[1]) == 2 && argv[1][0] == '-' && argv[1][1] == 'c')
+	{
+		input = argv[2];
+		to_exit = 1;
+	}
 	line = NULL;
 	if (setup(&cmd, envp, argc) == -1)
 		return (-1);
@@ -64,6 +72,8 @@ int	main(int argc, char **argv, char **envp)
 			input = NULL;
 			reset(&cmd, line);
 		}
+		if(to_exit)
+			break;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -51,16 +51,17 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 
 int	setup(t_cmd *cmd, char **envp, int argc)
 {
-	if (argc != 1)
-	{
-		ft_putstr_fd("Minishell doesn't want an argument, please try again\n", \
-		STDERR_FILENO);
-		return (-1);
-	}
+	// if (argc != 1)
+	// {
+	// 	ft_putstr_fd("Minishell doesn't want an argument, please try again\n", \
+	// 	STDERR_FILENO);
+	// 	return (-1);
+	// }
+	(void)argc;
 	g_errno = 0;
 	setup_termios();
 	if (g_errno != 0)
-		return (-1);
+		return (g_errno);
 	catch_signals();
 	return (setup_cmd(cmd, envp));
 }

@@ -19,7 +19,7 @@ char	**getpaths(char **envp)
 
 	i = 0;
 	paths = NULL;
-	while (envp[i])
+	while (envp && envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{

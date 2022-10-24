@@ -56,7 +56,7 @@ int	exec_builtin(t_simple	*t, t_cmd *cmd)
 		return (bi_env(cmd));
 	else if (ft_strncmp(t->argv[0], "exit", 5) == 0)
 	{
-		bi_exit(cmd);
+		bi_exit(cmd, t);
 		ft_putstr_fd("exit error\n", STDERR_FILENO);
 		exit(1);
 	}

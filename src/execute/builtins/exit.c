@@ -12,15 +12,15 @@
 
 #include "../execute.h"
 
-void	bi_exit(t_cmd *cmd)
+void	bi_exit(t_cmd *cmd, t_simple *simple)
 {
 	int ret;
 
 	ret = 0;
 	if (cmd->cmd_count == 1)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-	if (cmd->simples->argv[1])
-		ret = ft_atoi(cmd->simples->argv[1]);
+	if (simple->argv && simple->argv[1])
+		ret = ft_atoi(simple->argv[1]);
 	clear_cmd(cmd);
 	exit (ret);
 }
