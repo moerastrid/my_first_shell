@@ -1,12 +1,13 @@
 *.o
 *.a
-*.txt
 !astrid_notes.txt
 !bugs.txt
 !Samenvatting.txt
 minishell
 .tags
-*.sh
 .vscode
-minishell_tester
-minishell_tester/*
+
+#minishell_tester
+#minishell_tester/*
+#*.txt
+#*.sh
