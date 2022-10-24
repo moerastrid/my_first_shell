@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:02:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:04:00 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:40:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	docadd_back(t_doc **doc, t_doc *new_doc)
 	temp->next = new_doc;
 }
 
-t_doc	*docnew(char *eof, t_token *lessless)
+t_doc	*docnew(t_token *token, t_token *lessless)
 {
 	t_doc	*new;
 
@@ -67,7 +67,8 @@ t_doc	*docnew(char *eof, t_token *lessless)
 	new->name = nextfilename(ft_strdup("heredob"));
 	lessless->data = ft_strdup(new->name);
 	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
-	new->eof = ft_strdup(eof);
+	new->eof = ft_strdup(token->data);
+	new->type = token->type;
 	new->next = NULL;
 	return (new);
 }
