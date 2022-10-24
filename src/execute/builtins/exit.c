@@ -6,17 +6,17 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 23:25:22 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 23:51:03 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-int	ft_atoi_ret(const char *str, int *ret)
+long long int	ft_atoi_ret(const char *str, int *ret)
 {
 	int	a;
-	int	result;
-	int	mincounter;
+	long long int	result;
+	long long int	mincounter;
 
 	a = 0;
 	result = 0;
@@ -45,23 +45,26 @@ int	ft_atoi_ret(const char *str, int *ret)
 void	bi_exit(t_cmd *cmd, t_simple *simple)
 {
 	int	ret;
-	int	num;
+	long long int	num;
 
-	num = 0;
 	ret = 0;
+	num = 0;
+	if (cmd->cmd_count == 1)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
+	if (simple->argc > 2)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		exit (1);
+	}
 	if (simple->argv && simple->argv[1])
 	{
 		num = ft_atoi_ret(simple->argv[1], &ret);
-		if (ret == -1)
+		if (ret == -1 || num > INT16_MAX || num < INT16_MIN)
 		{
 			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 			ft_putstr_fd(simple->argv[1], STDERR_FILENO);
 			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 			exit (255);
-		}
-		else
-		{
-			ft_putstr_fd("exit\n", STDERR_FILENO);
 		}
 		clear_cmd(cmd);
 		exit (num);
