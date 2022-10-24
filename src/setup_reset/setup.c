@@ -17,10 +17,9 @@ void	setup_termios(void)
 	struct termios	my_term;
 
 	if (tcgetattr(0, &my_term) == -1)
-		g_errno = errno;
+		return ;
 	my_term.c_lflag &= ~ECHOCTL;
-	if (tcsetattr(0, 0, &my_term) == -1)
-		g_errno = errno;
+	tcsetattr(0, 0, &my_term);
 }
 
 static int	setup_cmd(t_cmd *cmd, char **envp)
@@ -53,8 +52,6 @@ int	setup(t_cmd *cmd, char **envp)
 {
 	g_errno = 0;
 	setup_termios();
-	if (g_errno != 0)
-		return (-1);
 	catch_signals();
 	return (setup_cmd(cmd, envp));
 }
