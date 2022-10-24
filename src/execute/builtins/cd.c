@@ -30,7 +30,7 @@ int	bi_cd(t_simple *simple, t_cmd *cmd)
 	{
 		retstr = getcwd(NULL, 0);
 		retstr2 = ft_strjoin("PWD=", retstr);
-		env_add(retstr2, cmd->envc);
+		cmd->envc = env_add(retstr2, cmd->envc);
 		free (retstr2);
 		free(retstr);
 	}

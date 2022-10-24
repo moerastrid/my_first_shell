@@ -19,7 +19,7 @@ int	bi_echo(t_simple *sm)
 
 	flag = 0;
 	i = 1;
-	if (sm->argc == 1)
+	if (sm->argc <= 1)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return (0);

@@ -19,9 +19,7 @@ char	*find_str(char *str, char **envp)
 	i = 0;
 	while (envp && envp[i] != NULL)
 	{
-		if (ft_strlen(envp[i]) < ft_strlen(str))
-			continue ;
-		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0 \
+		if (ft_strncmp(envp[i], str, ft_strlen(str) + 1) == 0 \
 		&& *(envp[i] + ft_strlen(str)) == '=')
 			return (envp[i]);
 		i++;
@@ -66,8 +64,6 @@ int	env_replace(char *var_name, char *insert, char **envp)
 	i = 0;
 	while (envp && envp[i] != NULL)
 	{
-		if (ft_strlen(envp[i]) < ft_strlen(var_name))
-			continue ;
 		if (ft_strncmp(envp[i], var_name, ft_strlen(var_name)) == 0 \
 		&& *(envp[i] + ft_strlen(var_name)) == '=')
 		{
