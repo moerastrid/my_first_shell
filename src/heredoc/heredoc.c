@@ -17,8 +17,6 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 {
 	char	*line;
 
-	print_tokens(cmd->tokens);
-
 	heredoc_signals();
 	while (hd)
 	{

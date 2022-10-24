@@ -44,12 +44,13 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	char	*line;
 	int		to_exit;
+	int res;
 
 	input = NULL;
 	to_exit = check_c_mode(argc, argv, &input);
 	line = NULL;
-	if (setup(&cmd, envp) == -1)
-		return (-1);
+	if ((res = setup(&cmd, envp)) != 0)
+		return (res);
 	while (1)
 	{
 		if (minishell(&cmd, &input, &line) == 1)
