@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/25 00:31:43 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/25 00:48:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,32 @@ void	exec_cmd(t_simple *simple, char **envp)
 	i = 1;
 	default_signals();
 	execve(simple->bin, simple->argv, envp);
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	if (simple->argc == 1)
+	if (simple->argc == 1 && g_errno != 127)
 	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		g_errno = 127;
+		exit(127);
 	}
 	while (simple->argv[i])
 	{
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putstr_fd(simple->argv[i++], STDERR_FILENO);
-		ft_putstr_fd("No such file or directory\n", STDERR_FILENO);
-		g_errno = 1;
+		if (access(&simple->bin[0], F_OK) == 0)
+		{
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd(simple->argv[i], STDERR_FILENO);
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			i++;
+		}
+		else
+		{
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			g_errno = 127;
+			exit(127);
+		}
 	}
+	g_errno = 1;
 	exit (g_errno);
 }
 
