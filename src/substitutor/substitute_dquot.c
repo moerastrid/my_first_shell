@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 17:01:31 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 21:03:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,15 @@ void	substitute_dquot(t_token *token, char **envp)
 	char	*new_data;
 	int		presublen;
 
+	presublen = 0;
 	input = token->data;
 	while (input && *input != '\0')
 	{
 		while (*input != '$' && *input != '\0')
 			input++;
-		if (!*input)
+		if (!*(input) && !*(input + 1))
 			break ;
-		if (!ft_isalpha(*input))
+		if (!ft_isalpha(*(input + 1)))
 		{
 			input++;
 			continue ;
