@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 17:12:22 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 19:38:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	substitute(t_cmd cmd, char **envp)
 		if (tokens->type == DOLL)
 			substitute_doll(tokens, envp);
 		if (tokens->type == DOLLQ)
-			substitute_dollq(&cmd.tokens);
+			substitute_dollq(&tokens);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
 		tokens = tokens->next;
