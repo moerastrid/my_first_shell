@@ -1,3 +1,4 @@
+-n
 cd "doesntexist"
 cd "doesntexist" 2>/dev/null
 cd "wtf" 2>/dev/null
@@ -104,10 +105,10 @@ export ==========
 export 1TEST=
 export ""=""
 export TE+S=T=""
-export TES\\T=123
+export TES\T=123
 export TES.T=123
 export TES\$T=123
-export TES\\T
+export TES\T
 export TES.T=123
 export TES+T=123
 export TES}T=123
@@ -125,7 +126,7 @@ export TES!T=123
 export TES~T=123
 env | grep "_="
 cd .. | pwd
-unset TES\\T
+unset TES\T
 unset TES;T
 unset TES.T
 unset TES+T
