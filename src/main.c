@@ -45,14 +45,12 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	int		to_exit;
 
-	printf("%s\n", "hi");
-
 	(void)argv;
 	input = NULL;
 	to_exit = 0;
 	if (argc >= 2 && ft_strlen(argv[1]) == 2 && argv[1][0] == '-' && argv[1][1] == 'c')
 	{
-		input = argv[2];
+		input = ft_strdup(argv[2]);
 		to_exit = 1;
 	}
 	line = NULL;
