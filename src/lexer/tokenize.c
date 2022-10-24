@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 16:51:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 22:26:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_token(t_token *token)
 		if (type == WORD)
 		{
 			g_errno = 10;
-			return (-1);
+			return (10);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 19:23:56 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 22:25:36 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute(t_cmd *cmd)
 	ret_val = 0;
 	ignore_signals();
 	if (cmd->cmd_count <= 0)
-		return (-1);
+		return (1);
 	if (cmd->cmd_count == 1)
 	{
 		if (is_builtin(cmd->simples) == 1)

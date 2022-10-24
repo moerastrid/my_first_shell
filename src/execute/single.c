@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:09:01 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 22:25:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int	only_child(t_cmd *cmd)
 			exit_code = WTERMSIG(status) + 128;
 		return (exit_code);
 	}
-	return (-1);
+	return (1);
 }

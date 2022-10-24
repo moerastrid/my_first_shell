@@ -121,3 +121,27 @@ export TES@T=123
 export TES!T=123
 export =============123
 export +++++++=123
+export TES^T=123
+export TES!T=123
+export TES~T=123
+env | grep "_="
+cd .. | pwd
+export TEST=123 | cat -e | cat -e
+unset TES\T
+unset TES;T
+unset TES.T
+unset TES+T
+unset TES=T
+unset TES}T
+unset TES{T
+unset TES-T
+unset -TEST
+unset TE*ST
+unset TES#T
+unset TES@T
+unset TES!T
+unset ============
+unset +++++++
+unset TES^T
+unset TES!T
+unset TES~T
