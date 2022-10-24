@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/25 00:26:12 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/25 00:31:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	exec_cmd(t_simple *simple, char **envp)
 	{
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		g_errno = 127;
 	}
 	while (simple->argv[i])
 	{
@@ -34,9 +35,9 @@ void	exec_cmd(t_simple *simple, char **envp)
 		ft_putstr_fd(": ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[i++], STDERR_FILENO);
 		ft_putstr_fd("No such file or directory\n", STDERR_FILENO);
+		g_errno = 1;
 	}
-	g_errno = 15;
-	exit (errno);
+	exit (g_errno);
 }
 
 // this is a function for a single command
