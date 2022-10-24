@@ -8,6 +8,5 @@ minishell
 .tags
 *.sh
 .vscode
-heredo*
 minishell_tester
 minishell_tester/*

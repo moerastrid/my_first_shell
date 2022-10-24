@@ -71,7 +71,6 @@ void	substitute_dquot(t_token *token, char **envp)
 	char	*new_data;
 	int		presublen;
 
-	presublen = 0;
 	input = token->data;
 	while (input && *input != '\0')
 	{
@@ -89,6 +88,4 @@ void	substitute_dquot(t_token *token, char **envp)
 		token->data = new_data;
 		input = token->data + presublen;
 	}
-	if (input == NULL)
-		printf("%s\n", "Substitution error");
 }

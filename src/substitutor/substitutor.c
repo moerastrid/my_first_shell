@@ -12,35 +12,6 @@
 
 #include "substitutor.h"
 
-// char	*get_envp_var(char *str, char **envp)
-// {
-// 	int		i;
-// 	char	*env_head;
-// 	int		comp;
-// 	char	*end;
-//
-// 	i = 0;
-// 	while (envp && envp[i])
-// 	{
-// 		end = ft_strchr(envp[i], '=');
-// 		if (end == NULL)
-// 			continue ;
-// 		env_head = ft_substr(envp[i], 0, end - envp[i]);
-// 		if (ft_strlen(env_head) == ft_strlen(str))
-// 		{
-// 			comp = ft_strncmp(str, env_head, ft_strlen(env_head)) == 0;
-// 			if (comp == 1)
-// 			{
-// 				free(env_head);
-// 				return (ft_strdup(&(envp[i][ft_strlen(env_head) + 1])));
-// 			}
-// 		}
-// 		free(env_head);
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
-
 char	*get_envp_var(char *str, char **envp)
 {
 	int		i;

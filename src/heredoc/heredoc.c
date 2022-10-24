@@ -31,13 +31,8 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 		}
 		else
 		{
-			printf("%s == %d: ", line, hd->type);
-			print_token_type(hd->type);
-			printf(" %d\n", hd->type == WORD);
-			printf("\n");
 			if (hd->type == WORD)
 				line = substitute_line(line, cmd->envc);
-			printf("%s\n", line);
 			write(hd->fd, line, ft_strlen(line));
 			write(hd->fd, "\n", ft_strlen("\n"));
 		}
@@ -69,8 +64,6 @@ int	heredoc(t_cmd *cmd, char **retstr)
 {
 	t_token	*token;
 	t_token	*lessless;
-
-	print_tokens(cmd->tokens);
 
 	cmd->doc = NULL;
 	token = cmd->tokens;

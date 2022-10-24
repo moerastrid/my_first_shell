@@ -26,7 +26,7 @@ char	*substitute_line(char *line, char **envp)
 			ptr++;
 		if (!*ptr || !*(ptr + 1))
 			break ;
-		if (!ft_isalpha(*ptr + 1))
+		if (!ft_isalpha(*(ptr + 1)))
 		{
 			ptr++;
 			continue ;
