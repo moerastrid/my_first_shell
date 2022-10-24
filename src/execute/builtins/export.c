@@ -33,5 +33,6 @@ int	bi_export(t_simple simple, t_cmd *cmd)
 		cmd->envc = env_add(simple.argv[i], cmd->envc);
 		i++;
 	}
+	printf("%s\n", cmd->envc[0]);
 	return (0);
 }
