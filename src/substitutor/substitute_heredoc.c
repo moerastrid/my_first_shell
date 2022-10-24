@@ -24,9 +24,9 @@ char	*substitute_line(char *line, char **envp)
 	{
 		while (*ptr != '$' && *ptr != '\0')
 			ptr++;
-		if (!*ptr)
+		if (!*ptr || !*(ptr + 1))
 			break ;
-		if (!ft_isalpha(*ptr))
+		if (!ft_isalpha(*ptr + 1))
 		{
 			ptr++;
 			continue ;

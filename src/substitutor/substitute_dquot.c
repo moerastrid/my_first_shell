@@ -76,9 +76,9 @@ void	substitute_dquot(t_token *token, char **envp)
 	{
 		while (*input != '$' && *input != '\0')
 			input++;
-		if (!*input)
+		if (!*input || !*(input + 1))
 			break ;
-		if (!ft_isalpha(*input))
+		if (!ft_isalpha(*input + 1))
 		{
 			input++;
 			continue ;
