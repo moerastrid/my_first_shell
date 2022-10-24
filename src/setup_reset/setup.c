@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 18:10:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 18:15:55 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	setup(t_cmd *cmd, char **envp)
 
 int	check_c_mode(int argc, char **argv, char **input)
 {
-	if (argc >= 2 && ft_strlen(argv[1]) == 2 && argv[1][0] == '-' && argv[1][1] == 'c')
+	if (argc >= 2 && ft_strlen(argv[1]) == 2 \
+	&& argv[1][0] == '-' && argv[1][1] == 'c')
 	{
 		*input = ft_strdup(argv[2]);
 		return (1);
