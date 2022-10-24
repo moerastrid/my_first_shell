@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:33:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 21:38:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 22:17:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_str(char *str, char **envp)
 	i = 0;
 	while (envp && envp[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], str, ft_strlen(str) + 1) == 0 \
+		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0 \
 		&& *(envp[i] + ft_strlen(str)) == '=')
 			return (envp[i]);
 		i++;
