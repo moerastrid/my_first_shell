@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:49:24 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 20:24:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	bi_cd(t_simple *simple, t_cmd *cmd)
 	{
 		retstr = getcwd(NULL, 0);
 		retstr2 = ft_strjoin("PWD=", retstr);
-		if (env_replace("PWD", retstr2, cmd->envc) == -1)
-			free (retstr2);
+		env_add(retstr2, cmd->envc);
+		free (retstr2);
 		free(retstr);
 	}
 	return (0);
