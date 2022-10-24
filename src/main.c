@@ -6,33 +6,25 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 15:48:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 17:17:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+#include "heredoc/heredoc.h"
 #include "substitutor/substitutor.h"
 
 int	minishell(t_cmd *cmd, char **input, char **line)
 {
 	char	*retstr;
-	int		err;
 
-	err = 0;
 	retstr = NULL;
 	if (*input == NULL)
 		*line = prompt(cmd);
 	else
-	{
-		*line = ft_strdup(*input);
-		free (*input);
-	}
+		*line = *input;
 	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
-	|| cmd->tokens == NULL)
-		return (1);
-	print_tokens(cmd->tokens);
-	if (heredoc(cmd, &retstr))
+	|| cmd->tokens == NULL || heredoc(cmd, &retstr))
 		return (1);
 	if (retstr != NULL)
 	{
@@ -42,12 +34,9 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	}
 	if (parse(cmd) != 0)
 		return (1);
-	cmd_simples_set_bin(cmd);
 	g_errno = execute(cmd);
 	return (1);
 }
-
-#include "heredoc/heredoc.h"
 
 int	main(int argc, char **argv, char **envp)
 {

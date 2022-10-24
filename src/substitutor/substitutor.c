@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 15:00:59 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 17:12:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_envp_var(char *str, char **envp)
 {
 	int		i;
 	char	*env_head;
-	size_t	env_head_len;
 	int		comp;
 	char	*end;
 
@@ -25,16 +24,15 @@ char	*get_envp_var(char *str, char **envp)
 	{
 		end = ft_strchr(envp[i], '=');
 		if (end == NULL)
-			continue;
+			continue ;
 		env_head = ft_substr(envp[i], 0, end - envp[i]);
-		env_head_len = ft_strlen(env_head);
-		if(env_head_len == ft_strlen(str))
+		if (ft_strlen(env_head) == ft_strlen(str))
 		{
 			comp = ft_strncmp(str, env_head, ft_strlen(env_head)) == 0;
 			if (comp == 1)
 			{
 				free(env_head);
-				return (ft_strdup(&(envp[i][env_head_len + 1])));
+				return (ft_strdup(&(envp[i][ft_strlen(env_head) + 1])));
 			}
 		}
 		free(env_head);
@@ -85,12 +83,12 @@ static void	substitute_doll(t_token *token, char **envp)
 		}
 		token->data = sub;
 	}
-	if(ft_strchr(token->data, ' ') || ft_strchr(token->data, '\t')\
+	if (ft_strchr(token->data, ' ') || ft_strchr(token->data, '\t') \
 	|| ft_strchr(token->data, '\n'))
 		split_token(token);
 }
 
-static void substitute_dollq(t_token **tokens)
+static void	substitute_dollq(t_token **tokens)
 {
 	if ((*tokens)->data)
 		free((*tokens)->data);
@@ -112,20 +110,6 @@ void	substitute(t_cmd cmd, char **envp)
 			substitute_dollq(&cmd.tokens);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
-		//if (tokens->type == LESSLESS)
-		//{
-		//	tokens = tokens->next;
-		//	while (tokens->type == WSPACE)
-		//		tokens = tokens->next;
-		//	if(tokens->type == WORD && check_heredoc_for_substitution(doc))
-		//	{
-		//		substitute_heredoc(&doc, envp);
-		//		tokens->data = ft_strjoin(doc->name, "_42cpy");
-		//	}
-
-		//	// remove_token_from_list(&cmd.tokens, tokens);
-		//	doc = doc->next;
-		//}
 		tokens = tokens->next;
 	}
 	merge_words(cmd.tokens);

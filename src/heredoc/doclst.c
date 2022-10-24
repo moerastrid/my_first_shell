@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:02:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 15:10:01 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 16:51:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	doc_free(t_doc *doc)
 
 void	docs_free(t_doc *doc)
 {
-	t_doc *next;
+	t_doc	*next;
 
 	while (doc)
 	{

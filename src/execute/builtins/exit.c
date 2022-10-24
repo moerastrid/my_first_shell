@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 16:20:57 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 16:50:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	bi_exit(t_cmd *cmd)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (cmd->cmd_count == 1)

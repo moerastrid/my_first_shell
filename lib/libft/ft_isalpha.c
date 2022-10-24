@@ -6,11 +6,11 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/05 17:28:02 by tnuyten       #+#    #+#                 */
-/*   Updated: 2021/10/12 18:40:14 by tnuyten       ########   odam.nl         */
+/*   Updated: 2022/10/24 16:28:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
-	return ((c >= 65 && c <= 90 ) || (c >= 97 && c <= 122));
+	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:18 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/17 22:45:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 16:54:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			count_simples(t_cmd *cmd);
 // str_list.c
 t_str_list	*str_list_new(char *str, int append_mode);
 void		str_list_add_back(t_str_list *root, t_str_list *new);
-//void		free_str_list(t_str_list *root);
 
 //parse_token.c
 int			parse_redirect(t_cmd *cmd, t_token **token);
