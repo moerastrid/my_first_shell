@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:54:27 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 15:00:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,18 @@ static void	substitute_doll(t_token *token, char **envp)
 		split_token(token);
 }
 
-// static void sub_heredoc()
-// {
-//
-// }
+static void substitute_dollq(t_token **tokens)
+{
+	if ((*tokens)->data)
+		free((*tokens)->data);
+	(*tokens)->data = ft_itoa(g_errno);
+}
 
 void	substitute(t_cmd cmd, char **envp)
 {
 	t_token	*tokens;
 	t_doc	*doc;
 
-	print_tokens(cmd.tokens);
 	doc = cmd.doc;
 	tokens = cmd.tokens;
 	while (tokens)
@@ -108,7 +109,7 @@ void	substitute(t_cmd cmd, char **envp)
 		if (tokens->type == DOLL)
 			substitute_doll(tokens, envp);
 		if (tokens->type == DOLLQ)
-			tokens->data = ft_itoa(g_errno);
+			substitute_dollq(&cmd.tokens);
 		if (tokens->type == DQUOT)
 			substitute_dquot(tokens, envp);
 		//if (tokens->type == LESSLESS)
