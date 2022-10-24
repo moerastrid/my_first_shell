@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/25 00:16:28 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/25 00:18:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ void	bi_exit(t_cmd *cmd, t_simple *simple)
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		exit (1);
 	}
-	//print_cmd(*cmd);
 	if (simple->argv && simple->argv[1])
 	{
 		num = ft_atoi_ret(simple->argv[1], &ret);
-		//dprintf(2, "num: %lld\nret: %d\n", num, ret);
 		err_ret(ret, num, simple);
 		clear_cmd(cmd);
 		exit (num);

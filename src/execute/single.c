@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:25:57 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/25 00:26:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@
 // this is a single command in a child process
 void	exec_cmd(t_simple *simple, char **envp)
 {
+	int	i;
+
+	i = 1;
 	default_signals();
 	execve(simple->bin, simple->argv, envp);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	if (simple->argc == 1)
+	{
+		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	}
+	while (simple->argv[i])
+	{
+		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd(simple->argv[i++], STDERR_FILENO);
+		ft_putstr_fd("No such file or directory\n", STDERR_FILENO);
+	}
 	g_errno = 15;
 	exit (errno);
 }
