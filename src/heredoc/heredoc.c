@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:03:38 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:37:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	token_check(t_cmd *cmd, t_token **lessless, t_token **token)
 	}
 	if ((*token)->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 	{
-		docadd_back(&cmd->doc, docnew((*token)->data, *lessless));
+		docadd_back(&cmd->doc, docnew(*token, *lessless));
 		// remove_token_from_list(&cmd->tokens, *token);
 		*token = *lessless;
 	}

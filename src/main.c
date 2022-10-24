@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:34:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 14:31:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 #include "substitutor/substitutor.h"
 

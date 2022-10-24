@@ -38,10 +38,11 @@ typedef struct s_simple {
 }	t_simple;
 
 typedef struct s_doc {
-	char			*name;
-	int				fd;
-	char			*eof;
-	struct s_doc	*next;
+	enum e_token_type	type;
+	char				*name;
+	int					fd;
+	char				*eof;
+	struct s_doc		*next;
 }	t_doc;
 
 typedef struct s_cmd {
