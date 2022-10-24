@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:53:44 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 17:01:31 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*get_word(char *input)
 	return (ft_substr(input, 1, var_end - 1 - input));
 }
 
-char	*replace_once(char *input, char *full_input, int *pre_sub_len, char **envp)
+char	*rep_once(char *input, char *full_input, int *presublen, char **envp)
 {
 	char	*var_name;
 	char	*sub;
@@ -58,7 +58,7 @@ char	*replace_once(char *input, char *full_input, int *pre_sub_len, char **envp)
 	pre = ft_substr(full_input, 0, input - full_input);
 	post_begin = input + ft_strlen(var_name) + 1;
 	post = ft_substr(post_begin, 0, ft_strlen(post_begin) + 1);
-	*pre_sub_len = ft_strlen(pre) + ft_strlen(sub);
+	*presublen = ft_strlen(pre) + ft_strlen(sub);
 	free(var_name);
 	return (ft_strjoin3_free(pre, sub, post));
 }
@@ -67,7 +67,7 @@ void	substitute_dquot(t_token *token, char **envp)
 {
 	char	*input;
 	char	*new_data;
-	int		pre_sub_len;
+	int		presublen;
 
 	input = token->data;
 	while (input && *input != '\0')
@@ -76,10 +76,10 @@ void	substitute_dquot(t_token *token, char **envp)
 			input++;
 		if (!*input)
 			break ;
-		new_data = replace_once(input, token->data, &pre_sub_len, envp);
+		new_data = rep_once(input, token->data, &presublen, envp);
 		free(token->data);
 		token->data = new_data;
-		input = token->data + pre_sub_len;
+		input = token->data + presublen;
 	}
 	if (input == NULL)
 		printf("%s\n", "Substitution error");

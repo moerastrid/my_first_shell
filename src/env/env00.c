@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:33:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:35:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 16:50:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,16 @@ char	**env_add(char *to_add, char **envp)
 	char	**new_envp;
 	int		i;
 	char	*head;
-	char	*head_end;
 
-	head_end = ft_strchr(to_add, '=');
-	if (!head_end)
+	if (ft_strchr(to_add, '=') == 0)
 		return (envp);
-	head = ft_substr(to_add, 0, head_end - to_add);
+	head = ft_substr(to_add, 0, ft_strchr(to_add, '=') - to_add);
 	if (env_replace(head, to_add, envp) == 0)
 		return (envp);
 	new_envp = ft_calloc(count_envp(envp) + 2, sizeof(envp));
 	if (!new_envp)
 	{
 		g_errno = 12;
-		// why not return NULL?
 		return (envp);
 	}
 	i = 0;

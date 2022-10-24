@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:32:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:52:51 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 17:01:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 
 char	*get_envp_var(char *str, char **envp);
 void	substitute_dquot(t_token *token, char **envp);
-//int		check_heredoc_for_substitution(t_doc *doc);
 char	*substitute_line(char *line, char **envp);
-//int		substitute_heredoc(t_doc **doc, char **envp);
-char	*replace_once(char *input, char *full_input, int *pre_sub_len, char **envp);
+char	*rep_once(char *input, char *fi, int *psl, char **envp);
 
 #endif

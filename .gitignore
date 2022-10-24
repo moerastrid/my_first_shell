@@ -9,3 +9,4 @@ minishell
 *.sh
 minishell_tester/*
 minishell_tester
+.vscode

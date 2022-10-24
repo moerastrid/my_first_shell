@@ -6,11 +6,12 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 14:58:23 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 15:33:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "../setup_reset/setup.h"
 
 static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 {
@@ -40,7 +41,7 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 	return (NULL);
 }
 
-static int	token_check(t_cmd *cmd, t_token **lessless, t_token **token)
+static int	token_check(t_cmd *cmd, t_token *lessless, t_token **token)
 {
 	if (!(*token))
 	{
@@ -49,11 +50,7 @@ static int	token_check(t_cmd *cmd, t_token **lessless, t_token **token)
 		return (1);
 	}
 	if ((*token)->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
-	{
-		docadd_back(&cmd->doc, docnew(*token, *lessless));
-		// remove_token_from_list(&cmd->tokens, *token);
-		*token = *lessless;
-	}
+		docadd_back(&cmd->doc, docnew(*token, lessless));
 	else
 	{
 		printf("%s - %u\n", "minishell : unexptected token ", (*token)->type);
@@ -78,8 +75,9 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			token = token->next;
 			while (token && token->type == WSPACE)
 				token = token->next;
-			if (token_check(cmd, &lessless, &token) == 1)
+			if (token_check(cmd, lessless, &token) == 1)
 				return (1);
+			token = lessless;
 		}
 		token = token->next;
 	}

@@ -14,13 +14,17 @@
 
 void	bi_exit(t_cmd *cmd, t_simple *simple)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (cmd->cmd_count == 1)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (simple->argv && simple->argv[1])
+	{
 		ret = ft_atoi(simple->argv[1]);
+		clear_cmd(cmd);
+		exit (ret);
+	}
 	clear_cmd(cmd);
-	exit (ret);
+	exit (g_errno);
 }

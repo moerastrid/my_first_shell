@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tnuyten <tnuyten@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 18:18:52 by tnuyten           #+#    #+#             */
-/*   Updated: 2021/10/28 19:04:54 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_split_multiple.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/10/07 18:18:52 by tnuyten       #+#    #+#                 */
+/*   Updated: 2022/10/24 16:34:15 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static char			*get_end_index(char *s, char *c);
-static void			free_arr(char **str);
 static size_t		count_words(char const *s, char *c);
 static int			fill_array(char **res, char *s, size_t len, char *c);
 
@@ -30,17 +29,19 @@ char	**ft_split_multiple(char const *s, char *c)
 		return (NULL);
 	if (fill_array(res, (char *)s, len, c) == 0)
 	{
-		free_arr(res);
+		while (*res)
+			free(*res++);
+		free(res);
 		return (NULL);
 	}
 	return (res);
 }
 
-static int in(char s, char *c)
+static int	in(char s, char *c)
 {
-	while(c && *c)
+	while (c && *c)
 	{
-		if(*c == s)
+		if (*c == s)
 			return (1);
 		c++;
 	}
@@ -79,7 +80,7 @@ static size_t	count_words(char const *s, char *c)
 	word_count = 0;
 	while (*s2)
 	{
-		while (in(*s2,c))
+		while (in(*s2, c))
 			s2++;
 		if (!in(*s2, c) && *s2 != '\0')
 		{
@@ -93,21 +94,13 @@ static size_t	count_words(char const *s, char *c)
 	return (word_count);
 }
 
-static void	free_arr(char **str)
-{
-	while (*str)
-		free(*str++);
-	free(str);
-}
-
 static char	*get_end_index(char *s, char *c)
 {
-	while(s && *s)
+	while (s && *s)
 	{
-		if(in(*s, c))
+		if (in(*s, c))
 			return (s);
 		s++;
 	}
-
 	return (s);
 }

@@ -6,29 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:28:25 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/24 16:51:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
-
-int	lessless_length(char *input)
-{
-	int	len;
-
-	len = 0;
-	while (*input == ' ')
-	{
-		input++;
-		len++;
-	}
-	while (*input != ' ' && *input != '\0')
-	{
-		input++;
-		len++;
-	}
-	return (len);
-}
 
 static char	*get_data(int type, char *input)
 {
@@ -45,12 +27,6 @@ static char	*get_data(int type, char *input)
 		data = ft_substr(input, 1, doll_length(input + 1));
 	else if (type == DOLLQ)
 		data = ft_substr(input, 0, 2);
-	// else if (type == LESSLESS)
-	// 	data = ft_substr(input, 2, lessless_length(input + 2));
-	// else if (type == GREAT || type == LESS)
-	// 	data = ft_substr(input, 1, redir_length(input + 1));
-	// else if (type == GREATGREAT)
-	// 	data = ft_substr(input, 2, redir_length(input + 2));
 	else if (type == WSPACE)
 		data = ft_substr(input, 0, 1);
 	return (data);
