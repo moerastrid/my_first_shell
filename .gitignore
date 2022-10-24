@@ -1,11 +1,11 @@
 *.o
 *.a
-*.txt
+#*.txt
 !astrid_notes.txt
 !bugs.txt
 !Samenvatting.txt
 minishell
 .tags
-#*.sh
+*.sh
 .vscode
 heredo*

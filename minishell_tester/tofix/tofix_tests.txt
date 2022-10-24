@@ -1,0 +1,141 @@
+cd "doesntexist"
+cd "doesntexist" 2>/dev/null
+cd "wtf" 2>/dev/null
+cd ?
+cd +
+cd _
+cd woof
+cd bark bark
+cd $OLDPWD/something
+echo -nn bonjour
+echo -n -n -n bonjour
+echo -n -n -n bonjour
+echo "-nnnn" bonjour
+echo ~
+echo ~/123
+echo ~/123/456
+echo "$USER"
+echo "'$USER'"
+echo " '$USER' "
+echo text"$USER"
+echo text"'$USER'" ' $USER '
+echo "text" "$USER" "$USER"
+echo text "$USER" "$USER"text
+echo \" \" \" \"\"\" \'\'\'
+echo "$USER""$USER""$USER"
+echo text"$USER"test
+echo '$USER' "$USER" "text ' text"
+echo "$USER""Users/$USER/file""'$USER'"'$USER'
+echo "$USER$USER$USER"
+echo '$USER'"$USER"'$USER'
+echo '"$USER"''$USER'"""$USER"
+echo " $USER "'$PWD'
+echo " $USER $ "'$PWD'
+echo $USER$12USER$USER=4$USER12
+echo $USER $123456789USER $USER123456789
+echo $USER $9999USER $8888USER $7777USER
+echo $USER $USER9999 $USER8888 $USER7777
+echo $USER $USER9999 $USER8888 $USER7777 "$USER"
+echo "$USER=12$USER"
+echo "$9USER" "'$USER=12$SOMETHING'"
+echo "$PWD/file"
+echo "text" "text$USER" ... "$USER"
+| test
+echo > <
+echo | |
+<
+|
+| | |
+hello world
+||||||||
+>
+>>>>>>>>
+<<<<<<<<<
+> > > >
+>> >> >> >>
+~
+<<
+/Users
+.
+..
+/
+\EechoE
+.echo.
+>echo>
+<echo<
+>>echo>>
+|echo|
+| echo -n oui
+trying to destroy your minishell
+trying something again echo if you see this message thats not a good new
+qewew
+wtf
+hi im thallard
+your minishell is perfect
+exit 0 0
+exit 42 42
+exit -42 -24
+exit 42 53 68
+exit --1239312
+exit ++++1203020103
+exit ++++++0
+exit -----0
+exit azerty
+exit kewkwqke
+exit a
+exit z
+exit "+++1230"
+exit "'42'"
+exit 9223372036854775808
+exit wrong
+exit wrong_command
+exit something
+exit --000
+exit +++++++000
+exit ++++3193912939
+exit ---31232103012
+exit "something"
+exit q
+exit help
+exit export
+exit echo
+exit cd ..
+exit 0 0
+exit something somethingv2
+exit 42 42 42 42 42
+exit echo something
+exit exit
+env | grep "_="
+export | grep "SHLVL"
+export | grep "OLDPWD"
+export | grep "PWD"
+export $?
+export --TEST=123
+export ""=""
+export ''=''
+export "="="="
+export '='='='
+export TE-ST=100
+export -TEST=100
+export TEST-=100
+export | grep "SHLVL"
+export ==========
+export 1TEST=
+export ""=""
+export TE+S=T=""
+export TES\\T=123
+export TES.T=123
+export TES\$T=123
+export TES\\T
+export TES.T=123
+export TES+T=123
+export TES}T=123
+export TES{T=123
+export TES-T=123
+export -TEST=123
+export TE*ST=123
+export TES#T=123
+export TES@T=123
+export TES!T=123
+export =============123
+export +++++++=123
