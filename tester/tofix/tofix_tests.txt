@@ -54,9 +54,6 @@ qewew
 wtf
 hi im thallard
 your minishell is perfect
-exit '42'"42"42
-exit +'42'"42"42
-exit -'42'"42"42
 exit cd ..
 exit something somethingv2
 exit echo something
