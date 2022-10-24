@@ -88,7 +88,6 @@ exit 42 42 42 42 42
 exit echo something
 exit exit
 env | grep "_="
-export | grep "SHLVL"
 export | grep "OLDPWD"
 export | grep "PWD"
 export $?
@@ -100,7 +99,6 @@ export '='='='
 export TE-ST=100
 export -TEST=100
 export TEST-=100
-export | grep "SHLVL"
 export ==========
 export 1TEST=
 export ""=""
