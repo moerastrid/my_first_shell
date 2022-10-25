@@ -8,4 +8,4 @@ minishell
 .vscode
 *.sh
 !tester/test.sh
-#*.txt
+*.txt
