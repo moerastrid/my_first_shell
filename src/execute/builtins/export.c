@@ -33,8 +33,6 @@ int	is_valid_env_line(char *name)
 		return (2);
 	if (*ptr != '=')
 		return (ft_exit_err(name, 0));
-	// while(*ptr != '=' && *ptr != '\0')
-	// 	ptr++;
 	return (1);
 }
 
@@ -60,8 +58,6 @@ static void export_print_env(t_cmd *cmd)
 	}
 }
 
-// alle varname checks op n rijtje:
-//
 int	bi_export(t_simple simple, t_cmd *cmd)
 {
 	int		i;

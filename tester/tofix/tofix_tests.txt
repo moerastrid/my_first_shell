@@ -1,7 +1,0 @@
-env | grep "_="
-export | grep "PWD"
-export --TEST=123
-export TE\ST=100
-export -TEST=100
-export -TEST=123
-export TEST+=100

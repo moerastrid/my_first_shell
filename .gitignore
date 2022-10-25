@@ -6,6 +6,6 @@
 minishell
 .tags
 .vscode
-*.txt
 *.sh
 !tester/test.sh
+*.txt
