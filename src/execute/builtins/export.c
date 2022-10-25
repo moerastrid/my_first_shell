@@ -63,6 +63,7 @@ int	bi_export(t_simple simple, t_cmd *cmd)
 	int		i;
 	int		ret;
 	int		val;
+	char	**env;
 
 	ret = 0;
 	if (simple.argc == 1)
@@ -72,7 +73,10 @@ int	bi_export(t_simple simple, t_cmd *cmd)
 	{
 		val = is_valid_env_line(simple.argv[i]);
 		if (val == 1)
-			cmd->envc = env_add(simple.argv[i], cmd->envc);
+		{
+			env = env_add(simple.argv[i], cmd->envc);
+			cmd->envc = env;
+		}
 		else if (val == 0)
 			ret = 1;
 		i++;
