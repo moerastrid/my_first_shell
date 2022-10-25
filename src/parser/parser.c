@@ -15,9 +15,7 @@
 static int	parse_words(t_cmd *cmd, t_token **tokens)
 {
 	int	type;
-	int	spaced;
 
-	spaced = 0;
 	while (1)
 	{
 		if ((*tokens) == NULL)
@@ -27,13 +25,10 @@ static int	parse_words(t_cmd *cmd, t_token **tokens)
 		{
 			add_arg(cmd, (*tokens)->data);
 			return (0);
-			*tokens = (*tokens)->next;
-			spaced = 0;
 		}
 		else if (type & WSPACE)
 		{
 			*tokens = (*tokens)->next;
-			spaced = 1;
 		}
 		else
 			return (0);

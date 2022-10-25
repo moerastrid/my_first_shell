@@ -3,19 +3,16 @@ env | grep "_="
 export | grep "SHLVL"
 export | grep "OLDPWD"
 export | grep "PWD"
-export $? 
+export $?
 export TEST
 export TEST=
 export TEST=123
 export ___TEST=123
-export --TEST=123
 export ""=""
 export ''=''
 export "="="="
 export '='='='
-export TE\\\ST=100
 export TE-ST=100
-export -TEST=100
 export TEST-=100
 export _TEST=100
 export | grep "SHLVL"
@@ -36,7 +33,6 @@ export TES=T=123
 export TES}T=123
 export TES{T=123
 export TES-T=123
-export -TEST=123
 export _TEST=123
 export TES_T=123
 export TEST_=123
@@ -58,4 +54,3 @@ export sudo
 export TES^T=123
 export TES!T=123
 export TES\~T=123
-export TEST+=100
