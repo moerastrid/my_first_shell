@@ -1,9 +1,7 @@
--n
-cd "doesntexist"
-cd "doesntexist" 2>/dev/null
-cd "wtf" 2>/dev/null
-cd ?
-cd +
-cd _
-cd woof
-cd bark bark
+env | grep "_="
+export | grep "PWD"
+export --TEST=123
+export TE\ST=100
+export -TEST=100
+export -TEST=123
+export TEST+=100
