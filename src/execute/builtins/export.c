@@ -61,8 +61,6 @@ static void export_print_env(t_cmd *cmd)
 int	bi_export(t_simple simple, t_cmd *cmd)
 {
 	int		i;
-	int		j;
-	char	*env_name;
 	int		ret;
 	int		val;
 

@@ -38,7 +38,6 @@ int	bi_unset(t_simple simple, t_cmd *cmd)
 {
 	int		i;
 	int		val;
-	char	**new_envc;
 	int		ret;
 
 	i = 1;

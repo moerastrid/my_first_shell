@@ -12,6 +12,17 @@
 
 #include "../execute.h"
 
+int	ft_isflag(char *str)
+{
+	if (*str == '-')
+		str++;
+	while (*str == 'n')
+		str++;
+	if (*str == '\0')
+		return (1);
+	return (0);
+}
+
 int	bi_echo(t_simple *sm)
 {
 	int	flag;
@@ -24,7 +35,7 @@ int	bi_echo(t_simple *sm)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return (0);
 	}
-	if (ft_strlen(sm->argv[1]) > 1 && ft_strncmp("-n", sm->argv[1], 3) == 0)
+	while (sm->argv[i] && ft_isflag(sm->argv[i]))
 	{
 		flag = 1;
 		i++;
