@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:31:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 14:25:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	printf("Minishell: syntax error near unexpected token [");
 	print_token_type(type);
 	printf("]\n");
+	g_errno = 2;
 	return (1);
 }
 
