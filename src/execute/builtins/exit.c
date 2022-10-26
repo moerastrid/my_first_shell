@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/25 00:18:11 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 13:53:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,29 @@ static void	err_ret(int ret, long long int num, t_simple *simple)
 	}
 }
 
+static int	ft_isnum(char *str, t_simple *simple)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]) == 0 && str[i] != '-')
+		{
+			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+			ft_putstr_fd(simple->argv[1], STDERR_FILENO);
+			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			g_errno = 255;
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	bi_exit(t_cmd *cmd, t_simple *simple)
 {
-	int	ret;
+	int				ret;
 	long long int	num;
 
 	ret = 0;
@@ -64,6 +84,10 @@ void	bi_exit(t_cmd *cmd, t_simple *simple)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (simple->argc > 2)
 	{
+		if (ft_isnum(simple->argv[1], simple) == 0)
+		{
+			exit (g_errno);
+		}
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		exit (1);
 	}

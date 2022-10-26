@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 13:09:08 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 19:26:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 13:35:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 	close(writep[READ]);
 	child_connect_pipe(*cmd, writep, readp, cmd_no);
 	simple = get_simple(*cmd, cmd_no);
-	if (is_builtin(simple) == 1)
+	if (is_builtin(simple->argv[0]) == 1)
 	{
 		redirect_infile(simple->infiles);
 		redirect_outfile(simple->outfiles);

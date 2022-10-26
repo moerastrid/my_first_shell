@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:56:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 13:35:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ int	is_del(char c)
 	return (0);
 }
 
-int	is_builtin(t_simple	*t)
+int	is_builtin(char *s)
 {
-	if (ft_strncmp(t->argv[0], "echo", 5) == 0)
+	if (ft_strncmp(s, "echo", 5) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "cd", 3) == 0)
+	if (ft_strncmp(s, "cd", 3) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "pwd", 4) == 0)
+	if (ft_strncmp(s, "pwd", 4) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "export", 7) == 0)
+	if (ft_strncmp(s, "export", 7) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "unset", 6) == 0)
+	if (ft_strncmp(s, "unset", 6) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "env", 4) == 0)
+	if (ft_strncmp(s, "env", 4) == 0)
 		return (1);
-	if (ft_strncmp(t->argv[0], "exit", 5) == 0)
+	if (ft_strncmp(s, "exit", 5) == 0)
 		return (1);
 	return (0);
 }
