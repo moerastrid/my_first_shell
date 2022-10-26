@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:18 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:00:45 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:38:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define PARSER_H
 
 # include "../../minishell.h"
-
-// Parser.c
-
 
 // cmd_builder.c
 int			cmd_add_pipe(t_cmd *cmd);

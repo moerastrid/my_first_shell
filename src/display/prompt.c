@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:09:05 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:32:36 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 20:05:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*prompt(t_cmd *cmd)
 {
 	char	*line;
 
+	catch_signals();
 	line = readline(PROMPT);
 	if (line == NULL)
 	{
@@ -24,6 +25,7 @@ char	*prompt(t_cmd *cmd)
 	}
 	if (*line)
 		add_history(line);
+	default_signals();
 	return (line);
 }
 
