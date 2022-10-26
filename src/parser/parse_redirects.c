@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 14:31:55 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 14:53:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	simple_add(int type, t_simple *simple, char *data)
 	simple_add_infile(simple, data, type == LESSLESS);
 }
 
-static void ft_print_err(t_token *token)
+static void	ft_print_err(t_token *token)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token `", STDERR_FILENO);
 	if (token->type == LESS || token->type == LESSLESS)
