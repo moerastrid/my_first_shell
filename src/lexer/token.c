@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:43 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:21:26 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:44:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ t_token	*token_new(char *data, int type)
 
 	token = ft_calloc(1, sizeof(t_token));
 	if (token == NULL)
-	{
-		g_errno = 12;
 		return (NULL);
-	}
 	token->data = data;
 	token->type = type;
 	token->next = NULL;

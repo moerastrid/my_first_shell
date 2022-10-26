@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:33:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:17:09 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:01:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ char	**copy_env(char **og)
 
 	copy = ft_calloc(count_envp(og) + 1, sizeof(char *));
 	if (copy == NULL)
-	{
-		g_errno = 12;
 		return (NULL);
-	}
 	i = 0;
 	while (og[i] != NULL)
 	{
@@ -82,29 +79,23 @@ char	**env_add(char *to_add, char **envp)
 	int		i;
 	char	*head;
 
-	if (ft_strchr(to_add, '=') == NULL)
-		return (envp);
 	head = ft_substr(to_add, 0, ft_strchr(to_add, '=') - to_add);
 	if (env_replace(head, to_add, envp) == 0)
 	{
 		free(head);
 		return (envp);
 	}
+	free(head);
 	new_envp = ft_calloc(count_envp(envp) + 2, sizeof(envp));
 	if (!new_envp)
-	{
-		g_errno = 12;
-		free(head);
 		return (envp);
-	}
 	i = 0;
 	while (envp[i])
 	{
 		new_envp[i] = ft_strdup(envp[i]);
-		free(envp[i++]);
+		i++;
 	}
-	free(envp);
-	free(head);
+	free_envc(envp);
 	new_envp[i++] = ft_strdup(to_add);
 	return (new_envp);
 }

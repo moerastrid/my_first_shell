@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:46:11 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:30:01 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:45:14 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,7 @@ char	**single_split(char const *s, char c)
 	flen = sizeof(char *) * (parts + 1);
 	startptr = ft_calloc((flen + ft_strlen(s) - cc + parts), 1);
 	if (startptr == 0)
-	{
-		g_errno = 12;
 		return (NULL);
-	}
 	if (*s == '\0')
 	{
 		((char **)startptr)[0] = NULL;

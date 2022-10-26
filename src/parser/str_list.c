@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:29:57 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:45:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_str_list	*str_list_new(char *str, int append_mode)
 
 	new = ft_calloc(1, sizeof(t_str_list));
 	if (new == NULL)
-	{
-		g_errno = 12;
 		return (NULL);
-	}
 	new->str = NULL;
 	if (str)
 		new->str = ft_strdup(str);

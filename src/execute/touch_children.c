@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:24:45 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:28:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:44:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ t_children	*new_child(pid_t id)
 
 	new = ft_calloc(1, sizeof(t_children));
 	if (new == NULL)
-	{
-		g_errno = 12;
 		return (NULL);
-	}
 	new->id = id;
 	new->next = NULL;
 	return (new);

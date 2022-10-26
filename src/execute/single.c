@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 15:29:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:34:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@ void	exec_cmd(t_simple *simple, char **envp)
 	i = 1;
 	default_signals();
 	execve(simple->bin, simple->argv, envp);
-
-	// All the reasons execve could fail:
-	// bin is NULL;
-	// bin is empty;
-	// bin is directory;
-	// bin is shell script;
-	// bin does not have (execute) rights;
-	// More?
-
 	if (access(simple->bin, F_OK) == 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -47,6 +38,13 @@ void	exec_cmd(t_simple *simple, char **envp)
 	}
 	exit(g_errno);
 }
+	// All the reasons execve could fail:
+	// bin is NULL;
+	// bin is empty;
+	// bin is directory;
+	// bin is shell script;
+	// bin does not have (execute) rights;
+	// More?
 
 // this is a function for a single command
 // executed in a single child process

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:57 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 22:29:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:44:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	add_arg(t_cmd *cmd, char *arg)
 	tail = simple_tail(cmd->simples);
 	argv = ft_calloc(sizeof(char **), (tail->argc + 2));
 	if (argv == NULL)
-	{
-		g_errno = 12;
 		return (-1);
-	}
 	i = 0;
 	while (i < tail->argc)
 	{
