@@ -23,6 +23,18 @@ static void	simple_add(int type, t_simple *simple, char *data)
 	simple_add_infile(simple, data, type == LESSLESS);
 }
 
+static void ft_print_err(t_token *token)
+{
+	ft_putstr_fd("minishell: syntax error near unexpected token `", STDERR_FILENO);
+	if (token->type == LESS || token->type == LESSLESS)
+		ft_putstr_fd("<", STDERR_FILENO);
+	if (token->type == GREAT || token->type == GREATGREAT)
+		ft_putstr_fd(">", STDERR_FILENO);
+	if (token->type == PIPE)
+		ft_putstr_fd("|", STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
+}
+
 int	parse_redirect(t_cmd *cmd, t_token **tokens)
 {
 	int		type;
@@ -46,9 +58,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 			break ;
 		continue ;
 	}
-	printf("Minishell: syntax error near unexpected token [");
-	print_token_type(type);
-	printf("]\n");
+	ft_print_err(*tokens);
 	return (1);
 }
 
