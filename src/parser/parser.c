@@ -27,9 +27,7 @@ static int	parse_words(t_cmd *cmd, t_token **tokens)
 			return (0);
 		}
 		else if (type & WSPACE)
-		{
 			*tokens = (*tokens)->next;
-		}
 		else
 			return (0);
 	}

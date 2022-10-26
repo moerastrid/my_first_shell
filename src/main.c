@@ -23,8 +23,8 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 		*line = prompt(cmd);
 	else
 		*line = *input;
-	if (ft_strlen(*line) == 0 || tokenize(cmd, *line) == -1 \
-	|| cmd->tokens == NULL || heredoc(cmd, &retstr))
+	if (!ft_strlen(*line) || tokenize(cmd, *line) == -1 \
+	|| !cmd->tokens || heredoc(cmd, &retstr))
 		return (1);
 	if (retstr != NULL)
 	{
@@ -32,9 +32,9 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 		*input = retstr;
 		return (2);
 	}
-	if (parse(cmd) != 0)
-		return (1);
-	g_errno = execute(cmd);
+	g_errno = parse(cmd);
+	if (g_errno == 0)
+		g_errno = execute(cmd);
 	return (1);
 }
 
