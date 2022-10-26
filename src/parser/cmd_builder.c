@@ -19,8 +19,10 @@ int	cmd_add_pipe(t_cmd *cmd)
 	new = new_simple(0, NULL);
 	if (simple_tail(cmd->simples)->argv == NULL)
 	{
+		free(new);
 		g_errno = 258;
-		printf("minishell: syntax error near unexpected token '|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n",\
+		 STDERR_FILENO);
 		return (-1);
 	}
 	simple_add_back(&cmd->simples, new);

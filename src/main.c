@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		if (to_exit)
 			break ;
 	}
+	clear_cmd(&cmd);
 	return (g_errno);
 }
 

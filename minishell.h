@@ -45,6 +45,7 @@ char		*prompt(t_cmd	*cmd);
 
 // execute
 int			execute(t_cmd *cmds);
+int			is_valid_env_name(char *name);
 
 // lexer
 int			tokenize(t_cmd *cmd, char *input);

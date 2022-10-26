@@ -82,7 +82,7 @@ char	**env_add(char *to_add, char **envp)
 	int		i;
 	char	*head;
 
-	if (ft_strchr(to_add, '=') == 0)
+	if (ft_strchr(to_add, '=') == NULL)
 		return (envp);
 	head = ft_substr(to_add, 0, ft_strchr(to_add, '=') - to_add);
 	if (env_replace(head, to_add, envp) == 0)
@@ -94,6 +94,7 @@ char	**env_add(char *to_add, char **envp)
 	if (!new_envp)
 	{
 		g_errno = 12;
+		free(head);
 		return (envp);
 	}
 	i = 0;
@@ -103,6 +104,7 @@ char	**env_add(char *to_add, char **envp)
 		free(envp[i++]);
 	}
 	free(envp);
+	free(head);
 	new_envp[i++] = ft_strdup(to_add);
 	return (new_envp);
 }

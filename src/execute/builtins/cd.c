@@ -25,7 +25,10 @@ int	bi_cd(t_simple *simple, t_cmd *cmd)
 	if ((int)str == 5)
 		return (1);
 	if (chdir(str) != 0)
+	{
 		perror(str);
+		return (1);
+	}
 	else
 	{
 		retstr = getcwd(NULL, 0);
