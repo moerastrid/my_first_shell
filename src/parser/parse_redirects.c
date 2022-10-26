@@ -44,6 +44,8 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	int		type;
 	int		start_type;
 
+	print_tokens(cmd->tokens);
+
 	start_type = (*tokens)->type;
 	*tokens = (*tokens)->next;
 	while (1)
