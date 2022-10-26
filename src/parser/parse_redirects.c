@@ -59,7 +59,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 		continue ;
 	}
 	ft_print_err(*tokens);
-	return (1);
+	return (2);
 }
 
 int	parse_heredoc(t_cmd *cmd, t_token **token)

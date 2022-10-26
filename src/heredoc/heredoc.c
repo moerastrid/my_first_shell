@@ -81,7 +81,7 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			while (token && token->type == WSPACE)
 				token = token->next;
 			if (token_check(cmd, lessless, token) == 1)
-				return (1);
+				return (0);
 			token = lessless;
 		}
 		token = token->next;
