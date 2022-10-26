@@ -107,4 +107,5 @@ void	substitute(t_cmd cmd, char **envp)
 		tokens = tokens->next;
 	}
 	merge_words(cmd.tokens);
+	token_delete_empty_subs(&cmd.tokens);
 }

@@ -23,6 +23,7 @@ int		token_length(t_token *token);
 //tokenize.c
 int		tokenize(t_cmd *cmd, char *input);
 int		lessless_length(char *input);
+void	token_delete_empty_subs(t_token **tokens);
 
 //token_length.c
 int		word_length(char *input);
