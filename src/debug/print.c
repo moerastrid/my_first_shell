@@ -6,52 +6,52 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:35:52 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:03:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:07:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // Totally illegal
-//void	print_token_type(enum e_token_type num)
-//{
-//	switch (num)
-//	{
-//		case WORD:
-//			printf("%s", "WORD");
-//		break ;
-//		case GREAT:
-//			printf("%s", "GREAT");
-//		break ;
-//		case LESS:
-//			printf("%s", "LESS");
-//		break ;
-//		case PIPE:
-//			printf("%s", "PIPE");
-//		break ;
-//		case GREATGREAT:
-//			printf("%s", "GREATGREAT");
-//		break ;
-//		case LESSLESS:
-//			printf("%s", "LESSLESS");
-//		break ;
-//		case DOLL:
-//			printf("%s", "DOLL");
-//		break ;
-//		case DOLLQ:
-//			printf("%s", "DOLLQ");
-//		break ;
-//		case QUOT:
-//			printf("%s", "QUOT");
-//		break ;
-//		case DQUOT:
-//			printf("%s", "DQUOT");
-//		break ;
-//		case WSPACE:
-//			printf("%s", "WSPACE");
-//		break ;
-//	}
-//}
+void	print_token_type(enum e_token_type num)
+{
+	switch (num)
+	{
+		case WORD:
+			printf("%s", "WORD");
+		break ;
+		case GREAT:
+			printf("%s", "GREAT");
+		break ;
+		case LESS:
+			printf("%s", "LESS");
+		break ;
+		case PIPE:
+			printf("%s", "PIPE");
+		break ;
+		case GREATGREAT:
+			printf("%s", "GREATGREAT");
+		break ;
+		case LESSLESS:
+			printf("%s", "LESSLESS");
+		break ;
+		case DOLL:
+			printf("%s", "DOLL");
+		break ;
+		case DOLLQ:
+			printf("%s", "DOLLQ");
+		break ;
+		case QUOT:
+			printf("%s", "QUOT");
+		break ;
+		case DQUOT:
+			printf("%s", "DQUOT");
+		break ;
+		case WSPACE:
+			printf("%s", "WSPACE");
+		break ;
+	}
+}
 
 void	print_tokens(t_token *root)
 {

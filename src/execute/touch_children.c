@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:24:45 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:44:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:05:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,3 @@ void	child_add_back(t_children *root, t_children *new)
 	}
 	root->next = new;
 }
-
-//void	kill_children(t_children *kids)
-//{
-//	while (kids != NULL)
-//	{
-//		if (kids->id > 0)
-//			kill(kids->id, SIGKILL);
-//		kids = kids->next;
-//	}
-//}

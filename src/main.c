@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:08:50 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:24:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ int	main(int argc, char **argv, char **envp)
 	int		res;
 
 	input = NULL;
-	to_exit = check_c_mode(argc, argv, &input);
 	line = NULL;
-	if ((res = setup(&cmd, envp)) != 0)
+	to_exit = check_c_mode(argc, argv, &input);
+	res = setup(&cmd, envp);
+	if (res != 0)
 		return (res);
 	while (1)
 	{
