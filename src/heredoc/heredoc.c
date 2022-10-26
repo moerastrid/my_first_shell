@@ -41,19 +41,24 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 	return (NULL);
 }
 
-static int	token_check(t_cmd *cmd, t_token *lessless, t_token **token)
+//examples;
+// echo > << a b
+// echo > <<
+// echo > <
+static int	token_check(t_cmd *cmd, t_token *lessless, t_token *token)
 {
-	if (!(*token))
+	if (!token) //probably not here
 	{
-		printf("%s\n", "minishell : unexptected token newline");
+		// printf("%s\n", "minishell : syntax error near unexptected token `newline'");
 		g_errno = 258;
 		return (1);
 	}
-	if ((*token)->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
-		docadd_back(&cmd->doc, docnew(*token, lessless));
+	if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
+		docadd_back(&cmd->doc, docnew(token, lessless));
 	else
 	{
-		printf("%s - %u\n", "minishell : unexptected token ", (*token)->type);
+		// printf("%s - %u\n", "minishell : syntax error near unexptected token ",\
+		 // token->type);
 		g_errno = 258;
 		return (1);
 	}
@@ -75,7 +80,7 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			token = token->next;
 			while (token && token->type == WSPACE)
 				token = token->next;
-			if (token_check(cmd, lessless, &token) == 1)
+			if (token_check(cmd, lessless, token) == 1)
 				return (1);
 			token = lessless;
 		}
