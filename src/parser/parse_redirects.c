@@ -44,8 +44,6 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	int		type;
 	int		start_type;
 
-	print_tokens(cmd->tokens);
-
 	start_type = (*tokens)->type;
 	*tokens = (*tokens)->next;
 	while (1)
@@ -69,9 +67,14 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 
 int	parse_heredoc(t_cmd *cmd, t_token **token)
 {
-	simple_add_infile(simple_tail(cmd->simples), (*token)->data, 1);
-	*token = (*token)->next;
-	while (*token && (*token)->type == WSPACE)
+	if((*token)->data)
+	{
+		simple_add_infile(simple_tail(cmd->simples), (*token)->data, 1);
 		*token = (*token)->next;
+		while (*token && (*token)->type == WSPACE)
+		*token = (*token)->next;
+	}
+	else
+		return (ft_print_err(NULL, 2));
 	return (0);
 }
