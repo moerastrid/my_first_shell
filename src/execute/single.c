@@ -23,12 +23,6 @@ void	exec_cmd(t_simple *simple, char **envp)
 	default_signals();
 	execve(simple->bin, simple->argv, envp);
 
-	// perror(ft_strjoin("execve perror: ", simple->bin));
-
-	// extern int errno;
-
-	// printf("%d\n", errno);
-
 	// All the reasons execve could fail:
 	// bin is NULL;
 	// bin is empty;
@@ -37,50 +31,21 @@ void	exec_cmd(t_simple *simple, char **envp)
 	// bin does not have (execute) rights;
 	// More?
 
-
-
-	// if (simple->argc == 1 && g_errno != 127)
-	// {
-		if (access(simple->bin, F_OK) == 0)
-		{
-			// perror(simple->bin);
-			ft_putstr_fd("minishell: ", STDERR_FILENO);
-			ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
-			g_errno = 126;
-		}
-		else
-		{
-			ft_putstr_fd("minishell: ", STDERR_FILENO);
-			ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-			ft_putstr_fd(": command not found\n", STDERR_FILENO);
-			g_errno = 127;
-		}
-		exit(g_errno);
-	// }
-	//while (simple->argv[i])
-	//{
-	//	ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-	//	//if (is_dir(&simple->bin[0])
-	//	//{
-	//	//	//
-	//	//}
-		if (access(simple->bin, F_OK) == 0)
-		{
-			ft_putstr_fd(": ", STDERR_FILENO);
-			ft_putstr_fd(simple->argv[i], STDERR_FILENO);
-			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
-			i++;
-		}
-		if (access(simple->bin, F_OK) != 0)
-		{
-			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-			g_errno = 127;
-			exit(127);
-		}
-	//}
-	g_errno = 1;
-	exit (g_errno);
+	if (access(simple->bin, F_OK) == 0)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
+		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+		g_errno = 126;
+	}
+	else
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		g_errno = 127;
+	}
+	exit(g_errno);
 }
 
 // this is a function for a single command
@@ -90,8 +55,6 @@ int	only_child(t_cmd *cmd)
 	pid_t	child_one_id;
 	int		status;
 	int		exit_code;
-
-	// print_cmd(*cmd);
 
 	exit_code = 0;
 	child_one_id = fork();
