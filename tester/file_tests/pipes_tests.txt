@@ -1,5 +1,4 @@
 - Pipes part : For next tests, you will need : \\\033[0;33mall built-in, redirections (normal and stderror) and semicolons (;).
-env | grep "_="
 env | grep "SHLVL"
 echo oui | cat -e
 echo oui | echo non | echo something | grep oui
@@ -13,7 +12,7 @@ ifconfig | grep ":"
 ifconfig | grep nothing
 whoami | grep $USER
 whoami | grep $USER > tmp/file
-whoami | cat -e | cat -e > tmp/file 
+whoami | cat -e | cat -e > tmp/file
 cat Makefile | grep "FLAGS"
 cat Makefile | cat -e | cat -e
 cat Makefile | grep "FLAGS" | grep "FLAGS" | cat -e
@@ -23,7 +22,7 @@ echo test | cat -e | cat -e | cat -e
 whereis ls | cat -e | cat -e > test
 echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
 ls -la | grep "."
-whereis grep > tmp/file 
+whereis grep > tmp/file
 whereis grep > tmp/file
 ls -la > tmp/file
-ls -la > tmp/file 
+ls -la > tmp/file
