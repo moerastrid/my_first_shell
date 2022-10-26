@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 13:35:44 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:42:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,26 @@ typedef struct s_children {
 # define READ 0
 # define WRITE 1
 
+//family_life.c
 int			family_life(t_cmd *cmds);
+
+//children.c
 void		child(t_cmd *cmd, int *writep, int *readp, int cmd_no);
-pid_t		create_child(t_cmd *cmds, int *wpipe, int *rpipe, int cmd_no);
-void		exec_cmd(t_simple *simple, char **envp);
-int			only_child(t_cmd *cmds);
+
+//redirect.c
 void		redirect_infile(t_str_list *infiles);
 void		redirect_outfile(t_str_list *outfiles);
+
+//single.c
+void		exec_cmd(t_simple *simple, char **envp);
+int			only_child(t_cmd *cmds);
+
+//call_builtin.c
 int			is_builtin(char *str);
 int			exec_builtin(t_simple *t, t_cmd *cmd);
+
+//touch_children.c
 t_children	*new_child(pid_t id);
 void		child_add_back(t_children *root, t_children *new);
-void		free_children(t_children *root);
 
 #endif

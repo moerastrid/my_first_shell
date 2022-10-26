@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:39:43 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:43:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_exit_err(char *str, int err)
 	return (err);
 }
 
-int	is_valid_env_line(char *name)
+static int	is_valid_env_line(char *name)
 {
 	char	*ptr;
 

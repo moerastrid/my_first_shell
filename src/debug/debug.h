@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:36:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:02:31 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:33:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../../minishell.h"
 
 //DEBUG #TODO REMOVE... ILLEGAL FUNCTION!
-//void		print_token_type(enum e_token_type num);
+void		print_token_type(enum e_token_type num);
 void		print_str_list(t_str_list *root, char *name);
 void		print_tokens(t_token *root);
 void		print_simples(t_simple *root);

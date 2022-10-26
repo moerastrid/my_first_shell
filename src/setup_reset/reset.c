@@ -6,12 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 16:37:19 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:46:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:04:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include "../env/env.h"
+#include "../parser/parser.h"
 
 void	unlink_docs(t_doc *docs)
 {

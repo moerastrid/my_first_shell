@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:38:35 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:44:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 	return (NULL);
 }
 
-//examples;
-// echo > << a b
-// echo > <<
-// echo > <
 static int	token_check(t_cmd *cmd, t_token *lessless, t_token *token)
 {
 	if (!token)

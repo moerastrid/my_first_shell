@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:43 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:44:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:48:10 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*token_new(char *data, int type)
 	return (token);
 }
 
-void	merge_token_with_next(t_token *token)
+static void	merge_token_with_next(t_token *token)
 {
 	t_token	*temp;
 	char	*new_data;

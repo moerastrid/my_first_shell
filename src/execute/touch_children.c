@@ -6,23 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:24:45 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:05:22 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:42:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-void	free_children(t_children *root)
-{
-	t_children	*next;
-
-	while (root != NULL)
-	{
-		next = root->next;
-		free(root);
-		root = next;
-	}
-}
 
 t_children	*new_child(pid_t id)
 {
