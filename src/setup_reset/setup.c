@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 18:15:55 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:16:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "setup.h"
 
 void	setup_termios(void)
 {

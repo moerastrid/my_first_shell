@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:55:44 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:22:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "../../minishell.h"
 
 static void	simple_add(int type, t_simple *simple, char *data)
 {

@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:44:30 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:21:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
-#include "../setup_reset/setup.h"
 
 static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 {

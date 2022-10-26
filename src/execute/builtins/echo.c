@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:42:48 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:19:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute.h"
+#include "builtins.h"
 
 static int	ft_isflag(char *str)
 {

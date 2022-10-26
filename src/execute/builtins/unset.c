@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:02:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:43:36 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:18:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute.h"
+#include "builtins.h"
 
 static int	ft_exit_err(char *str, int err)
 {

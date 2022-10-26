@@ -6,15 +6,13 @@
 /*   By: tnuyten <tnuyten@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/29 16:07:28 by tnuyten       #+#    #+#                 */
-/*   Updated: 2022/10/26 18:50:25 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:14:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# include "../../lib/libft/libft.h"
-# include "../../structs.h"
 # include "../../minishell.h"
 
 // lexer.c

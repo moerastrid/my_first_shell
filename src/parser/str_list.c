@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 15:43:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:45:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:22:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "parser.h"
 
 t_str_list	*str_list_new(char *str, int append_mode)
 {

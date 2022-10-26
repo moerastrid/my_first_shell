@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:35:52 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:07:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:18:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "debug.h"
 
 // Totally illegal
 void	print_token_type(enum e_token_type num)

@@ -6,13 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:24:41 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:22:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "heredoc/heredoc.h"
-#include "substitutor/substitutor.h"
 
 int	minishell(t_cmd *cmd, char **input, char **line)
 {

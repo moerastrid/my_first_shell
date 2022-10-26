@@ -6,14 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:42:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:20:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include "../../minishell.h"
 # include "./builtins/builtins.h"
 
 typedef struct s_children {
