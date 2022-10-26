@@ -47,7 +47,6 @@ SRC =	src/main.c\
 		src/setup_reset/setup.c\
 		src/setup_reset/reset.c\
 		src/utils/utils00.c\
-		src/debug/print.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -77,7 +76,6 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/utils
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
-	@mkdir -pv obj/debug
 	@mkdir -pv obj/env
 	@mkdir -pv obj/setup_reset
 	@mkdir -pv obj/heredoc

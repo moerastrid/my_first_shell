@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:11:46 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 20:27:39 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-// # include <sys/syslimits.h> Only works on MacOS.
 # include <stdlib.h>
 # include <signal.h>
 # include <stdbool.h>
@@ -33,8 +32,7 @@
 # include "src/display/display.h"
 # include "src/lexer/token.h"
 # include "src/setup_reset/setup.h"
-// #remove before handin
-# include "src/debug/debug.h"
+
 
 // GLOBAL VAR
 int	g_errno;
