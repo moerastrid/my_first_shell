@@ -73,3 +73,21 @@ int	token_length(t_token *token)
 		len += 1;
 	return (len);
 }
+
+void	token_delete_empty_subs(t_token **tokens)
+{
+	t_token	*token;
+	t_token	*next;
+
+	token = *tokens;
+	while (token)
+	{
+		next = token->next;
+		if (token->type & (WORD + DQUOT + DOLL))
+		{
+			if (token->data == NULL || ft_strlen(token->data) == 0)
+				remove_token_from_list(tokens, token);
+		}
+		token = next;
+	}
+}

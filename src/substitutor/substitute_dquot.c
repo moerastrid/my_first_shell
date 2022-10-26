@@ -12,14 +12,7 @@
 
 #include "substitutor.h"
 
-int	is_start_word_char(char c)
-{
-	if (ft_isdigit(c) || c == '_')
-		return (1);
-	return (0);
-}
-
-int	is_word_char(char c)
+static int	is_word_char(char c)
 {
 	if (ft_isalnum(c) || c == '_')
 		return (1);
@@ -33,6 +26,8 @@ static char	*get_word(char *input)
 	if (ft_strlen(input) <= 1)
 		return (NULL);
 	var_end = input + 1;
+	if (ft_isdigit(*var_end))
+		return (ft_substr(input, 1, 1));
 	while (is_word_char(*var_end))
 		var_end++;
 	return (ft_substr(input, 1, var_end - 1 - input));
@@ -72,18 +67,21 @@ void	substitute_dquot(t_token *token, char **envp)
 	int		presublen;
 
 	input = token->data;
+	presublen = 0;
 	while (input && *input != '\0')
 	{
 		while (*input != '$' && *input != '\0')
 			input++;
 		if (!*input || !*(input + 1))
 			break ;
-		if (!ft_isalpha(*(input + 1)))
+		if (is_word_char(*(input + 1)) == 0)
 		{
 			input++;
 			continue ;
 		}
 		new_data = rep_once(input, token->data, &presublen, envp);
+		if(new_data == NULL)
+			return ;
 		free(token->data);
 		token->data = new_data;
 		input = token->data + presublen;

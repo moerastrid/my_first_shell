@@ -62,6 +62,8 @@ int	doll_length(char *input)
 	int	len;
 
 	len = 0;
+	if (ft_isdigit(*input))
+		return (1);
 	while (ft_isalnum(*input) || *input == '_')
 	{
 		len++;
