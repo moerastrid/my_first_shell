@@ -65,7 +65,10 @@ static void	substitute_doll(t_token *token, char **envp)
 	{
 		if (token->data == NULL)
 			return ;
-		sub = get_envp_var(token->data, envp);
+		if (ft_strlen(token->data) == 0)
+			sub = ft_strdup("$");
+		else
+			sub = get_envp_var(token->data, envp);
 		free(token->data);
 		if (sub == NULL)
 		{
