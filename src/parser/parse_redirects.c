@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 14:59:14 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:22:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "../../minishell.h"
 
 static void	simple_add(int type, t_simple *simple, char *data)
 {
@@ -49,7 +48,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	while (1)
 	{
 		if ((*tokens) == NULL)
-			return ft_print_err(*tokens, 2);
+			return (ft_print_err(*tokens, 2));
 		type = (*tokens)->type;
 		if (type == WSPACE)
 			*tokens = (*tokens)->next;
@@ -62,12 +61,12 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 			break ;
 		continue ;
 	}
-	return ft_print_err(*tokens, 2);
+	return (ft_print_err(*tokens, 2));
 }
 
 int	parse_heredoc(t_cmd *cmd, t_token **token)
 {
-	if((*token)->data)
+	if ((*token)->data)
 	{
 		simple_add_infile(simple_tail(cmd->simples), (*token)->data, 1);
 		*token = (*token)->next;

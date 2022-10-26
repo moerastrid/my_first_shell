@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:35:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 16:48:32 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 17:44:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ char	**env_remove(char *var_name, char **envp)
 		return (envp);
 	new_envp = ft_calloc(count_envp(envp), sizeof(envp));
 	if (new_envp == NULL)
-	{
-		g_errno = 12;
 		return (envp);
-	}
 	i = 0;
 	j = 0;
 	while (envp && envp[i])

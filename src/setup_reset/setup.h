@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:21 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 18:10:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:16:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../../minishell.h"
 # include "../env/env.h"
 # include "../heredoc/heredoc.h"
+# include "../parser/parser.h"
+# include "../lexer/token.h"
 
 char		**getpaths(char **envp);
 int			setup(t_cmd *cmd, char **envp);

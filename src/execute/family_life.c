@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   family_life.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ageels <ageels@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 22:18:38 by ageels            #+#    #+#             */
-/*   Updated: 2022/10/14 18:35:20 by tnuyten          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   family_life.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
+/*   Updated: 2022/10/26 18:39:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,33 @@ static int	pickup_kids(t_children *kids)
 	return (exit_code);
 }
 
+static void	parent(t_cmd cmd, int *writep, int *readp, int cmd_no)
+{
+	if (cmd_no != 0)
+		close(readp[READ]);
+	if (cmd_no != cmd.cmd_count - 1)
+		close (writep[WRITE]);
+}
+
+static pid_t	create_child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
+{
+	pid_t		child_id;
+
+	child_id = fork();
+	if (child_id < 0)
+		return (-1);
+	else if (child_id == 0)
+	{
+		child(cmd, writep, readp, cmd_no);
+		return (-1);
+	}
+	else
+	{
+		parent(*cmd, writep, readp, cmd_no);
+		return (child_id);
+	}
+}
+
 int	family_life(t_cmd *cmd)
 {
 	int			pfd[2][2];
@@ -62,31 +89,4 @@ int	family_life(t_cmd *cmd)
 		i++;
 	}
 	return (pickup_kids(kids));
-}
-
-void	parent(t_cmd cmd, int *writep, int *readp, int cmd_no)
-{
-	if (cmd_no != 0)
-		close(readp[READ]);
-	if (cmd_no != cmd.cmd_count - 1)
-		close (writep[WRITE]);
-}
-
-pid_t	create_child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
-{
-	pid_t		child_id;
-
-	child_id = fork();
-	if (child_id < 0)
-		return (-1);
-	else if (child_id == 0)
-	{
-		child(cmd, writep, readp, cmd_no);
-		return (-1);
-	}
-	else
-	{
-		parent(*cmd, writep, readp, cmd_no);
-		return (child_id);
-	}
 }

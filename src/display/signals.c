@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 15:20:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:17:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	heredoc_sigint(int sig)
 	ft_putstr_fd(PROMPT, STDERR_FILENO);
 	rl_on_new_line();
 	rl_replace_line("", 1);
+	rl_redisplay();
 }
 
 void	catch_signals(void)

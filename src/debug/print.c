@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:35:52 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 16:36:26 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:18:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "debug.h"
 
 // Totally illegal
 void	print_token_type(enum e_token_type num)
@@ -99,22 +99,22 @@ void	print_simples(t_simple *root)
 		i = 0;
 		while (i < root->argc)
 		{
-			if(i != root->argc - 1)
+			if (i != root->argc - 1)
 				printf("[%s]->", argv[i++]);
 			else
 				printf("[%s]\n", argv[i++]);
 		}
-		if(root->outfiles)
+		if (root->outfiles)
 			printf("\t");
 		print_str_list(root->outfiles, "Outfiles");
-		if(root->infiles)
+		if (root->infiles)
 			printf("\t");
 		print_str_list(root->infiles, "Infiles ");
 		root = root->next;
 	}
 }
 
-void print_cmd(t_cmd cmd)
+void	print_cmd(t_cmd cmd)
 {
 	printf("%s\n", "=================================");
 	printf("%s\n", "\tCommand struct breakdown");
@@ -125,9 +125,9 @@ void print_cmd(t_cmd cmd)
 	printf("%s\n", "=================================");
 }
 
-void print_envc(char **envc)
+void	print_envc(char **envc)
 {
-	while(envc && *envc)
+	while (envc && *envc)
 	{
 		printf("%s\n", *envc++);
 	}

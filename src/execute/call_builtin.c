@@ -6,20 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 20:45:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 13:35:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 18:37:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-int	is_del(char c)
-{
-	if (!c)
-		return (0);
-	if (c == ' ' || c == '\0' || c == '\n')
-		return (1);
-	return (0);
-}
 
 int	is_builtin(char *s)
 {

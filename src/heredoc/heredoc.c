@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 19:51:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:21:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
-#include "../setup_reset/setup.h"
 
 static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 {
@@ -41,27 +40,14 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 	return (NULL);
 }
 
-//examples;
-// echo > << a b
-// echo > <<
-// echo > <
 static int	token_check(t_cmd *cmd, t_token *lessless, t_token *token)
 {
-	if (!token) //probably not here
-	{
-		// printf("%s\n", "minishell : syntax error near unexptected token `newline'");
-		g_errno = 258;
+	if (!token)
 		return (1);
-	}
 	if (token->type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		docadd_back(&cmd->doc, docnew(token, lessless));
 	else
-	{
-		// printf("%s - %u\n", "minishell : syntax error near unexptected token ",\
-		 // token->type);
-		g_errno = 258;
 		return (1);
-	}
 	return (0);
 }
 

@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 16:59:57 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 17:02:01 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 19:22:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "substitutor.h"
-#include "../heredoc/heredoc.h"
 
 char	*substitute_line(char *line, char **envp)
 {
