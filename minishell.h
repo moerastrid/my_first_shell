@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 20:27:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 20:31:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@
 # include <curses.h>
 # include <term.h>
 # include <errno.h>
-
 # include "structs.h"
 # include "lib/libft/libft.h"
 # include "src/display/display.h"
 # include "src/lexer/token.h"
 # include "src/setup_reset/setup.h"
-
 
 // GLOBAL VAR
 int	g_errno;

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:36 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 21:32:14 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 20:32:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	substitute_dquot(t_token *token, char **envp)
 			continue ;
 		}
 		new_data = rep_once(input, token->data, &presublen, envp);
-		if(new_data == NULL)
+		if (new_data == NULL)
 			return ;
 		free(token->data);
 		token->data = new_data;
