@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 14:53:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 14:59:14 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	simple_add(int type, t_simple *simple, char *data)
 
 static void	ft_print_err(t_token *token)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	if (token->type == LESS || token->type == LESSLESS)
 		ft_putstr_fd("<", STDERR_FILENO);
 	if (token->type == GREAT || token->type == GREATGREAT)

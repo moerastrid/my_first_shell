@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:12 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:31:10 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 15:00:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ int	cmd_add_pipe(t_cmd *cmd)
 	if (simple_tail(cmd->simples)->argv == NULL)
 	{
 		free(new);
-		g_errno = 258;
-		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n",\
-		 STDERR_FILENO);
-		return (-1);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd("syntax error near unexpected token '|'\n", STDERR_FILENO);
+		return (2);
 	}
 	simple_add_back(&cmd->simples, new);
 	return (0);

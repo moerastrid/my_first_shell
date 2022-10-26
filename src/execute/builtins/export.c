@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 23:07:44 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/26 14:57:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-static int ft_exit_err(char *str, int err)
+static int	ft_exit_err(char *str, int err)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
@@ -27,7 +27,8 @@ int	is_valid_env_line(char *name)
 	ptr = name;
 	if (!(ft_isalpha(*ptr) || *ptr == '_'))
 		return (ft_exit_err(name, 0));
-	while ((ft_isalpha(*ptr) || *ptr == '_' || ft_isdigit(*ptr)) && *ptr != '\0')
+	while ((ft_isalpha(*ptr) || *ptr == '_' || \
+	ft_isdigit(*ptr)) && *ptr != '\0')
 		ptr++;
 	if (*ptr == '\0')
 		return (2);
@@ -36,7 +37,7 @@ int	is_valid_env_line(char *name)
 	return (1);
 }
 
-static void export_print_env(t_cmd *cmd)
+static void	export_print_env(t_cmd *cmd)
 {
 	int	i;
 	int	j;
