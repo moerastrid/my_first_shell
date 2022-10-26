@@ -23,17 +23,20 @@ static void	simple_add(int type, t_simple *simple, char *data)
 	simple_add_infile(simple, data, type == LESSLESS);
 }
 
-static void	ft_print_err(t_token *token)
+static int	ft_print_err(t_token *token, int err)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
-	if (token->type == LESS || token->type == LESSLESS)
+	if (token == NULL)
+		ft_putstr_fd("newline", STDERR_FILENO);
+	else if (token->type == LESS || token->type == LESSLESS)
 		ft_putstr_fd("<", STDERR_FILENO);
-	if (token->type == GREAT || token->type == GREATGREAT)
+	else if (token->type == GREAT || token->type == GREATGREAT)
 		ft_putstr_fd(">", STDERR_FILENO);
-	if (token->type == PIPE)
+	else if (token->type == PIPE)
 		ft_putstr_fd("|", STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
+	return (err);
 }
 
 int	parse_redirect(t_cmd *cmd, t_token **tokens)
@@ -46,7 +49,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 	while (1)
 	{
 		if ((*tokens) == NULL)
-			return (1);
+			return ft_print_err(*tokens, 2);
 		type = (*tokens)->type;
 		if (type == WSPACE)
 			*tokens = (*tokens)->next;
@@ -59,8 +62,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 			break ;
 		continue ;
 	}
-	ft_print_err(*tokens);
-	return (2);
+	return ft_print_err(*tokens, 2);
 }
 
 int	parse_heredoc(t_cmd *cmd, t_token **token)
