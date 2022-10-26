@@ -9,3 +9,4 @@ minishell
 *.sh
 !tester/test.sh
 *.txt
+tester/tofix
