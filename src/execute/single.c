@@ -12,9 +12,9 @@
 
 #include "execute.h"
 
-// IN EXECUTE03, THE SINGLE COMMANDS ARE EXECUTED
+// IN single.c, THE SINGLE COMMANDS ARE EXECUTED
 
-// this is a single command in a child process
+// Execute a single command in a child process
 void	exec_cmd(t_simple *simple, char **envp)
 {
 	int	i;
@@ -39,32 +39,38 @@ void	exec_cmd(t_simple *simple, char **envp)
 	exit(g_errno);
 }
 
-// this is a function for a single command
-// executed in a single child process
-int	only_child(t_cmd *cmd)
+static int	signal_catcher(pid_t child_pid)
 {
-	pid_t	child_one_id;
 	int		status;
 	int		exit_code;
 
 	exit_code = 0;
-	child_one_id = fork();
-	if (child_one_id == -1)
+	waitpid(child_pid, &status, 0);
+	if (WIFEXITED(status))
+		exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		exit_code = WTERMSIG(status) + 128;
+	return (exit_code);
+}
+
+// this is a function for a single command
+// executed in a single child process
+int	only_child(t_cmd *cmd)
+{
+	pid_t	child_id;
+	int		ret;
+
+	child_id = fork();
+	if (child_id == -1)
 		return (10);
-	else if (child_one_id == 0)
+	else if (child_id == 0)
 	{
-		redirect_infile(cmd->simples->infiles);
-		redirect_outfile(cmd->simples->outfiles);
-		exec_cmd(cmd->simples, cmd->envc);
+		ret = redirect_infile(cmd->simples->infiles);
+		ret += redirect_outfile(cmd->simples->outfiles);
+		if (!ret)
+			exec_cmd(cmd->simples, cmd->envc);
 	}
 	else
-	{
-		waitpid(child_one_id, &status, 0);
-		if (WIFEXITED(status))
-			exit_code = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			exit_code = WTERMSIG(status) + 128;
-		return (exit_code);
-	}
+		return (signal_catcher(child_id));
 	return (1);
 }

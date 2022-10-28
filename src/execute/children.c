@@ -54,8 +54,10 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 	simple = get_simple(*cmd, cmd_no);
 	if (is_builtin(simple->argv[0]) == 1)
 	{
-		redirect_infile(simple->infiles);
-		redirect_outfile(simple->outfiles);
+		ret_val += redirect_infile(simple->infiles);
+		ret_val += redirect_outfile(simple->outfiles);
+		if (ret_val)
+			exit(ret_val);
 		ret_val = exec_builtin(simple, cmd);
 		dup2(0, STDIN_FILENO);
 		dup2(1, STDOUT_FILENO);

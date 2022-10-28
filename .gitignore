@@ -6,8 +6,7 @@
 minishell
 .tags
 .vscode
+.DS_store
 *.sh
-!tester/test.sh
 *.txt
-tester/tofix
-tester/tmp
+tester

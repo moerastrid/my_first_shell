@@ -49,3 +49,12 @@ void	free_str_list(t_str_list *root)
 	}
 	root = NULL;
 }
+
+t_str_list	*str_list_tail(t_str_list *root)
+{
+	if (!root)
+		return (NULL);
+	while (root->next != NULL)
+		root = root->next;
+	return (root);
+}

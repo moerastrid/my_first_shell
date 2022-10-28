@@ -30,8 +30,8 @@ int			family_life(t_cmd *cmds);
 void		child(t_cmd *cmd, int *writep, int *readp, int cmd_no);
 
 //redirect.c
-void		redirect_infile(t_str_list *infiles);
-void		redirect_outfile(t_str_list *outfiles);
+int			redirect_infile(t_str_list *infiles);
+int			redirect_outfile(t_str_list *outfiles);
 
 //single.c
 void		exec_cmd(t_simple *simple, char **envp);

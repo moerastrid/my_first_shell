@@ -71,7 +71,7 @@ int	parse_heredoc(t_cmd *cmd, t_token **token)
 		simple_add_infile(simple_tail(cmd->simples), (*token)->data, 1);
 		*token = (*token)->next;
 		while (*token && (*token)->type == WSPACE)
-		*token = (*token)->next;
+			*token = (*token)->next;
 	}
 	else
 		return (ft_print_err(NULL, 2));

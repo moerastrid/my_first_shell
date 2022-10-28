@@ -12,67 +12,97 @@
 
 #include "execute.h"
 
-static void	set_infile(t_str_list *last_infile)
+static int	set_infile(t_str_list *infile)
 {
-	int			fd;
+	int	fd;
 
 	fd = 0;
-	if (last_infile->append_mode == 0)
+	if (infile->append_mode == 0)
 	{
-		if (access(last_infile->str, R_OK) != 0)
+		if (access(infile->str, R_OK) != 0)
 		{
-			perror(last_infile->str);
-			exit(errno);
+			perror(infile->str);
+			return (errno);
 		}
-		fd = open(last_infile->str, O_RDONLY);
+		fd = open(infile->str, O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
-	else if (last_infile->append_mode == 1)
+	else if (infile->append_mode == 1)
 	{
-		fd = open(last_infile->str, O_RDONLY, 0664);
+		fd = open(infile->str, O_RDONLY, 0664);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
-		unlink(last_infile->str);
+		unlink(infile->str);
 	}
+	return (0);
 }
 
-void	redirect_infile(t_str_list *infiles)
+static int	create_outfiles(t_str_list *outfiles)
 {
-	t_str_list	*last_infile;
+	int	fd;
 
-	if (infiles == NULL)
-		return ;
-	last_infile = infiles;
-	while (infiles != NULL)
+	while (outfiles != NULL)
 	{
-		if (infiles->next == NULL)
-			last_infile = infiles;
-		else if (infiles->append_mode == 1)
+		if (access(outfiles->str, F_OK) != 0)
+		{
+			fd = open(outfiles->str, O_CREAT, 0664);
+			if (fd != -1)
+				close(fd);
+			else
+			{
+				perror(outfiles->str);
+				g_errno = errno;
+				return (errno);
+			}
+		}
+		outfiles = outfiles->next;
+	}
+	return (0);
+}
+
+static void	unlink_heredocs(t_str_list *infiles)
+{
+	while (infiles->next != NULL)
+	{
+		if (infiles->append_mode == 1)
 			unlink(infiles->str);
 		infiles = infiles->next;
 	}
-	set_infile(last_infile);
 }
 
-void	redirect_outfile(t_str_list *outfiles)
+int	redirect_infile(t_str_list *infiles)
+{
+	if (infiles == NULL)
+		return (0);
+	unlink_heredocs(infiles);
+	return (set_infile(str_list_tail(infiles)));
+}
+
+int	redirect_outfile(t_str_list *outfiles)
 {
 	int	fd;
 	int	flags;
+	int	ret;
 
 	if (outfiles == NULL)
-		return ;
-	while (outfiles->next != NULL)
-	{
-		close(open(outfiles->str, O_CREAT, 0664));
-		g_errno = errno;
-		outfiles = outfiles->next;
-	}
+		return (0);
+	ret = create_outfiles(outfiles);
+	if (ret != 0)
+		return (errno);
+	outfiles = str_list_tail(outfiles);
 	if (outfiles->append_mode)
-		flags = O_RDWR | O_CREAT | O_APPEND;
+		flags = O_RDWR | O_APPEND;
 	else
-		flags = O_WRONLY | O_CREAT | O_TRUNC;
+		flags = O_WRONLY | O_TRUNC;
 	fd = open(outfiles->str, flags, 0664);
+	if (fd == -1)
+	{
+		perror(outfiles->str);
+		g_errno = errno;
+		return (errno);
+	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
+	return (0);
 }
