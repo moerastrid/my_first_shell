@@ -10,3 +10,4 @@ minishell
 *.sh
 *.txt
 tester
+!bugs.txt

@@ -1,0 +1,53 @@
+Bug 1: Heredoc ctrl-c bug
+
+Commands to reproduce bug:
+
+	cat << EOF
+		ctrl-c
+	cat << EOF
+		enter
+
+Expected behavior:
+	Give prompt to fill heredoc.
+Current behavior:
+	Heredoc prompt is closed.
+
+Bug 2: Heredoc ctrl-c "bug"
+
+Commands to reproduce bug:
+
+	cat << EOF
+		ctrl-C
+	ctrl-D
+
+Expected behavior:
+	Minishell is closed
+
+Current behavior:
+	Minishell heredoc subprompt is closed. (press ctrl-D again to actually close minishell)
+
+Bug 3:
+
+Commands to reproduce bug:
+
+Expected behavior:
+
+Current behavior:
+
+
+Bug 4:
+
+Commands to reproduce bug:
+
+Expected behavior:
+
+Current behavior:
+
+
+Bug 5:
+
+Commands to reproduce bug:
+
+Expected behavior:
+
+Current behavior:
