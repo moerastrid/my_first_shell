@@ -9,5 +9,5 @@ minishell
 .DS_store
 *.sh
 *.txt
-tester
+minishell_tester
 !bugs.txt

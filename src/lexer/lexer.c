@@ -74,19 +74,19 @@ int	token_length(t_token *token)
 	return (len);
 }
 
-void	token_delete_empty_subs(t_token **tokens)
+void	token_delete_empty_subs(t_cmd *cmd)
 {
 	t_token	*token;
 	t_token	*next;
 
-	token = *tokens;
+	token = cmd->tokens;
 	while (token)
 	{
 		next = token->next;
-		if (token->type & (WORD + DQUOT + DOLL))
+		if (token->type & (WORD + DQUOT + QUOT + DOLL))
 		{
 			if (token->data == NULL || ft_strlen(token->data) == 0)
-				remove_token_from_list(tokens, token);
+				remove_token_from_list(&(cmd->tokens), token);
 		}
 		token = next;
 	}

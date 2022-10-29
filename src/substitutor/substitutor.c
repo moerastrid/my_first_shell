@@ -89,13 +89,13 @@ static void	substitute_dollq(t_token **tokens)
 	(*tokens)->data = ft_itoa(g_errno);
 }
 
-void	substitute(t_cmd cmd, char **envp)
+void	substitute(t_cmd *cmd, char **envp)
 {
 	t_token	*tokens;
 	t_doc	*doc;
 
-	doc = cmd.doc;
-	tokens = cmd.tokens;
+	doc = cmd->doc;
+	tokens = cmd->tokens;
 	while (tokens)
 	{
 		if (tokens->type == DOLL)
@@ -106,6 +106,6 @@ void	substitute(t_cmd cmd, char **envp)
 			substitute_dquot(tokens, envp);
 		tokens = tokens->next;
 	}
-	merge_words(cmd.tokens);
-	token_delete_empty_subs(&cmd.tokens);
+	merge_words(cmd->tokens);
+	token_delete_empty_subs(cmd);
 }

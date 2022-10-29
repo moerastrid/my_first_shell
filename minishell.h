@@ -49,7 +49,7 @@ int			tokenize(t_cmd *cmd, char *input);
 int			parse(t_cmd *cmds);
 
 // substitutor
-void		substitute(t_cmd cmd, char **envp);
+void		substitute(t_cmd *cmd, char **envp);
 
 //utils
 char		**single_split(char const *s, char c);

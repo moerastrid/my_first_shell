@@ -90,9 +90,9 @@ void	remove_token_from_list(t_token **root, t_token *to_remove)
 		return ;
 	if (*root == to_remove)
 	{
-		*root = to_remove->next;
-		to_remove->next = NULL;
+		*root = (*root)->next;
 		free_token(to_remove);
+		to_remove = NULL;
 		return ;
 	}
 	iter = *root;

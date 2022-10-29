@@ -1,7 +1,7 @@
-Bug 1: Heredoc ctrl-c bug
+Bug 1:
+	Heredoc ctrl-c bug
 
 Commands to reproduce bug:
-
 	cat << EOF
 		ctrl-c
 	cat << EOF
@@ -12,10 +12,12 @@ Expected behavior:
 Current behavior:
 	Heredoc prompt is closed.
 
-Bug 2: Heredoc ctrl-c "bug"
+
+
+Bug 2:
+	Heredoc ctrl-c "bug"
 
 Commands to reproduce bug:
-
 	cat << EOF
 		ctrl-C
 	ctrl-D
@@ -26,16 +28,54 @@ Expected behavior:
 Current behavior:
 	Minishell heredoc subprompt is closed. (press ctrl-D again to actually close minishell)
 
+
+
 Bug 3:
+	pipe bug
 
 Commands to reproduce bug:
+	ls |
 
 Expected behavior:
+	Probably syntax error
 
 Current behavior:
+	ls output / no output , no error message
+
+
 
 
 Bug 4:
+	leaking fd's
+
+Commands to reproduce bug:
+	cmd1 | cmd2
+
+Expected behavior:
+	no leak
+
+Current behavior:
+	leak
+
+
+
+
+Bug 5:
+	empty quote
+
+Commands to reproduce bug:
+	""
+
+	"" cmd
+
+Expected behavior:
+empty command (not found)
+
+Current behavior:
+
+
+
+Bug 6:
 
 Commands to reproduce bug:
 
@@ -44,7 +84,8 @@ Expected behavior:
 Current behavior:
 
 
-Bug 5:
+
+Bug 7:
 
 Commands to reproduce bug:
 

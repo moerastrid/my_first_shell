@@ -38,6 +38,8 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 {
 	int	type;
 
+	if (*token == NULL)
+		return (1);
 	type = (*token)->type;
 	if (type & (GREAT + LESS + GREATGREAT))
 		return (parse_redirect(cmd, token));
@@ -46,22 +48,28 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 	if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		return (parse_words(cmd, token));
 	if (type == PIPE)
-		return (cmd_add_pipe(cmd));
+		return (cmd_add_pipe(cmd, *token));
 	return (0);
+}
+
+static int	ft_parse_error(int err)
+{
+	ft_putstr_fd("minishell: Command '' not found\n", STDERR_FILENO);
+	return (err);
 }
 
 int	parse(t_cmd *cmd)
 {
 	t_token		*token;
-	int			space_flag;
 	int			ret;
 	t_simple	*tail;
 
-	substitute(*cmd, cmd->envc);
+	substitute(cmd, cmd->envc);
+	if (cmd->tokens == NULL)
+		return (ft_parse_error(2));
 	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;
-	space_flag = 0;
 	while (token != NULL)
 	{
 		ret = parse_token(cmd, &token);

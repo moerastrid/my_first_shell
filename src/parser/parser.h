@@ -16,7 +16,7 @@
 # include "../../minishell.h"
 
 // cmd_builder.c
-int			cmd_add_pipe(t_cmd *cmd);
+int			cmd_add_pipe(t_cmd *cmd, t_token *token);
 
 // parce_redirects.c
 int			parse_redirect(t_cmd *cmd, t_token **token);
