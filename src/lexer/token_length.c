@@ -41,22 +41,6 @@ int	quot_length(char *input)
 	return (count);
 }
 
-int	dquot_length(char *input)
-{
-	int	count;
-	int	type;
-
-	type = token_type(input);
-	count = 0;
-	input++;
-	while (*input != '\0' && token_type(input) != type)
-	{
-		count++;
-		input++;
-	}
-	return (count);
-}
-
 int	doll_length(char *input)
 {
 	int	len;

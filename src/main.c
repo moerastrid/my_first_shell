@@ -64,5 +64,3 @@ int	main(int argc, char **argv, char **envp)
 	clear_cmd(&cmd);
 	return (g_errno);
 }
-
-//ls | cat >out.txt <in.txt >>out2.txt | echo -e -r -m $SHLVL=a/b

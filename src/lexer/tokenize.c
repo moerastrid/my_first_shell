@@ -22,7 +22,7 @@ static char	*get_data(int type, char *input)
 	else if (type == QUOT)
 		data = ft_substr(input, 1, quot_length(input));
 	else if (type == DQUOT)
-		data = ft_substr(input, 1, dquot_length(input));
+		data = ft_substr(input, 1, quot_length(input));
 	else if (type == DOLL)
 		data = ft_substr(input, 1, doll_length(input + 1));
 	else if (type == DOLLQ)
@@ -32,7 +32,6 @@ static char	*get_data(int type, char *input)
 	return (data);
 }
 
-// error values?
 static int	check_token(t_token *token)
 {
 	int	type;
@@ -47,6 +46,23 @@ static int	check_token(t_token *token)
 		}
 	}
 	return (0);
+}
+
+static int	print_quot_error(int type, int err)
+{
+	char	*str;
+
+	if (type == QUOT)
+		str = "'";
+	else if (type == DQUOT)
+		str = "\"";
+	else
+		return (-1);
+	ft_putstr_fd("minishell: syntax error: unmatched `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
+	g_errno = 2;
+	return (err);
 }
 
 int	tokenize(t_cmd *cmd, char *input)
@@ -65,7 +81,7 @@ int	tokenize(t_cmd *cmd, char *input)
 			return (-1);
 		input += token_length(new);
 		if (input > end)
-			return (-1);
+			return (print_quot_error(type, -1));
 	}
 	return (0);
 }

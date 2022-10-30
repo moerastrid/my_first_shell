@@ -68,6 +68,3 @@ typedef struct s_cmd {
 
 #endif
 
-// ==39144== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-// ==39144==   /path/to/gdb ./minishell
-// target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=39144

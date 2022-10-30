@@ -53,11 +53,12 @@ Commands to reproduce bug:
 	"" cmd
 
 Expected behavior:
-empty command (not found)
+empty command + error message ? (can't test, different version)
+error code 127 ?
 
 Current behavior:
-Probably wrong error message
-
+Probably wrong error message, error code
+Need to check codam bash version to fix.
 
 
 Bug 6:

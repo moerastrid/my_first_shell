@@ -28,7 +28,6 @@ void	token_delete_empty_subs(t_cmd *cmd);
 //token_length.c
 int		word_length(char *input);
 int		quot_length(char *input);
-int		dquot_length(char *input);
 int		doll_length(char *input);
 
 // token_free.c
