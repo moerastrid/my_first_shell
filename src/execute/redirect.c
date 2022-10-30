@@ -44,17 +44,14 @@ static int	create_outfiles(t_str_list *outfiles)
 
 	while (outfiles != NULL)
 	{
-		if (access(outfiles->str, F_OK) != 0)
+		fd = open(outfiles->str, O_CREAT | O_TRUNC, 0664);
+		if (fd != -1)
+			close(fd);
+		else
 		{
-			fd = open(outfiles->str, O_CREAT, 0664);
-			if (fd != -1)
-				close(fd);
-			else
-			{
-				perror(outfiles->str);
-				g_errno = errno;
-				return (errno);
-			}
+			perror(outfiles->str);
+			g_errno = errno;
+			return (errno);
 		}
 		outfiles = outfiles->next;
 	}
@@ -92,7 +89,7 @@ int	redirect_outfile(t_str_list *outfiles)
 		return (errno);
 	outfiles = str_list_tail(outfiles);
 	if (outfiles->append_mode)
-		flags = O_RDWR | O_APPEND;
+		flags = O_WRONLY | O_APPEND;
 	else
 		flags = O_WRONLY | O_TRUNC;
 	fd = open(outfiles->str, flags, 0664);
