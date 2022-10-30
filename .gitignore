@@ -11,3 +11,4 @@ minishell
 *.txt
 minishell_tester
 !bugs.txt
+print.c

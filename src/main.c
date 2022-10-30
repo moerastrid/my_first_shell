@@ -28,6 +28,7 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 	{
 		reset(cmd, *line);
 		*input = retstr;
+		g_errno = 0;
 		return (2);
 	}
 	g_errno = parse(cmd);

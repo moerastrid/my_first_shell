@@ -44,22 +44,6 @@ Current behavior:
 
 
 
-
-Bug 4:
-	leaking fd's
-
-Commands to reproduce bug:
-	cmd1 | cmd2
-
-Expected behavior:
-	no leak
-
-Current behavior:
-	leak
-
-
-
-
 Bug 5:
 	empty quote
 
@@ -72,6 +56,7 @@ Expected behavior:
 empty command (not found)
 
 Current behavior:
+Probably wrong error message
 
 
 
