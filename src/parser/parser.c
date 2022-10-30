@@ -52,12 +52,6 @@ static int	parse_token(t_cmd *cmd, t_token **token)
 	return (0);
 }
 
-static int	ft_parse_error(int err)
-{
-	ft_putstr_fd("minishell: Command '' not found\n", STDERR_FILENO);
-	return (err);
-}
-
 int	parse(t_cmd *cmd)
 {
 	t_token		*token;
@@ -65,8 +59,6 @@ int	parse(t_cmd *cmd)
 	t_simple	*tail;
 
 	substitute(cmd, cmd->envc);
-	if (cmd->tokens == NULL)
-		return (ft_parse_error(2));
 	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
 	token = cmd->tokens;

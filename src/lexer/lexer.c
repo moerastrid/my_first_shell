@@ -83,7 +83,7 @@ void	token_delete_empty_subs(t_cmd *cmd)
 	while (token)
 	{
 		next = token->next;
-		if (token->type & (WORD + DQUOT + QUOT + DOLL))
+		if (token->type & (WORD + DOLL))
 		{
 			if (token->data == NULL || ft_strlen(token->data) == 0)
 				remove_token_from_list(&(cmd->tokens), token);

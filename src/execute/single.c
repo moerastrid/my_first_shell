@@ -21,7 +21,8 @@ void	exec_cmd(t_simple *simple, char **envp)
 
 	i = 1;
 	default_signals();
-	execve(simple->bin, simple->argv, envp);
+	if (simple->bin)
+		execve(simple->bin, simple->argv, envp);
 	if (access(simple->bin, F_OK) == 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
