@@ -37,7 +37,7 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 	if (!cmd->envc)
 		return (-1);
 	str = find_str("SHLVL", cmd->envc) + 6;
-	if ((int)str == 6)
+	if (str == (void *)0x6)
 		return (0);
 	lvl = ft_atoi(str) + 1;
 	num = ft_itoa(lvl);

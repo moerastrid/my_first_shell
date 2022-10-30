@@ -21,7 +21,7 @@ int	bi_cd(t_simple *simple, t_cmd *cmd)
 		str = find_str("HOME", cmd->envc) + 5;
 	else
 		str = simple->argv[1];
-	if ((int)str == 5)
+	if (str == (void *)0x5)
 		return (1);
 	if (chdir(str) != 0)
 	{
