@@ -74,7 +74,7 @@ int	family_life(t_cmd *cmd)
 	kids = NULL;
 	while (i < cmd->cmd_count)
 	{
-		if (i != cmd->cmd_count - 1 || cmd->cmd_count == 2)
+		if (i != cmd->cmd_count - 1)
 		{
 			if (pipe(pfd[i % 2]) == -1)
 				ft_putstr_fd("pipe error", STDERR_FILENO);
