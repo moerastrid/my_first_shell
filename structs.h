@@ -67,4 +67,3 @@ typedef struct s_cmd {
 }	t_cmd;
 
 #endif
-
