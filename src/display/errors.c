@@ -6,16 +6,16 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 22:16:11 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:01:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:12:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-void	catch_errno(void)
+void	catch_errno(t_cmd cmd)
 {
-	if (g_errno == 130)
+	if (cmd.err == 130)
 		ft_putstr_fd("^C\n", STDERR_FILENO);
-	else if (g_errno == 131)
+	else if (cmd.err == 131)
 		ft_putstr_fd("^\\Quit: 3\n", STDERR_FILENO);
 }

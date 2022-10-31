@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:19:31 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 18:31:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	bi_cd(t_simple *simple, t_cmd *cmd)
 		str = find_str("HOME", cmd->envc) + 5;
 	else
 		str = simple->argv[1];
-	if (str == (void *)0x5)
+	if (str == (void *)5)
 		return (1);
 	if (chdir(str) != 0)
 	{

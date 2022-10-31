@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 22:26:13 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:27:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ static char	*get_data(int type, char *input)
 	return (data);
 }
 
-static int	check_token(t_token *token)
-{
-	int	type;
-
-	type = token->type;
-	if (token->data == NULL)
-	{
-		if (type == WORD)
-		{
-			g_errno = 10;
-			return (10);
-		}
-	}
-	return (0);
-}
-
 static int	print_quot_error(int type, int err)
 {
 	char	*str;
@@ -61,7 +45,6 @@ static int	print_quot_error(int type, int err)
 	ft_putstr_fd("minishell: syntax error: unmatched `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
-	g_errno = 2;
 	return (err);
 }
 
@@ -77,8 +60,6 @@ int	tokenize(t_cmd *cmd, char *input)
 		type = token_type(input);
 		new = token_new(get_data(type, input), type);
 		token_add_back(&(cmd->tokens), new);
-		if (check_token(new) == -1)
-			return (-1);
 		input += token_length(new);
 		if (input > end)
 			return (print_quot_error(type, -1));

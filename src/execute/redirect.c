@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 14:20:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 16:23:31 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:19:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	create_outfiles(t_str_list *outfiles)
 		else
 		{
 			perror(outfiles->str);
-			g_errno = errno;
 			return (errno);
 		}
 		outfiles = outfiles->next;
@@ -96,7 +95,6 @@ int	redirect_outfile(t_str_list *outfiles)
 	if (fd == -1)
 	{
 		perror(outfiles->str);
-		g_errno = errno;
 		return (errno);
 	}
 	dup2(fd, STDOUT_FILENO);

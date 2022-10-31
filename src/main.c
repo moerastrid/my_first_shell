@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:22:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 20:01:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 		g_errno = 0;
 		return (2);
 	}
-	g_errno = parse(cmd);
-	if (g_errno == 0)
-		g_errno = execute(cmd);
+	cmd->err = parse(cmd);
+	if (cmd->err == 0)
+		cmd->err = execute(cmd);
 	return (1);
 }
 
@@ -62,5 +62,5 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	clear_cmd(&cmd);
-	return (g_errno);
+	return (cmd.err);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 16:07:56 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:24:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ void	exec_cmd(t_simple *simple, char **envp)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
 		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
-		g_errno = 126;
+		exit (126);
 	}
 	else
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		g_errno = 127;
+		exit (127);
 	}
-	exit(g_errno);
 }
 
 static int	signal_catcher(pid_t child_pid)
@@ -67,8 +66,9 @@ int	only_child(t_cmd *cmd)
 	else if (child_id == 0)
 	{
 		ret = redirect_infile(cmd->simples->infiles);
-		ret += redirect_outfile(cmd->simples->outfiles);
 		if (!ret)
+			ret = redirect_outfile(cmd->simples->outfiles);
+		else if (!ret)
 			exec_cmd(cmd->simples, cmd->envc);
 		else
 			exit (ret);

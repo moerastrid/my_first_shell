@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 20:32:32 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 20:32:33 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:08:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ typedef struct s_doc {
 }	t_doc;
 
 typedef struct s_cmd {
-	char		**envc;
-	char		**paths;
-	int			cmd_count;
-	t_token		*tokens;
-	t_simple	*simples;
-	t_doc		*doc;
+	char			**envc;
+	char			**paths;
+	int				cmd_count;
+	t_token			*tokens;
+	t_simple		*simples;
+	t_doc			*doc;
+	unsigned int	err;
 }	t_cmd;
 
 #endif

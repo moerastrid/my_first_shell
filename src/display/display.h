@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:04:55 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 19:13:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	default_signals(void);
 void	ignore_signals(void);
 
 //errors.c
-void	catch_errno(void);
+void	catch_errno(t_cmd cmd);
 
 #endif
