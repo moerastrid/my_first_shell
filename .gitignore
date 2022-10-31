@@ -1,8 +1,5 @@
 *.o
 *.a
-!astrid_notes.txt
-!bugs.txt
-!Samenvatting.txt
 minishell
 .tags
 .vscode

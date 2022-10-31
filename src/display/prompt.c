@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:09:05 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 20:05:41 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 23:40:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,4 @@ char	*prompt(t_cmd *cmd)
 		add_history(line);
 	default_signals();
 	return (line);
-}
-
-void	ignore_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 }
