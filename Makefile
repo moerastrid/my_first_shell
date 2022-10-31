@@ -60,15 +60,8 @@ all : libft $(NAME)
 
 lib/libft/libft.a: libft
 
-libft:
-	@$(MAKE) -C lib/libft
-
-$(NAME): $(OBJ) libft
-	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) lib/libft/libft.a
-	@printf "$(_SUCCESS) Minishell ready.\n"
-
-obj/%.o : src/%.c
-	@mkdir -pv obj
+obj_folder :
+	mkdir -pv obj
 	@mkdir -pv obj/display
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute
@@ -79,6 +72,15 @@ obj/%.o : src/%.c
 	@mkdir -pv obj/env
 	@mkdir -pv obj/setup_reset
 	@mkdir -pv obj/heredoc
+
+libft:
+	@$(MAKE) -C lib/libft
+
+$(NAME): obj_folder $(OBJ) libft
+	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) lib/libft/libft.a
+	@printf "$(_SUCCESS) Minishell ready.\n"
+
+obj/%.o : src/%.c
 	@$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
