@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 20:09:13 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 16:07:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	only_child(t_cmd *cmd)
 		ret += redirect_outfile(cmd->simples->outfiles);
 		if (!ret)
 			exec_cmd(cmd->simples, cmd->envc);
+		else
+			exit (ret);
 	}
 	else
 		return (signal_catcher(child_id));
