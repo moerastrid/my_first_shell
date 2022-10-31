@@ -16,7 +16,7 @@ void	unlink_docs(t_doc *docs)
 {
 	while (docs)
 	{
-		if (access(docs->name, F_OK) == 0)
+		if (docs->name && access(docs->name, F_OK) == 0)
 			unlink(docs->name);
 		if (errno == 2)
 			errno = 0;

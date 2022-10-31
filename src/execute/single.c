@@ -23,7 +23,7 @@ void	exec_cmd(t_simple *simple, char **envp)
 	default_signals();
 	if (simple->bin)
 		execve(simple->bin, simple->argv, envp);
-	if (access(simple->bin, F_OK) == 0)
+	if (simple->bin && access(simple->bin, F_OK) == 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
