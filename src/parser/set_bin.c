@@ -49,9 +49,12 @@ void	cmd_simples_set_bin(t_cmd *cmd)
 	simples = cmd->simples;
 	while (simples)
 	{
-		argv0 = simples->argv[0];
-		if (argv0 && ft_strlen(argv0) != 0)
-			set_bin(simples, cmd->paths);
+		if (simples->argv)
+		{
+			argv0 = simples->argv[0];
+			if (argv0 && ft_strlen(argv0) != 0)
+				set_bin(simples, cmd->paths);
+		}
 		simples = simples->next;
 	}
 }
