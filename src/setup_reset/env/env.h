@@ -6,14 +6,14 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:33:05 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/21 21:33:06 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 23:27:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "../../minishell.h"
+# include "../setup.h"
 
 char	*find_str(char *str, char **envp);
 char	**copy_env(char **og);

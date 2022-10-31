@@ -1,13 +1,11 @@
 NAME := minishell
 BREW_DIR = $(shell brew --prefix)
 OBJ_DIR = ./obj
-CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft -Wall -Wextra -Werror -fsanitize=address -g -O3 -fno-omit-frame-pointer
+CFLAG = -I $(BREW_DIR)/opt/readline/include -I lib/libft -Wall -Wextra -Werror #-fsanitize=address -g -O3 -fno-omit-frame-pointer
 LFLAG = -L $(BREW_DIR)/opt/readline/lib -lreadline  -L lib/libft
 CC = clang
 
 SRC =	src/main.c\
-		src/env/env00.c\
-		src/env/env01.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/errors.c\
@@ -43,10 +41,12 @@ SRC =	src/main.c\
 		src/execute/redirect.c\
 		src/execute/single.c\
 		src/execute/touch_children.c\
+		src/setup_reset/env/env00.c\
+		src/setup_reset/env/env01.c\
 		src/setup_reset/path.c\
 		src/setup_reset/setup.c\
 		src/setup_reset/reset.c\
-		src/utils/utils00.c\
+		src/setup_reset/utils.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -66,10 +66,9 @@ obj_folder :
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute
 	@mkdir -pv obj/execute/builtins
-	@mkdir -pv obj/utils
 	@mkdir -pv obj/parser
 	@mkdir -pv obj/substitutor
-	@mkdir -pv obj/env
+	@mkdir -pv obj/setup_reset/env
 	@mkdir -pv obj/setup_reset
 	@mkdir -pv obj/heredoc
 

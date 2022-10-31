@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 16:44:09 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 23:32:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ char		*prompt(t_cmd	*cmd);
 // execute
 int			execute(t_cmd *cmds);
 
+//heredoc
+int			heredoc(t_cmd *cmd, char **retstr);
+
 // lexer
 int			tokenize(t_cmd *cmd, char *input);
 
@@ -50,11 +53,5 @@ int			parse(t_cmd *cmds);
 
 // substitutor
 void		substitute(t_cmd *cmd, char **envp);
-
-//utils
-char		**single_split(char const *s, char c);
-
-//heredoc
-int			heredoc(t_cmd *cmd, char **retstr);
 
 #endif

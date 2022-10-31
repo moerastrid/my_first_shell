@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:21 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 20:18:58 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 23:32:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SETUP_H
 
 # include "../../minishell.h"
-# include "../env/env.h"
+# include "env/env.h"
 # include "../heredoc/heredoc.h"
 # include "../parser/parser.h"
 # include "../lexer/token.h"
@@ -25,5 +25,6 @@ void		reset(t_cmd *cmd, char *line);
 void		clear_cmd(t_cmd *cmd);
 void		unlink_docs(t_doc *docs);
 int			check_c_mode(int argc, char **argv, char **input);
+char		**single_split(char const *s, char c);
 
 #endif
