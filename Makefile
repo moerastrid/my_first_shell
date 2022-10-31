@@ -61,7 +61,7 @@ all : libft $(NAME)
 lib/libft/libft.a: libft
 
 obj_folder :
-	mkdir -pv obj
+	@mkdir -pv obj
 	@mkdir -pv obj/display
 	@mkdir -pv obj/lexer
 	@mkdir -pv obj/execute

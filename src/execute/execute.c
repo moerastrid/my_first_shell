@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 16:42:53 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 17:46:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	execute(t_cmd *cmd)
 	int	ret;
 	int	fd_out_copy;
 
-	fd_out_copy = dup(STDOUT_FILENO);
 	ignore_signals();
 	if (cmd->cmd_count <= 0)
 		return (1);
@@ -27,6 +26,7 @@ int	execute(t_cmd *cmd)
 	{
 		if (is_builtin(cmd->simples->argv[0]) == 1)
 		{
+			fd_out_copy = dup(STDOUT_FILENO);
 			ret = redirect_outfile(cmd->simples->outfiles);
 			if (!ret)
 				ret += exec_builtin(cmd->simples, cmd);
