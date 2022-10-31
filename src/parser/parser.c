@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 20:21:56 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/24 16:56:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:34:46 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	parse_words(t_cmd *cmd, t_token **tokens)
 		type = (*tokens)->type;
 		if (type & (WORD + QUOT + DQUOT + DOLL + DOLLQ))
 		{
-			add_arg(cmd, (*tokens)->data);
-			return (0);
+			return (add_arg(cmd, (*tokens)->data));
 		}
 		else if (type & WSPACE)
 			*tokens = (*tokens)->next;

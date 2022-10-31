@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:24:45 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:42:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:08:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_children	*new_child(pid_t id)
 	return (new);
 }
 
-void	child_add_back(t_children *root, t_children *new)
+void	child_add_back(t_children **root, t_children *new)
 {
 	if (root == NULL)
 		return ;
-	while (root->next != NULL)
+	if (*root == NULL)
 	{
-		root = root->next;
+		*root = new;
+		return ;
 	}
-	root->next = new;
+	while ((*root)->next != NULL)
+		*root = (*root)->next;
+	(*root)->next = new;
 }

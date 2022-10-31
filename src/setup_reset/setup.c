@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:11:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 21:47:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 	cmd->doc = NULL;
 	cmd->err = 0;
 	cmd->envc = copy_env(envp);
-	if (!cmd->envc)
-		return (-1);
 	str = find_str("SHLVL", cmd->envc) + 6;
 	if (str == (void *)0x6)
 		return (0);

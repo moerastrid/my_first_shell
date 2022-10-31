@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:02:27 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 17:44:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:15:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ static char	*nextfilename(char *s)
 	int		i;
 
 	i = 0;
-	ret = NULL;
 	ret = ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (!ret)
+	{
+		free (s);
 		return (NULL);
+	}
 	while (s[i])
 	{
 		ret[i] = s[i];
@@ -55,11 +57,15 @@ t_doc	*docnew(t_token *token, t_token *lessless)
 {
 	t_doc	*new;
 
-	new = malloc(sizeof(t_doc));
+	new = ft_calloc(1, sizeof(t_doc));
 	if (!new)
 		return (NULL);
 	new->name = nextfilename(ft_strdup("heredob"));
+	if (new->name == NULL)
+		return (NULL);
 	lessless->data = ft_strdup(new->name);
+	if (lessless->data == NULL)
+		return (NULL);
 	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
 	if (token->type == DOLL)
 		new->eof = ft_strjoin("$", token->data);

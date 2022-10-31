@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:20:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:03:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int			exec_builtin(t_simple *t, t_cmd *cmd);
 
 //touch_children.c
 t_children	*new_child(pid_t id);
-void		child_add_back(t_children *root, t_children *new);
+void		child_add_back(t_children **root, t_children *new);
 
 #endif

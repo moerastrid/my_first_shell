@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:09:08 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:33:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ static void	split_token(t_token *token)
 	while (s && *s)
 	{
 		token->next = token_new(ft_strdup(" "), WSPACE);
+		if (token->next == NULL)
+			return ;
 		token = token->next;
 		token->next = token_new(ft_strdup(*s), WORD);
+		if (token->next == NULL)
+			return ;
 		token = token->next;
 		free(*s++);
 	}

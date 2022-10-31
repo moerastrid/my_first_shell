@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:24:25 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 21:27:03 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
 // IN single.c, THE SINGLE COMMANDS ARE EXECUTED
 
 // Execute a single command in a child process
@@ -58,20 +57,20 @@ static int	signal_catcher(pid_t child_pid)
 int	only_child(t_cmd *cmd)
 {
 	pid_t	child_id;
-	int		ret;
+	int		ret1;
+	int		ret2;
 
 	child_id = fork();
 	if (child_id == -1)
 		return (10);
 	else if (child_id == 0)
 	{
-		ret = redirect_infile(cmd->simples->infiles);
-		if (!ret)
-			ret = redirect_outfile(cmd->simples->outfiles);
-		else if (!ret)
+		ret1 = redirect_infile(cmd->simples->infiles);
+		ret2 = redirect_outfile(cmd->simples->outfiles);
+		if (!ret1 && !ret2)
 			exec_cmd(cmd->simples, cmd->envc);
 		else
-			exit (ret);
+			exit (ret1 || ret2);
 	}
 	else
 		return (signal_catcher(child_id));

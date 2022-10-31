@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:27:20 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 22:23:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int	tokenize(t_cmd *cmd, char *input)
 	{
 		type = token_type(input);
 		new = token_new(get_data(type, input), type);
+		if (new == NULL)
+		{
+			cmd->err = 10;
+			return (-1);
+		}
 		token_add_back(&(cmd->tokens), new);
 		input += token_length(new);
 		if (input > end)

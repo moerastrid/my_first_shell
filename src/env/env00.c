@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 21:33:09 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 18:01:02 by ageels        ########   odam.nl         */
+/*   Updated: 2022/10/31 21:48:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**copy_env(char **og)
 	if (copy == NULL)
 		return (NULL);
 	i = 0;
-	while (og[i] != NULL)
+	while (og && og[i] != NULL)
 	{
 		copy[i] = ft_strdup(og[i]);
 		i++;
