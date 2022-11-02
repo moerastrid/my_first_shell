@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:29:17 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/26 19:22:16 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 19:12:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	simple_add_file(int type, t_simple *simple, char *data)
+static void	simple_file(int type, t_simple *simple, char *data)
 {
 	if (type == GREAT || type == GREATGREAT)
 	{
@@ -54,7 +54,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 			*tokens = (*tokens)->next;
 		else if (type & (QUOT + DQUOT + WORD + DOLL + DOLLQ))
 		{
-			simple_add_file(start_type, simple_tail(cmd->simples), (*tokens)->data);
+			simple_file(start_type, simple_tail(cmd->simples), (*tokens)->data);
 			return (0);
 		}
 		else

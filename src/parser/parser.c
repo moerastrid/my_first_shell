@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 20:21:56 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/02 15:10:10 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 19:13:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse(t_cmd *cmd)
 	substitute(cmd, cmd->envc);
 	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
-	if(cmd->simples == NULL)
+	if (cmd->simples == NULL)
 		return (10);
 	token = cmd->tokens;
 	while (token != NULL)
