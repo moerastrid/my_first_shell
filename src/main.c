@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 22:36:09 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 13:54:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	minishell(t_cmd *cmd, char **input, char **line)
 
 	retstr = NULL;
 	if (*input == NULL)
+	{
+		if (g_errno == 1)
+			exit(0);
 		*line = prompt(cmd);
+	}
 	else
 		*line = *input;
 	if (!ft_strlen(*line) || tokenize(cmd, *line) == -1 \
