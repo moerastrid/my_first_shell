@@ -10,3 +10,4 @@ minishell_tester
 !bugs.txt
 print.c
 tester
+.gitignore
