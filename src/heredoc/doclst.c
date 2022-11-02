@@ -53,6 +53,8 @@ void	docadd_back(t_doc **doc, t_doc *new_doc)
 	temp->next = new_doc;
 }
 
+static void	doc_free(t_doc *doc);
+
 t_doc	*docnew(t_token *token, t_token *lessless)
 {
 	t_doc	*new;
@@ -61,11 +63,17 @@ t_doc	*docnew(t_token *token, t_token *lessless)
 	if (!new)
 		return (NULL);
 	new->name = nextfilename(ft_strdup("heredob"));
-	if (new->name == NULL)
+	if (new->name == NULL || ft_strlen(new->name) == 0)
+	{
+		doc_free(new);
 		return (NULL);
+	}
 	lessless->data = ft_strdup(new->name);
 	if (lessless->data == NULL)
+	{
+		doc_free(new);
 		return (NULL);
+	}
 	new->fd = open(new->name, O_CREAT | O_RDWR, 0664);
 	if (token->type == DOLL)
 		new->eof = ft_strjoin("$", token->data);

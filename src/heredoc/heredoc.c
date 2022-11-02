@@ -32,15 +32,15 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 		{
 			if (hd->type == WORD)
 				line = substitute_line(line, cmd->envc);
-			write(hd->fd, line, ft_strlen(line));
-			write(hd->fd, "\n", ft_strlen("\n"));
+			ft_putstr_fd(line, hd->fd);
+			ft_putstr_fd("\n", hd->fd);
 		}
 		free(line);
 	}
 	return (NULL);
 }
 
-static int	token_check(t_cmd *cmd, t_token *lessless, t_token *token)
+static int	doc_add(t_cmd *cmd, t_token *lessless, t_token *token)
 {
 	if (!token)
 		return (1);
@@ -65,7 +65,7 @@ int	heredoc(t_cmd *cmd, char **retstr)
 			token = token->next;
 			while (token && token->type == WSPACE)
 				token = token->next;
-			if (token_check(cmd, lessless, token) == 1)
+			if (doc_add(cmd, lessless, token) == 1)
 				return (0);
 			token = lessless;
 		}
