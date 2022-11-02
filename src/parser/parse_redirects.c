@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-static void	simple_add(int type, t_simple *simple, char *data)
+static void	simple_add_file(int type, t_simple *simple, char *data)
 {
 	if (type == GREAT || type == GREATGREAT)
 	{
@@ -54,7 +54,7 @@ int	parse_redirect(t_cmd *cmd, t_token **tokens)
 			*tokens = (*tokens)->next;
 		else if (type & (QUOT + DQUOT + WORD + DOLL + DOLLQ))
 		{
-			simple_add(start_type, simple_tail(cmd->simples), (*tokens)->data);
+			simple_add_file(start_type, simple_tail(cmd->simples), (*tokens)->data);
 			return (0);
 		}
 		else

@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-static int	ft_exit_err(char *str, int err)
+static int	ft_unset_err(char *str, int err)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
@@ -26,7 +26,7 @@ static int	is_valid_env_var(char *name)
 
 	ptr = name;
 	if (!(ft_isalpha(*ptr) || *ptr == '_'))
-		return (ft_exit_err(name, 0));
+		return (ft_unset_err(name, 0));
 	while ((ft_isalpha(*ptr) || *ptr == '_' || \
 	ft_isdigit(*ptr)) && *ptr != '\0')
 		ptr++;

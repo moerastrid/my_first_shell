@@ -17,7 +17,10 @@ char	*prompt(t_cmd *cmd)
 	char	*line;
 
 	if (g_errno == 1)
+	{
+		clear_cmd(cmd);
 		exit(0);
+	}
 	catch_signals();
 	line = readline(PROMPT);
 	if (line == NULL)

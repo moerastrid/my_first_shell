@@ -41,10 +41,14 @@ void	bi_exit(t_cmd *cmd, t_simple *simple)
 	if (simple->argc >= 2)
 	{
 		if (ft_strisnum(simple->argv[1], simple) == 0)
+		{
+			clear_cmd(cmd);
 			exit (255);
+		}
 		if (simple->argc > 2)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			clear_cmd(cmd);
 			exit (1);
 		}
 		num = ft_atoi(simple->argv[1]);

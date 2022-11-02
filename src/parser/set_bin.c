@@ -19,8 +19,7 @@ static void	set_bin(t_simple *simple, char **paths)
 
 	if (!simple || !simple->argv)
 		return ;
-	if (ft_strchr(simple->argv[0], '/') != NULL \
-	|| access(simple->argv[0], X_OK) == 0)
+	if (ft_strchr(simple->argv[0], '/') != NULL)
 	{
 		simple->bin = ft_strdup(simple->argv[0]);
 		return ;

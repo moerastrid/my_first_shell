@@ -49,6 +49,7 @@ int	exec_builtin(t_simple	*t, t_cmd *cmd)
 	{
 		bi_exit(cmd, t);
 		ft_putstr_fd("exit error\n", STDERR_FILENO);
+		clear_cmd(cmd);
 		exit(1);
 	}
 	else

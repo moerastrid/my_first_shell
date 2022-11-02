@@ -60,6 +60,8 @@ int	parse(t_cmd *cmd)
 	substitute(cmd, cmd->envc);
 	cmd->paths = getpaths(cmd->envc);
 	cmd->simples = new_simple(0, NULL);
+	if(cmd->simples == NULL)
+		return (10);
 	token = cmd->tokens;
 	while (token != NULL)
 	{

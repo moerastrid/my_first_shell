@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-static int	ft_exit_err(char *str, int err)
+static int	export_err(char *str, int err)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
@@ -26,14 +26,14 @@ static int	is_valid_env_line(char *name)
 
 	ptr = name;
 	if (!(ft_isalpha(*ptr) || *ptr == '_'))
-		return (ft_exit_err(name, 0));
+		return (export_err(name, 0));
 	while ((ft_isalpha(*ptr) || *ptr == '_' || \
 	ft_isdigit(*ptr)) && *ptr != '\0')
 		ptr++;
 	if (*ptr == '\0')
 		return (2);
 	if (*ptr != '=')
-		return (ft_exit_err(name, 0));
+		return (export_err(name, 0));
 	return (1);
 }
 

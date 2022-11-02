@@ -24,7 +24,7 @@ int	cmd_add_pipe(t_cmd *cmd, t_token *token)
 	}
 	new = new_simple(0, NULL);
 	if (new == NULL)
-		return (1);
+		return (10);
 	simple_add_back(&cmd->simples, new);
 	return (0);
 }
