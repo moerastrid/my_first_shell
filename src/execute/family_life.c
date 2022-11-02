@@ -78,7 +78,7 @@ int	family_life(t_cmd *cmd)
 		if (i != cmd->cmd_count - 1)
 		{
 			if (pipe(pfd[i % 2]) == -1)
-				ft_putstr_fd("pipe error", STDERR_FILENO);
+				ft_putstr_fd("minishell : pipe error\n", STDERR_FILENO);
 		}
 		id = create_child(cmd, pfd[i % 2], pfd[(i + 1) % 2], i);
 		if (id == -1)

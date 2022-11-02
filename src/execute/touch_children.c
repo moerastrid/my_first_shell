@@ -26,6 +26,9 @@ t_children	*new_child(pid_t id)
 
 void	child_add_back(t_children **root, t_children *new)
 {
+	t_children *temp;
+
+	temp = *root;
 	if (root == NULL)
 		return ;
 	if (*root == NULL)
@@ -33,7 +36,7 @@ void	child_add_back(t_children **root, t_children *new)
 		*root = new;
 		return ;
 	}
-	while ((*root)->next != NULL)
-		*root = (*root)->next;
-	(*root)->next = new;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = new;
 }
