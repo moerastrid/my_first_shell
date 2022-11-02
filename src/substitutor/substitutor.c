@@ -34,14 +34,14 @@ char	*get_envp_var(char *str, char **envp)
 
 static void	split_token(t_token *token)
 {
-	char	**splitted;
+	char	**split;
 	char	**s;
 	t_token	*old_next;
 
-	splitted = ft_split_multiple(token->data, " \t\n");
-	if (splitted == NULL)
+	split = ft_split_multiple(token->data, " \t\n");
+	if (split == NULL)
 		return ;
-	s = splitted;
+	s = split;
 	free(token->data);
 	token->data = *s++;
 	old_next = token->next;
@@ -58,7 +58,7 @@ static void	split_token(t_token *token)
 		free(*s++);
 	}
 	token->next = old_next;
-	free(splitted);
+	free(split);
 }
 
 static void	substitute_doll(t_token *token, char **envp)
@@ -91,15 +91,12 @@ static void	substitute_dollq(t_cmd *cmd, t_token **tokens)
 	if ((*tokens)->data)
 		free((*tokens)->data);
 	(*tokens)->data = ft_itoa(cmd->err);
-	(void)cmd;
 }
 
 void	substitute(t_cmd *cmd, char **envp)
 {
 	t_token	*tokens;
-	t_doc	*doc;
 
-	doc = cmd->doc;
 	tokens = cmd->tokens;
 	while (tokens)
 	{

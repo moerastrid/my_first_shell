@@ -56,7 +56,6 @@ int	heredoc(t_cmd *cmd, char **retstr)
 	t_token	*token;
 	t_token	*lessless;
 
-	cmd->doc = NULL;
 	token = cmd->tokens;
 	while (token)
 	{

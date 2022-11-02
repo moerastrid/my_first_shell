@@ -12,6 +12,13 @@
 
 #include "substitutor.h"
 
+static int	is_word_char(char c)
+{
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
+}
+
 char	*substitute_line(char *line, char **envp)
 {
 	char	*ptr;
@@ -19,13 +26,14 @@ char	*substitute_line(char *line, char **envp)
 	char	*new_line;
 
 	ptr = line;
-	while (ptr && *ptr != '\0')
+	pre_sub_len = 0;
+	while (line && *ptr != '\0')
 	{
 		while (*ptr != '$' && *ptr != '\0')
 			ptr++;
 		if (!*ptr || !*(ptr + 1))
 			break ;
-		if (!ft_isalpha(*(ptr + 1)))
+		if (!is_word_char(*(ptr + 1)))
 		{
 			ptr++;
 			continue ;

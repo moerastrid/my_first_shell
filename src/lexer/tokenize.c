@@ -42,7 +42,7 @@ static int	print_quot_error(int type, int err)
 		str = "\"";
 	else
 		return (-1);
-	ft_putstr_fd("minishell: syntax error: unmatched '", STDERR_FILENO);
+	ft_putstr_fd("minishell: syntax error: unmatched `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
 	return (err);

@@ -43,10 +43,8 @@ char	*rep_once(char *input, char *full_input, int *presublen, char **envp)
 
 	var_name = get_word(input);
 	if (var_name == NULL)
-		return (NULL);
-	if (ft_strlen(var_name) == 0)
 	{
-		free(var_name);
+		(*presublen)++;
 		return (ft_strdup(full_input));
 	}
 	sub = get_envp_var(var_name, envp);

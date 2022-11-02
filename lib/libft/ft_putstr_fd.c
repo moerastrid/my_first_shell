@@ -14,19 +14,7 @@
 
 int	ft_putstr_fd(char *s, int fd)
 {
-	int	written;
-	int	temp;
-
-	temp = 0;
-	written = 0;
 	if (!s)
-		return (written);
-	while (*s)
-	{
-		temp = ft_putchar_fd(*s++, fd);
-		if (temp == -1)
-			return (-1);
-		written += temp;
-	}
-	return (written);
+		return (0);
+	return (write(fd, s, ft_strlen(s)));
 }
