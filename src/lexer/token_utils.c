@@ -58,22 +58,6 @@ int	token_type(char *str)
 	return (WORD);
 }
 
-int	token_length(t_token *token)
-{
-	int	len;
-	int	type;
-
-	type = token->type;
-	len = 1;
-	if (type & (WORD + QUOT + DQUOT + DOLL))
-		len = ft_strlen(token->data);
-	if (type & (QUOT + DQUOT))
-		len += 2;
-	if (type & (DOLL + DOLLQ + GREATGREAT + LESSLESS))
-		len += 1;
-	return (len);
-}
-
 void	token_delete_empty_subs(t_cmd *cmd)
 {
 	t_token	*token;

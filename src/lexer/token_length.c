@@ -55,3 +55,19 @@ int	doll_length(char *input)
 	}
 	return (len);
 }
+
+int	token_length(t_token *token)
+{
+	int	len;
+	int	type;
+
+	type = token->type;
+	len = 1;
+	if (type & (WORD + QUOT + DQUOT + DOLL))
+		len = ft_strlen(token->data);
+	if (type & (QUOT + DQUOT))
+		len += 2;
+	if (type & (DOLL + DOLLQ + GREATGREAT + LESSLESS))
+		len += 1;
+	return (len);
+}
