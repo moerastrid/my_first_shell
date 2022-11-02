@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 14:29:48 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 22:23:59 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 15:22:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	print_quot_error(int type, int err)
 		str = "\"";
 	else
 		return (-1);
-	ft_putstr_fd("minishell: syntax error: unmatched `", STDERR_FILENO);
+	ft_putstr_fd("minishell: syntax error: unmatched '", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
 	return (err);
