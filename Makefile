@@ -9,11 +9,11 @@ SRC =	src/main.c\
 		src/display/prompt.c\
 		src/display/signals.c\
 		src/display/errors.c\
-		src/lexer/lexer.c\
-		src/lexer/token.c\
 		src/lexer/tokenize.c\
+		src/lexer/token.c\
 		src/lexer/token_free.c\
 		src/lexer/token_length.c\
+		src/lexer/token_utils.c\
 		src/heredoc/heredoc.c\
 		src/heredoc/doclst.c\
 		src/parser/parser.c\
