@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:30:44 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 22:33:01 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 14:39:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	substitute_dollq(t_cmd *cmd, t_token **tokens)
 	if ((*tokens)->data)
 		free((*tokens)->data);
 	(*tokens)->data = ft_itoa(cmd->err);
+	(void)cmd;
 }
 
 void	substitute(t_cmd *cmd, char **envp)

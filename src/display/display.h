@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:13:17 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/02 15:04:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 //signals.c 
 void	handle_sigint(int sig);
-void	setup_termios(void);
 void	catch_signals(void);
 void	heredoc_signals(void);
 void	default_signals(void);
