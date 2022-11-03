@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 20:49:16 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 17:46:43 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 19:54:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	infile_check_access(t_str_list *infiles)
 {
 	while (infiles)
 	{
-		if(access(infiles->str, F_OK) != 0)
+		if (access(infiles->str, F_OK) != 0)
 		{
 			perror(infiles->str);
 			return (errno);
 		}
-		if(access(infiles->str, R_OK) != 0)
+		if (access(infiles->str, R_OK) != 0)
 		{
 			perror(infiles->str);
 			return (errno);
