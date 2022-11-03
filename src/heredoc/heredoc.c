@@ -6,24 +6,22 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 15:02:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 18:55:07 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 15:53:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
+static void	heredoc_loop(t_doc *hd, t_cmd *cmd)
 {
-	char	*line;
+	char	*indoc;
 
-	heredoc_signals();
+	default_signals();
 	while (hd)
 	{
 		ft_putstr_fd(" >", STDERR_FILENO);
-		line = readline(" ");
-		if (g_errno == 1)
-			return (line);
-		if (!line || ft_strncmp(line, hd->eof, ft_strlen(hd->eof) + 1) == 0)
+		indoc = readline(" ");
+		if (!indoc || ft_strncmp(indoc, hd->eof, ft_strlen(hd->eof) + 1) == 0)
 		{
 			close(hd->fd);
 			hd = hd->next;
@@ -31,13 +29,28 @@ static char	*heredoc_loop(t_doc *hd, t_cmd *cmd)
 		else
 		{
 			if (hd->type == WORD)
-				line = substitute_line(line, cmd->envc);
-			ft_putstr_fd(line, hd->fd);
+				indoc = substitute_line(indoc, cmd->envc);
+			ft_putstr_fd(indoc, hd->fd);
 			ft_putstr_fd("\n", hd->fd);
 		}
-		free(line);
+		free(indoc);
 	}
-	return (NULL);
+	exit(0);
+}
+
+static int	heredoc_process(t_doc *hd, t_cmd *cmd)
+{
+	pid_t	heredoc_id;
+
+	heredoc_id = fork();
+	if (heredoc_id == -1)
+		return (-1);
+	else if (heredoc_id == 0)
+	{
+		heredoc_loop(hd, cmd);
+	}
+	ignore_signals();
+	return (signal_catcher(heredoc_id));
 }
 
 static int	doc_add(t_cmd *cmd, t_token *lessless, t_token *token)
@@ -51,7 +64,7 @@ static int	doc_add(t_cmd *cmd, t_token *lessless, t_token *token)
 	return (0);
 }
 
-int	heredoc(t_cmd *cmd, char **retstr)
+int	heredoc(t_cmd *cmd)
 {
 	t_token	*token;
 	t_token	*lessless;
@@ -72,7 +85,9 @@ int	heredoc(t_cmd *cmd, char **retstr)
 		token = token->next;
 	}
 	if (cmd->doc != NULL)
-		*retstr = heredoc_loop(cmd->doc, cmd);
-	catch_signals();
+	{
+		cmd->err = heredoc_process(cmd->doc, cmd);
+		return (cmd->err);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/27 22:19:40 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 23:32:40 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 15:32:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 # include "src/lexer/token.h"
 # include "src/setup_reset/setup.h"
 
-// GLOBAL VAR
-int	g_errno;
-
 // FILES & FUNCTIONS:
 //display
 char		*prompt(t_cmd	*cmd);
@@ -43,7 +40,7 @@ char		*prompt(t_cmd	*cmd);
 int			execute(t_cmd *cmds);
 
 //heredoc
-int			heredoc(t_cmd *cmd, char **retstr);
+int			heredoc(t_cmd *cmd);
 
 // lexer
 int			tokenize(t_cmd *cmd, char *input);
