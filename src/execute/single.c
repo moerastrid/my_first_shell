@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/03 15:27:04 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 16:54:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,26 @@
 // Execute a single command in a child process
 void	exec_cmd(t_simple *simple, char **envp)
 {
-	int	i;
-
-	i = 1;
 	default_signals();
 	if (simple->bin)
 		execve(simple->bin, simple->argv, envp);
+	dup2(STDERR_FILENO, STDOUT_FILENO);
 	if (simple->bin && access(simple->bin, F_OK) == 0)
 	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+		printf("minishell: ");
+		if (access(simple->bin, X_OK) != 0)
+			printf("%s : Permission denied\n", simple->argv[0]);
+		else
+			printf("%s : is a directory\n", simple->argv[0]);
 		exit (126);
 	}
 	else if (simple->argv)
 	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		printf("minishell: %s", simple->argv[0]);
+		if (ft_strchr(simple->argv[0], '/') != NULL)
+			printf(": No such file or directory\n");
+		else
+			printf(": command not found\n");
 		exit (127);
 	}
 	exit(0);
