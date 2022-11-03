@@ -16,10 +16,12 @@ static int	ft_strisnum(char *str, t_simple *simple)
 {
 	int	i;
 
+	if (*str == '+' || *str == '-')
+		str++;
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == 0 && str[i] != '-')
+		if (ft_isdigit(str[i]) == 0)
 		{
 			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 			ft_putstr_fd(simple->argv[1], STDERR_FILENO);
