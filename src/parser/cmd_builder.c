@@ -26,15 +26,11 @@ static int	simple_is_empty(t_simple *simple)
 int	cmd_add_pipe(t_cmd *cmd, t_token *token)
 {
 	t_simple	*new;
-	int			flag;
 
-	flag = 0;
 	token = token->next;
 	while (token && token->type == WSPACE)
 		token = token->next;
-	if (token == NULL)
-		flag = 1;
-	if (simple_is_empty(simple_tail(cmd->simples)) || flag)
+	if (simple_is_empty(simple_tail(cmd->simples)) || !token)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd("syntax error near unexpected token '|'\n", STDERR_FILENO);
