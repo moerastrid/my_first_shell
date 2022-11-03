@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 22:03:57 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:58:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_children {
 
 # define READ 0
 # define WRITE 1
+
+//errno: 
+void		catch_errno(int err);
 
 //family_life.c
 int			family_life(t_cmd *cmds);

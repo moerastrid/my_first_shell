@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:09:05 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/02 15:18:39 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:29:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*prompt(t_cmd *cmd)
 	if (g_errno == 1)
 	{
 		clear_cmd(cmd);
+		printf("HERE\n");
 		exit(0);
 	}
 	catch_signals();

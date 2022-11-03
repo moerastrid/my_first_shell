@@ -6,13 +6,21 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:18:38 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 22:04:23 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:56:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
 // IN EXECUTE01, YOU CAN FIND THE CHILD PROCESSES AND THE PARENT :)
+
+void	catch_errno(int err)
+{
+	if (err == 130)
+		ft_putstr_fd("^C\n", STDERR_FILENO);
+	else if (err == 131)
+		ft_putstr_fd("^\\Quit: 3\n", STDERR_FILENO);
+}
 
 static int	pickup_kids(t_children *kids)
 {
@@ -33,6 +41,7 @@ static int	pickup_kids(t_children *kids)
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
+	catch_errno(exit_code);
 	return (exit_code);
 }
 

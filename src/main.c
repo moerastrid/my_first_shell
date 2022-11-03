@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/21 22:34:30 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/02 15:18:46 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:53:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	minishell(t_cmd *cmd, char **input)
 	retstr = NULL;
 	if (*input == NULL)
 		*input = prompt(cmd);
-	if (!ft_strlen(*input) || tokenize(cmd, *input) == -1 \
-	|| !cmd->tokens || heredoc(cmd, &retstr))
+	if (!ft_strlen(*input))
+		return (1);
+	if (tokenize(cmd, *input) == -1 || !cmd->tokens || heredoc(cmd, &retstr))
 		return (1);
 	if (retstr != NULL)
 	{
@@ -32,7 +33,7 @@ int	minishell(t_cmd *cmd, char **input)
 	cmd->err = parse(cmd);
 	if (cmd->err == 255)
 		cmd->err = 0;
-	else if (cmd->err == 0)
+	else
 		cmd->err = execute(cmd);
 	return (1);
 }
@@ -51,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 		return (res);
 	while (1)
 	{
+		g_errno = 0;
 		if (to_exit != 2 && minishell(&cmd, &input) == 1)
 		{
 			reset(&cmd, input);

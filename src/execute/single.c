@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 21:27:03 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:56:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	signal_catcher(pid_t child_pid)
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		exit_code = WTERMSIG(status) + 128;
+	catch_errno(exit_code);
 	return (exit_code);
 }
 

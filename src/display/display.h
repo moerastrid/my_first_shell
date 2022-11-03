@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 16:27:35 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/02 15:04:47 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 14:52:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,5 @@ void	default_signals(void);
 
 //prompt.c (last of signals)
 void	ignore_signals(void);
-
-//errors.c
-void	catch_errno(t_cmd cmd);
 
 #endif

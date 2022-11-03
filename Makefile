@@ -7,8 +7,8 @@ CC = clang
 
 SRC =	src/main.c\
 		src/display/prompt.c\
-		src/display/signals.c\
-		src/display/errors.c\
+		src/display/signals00.c\
+		src/display/signals01.c\
 		src/lexer/tokenize.c\
 		src/lexer/token.c\
 		src/lexer/token_free.c\
