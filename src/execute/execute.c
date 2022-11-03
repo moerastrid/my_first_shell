@@ -24,7 +24,7 @@ int	execute(t_cmd *cmd)
 		return (1);
 	if (cmd->cmd_count == 1)
 	{
-		if (is_builtin(cmd->simples->argv[0]) == 1)
+		if (cmd->simples->argv != NULL && is_builtin(cmd->simples) == 1)
 		{
 			fd_out_copy = dup(STDOUT_FILENO);
 			ret = redirect_outfile(cmd->simples->outfiles);

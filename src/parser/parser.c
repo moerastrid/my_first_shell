@@ -75,7 +75,5 @@ int	parse(t_cmd *cmd)
 	cmd->cmd_count = count_simples(cmd);
 	tail = simple_tail(cmd->simples);
 	cmd_simples_set_bin(cmd);
-	if (tail->argv == NULL)
-		return (255);
 	return (0);
 }

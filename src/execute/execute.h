@@ -23,7 +23,7 @@ typedef struct s_children {
 # define READ 0
 # define WRITE 1
 
-//errno: 
+//errno:
 void		catch_errno(int err);
 
 //family_life.c
@@ -41,7 +41,7 @@ void		exec_cmd(t_simple *simple, char **envp);
 int			only_child(t_cmd *cmds);
 
 //call_builtin.c
-int			is_builtin(char *str);
+int			is_builtin(t_simple *simple);
 int			exec_builtin(t_simple *t, t_cmd *cmd);
 
 //touch_children.c

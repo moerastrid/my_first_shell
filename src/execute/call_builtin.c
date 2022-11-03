@@ -12,8 +12,13 @@
 
 #include "execute.h"
 
-int	is_builtin(char *s)
+int	is_builtin(t_simple *simple)
 {
+	char	*s;
+
+	if (simple->argv == NULL)
+		return (0);
+	s = simple->argv[0];
 	if (ft_strncmp(s, "echo", 5) == 0)
 		return (1);
 	if (ft_strncmp(s, "cd", 3) == 0)

@@ -52,7 +52,7 @@ void	child(t_cmd *cmd, int *writep, int *readp, int cmd_no)
 	close(writep[READ]);
 	child_connect_pipe(*cmd, writep, readp, cmd_no);
 	simple = get_simple(*cmd, cmd_no);
-	if (is_builtin(simple->argv[0]) == 1)
+	if (is_builtin(simple) == 1)
 	{
 		ret_val += redirect_infile(simple->infiles);
 		ret_val += redirect_outfile(simple->outfiles);

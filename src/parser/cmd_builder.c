@@ -12,11 +12,22 @@
 
 #include "parser.h"
 
+static int	simple_is_empty(t_simple *simple)
+{
+	if (simple->argv == NULL \
+		&& simple->infiles == NULL \
+		&& simple->outfiles == NULL)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 int	cmd_add_pipe(t_cmd *cmd, t_token *token)
 {
 	t_simple	*new;
 
-	if (simple_tail(cmd->simples)->argv == NULL || token->next == NULL)
+	if (simple_is_empty(simple_tail(cmd->simples)) || token->next == NULL)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd("syntax error near unexpected token '|'\n", STDERR_FILENO);

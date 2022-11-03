@@ -29,13 +29,14 @@ void	exec_cmd(t_simple *simple, char **envp)
 		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
 		exit (126);
 	}
-	else
+	else if (simple->argv)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(simple->argv[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit (127);
 	}
+	exit(0);
 }
 
 static int	signal_catcher(pid_t child_pid)
