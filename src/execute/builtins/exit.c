@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 14:12:13 by ageels        #+#    #+#                 */
-/*   Updated: 2022/10/31 19:57:46 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 18:48:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_strisnum(char *str, t_simple *simple)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == 0 && str[i] != '-')
+		if (ft_isdigit(str[i]) == 0 && str[i] != '-' && str[i] != '+')
 		{
 			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 			ft_putstr_fd(simple->argv[1], STDERR_FILENO);
