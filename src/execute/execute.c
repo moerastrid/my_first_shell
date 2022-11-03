@@ -14,6 +14,25 @@
 
 // EXECUTE.C IS THE EXECUTE MAIN
 
+int	infile_check_access(t_str_list *infiles)
+{
+	while (infiles)
+	{
+		if(access(infiles->str, F_OK) != 0)
+		{
+			perror(infiles->str);
+			return (errno);
+		}
+		if(access(infiles->str, R_OK) != 0)
+		{
+			perror(infiles->str);
+			return (errno);
+		}
+		infiles = infiles->next;
+	}
+	return (0);
+}
+
 int	execute(t_cmd *cmd)
 {
 	int	ret;
@@ -28,6 +47,7 @@ int	execute(t_cmd *cmd)
 		{
 			fd_out_copy = dup(STDOUT_FILENO);
 			ret = redirect_outfile(cmd->simples->outfiles);
+			ret += infile_check_access(cmd->simples->infiles);
 			if (!ret)
 				ret += exec_builtin(cmd->simples, cmd);
 			dup2(fd_out_copy, STDOUT_FILENO);
