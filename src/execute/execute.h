@@ -35,6 +35,7 @@ void		child(t_cmd *cmd, int *writep, int *readp, int cmd_no);
 //redirect.c
 int			redirect_infile(t_str_list *infiles);
 int			redirect_outfile(t_str_list *outfiles);
+int			infile_check_access(t_str_list *infiles);
 
 //single.c
 void		exec_cmd(t_simple *simple, char **envp);
