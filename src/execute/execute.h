@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/30 00:43:26 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/03 14:58:16 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 15:27:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			redirect_outfile(t_str_list *outfiles);
 //single.c
 void		exec_cmd(t_simple *simple, char **envp);
 int			only_child(t_cmd *cmds);
+int			signal_catcher(pid_t child_pid);
 
 //call_builtin.c
 int			is_builtin(t_simple *simple);

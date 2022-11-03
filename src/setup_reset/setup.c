@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:59:54 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/02 15:13:16 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 15:19:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	setup_cmd(t_cmd *cmd, char **envp)
 
 int	setup(t_cmd *cmd, char **envp)
 {
-	g_errno = 0;
 	setup_termios();
 	catch_signals();
 	return (setup_cmd(cmd, envp));

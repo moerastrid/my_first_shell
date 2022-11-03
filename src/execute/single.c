@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 22:19:53 by ageels        #+#    #+#                 */
-/*   Updated: 2022/11/03 14:56:54 by ageels        ########   odam.nl         */
+/*   Updated: 2022/11/03 15:27:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,15 @@ void	exec_cmd(t_simple *simple, char **envp)
 	exit(0);
 }
 
-static int	signal_catcher(pid_t child_pid)
+void	catch_errno(int err)
+{
+	if (err == 130)
+		ft_putstr_fd("^C\n", STDERR_FILENO);
+	else if (err == 131)
+		ft_putstr_fd("^\\Quit: 3\n", STDERR_FILENO);
+}
+
+int	signal_catcher(pid_t child_pid)
 {
 	int		status;
 	int		exit_code;
