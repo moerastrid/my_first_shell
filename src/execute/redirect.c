@@ -67,8 +67,6 @@ static void	unlink_heredocs(t_str_list *infiles)
 	}
 }
 
-int	infile_check_access(t_str_list *infiles);
-
 int	redirect_infile(t_str_list *infiles)
 {
 	int	ret;

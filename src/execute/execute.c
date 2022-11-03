@@ -18,12 +18,12 @@ int	infile_check_access(t_str_list *infiles)
 {
 	while (infiles)
 	{
-		if(access(infiles->str, F_OK) != 0)
+		if (access(infiles->str, F_OK) != 0)
 		{
 			perror(infiles->str);
 			return (errno);
 		}
-		if(access(infiles->str, R_OK) != 0)
+		if (access(infiles->str, R_OK) != 0)
 		{
 			perror(infiles->str);
 			return (errno);
