@@ -7,6 +7,6 @@ minishell
 *.sh
 *.txt
 minishell_tester
-!bugs.txt
+bugs.txt
 tester
 .gitignore

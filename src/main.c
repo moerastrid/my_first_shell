@@ -25,7 +25,7 @@ int	minishell(t_cmd *cmd, char **input)
 	cmd->err = parse(cmd);
 	if (cmd->err == 255)
 		cmd->err = 0;
-	else
+	else if (cmd->err == 0 || cmd->err == 130 || cmd->err == 131)
 		cmd->err = execute(cmd);
 	return (1);
 }
